@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold: #D4AF37;
+    --gold-light: #E8CC6A;
+    --gold-dark: #A88B20;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-night-950 text-white font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-gold/30 text-white;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-night-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gold/40 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gold/70;
+  }
+}
+
+@keyframes fusionGlow {
+  0%, 100% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.35)) drop-shadow(0 0 15px rgba(255,255,255,0.15));
+  }
+  50% {
+    filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255,255,255,0.85)) drop-shadow(0 0 35px rgba(255,255,255,0.35));
+  }
+}
+
+@layer utilities {
+  .text-gold {
+    color: var(--gold);
+  }
+  .border-gold {
+    border-color: var(--gold);
+  }
+  .bg-gold {
+    background-color: var(--gold);
+  }
+
+  .animate-delay-100 { animation-delay: 100ms; }
+  .animate-delay-200 { animation-delay: 200ms; }
+  .animate-delay-300 { animation-delay: 300ms; }
+  .animate-delay-400 { animation-delay: 400ms; }
+
+  .opacity-0-init {
+    opacity: 0;
+  }
+
+  .fusion-glow {
+    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.35));
+    animation: fusionGlow 2.8s ease-in-out infinite;
+  }
+
+  .fusion-glow-static {
+    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.6));
+  }
+}

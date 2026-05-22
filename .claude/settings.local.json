@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:maps.app.goo.gl)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\NIONIO\\\\Documents\\\\keops-web\\\\src\\\\app\\\\fusion\")"
+    ]
+  }
+}
