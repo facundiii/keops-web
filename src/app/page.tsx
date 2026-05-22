@@ -141,7 +141,7 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto">
             <div className="w-12 h-px bg-gold mx-auto mb-8" />
             <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-white/80 leading-relaxed italic">
-              "Más de 50 años generando noches inolvidables."
+              &ldquo;Más de 50 años generando noches inolvidables.&rdquo;
             </blockquote>
             <p className="mt-6 text-white/30 text-sm tracking-widest uppercase">
               {siteConfig.name} · {siteConfig.location}
