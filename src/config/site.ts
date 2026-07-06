@@ -15,6 +15,16 @@ export const siteConfig = {
     url: "https://instagram.com/keopsoficial",
   },
 
+  tiktok: {
+    handle: "@keopsoficial",
+    url: "https://www.tiktok.com/@keopsoficial",
+  },
+
+  facebook: {
+    handle: "keopsoficial",
+    url: "https://www.facebook.com/keopsoficial",
+  },
+
   maps: {
     embedUrl:
       "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3387.6!2d-64.46543!3d-31.4023895!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x942d669190247b1b%3A0xf0ecd972344a83c8!2sKEOPS!5e0!3m2!1ses!2sar!4v1716000000000!5m2!1ses!2sar",
@@ -113,7 +123,6 @@ export const siteConfig = {
       paragraphs: [
         "Keops Disco es sinónimo de experiencias únicas. Con una programación semanal cuidadosamente diseñada, cada noche tiene su propia identidad: desde electrónica profunda hasta los mejores hits del momento.",
         "Nuestra infraestructura de sonido e iluminación convierte cada noche en un espectáculo. Un equipo de técnicos y artistas visuales trabajan juntos para crear una atmósfera incomparable.",
-        "Las puertas abren todos los viernes y sábados. Consultanos por la programación especial de feriados y noches temáticas.",
       ],
       cta: "Consultá la cartelera",
       mediaPath: "/disco",
@@ -142,14 +151,22 @@ export const siteConfig = {
     },
 
     egresados: {
-      title: "Egresados",
-      tagline: "La fiesta que siempre soñaron",
+      title: "Turismo Estudiantil",
+      tagline: "Tu viaje de egresados, a otro nivel.",
       description:
-        "Keops es el lugar elegido por cientos de promociones de Villa Carlos Paz y la región. Hacemos de la fiesta de egresados un recuerdo imborrable.",
+        "Matinées pensadas para contingentes, coordinación directa con agencias y coordinadores de viaje, protocolos de seguridad para grupos grandes y aforo garantizado. Somos parte de la previa de miles de generaciones.",
       paragraphs: [
         "Entendemos la importancia de este momento único. Por eso ofrecemos paquetes especiales diseñados exclusivamente para fiestas de egresados de primario y secundario.",
         "Coordinación completa, animación, producción de video, barra habilitada según corresponda y todo lo necesario para que la noche sea perfecta.",
-        "Más de 10 años acompañando promociones de la región. Hablá con tu delegado y coordiná una visita sin compromiso.",
+        "Contactanos para recibir asesoramiento especializado acorde a las necesidades de tu grupo.",
+      ],
+      services: [
+        "Matinées exclusivas para contingentes estudiantiles",
+        "Coordinación directa con agencias y coordinadores de viaje",
+        "Protocolos de seguridad para grupos numerosos",
+        "Aforo reservado según el tamaño del contingente",
+        "Coordinación completa con animación y producción de video",
+        "Barra habilitada según corresponda y normativa vigente",
       ],
       cta: "Pedir información",
       mediaPath: "/egresados",

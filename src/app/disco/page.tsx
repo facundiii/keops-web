@@ -41,7 +41,7 @@ export default function DiscoPage() {
           <FadeInSection>
             <div className="mb-12">
               <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">Cartelera</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-white">Próximas aperturas</h2>
+              <h2 className="font-serif text-3xl md:text-4xl text-cream">La agenda de la pirámide</h2>
             </div>
           </FadeInSection>
           <FadeInSection delay={100}>

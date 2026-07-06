@@ -4,9 +4,11 @@
 
 @layer base {
   :root {
-    --gold: #D4AF37;
-    --gold-light: #E8CC6A;
-    --gold-dark: #A88B20;
+    --gold: #c9a961;
+    --gold-light: #e0c278;
+    --gold-dark: #a88b45;
+    --cream: #f0ece4;
+    --text-secondary: #a0a0a0;
   }
 
   * {
@@ -18,11 +20,27 @@
   }
 
   body {
-    @apply bg-night-950 text-white font-sans antialiased;
+    @apply bg-night-950 font-sans antialiased;
+    color: var(--cream);
+  }
+
+  /* Hide default cursor on desktop/mouse devices */
+  @media (hover: hover) and (pointer: fine) {
+    *, *::before, *::after {
+      cursor: none !important;
+    }
+  }
+
+  /* Serif headings: semi-bold italic with open letter-spacing */
+  .font-serif {
+    font-style: italic;
+    font-weight: 600;
+    letter-spacing: 0.025em;
   }
 
   ::selection {
-    @apply bg-gold/30 text-white;
+    background: rgba(201, 169, 97, 0.3);
+    color: var(--cream);
   }
 
   /* Scrollbar */
@@ -40,6 +58,93 @@
   }
 }
 
+/* ── Custom cursor ─────────────────────────────────────────────── */
+.custom-cursor-ring,
+.custom-cursor-dot {
+  display: none;
+  pointer-events: none;
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor-ring {
+    display: block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(240, 236, 228, 0.65);
+    transform: translate(-50%, -50%);
+    transition: width 0.25s cubic-bezier(0.22,1,0.36,1),
+                height 0.25s cubic-bezier(0.22,1,0.36,1),
+                border-color 0.25s ease,
+                opacity 0.25s ease;
+  }
+  .custom-cursor-ring.is-hovering {
+    width: 48px;
+    height: 48px;
+    border-color: rgba(201, 169, 97, 0.75);
+  }
+  .custom-cursor-dot {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    transform: translate(-50%, -50%);
+    transition: transform 0.15s ease, opacity 0.2s ease;
+  }
+  .custom-cursor-ring.is-hovering + .custom-cursor-dot {
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+}
+
+/* ── Hero logo compound animation ─────────────────────────────── */
+.hero-logo {
+  animation:
+    logoEntrance 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
+    logoPulse 5s ease-in-out 1.1s infinite;
+}
+
+@keyframes logoPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 30px rgba(201,169,97,0.15)) drop-shadow(0 0 60px rgba(201,169,97,0.08));
+    transform: scale(1);
+  }
+  50% {
+    filter: drop-shadow(0 0 70px rgba(201,169,97,0.45)) drop-shadow(0 0 130px rgba(201,169,97,0.2));
+    transform: scale(1.022);
+  }
+}
+
+/* Subtitle: left-to-right fade */
+.hero-subtitle-anim {
+  animation: fadeInFromLeft 0.9s ease 0.9s both;
+}
+
+@keyframes fadeInFromLeft {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Cinema strip scroll */
+@keyframes scrollUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+@keyframes scrollDown {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes scrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── Fusion glow ────────────────────────────────────────────────── */
 @keyframes fusionGlow {
   0%, 100% {
     filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.35)) drop-shadow(0 0 15px rgba(255,255,255,0.15));
@@ -58,6 +163,12 @@
   }
   .bg-gold {
     background-color: var(--gold);
+  }
+  .text-cream {
+    color: var(--cream);
+  }
+  .text-secondary {
+    color: var(--text-secondary);
   }
 
   .animate-delay-100 { animation-delay: 100ms; }

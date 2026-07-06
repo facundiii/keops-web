@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { FadeInSection } from "@/components/FadeInSection";
@@ -59,24 +60,31 @@ export default function HomePage() {
           aria-hidden="true"
         />
 
-        {/* Gradient overlay — fallback también si el video no carga */}
+        {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-night-950/60 via-night-950/50 to-night-950/90" />
         <div className="absolute inset-0 bg-gradient-to-r from-night-950/30 via-transparent to-night-950/30" />
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          <p className="text-gold text-xs md:text-sm tracking-[0.4em] uppercase mb-6 animate-fade-in">
-            {siteConfig.location}
-          </p>
-          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-none tracking-tight animate-fade-in-up">
-            {siteConfig.heroPhrase}
-          </h1>
-          <p className="mt-6 text-white/50 text-base md:text-lg tracking-widest animate-fade-in animate-delay-200">
-            {siteConfig.heroSubphrase}
+          {/* Keops logo — compensación de transparencias: -37px top, -39px bottom (mobile) */}
+          <div className="hero-logo -mt-[37px] sm:-mt-[57px] md:-mt-[84px]">
+            <Image
+              src="/logo.png"
+              alt="Keops"
+              width={1080}
+              height={445}
+              className="w-[300px] sm:w-[460px] md:w-[680px] h-auto mx-auto"
+              priority
+            />
+          </div>
+
+          {/* Subtitle — pegado justo debajo del contenido real del logo */}
+          <p className="hero-subtitle-anim -mt-[27px] sm:-mt-[47px] md:-mt-[72px] text-white/45 text-xs md:text-sm tracking-[0.45em] uppercase">
+            Villa Carlos Paz · Córdoba · Argentina
           </p>
 
           {/* CTA */}
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-300">
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-400">
             <HeroCTAButton />
           </div>
         </div>
@@ -90,10 +98,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto">
           <FadeInSection>
             <div className="text-center mb-16">
-              <p className="text-gold text-xs tracking-[0.4em] uppercase mb-4">Nuestras propuestas</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-white">
-                Todo lo que Keops tiene para vos
+              <h2 className="font-serif text-4xl md:text-5xl text-cream mb-3">
+                Nuestras propuestas
               </h2>
+              <p className="text-[var(--text-secondary)] text-sm md:text-base tracking-wide">
+                Todo lo que Keops tiene para vos
+              </p>
             </div>
           </FadeInSection>
 
@@ -116,10 +126,10 @@ export default function HomePage() {
                       <p className={`text-xs tracking-[0.3em] uppercase text-white/40 mb-2 transition-colors duration-300 ${card.accentHover}`}>
                         {section.title}
                       </p>
-                      <h3 className="font-serif text-2xl md:text-3xl text-white mb-4 leading-tight">
+                      <h3 className="font-serif text-2xl md:text-3xl text-cream mb-4 leading-tight">
                         {section.tagline}
                       </h3>
-                      <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
+                      <p className="text-[var(--text-secondary)] text-sm leading-relaxed line-clamp-2">
                         {section.description}
                       </p>
                       <div className={`mt-6 flex items-center gap-2 text-xs tracking-widest uppercase text-white/30 transition-colors duration-300 ${card.accentHover}`}>
@@ -137,13 +147,13 @@ export default function HomePage() {
 
       {/* ─── MINI STATEMENT ──────────────────────────────────────────────── */}
       <FadeInSection>
-        <section className="bg-night-900 border-t border-white/5 py-24 px-4 text-center">
+        <section className="bg-night-950 border-t border-white/5 py-24 px-4 text-center">
           <div className="max-w-2xl mx-auto">
             <div className="w-12 h-px bg-gold mx-auto mb-8" />
-            <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-white/80 leading-relaxed italic">
-              &ldquo;Más de 50 años generando noches inolvidables.&rdquo;
+            <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-cream/85 leading-relaxed">
+              &ldquo;Más de 50 años generando recuerdos inolvidables.&rdquo;
             </blockquote>
-            <p className="mt-6 text-white/30 text-sm tracking-widest uppercase">
+            <p className="mt-6 text-[var(--text-secondary)] text-sm tracking-widest uppercase">
               {siteConfig.name} · {siteConfig.location}
             </p>
           </div>

@@ -28,7 +28,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center group" onClick={() => setIsOpen(false)}>
-            <div className="relative w-44 h-44 md:w-56 md:h-56">
+            <div className="relative w-40 md:w-52 aspect-[1080/445]">
               <Image
                 src="/logo.png"
                 alt="Keops"

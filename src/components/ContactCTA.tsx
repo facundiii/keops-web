@@ -23,7 +23,7 @@ export function ContactCTA({
   const waUrl = siteConfig.whatsapp.url;
 
   return (
-    <section className="bg-night-900 border-t border-white/5 py-12 px-4">
+    <section className="bg-night-950 border-t border-white/5 py-12 px-4">
       <div className="max-w-3xl mx-auto text-center">
         <p className="text-gold text-sm tracking-[0.3em] uppercase mb-4">Contacto</p>
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">{title}</h2>

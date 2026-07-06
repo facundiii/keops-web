@@ -10,12 +10,13 @@ const config: Config = {
     extend: {
       colors: {
         gold: {
-          DEFAULT: "#D4AF37",
-          light: "#E8CC6A",
-          dark: "#A88B20",
+          DEFAULT: "#c9a961",
+          light: "#e0c278",
+          dark: "#a88b45",
         },
+        cream: "#f0ece4",
         night: {
-          950: "#080808",
+          950: "#0a0a0a",
           900: "#111111",
           800: "#1a1a1a",
           700: "#252525",
@@ -30,6 +31,10 @@ const config: Config = {
         "fade-in-up": "fadeInUp 0.7s ease forwards",
         "fade-in": "fadeIn 0.6s ease forwards",
         "bounce-slow": "bounce 2s infinite",
+        "logo-entrance": "logoEntrance 1.1s cubic-bezier(0.22,1,0.36,1) forwards",
+        "scroll-up": "scrollUp 32s linear infinite",
+        "scroll-down": "scrollDown 32s linear infinite",
+        "scroll-left": "scrollLeft 28s linear infinite",
       },
       keyframes: {
         fadeInUp: {
@@ -39,6 +44,11 @@ const config: Config = {
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
+        },
+        logoEntrance: {
+          "0%": { opacity: "0", transform: "scale(0.82) translateY(16px)" },
+          "70%": { opacity: "1", transform: "scale(1.03) translateY(-4px)" },
+          "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
         },
       },
     },
