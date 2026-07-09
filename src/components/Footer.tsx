@@ -90,6 +90,34 @@ export function Footer() {
         </div>
       </div>
 
+      {/* ── Staff ── */}
+      <div className="border-b border-white/5 py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-6">
+            <p className="text-xs tracking-[0.35em] uppercase text-gold mb-1">Equipo</p>
+            <h3 className="font-serif text-xl text-cream">Nuestro Staff</h3>
+          </div>
+          <ul className="flex flex-wrap justify-center gap-x-10 gap-y-4">
+            {[
+              { role: "DJ Residente", name: "Diego Fernandez" },
+              { role: "Animador", name: "Santi Dominguez" },
+              { role: "VJ / LJ / Visuales", name: "Facu Fernandez" },
+              { role: "LJ", name: "Facu Ercoles" },
+              { role: "VJ", name: "Santi Miñoz" },
+              { role: "Técnica", name: "Diego Fernandez" },
+            ].map(({ role, name }) => (
+              <li key={role} className="flex items-start gap-2 text-sm w-[155px]">
+                <span className="mt-[7px] w-1 h-1 rounded-full bg-gold/60 shrink-0" />
+                <span>
+                  <span className="block text-white/35 text-[10px] tracking-[0.2em] uppercase leading-none mb-0.5">{role}</span>
+                  <span className="text-white/70">{name}</span>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
       {/* ── Footer main ── */}
       <div className="max-w-7xl mx-auto px-4 py-5">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">

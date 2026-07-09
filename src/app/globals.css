@@ -101,6 +101,135 @@
   }
 }
 
+/* ── Splash background ─────────────────────────────────────────── */
+.splash-bg {
+  background-image: url('/landing-pc.png');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 767px) {
+  .splash-bg {
+    background-image: url('/landing-mobile.png');
+  }
+}
+
+/* ── Noto Egyptian Hieroglyphs ─────────────────────────────────── */
+@font-face {
+  font-family: "NotoEgyptian";
+  src: url("/fonts/NotoSansEgyptianHieroglyphs-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+.font-hieroglyph {
+  font-family: "NotoEgyptian", serif;
+}
+
+/* ── Splash page ───────────────────────────────────────────────── */
+
+/* ON 3s → fade off 1s → fade on 1s → repeat (5s total) */
+@keyframes splashBeatGold {
+  0%, 60% {
+    color: #f0d88a;
+    text-shadow:
+      0 0 10px rgba(240,216,138,1),
+      0 0 28px rgba(201,169,97,0.95),
+      0 0 65px rgba(201,169,97,0.7),
+      0 0 130px rgba(201,169,97,0.4),
+      0 0 220px rgba(201,169,97,0.15);
+  }
+  80% {
+    color: #c9a961;
+    text-shadow:
+      0 0 4px rgba(201,169,97,0.2),
+      0 0 12px rgba(201,169,97,0.08);
+  }
+  100% {
+    color: #f0d88a;
+    text-shadow:
+      0 0 10px rgba(240,216,138,1),
+      0 0 28px rgba(201,169,97,0.95),
+      0 0 65px rgba(201,169,97,0.7),
+      0 0 130px rgba(201,169,97,0.4),
+      0 0 220px rgba(201,169,97,0.15);
+  }
+}
+
+@keyframes splashBeatWhite {
+  0%, 60% {
+    text-shadow:
+      0 0 10px rgba(255,255,255,0.95),
+      0 0 28px rgba(240,236,228,0.75),
+      0 0 65px rgba(240,236,228,0.4),
+      0 0 130px rgba(240,236,228,0.18);
+  }
+  80% {
+    text-shadow:
+      0 0 4px rgba(240,236,228,0.15),
+      0 0 12px rgba(240,236,228,0.06);
+  }
+  100% {
+    text-shadow:
+      0 0 10px rgba(255,255,255,0.95),
+      0 0 28px rgba(240,236,228,0.75),
+      0 0 65px rgba(240,236,228,0.4),
+      0 0 130px rgba(240,236,228,0.18);
+  }
+}
+
+@keyframes splashButtonBeat {
+  0%, 60% {
+    box-shadow:
+      0 0 14px rgba(201,169,97,0.65),
+      0 0 35px rgba(201,169,97,0.38),
+      0 0 75px rgba(201,169,97,0.18);
+  }
+  80% {
+    box-shadow:
+      0 0 4px rgba(201,169,97,0.08),
+      0 0 10px rgba(201,169,97,0.04);
+  }
+  100% {
+    box-shadow:
+      0 0 14px rgba(201,169,97,0.65),
+      0 0 35px rgba(201,169,97,0.38),
+      0 0 75px rgba(201,169,97,0.18);
+  }
+}
+
+@keyframes splashFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.splash-hieroglyph {
+  animation:
+    splashFadeUp 1s ease 0.3s both,
+    splashBeatGold 5s ease-in-out 2s infinite;
+}
+
+.splash-welcome {
+  animation:
+    splashFadeUp 0.9s ease 0.7s both,
+    splashBeatWhite 5s ease-in-out 2s infinite;
+}
+
+.splash-enter {
+  animation:
+    splashFadeUp 0.9s ease 1s both,
+    splashButtonBeat 5s ease-in-out 2s infinite;
+}
+
+/* ── Pyramid logo — glow fijo, sin pulso ──────────────────────── */
+.hero-pyramid {
+  animation: splashFadeUp 1s ease 0.1s both;
+  filter:
+    drop-shadow(0 0 10px rgba(201,169,97,0.95))
+    drop-shadow(0 0 28px rgba(201,169,97,0.7))
+    drop-shadow(0 0 65px rgba(201,169,97,0.4))
+    drop-shadow(0 0 130px rgba(201,169,97,0.2));
+}
+
 /* ── Hero logo compound animation ─────────────────────────────── */
 .hero-logo {
   animation:
