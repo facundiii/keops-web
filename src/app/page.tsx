@@ -21,26 +21,27 @@ export default function SplashPage() {
       audio.play().then(() => {
         setAudioReady(true);
       }).catch(() => {
-        // Autoplay blocked — will play on first interaction
         setAudioReady(false);
       });
     };
 
     tryPlay();
 
-    // Fallback: play on first user interaction if autoplay was blocked
     const onInteract = () => {
       if (audio.paused) {
         audio.play().then(() => setAudioReady(true)).catch(() => {});
       }
       document.removeEventListener("click", onInteract);
+      document.removeEventListener("touchstart", onInteract);
       document.removeEventListener("keydown", onInteract);
     };
     document.addEventListener("click", onInteract);
+    document.addEventListener("touchstart", onInteract);
     document.addEventListener("keydown", onInteract);
 
     return () => {
       document.removeEventListener("click", onInteract);
+      document.removeEventListener("touchstart", onInteract);
       document.removeEventListener("keydown", onInteract);
     };
   }, []);
@@ -55,7 +56,6 @@ export default function SplashPage() {
   const handleEnter = () => {
     const audio = audioRef.current;
     if (audio) {
-      // Fade out audio
       const fade = setInterval(() => {
         if (audio.volume > 0.05) {
           audio.volume = Math.max(0, audio.volume - 0.05);
@@ -89,6 +89,16 @@ export default function SplashPage() {
         {muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
         <span className="hidden sm:inline">{muted ? "Sin sonido" : "Sonido"}</span>
       </button>
+
+      {/* Tap to activate sound — only shows on mobile when audio is blocked */}
+      <div
+        className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-night-950/50 backdrop-blur-sm text-white/40 text-[11px] tracking-[0.2em] uppercase transition-all duration-700 sm:hidden ${
+          audioReady ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <Volume2 size={12} className="shrink-0 animate-pulse" />
+        Tocá para activar el sonido
+      </div>
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center px-6 select-none">
