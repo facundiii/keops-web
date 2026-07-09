@@ -94,7 +94,7 @@ export default function SplashPage() {
       <div className="relative z-10 flex flex-col items-center text-center px-6 select-none">
 
         {/* Hieroglyphics */}
-        <div className="splash-hieroglyph font-hieroglyph mb-6 text-5xl sm:text-6xl md:text-7xl leading-none tracking-[0.15em] whitespace-nowrap">
+        <div className="splash-hieroglyph font-hieroglyph mb-6 text-4xl sm:text-5xl md:text-6xl leading-none tracking-[0.1em] whitespace-nowrap">
           𓇋𓇋𓂻𓅱𓇋 𓅓 𓊵
         </div>
 

@@ -1,5 +1,8 @@
+"use client";
+
+import { useRef, useState } from "react";
 import Image from "next/image";
-import { Play, ImageIcon } from "lucide-react";
+import { Play, ImageIcon, Volume2, VolumeX } from "lucide-react";
 
 // ── Slot components ─────────────────────────────────────────────
 
@@ -19,6 +22,16 @@ function ImageSlot({ src, alt }: { src?: string; alt?: string }) {
 }
 
 function VideoSlot({ src }: { src?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    videoRef.current.muted = !videoRef.current.muted;
+    if (!videoRef.current.muted) videoRef.current.volume = 0.2;
+    setMuted(videoRef.current.muted);
+  };
+
   if (!src) {
     return (
       <div className="w-full aspect-[9/16] rounded-2xl bg-night-800 border border-white/8 flex flex-col items-center justify-center gap-4">
@@ -29,16 +42,30 @@ function VideoSlot({ src }: { src?: string }) {
       </div>
     );
   }
+
   return (
-    <div className="w-full aspect-[9/16] relative rounded-2xl overflow-hidden">
-      <video
-        src={src}
-        className="w-full h-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-      />
+    <div className="w-full">
+      <div className="w-full aspect-[9/16] relative rounded-2xl overflow-hidden">
+        <video
+          ref={videoRef}
+          src={src}
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      </div>
+      <div className="flex justify-center mt-3">
+        <button
+          onClick={toggleMute}
+          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/15 bg-night-900/60 backdrop-blur-sm text-white/50 hover:text-gold hover:border-gold/40 transition-all duration-300 text-[11px] tracking-widest"
+          aria-label={muted ? "Activar sonido" : "Silenciar"}
+        >
+          {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
+          <span>{muted ? "Activar sonido" : "Silenciar"}</span>
+        </button>
+      </div>
     </div>
   );
 }
@@ -51,7 +78,6 @@ interface StripProps {
 }
 
 function Strip({ images, direction }: StripProps) {
-  // Duplicate for seamless loop
   const items = [...images, ...images];
   const animClass = direction === "up" ? "animate-scroll-up" : "animate-scroll-down";
 
@@ -61,6 +87,46 @@ function Strip({ images, direction }: StripProps) {
         {items.map((src, i) => (
           <ImageSlot key={i} src={src} />
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Strip: horizontal infinite scroll (mobile) ──────────────────
+
+function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | undefined)[]; rightImages: (string | undefined)[] }) {
+  const leftItems = [...leftImages, ...leftImages];
+  const rightItems = [...rightImages, ...rightImages];
+
+  const renderItem = (src: string | undefined, i: number) => (
+    <div key={i} className="w-28 shrink-0 aspect-[9/16] relative rounded-xl overflow-hidden">
+      {src ? (
+        <Image src={src} alt="" fill className="object-cover" sizes="112px" />
+      ) : (
+        <div className="w-full h-full bg-night-800 border border-white/5 flex items-center justify-center">
+          <ImageIcon size={16} className="text-white/10" />
+        </div>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="flex flex-col gap-3">
+      {/* Fila 1 — izquierda */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-night-950 to-transparent pointer-events-none" />
+        <div className="flex gap-3 w-max animate-scroll-left-fast">
+          {leftItems.map(renderItem)}
+        </div>
+      </div>
+      {/* Fila 2 — derecha */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-night-950 to-transparent pointer-events-none" />
+        <div className="flex gap-3 w-max animate-scroll-right-fast">
+          {rightItems.map(renderItem)}
+        </div>
       </div>
     </div>
   );
@@ -117,16 +183,12 @@ export function EventosGallery({
         </div>
       </div>
 
-      {/* ── Mobile: stacked ── */}
-      <div className="lg:hidden px-4">
-        <div className="max-w-xs mx-auto mb-6">
+      {/* ── Mobile: video + horizontal carousel ── */}
+      <div className="lg:hidden">
+        <div className="max-w-xs mx-auto px-4 mb-6">
           <VideoSlot src={videoSrc} />
         </div>
-        <div className="grid grid-cols-2 gap-3 max-w-sm mx-auto">
-          {[...leftImages.slice(0, 2), ...rightImages.slice(0, 2)].map((src, i) => (
-            <ImageSlot key={i} src={src} />
-          ))}
-        </div>
+        <HorizontalStrip leftImages={leftImages} rightImages={rightImages} />
       </div>
     </>
   );

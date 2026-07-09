@@ -35,6 +35,9 @@ const config: Config = {
         "scroll-up": "scrollUp 32s linear infinite",
         "scroll-down": "scrollDown 32s linear infinite",
         "scroll-left": "scrollLeft 28s linear infinite",
+        "scroll-right": "scrollRight 28s linear infinite",
+        "scroll-left-fast": "scrollLeft 16s linear infinite",
+        "scroll-right-fast": "scrollRight 16s linear infinite",
       },
       keyframes: {
         fadeInUp: {

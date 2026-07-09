@@ -56,15 +56,15 @@ export function Footer() {
         <p className="text-xs tracking-[0.3em] uppercase text-[var(--text-secondary)] mb-4">
           Seguinos en nuestras redes
         </p>
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-3">
           <a
             href={siteConfig.instagram.url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="flex items-center gap-2.5 px-5 py-3 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-[#E1306C]/50 hover:bg-[#E1306C]/5 transition-all duration-300 text-sm tracking-wider"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-[#E1306C]/50 hover:bg-[#E1306C]/5 transition-all duration-300 text-sm tracking-wider"
           >
-            <Instagram size={18} />
+            <Instagram size={16} />
             <span>Instagram</span>
           </a>
           <a
@@ -72,9 +72,9 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
-            className="flex items-center gap-2.5 px-5 py-3 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all duration-300 text-sm tracking-wider"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all duration-300 text-sm tracking-wider"
           >
-            <TikTokIcon size={18} />
+            <TikTokIcon size={16} />
             <span>TikTok</span>
           </a>
           <a
@@ -82,9 +82,9 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="flex items-center gap-2.5 px-5 py-3 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-[#1877F2]/50 hover:bg-[#1877F2]/5 transition-all duration-300 text-sm tracking-wider"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-[#1877F2]/50 hover:bg-[#1877F2]/5 transition-all duration-300 text-sm tracking-wider"
           >
-            <Facebook size={18} />
+            <Facebook size={16} />
             <span>Facebook</span>
           </a>
         </div>
