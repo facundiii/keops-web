@@ -38,6 +38,16 @@ export const siteConfig = {
 
   upcomingEvents: [
     {
+      id: "7",
+      name: "ANKH - Día del Amigo en Keops!",
+      artist: "Diego Fernandez",
+      credits: ["DJ Residente Diego Fernandez", "DJ Invitado Santino Pupplo"],
+      date: "Sábado 18 de julio",
+      time: "00:00",
+      flyer: "/disco/flyers/ankh-180726.jpg",
+      flyerFit: "fill" as const,
+    },
+    {
       id: "1",
       name: "¡Gusty DJ en Vivo!",
       artist: "DJ Residente Diego Fernandez",
@@ -94,6 +104,7 @@ export const siteConfig = {
     date: string;
     time: string;
     flyer: string;
+    flyerFit?: "cover" | "fill";
   }[],
 
   nav: [

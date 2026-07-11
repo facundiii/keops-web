@@ -13,9 +13,10 @@ export type UpcomingEvent = {
   date: string;
   time: string;
   flyer: string;
+  flyerFit?: "cover" | "fill";
 };
 
-function FlyerImage({ src, name }: { src: string; name: string }) {
+function FlyerImage({ src, name, fit = "cover" }: { src: string; name: string; fit?: "cover" | "fill" }) {
   const [errored, setErrored] = useState(false);
 
   if (errored) {
@@ -32,7 +33,7 @@ function FlyerImage({ src, name }: { src: string; name: string }) {
       src={src}
       alt={`Flyer ${name}`}
       fill
-      className="object-cover transition-transform duration-500 group-hover:scale-105"
+      className={`${fit === "fill" ? "object-fill" : "object-cover"} transition-transform duration-500 group-hover:scale-105`}
       sizes="(max-width: 640px) 80vw, (max-width: 1024px) 45vw, 30vw"
       onError={() => setErrored(true)}
     />
@@ -133,7 +134,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
               <div className="rounded-2xl overflow-hidden border border-white/5 bg-night-900 flex flex-col group hover:border-gold/20 transition-colors duration-300">
                 {/* Flyer 9:16 */}
                 <div className="relative w-full aspect-[9/16] bg-night-800 overflow-hidden">
-                  <FlyerImage src={event.flyer} name={event.name} />
+                  <FlyerImage src={event.flyer} name={event.name} fit={event.flyerFit} />
                   {/* Gradient bottom */}
                   <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-night-900 to-transparent pointer-events-none" />
                 </div>
