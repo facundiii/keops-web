@@ -105,12 +105,12 @@ export const siteConfig = {
 
   fusion: {
     href: "/fusion",
-    logoSrc: "/fusion-logo.jpeg",
+    logoSrc: "/fusion-logo.png",
     tagline: "Las tres discos más importantes de Villa Carlos Paz se juntaron para hacer de cada noche algo único",
     partners: [
       { name: "Keops", logoSrc: "/logo.png" },
-      { name: "Khalama", logoSrc: "/khalama.jpeg" },
-      { name: "Molino", logoSrc: "/molino.jpeg" },
+      { name: "Khalama", logoSrc: "/khalama.png" },
+      { name: "Molino", logoSrc: "/molino.png" },
     ],
   },
 

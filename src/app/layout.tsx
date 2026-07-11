@@ -26,8 +26,8 @@ export const metadata: Metadata = {
   description: `${siteConfig.heroPhrase}. Disco, eventos privados, egresados e institucionales en ${siteConfig.location}.`,
   keywords: ["boliche", "nightclub", "Villa Carlos Paz", "Keops", "egresados", "eventos"],
   icons: {
-    icon: "/logo-piramide.jpeg",
-    apple: "/logo-piramide.jpeg",
+    icon: "/logo-piramide.png",
+    apple: "/logo-piramide.png",
   },
   openGraph: {
     title: siteConfig.name,

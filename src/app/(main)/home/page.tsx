@@ -69,7 +69,7 @@ export default function HomePage() {
           {/* Pyramid logo */}
           <div className="hero-pyramid mb-1 sm:mb-2">
             <Image
-              src="/logo-piramide.jpeg"
+              src="/logo-piramide.png"
               alt=""
               aria-hidden="true"
               width={400}

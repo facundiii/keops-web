@@ -115,14 +115,14 @@
 
 /* ── Splash background ─────────────────────────────────────────── */
 .splash-bg {
-  background-image: url('/landing-pc.jpeg');
+  background-image: url('/landing-pc.png');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 
 @media (max-width: 767px) {
   .splash-bg {
-    background-image: url('/landing-mobile.jpeg');
+    background-image: url('/landing-mobile.png');
   }
 }
 
