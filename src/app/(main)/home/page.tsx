@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
@@ -13,7 +13,7 @@ const sectionCards = [
     accentHover: "group-hover:text-purple-300",
     borderHover: "group-hover:border-purple-500/40",
     bgHover: "group-hover:bg-purple-500/5",
-    emoji: "🎵",
+    emoji: "ðŸŽµ",
   },
   {
     key: "eventos" as const,
@@ -22,7 +22,7 @@ const sectionCards = [
     accentHover: "group-hover:text-gold",
     borderHover: "group-hover:border-gold/40",
     bgHover: "group-hover:bg-gold/5",
-    emoji: "✨",
+    emoji: "âœ¨",
   },
   {
     key: "egresados" as const,
@@ -31,7 +31,7 @@ const sectionCards = [
     accentHover: "group-hover:text-rose-300",
     borderHover: "group-hover:border-rose-500/40",
     bgHover: "group-hover:bg-rose-500/5",
-    emoji: "🎓",
+    emoji: "ðŸŽ“",
   },
   {
     key: "institucionales" as const,
@@ -40,14 +40,14 @@ const sectionCards = [
     accentHover: "group-hover:text-sky-300",
     borderHover: "group-hover:border-sky-500/40",
     bgHover: "group-hover:bg-sky-500/5",
-    emoji: "🏢",
+    emoji: "ðŸ¢",
   },
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
+      {/* â”€â”€â”€ HERO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
         {/* Video background */}
         <video
@@ -69,7 +69,7 @@ export default function HomePage() {
           {/* Pyramid logo */}
           <div className="hero-pyramid mb-1 sm:mb-2">
             <Image
-              src="/logo-piramide.png"
+              src="/logo-piramide.jpeg"
               alt=""
               aria-hidden="true"
               width={400}
@@ -79,7 +79,7 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Keops logo — compensación de transparencias: -37px top, -39px bottom (mobile) */}
+          {/* Keops logo â€” compensaciÃ³n de transparencias: -37px top, -39px bottom (mobile) */}
           <div className="hero-logo -mt-[37px] sm:-mt-[57px] md:-mt-[84px]">
             <Image
               src="/logo.png"
@@ -91,9 +91,9 @@ export default function HomePage() {
             />
           </div>
 
-          {/* Subtitle — pegado justo debajo del contenido real del logo */}
+          {/* Subtitle â€” pegado justo debajo del contenido real del logo */}
           <p className="hero-subtitle-anim -mt-[27px] sm:-mt-[47px] md:-mt-[72px] text-white/45 text-xs md:text-sm tracking-[0.45em] uppercase">
-            Villa Carlos Paz · Córdoba · Argentina
+            Villa Carlos Paz Â· CÃ³rdoba Â· Argentina
           </p>
 
           {/* CTA */}
@@ -106,7 +106,7 @@ export default function HomePage() {
         <HeroScrollIndicator />
       </section>
 
-      {/* ─── SECCIONES ────────────────────────────────────────────────────── */}
+      {/* â”€â”€â”€ SECCIONES â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section id="sections" className="bg-night-950 py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <FadeInSection>
@@ -146,7 +146,7 @@ export default function HomePage() {
                         {section.description}
                       </p>
                       <div className={`mt-6 flex items-center gap-2 text-xs tracking-widest uppercase text-white/30 transition-colors duration-300 ${card.accentHover}`}>
-                        Ver más
+                        Ver mÃ¡s
                         <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-300" />
                       </div>
                     </div>
@@ -158,16 +158,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── MINI STATEMENT ──────────────────────────────────────────────── */}
+      {/* â”€â”€â”€ MINI STATEMENT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <FadeInSection>
         <section className="bg-night-950 border-t border-white/5 py-24 px-4 text-center">
           <div className="max-w-2xl mx-auto">
             <div className="w-12 h-px bg-gold mx-auto mb-8" />
             <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-cream/85 leading-relaxed">
-              &ldquo;Más de 50 años generando recuerdos inolvidables.&rdquo;
+              &ldquo;MÃ¡s de 50 aÃ±os generando recuerdos inolvidables.&rdquo;
             </blockquote>
             <p className="mt-6 text-[var(--text-secondary)] text-sm tracking-widest uppercase">
-              {siteConfig.name} · {siteConfig.location}
+              {siteConfig.name} Â· {siteConfig.location}
             </p>
           </div>
         </section>
