@@ -129,7 +129,7 @@
 /* ── Noto Egyptian Hieroglyphs ─────────────────────────────────── */
 @font-face {
   font-family: "NotoEgyptian";
-  src: url("/fonts/NotoSansEgyptianHieroglyphs-Regular.ttf") format("truetype");
+  src: url("/fonts/NotoSansEgyptianHieroglyphs-Regular.woff2") format("woff2");
   font-display: swap;
 }
 
