@@ -6,12 +6,11 @@ interface Company {
 }
 
 const companies: Company[] = [
-  { name: "Flecha",          logo: "/egresados/flecha.png" },
-  { name: "Super Tour",      logo: "/egresados/super-tour.png" },
-  { name: "Auckland",        logo: undefined },
-  { name: "Viajes Egresados",logo: undefined },
-  { name: "Top Tour",        logo: undefined },
-  { name: "Sol y Luna",      logo: undefined },
+  { name: "Flecha",     logo: "/egresados/flecha.png" },
+  { name: "Super Tour", logo: "/egresados/super-tour.png" },
+  { name: "Astros",     logo: "/egresados/astros.jpg" },
+  { name: "Púrpura",    logo: "/egresados/purpura.png" },
+  { name: "Images",     logo: "/egresados/images.jpg" },
 ];
 
 function Separator() {
@@ -24,14 +23,14 @@ function CompanyItem({ name, logo }: Company) {
       <Image
         src={logo}
         alt={name}
-        width={120}
-        height={48}
-        className="h-10 w-auto object-contain opacity-40 hover:opacity-70 transition-opacity duration-300 brightness-0 invert"
+        width={160}
+        height={64}
+        className="h-12 w-auto max-w-[140px] object-contain"
       />
     );
   }
   return (
-    <span className="text-white/25 text-sm tracking-[0.2em] uppercase font-sans hover:text-white/50 transition-colors duration-300">
+    <span className="text-white/40 text-sm tracking-[0.2em] uppercase font-sans">
       {name}
     </span>
   );
