@@ -3,22 +3,28 @@ import Image from "next/image";
 interface Company {
   name: string;
   logo?: string;
-  large?: boolean;
+  size?: "base" | "medium" | "large";
 }
 
 const companies: Company[] = [
   { name: "Flecha",     logo: "/egresados/flecha.png" },
-  { name: "Super Tour", logo: "/egresados/super-tour.png", large: true },
-  { name: "Astros",     logo: "/egresados/astros.jpg" },
-  { name: "Púrpura",    logo: "/egresados/purpura.png" },
-  { name: "Auckland",   logo: "/egresados/auckland.jpg", large: true },
+  { name: "Super Tour", logo: "/egresados/super-tour.png", size: "large" },
+  { name: "Astros",     logo: "/egresados/astros.jpg",     size: "medium" },
+  { name: "Púrpura",    logo: "/egresados/purpura.png",    size: "medium" },
+  { name: "Auckland",   logo: "/egresados/auckland.jpg",   size: "large" },
 ];
 
 function Separator() {
   return <span className="mx-10 text-gold/25 text-lg select-none">◆</span>;
 }
 
-function CompanyItem({ name, logo, large }: Company) {
+const sizeClass = {
+  base:   "h-12 w-auto max-w-[140px]",
+  medium: "h-16 w-auto max-w-[180px]",
+  large:  "h-20 w-auto max-w-[240px]",
+};
+
+function CompanyItem({ name, logo, size = "base" }: Company) {
   if (logo) {
     return (
       <Image
@@ -26,10 +32,7 @@ function CompanyItem({ name, logo, large }: Company) {
         alt={name}
         width={240}
         height={96}
-        className={large
-          ? "h-20 w-auto max-w-[240px] object-contain"
-          : "h-12 w-auto max-w-[140px] object-contain"
-        }
+        className={`${sizeClass[size]} object-contain`}
       />
     );
   }
