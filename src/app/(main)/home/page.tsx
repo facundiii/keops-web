@@ -136,7 +136,7 @@ export default function HomePage() {
 
                     <div className="relative z-10">
                       <span className="text-3xl mb-5 block">{card.emoji}</span>
-                      <p className={`text-xs tracking-[0.3em] uppercase text-white/60 mb-2 transition-colors duration-300 ${card.accentHover}`}>
+                      <p className={`text-xs tracking-[0.3em] uppercase text-white mb-2 transition-colors duration-300 ${card.accentHover}`}>
                         {section.title}
                       </p>
                       <h3 className="font-serif text-2xl md:text-3xl text-cream mb-4 leading-tight">
