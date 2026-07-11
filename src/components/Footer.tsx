@@ -180,6 +180,13 @@ export function Footer() {
             >
               Facundo Fernandez Goyechea
             </a>
+            <span className="mx-2 opacity-50">|</span>
+            <a
+              href="mailto:facufergoye@gmail.com"
+              className="hover:text-white/40 transition-colors duration-200"
+            >
+              facufergoye@gmail.com
+            </a>
           </p>
         </div>
       </div>
