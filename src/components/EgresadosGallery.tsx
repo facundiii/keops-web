@@ -20,38 +20,43 @@ function VideoCard({ item, index, onClick }: {
 }) {
   return (
     <div
-      className="relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group bg-night-900 border border-white/8"
+      className="relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group border border-white/20 hover:border-gold/50 transition-colors duration-300"
       onClick={onClick}
     >
       {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-night-800 via-night-900 to-night-950" />
-      <div className="absolute inset-0 bg-gradient-to-t from-gold/5 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-br from-night-700 via-night-800 to-night-900" />
+      <div className="absolute inset-0 bg-gradient-to-t from-gold/8 via-transparent to-transparent" />
 
       {/* Clip number */}
-      <div className="absolute top-4 left-4 text-white/15 font-serif italic text-5xl leading-none select-none">
+      <div className="absolute top-4 left-4 text-white/20 font-serif italic text-5xl leading-none select-none">
         {String(index + 1).padStart(2, "0")}
       </div>
 
       {/* Film grain texture lines */}
-      <div className="absolute inset-0 opacity-[0.03]"
+      <div className="absolute inset-0 opacity-[0.04]"
         style={{ backgroundImage: "repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 4px)" }}
       />
 
       {/* Play button */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-        <div className="relative flex items-center justify-center w-16 h-16 rounded-full border border-gold/30 bg-gold/5 group-hover:border-gold/70 group-hover:bg-gold/10 transition-all duration-400">
-          <div className="absolute inset-0 rounded-full bg-gold/10 scale-0 group-hover:scale-150 opacity-100 group-hover:opacity-0 transition-all duration-500" />
-          <Play size={24} className="text-gold ml-1 drop-shadow-[0_0_8px_rgba(201,169,97,0.8)]" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+        <div className="relative flex items-center justify-center w-20 h-20 rounded-full border-2 border-gold/60 bg-gold/10 group-hover:border-gold group-hover:bg-gold/20 transition-all duration-300">
+          <div className="absolute inset-0 rounded-full bg-gold/15 scale-0 group-hover:scale-150 opacity-100 group-hover:opacity-0 transition-all duration-500" />
+          <Play size={30} className="text-gold ml-1.5 drop-shadow-[0_0_12px_rgba(201,169,97,0.9)]" />
         </div>
-        {item.label && (
-          <p className="text-white/40 text-xs tracking-[0.25em] uppercase group-hover:text-white/70 transition-colors duration-300">
-            {item.label}
+        <div className="flex flex-col items-center gap-1">
+          {item.label && (
+            <p className="text-white/60 text-xs tracking-[0.25em] uppercase group-hover:text-white/90 transition-colors duration-300">
+              {item.label}
+            </p>
+          )}
+          <p className="text-white/30 text-[10px] tracking-widest uppercase group-hover:text-gold/60 transition-colors duration-300">
+            Reproducir
           </p>
-        )}
+        </div>
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-night-950/80 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-night-900/90 to-transparent" />
     </div>
   );
 }
