@@ -52,11 +52,11 @@ export function InfiniteSlider() {
       <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-night-950 to-transparent pointer-events-none" />
 
       <div
-        className="flex items-center whitespace-nowrap animate-scroll-left"
-        style={{ width: "max-content" }}
+        className="inline-flex items-center animate-scroll-left"
+        style={{ willChange: "transform" }}
       >
         {items.map((company, i) => (
-          <span key={i} className="inline-flex items-center">
+          <span key={i} className="inline-flex items-center shrink-0">
             <CompanyItem {...company} />
             <Separator />
           </span>

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { FadeInSection } from "@/components/FadeInSection";
 import { HeroCTAButton, HeroScrollIndicator } from "@/components/HeroScrollButton";
+import { ContactCTA } from "@/components/ContactCTA";
 
 const sectionCards = [
   {
@@ -172,6 +173,11 @@ export default function HomePage() {
           </div>
         </section>
       </FadeInSection>
+
+      <ContactCTA
+        title="¿Querés saber más?"
+        subtitle="Contactanos por WhatsApp, por mail o seguinos en Instagram para enterarte de todo lo que pasa en Keops."
+      />
     </>
   );
 }

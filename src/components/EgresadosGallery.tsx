@@ -18,15 +18,37 @@ function VideoCard({ item, index, onClick }: {
   index: number;
   onClick: () => void;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const video = videoRef.current;
+    if (!container || !video) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.preload = "metadata";
+          video.load();
+          observer.unobserve(container);
+        }
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       className="relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group border border-white/20 hover:border-gold/50 transition-colors duration-300"
       onClick={onClick}
     >
-      {/* Frame del video como fondo — solo carga metadata + primer frame */}
       <video
+        ref={videoRef}
         src={item.src}
-        preload="metadata"
+        preload="none"
         muted
         playsInline
         className="absolute inset-0 w-full h-full object-cover"

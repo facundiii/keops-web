@@ -44,22 +44,23 @@ function VideoSlot({ src }: { src?: string }) {
   }
 
   return (
-    <div className="w-full">
-      <div className="w-full aspect-[9/16] relative rounded-2xl overflow-hidden">
-        <video
-          ref={videoRef}
-          src={src}
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      </div>
-      <div className="flex justify-center mt-3">
+    <div className="w-full aspect-[9/16] relative rounded-2xl overflow-hidden">
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      {/* Gradient base para el botón */}
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+      {/* Botón de sonido — overlay dentro del video */}
+      <div className="absolute bottom-4 inset-x-0 flex justify-center z-20">
         <button
           onClick={toggleMute}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/15 bg-night-900/60 backdrop-blur-sm text-white/50 hover:text-gold hover:border-gold/40 transition-all duration-300 text-[11px] tracking-widest"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-gold/50 bg-night-950/70 backdrop-blur-sm text-gold/80 hover:text-gold hover:border-gold hover:bg-gold/10 transition-all duration-300 text-[11px] tracking-widest"
           aria-label={muted ? "Activar sonido" : "Silenciar"}
         >
           {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
@@ -157,12 +158,12 @@ export function EventosGallery({
       {/* ── Desktop: 3-column cinema strip ── */}
       <div className="hidden lg:block relative">
         {/* Top + bottom vignettes */}
-        <div className="absolute inset-x-0 top-0 h-20 z-10 bg-gradient-to-b from-night-950 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-20 z-10 bg-gradient-to-t from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-12 z-10 bg-gradient-to-b from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-12 z-10 bg-gradient-to-t from-night-950 to-transparent pointer-events-none" />
 
         <div
           className="flex gap-4 items-start max-w-5xl mx-auto px-4"
-          style={{ height: "720px", overflow: "hidden" }}
+          style={{ height: "660px", overflow: "hidden" }}
         >
           {/* Left strip — scrolls up */}
           <div className="w-52 shrink-0 h-full">
@@ -171,7 +172,7 @@ export function EventosGallery({
 
           {/* Center — video */}
           <div className="flex-1 flex items-center justify-center h-full py-3">
-            <div className="w-full max-w-[360px]">
+            <div className="w-full max-w-[280px]">
               <VideoSlot src={videoSrc} />
             </div>
           </div>

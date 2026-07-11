@@ -34,7 +34,7 @@ const config: Config = {
         "logo-entrance": "logoEntrance 1.1s cubic-bezier(0.22,1,0.36,1) forwards",
         "scroll-up": "scrollUp 32s linear infinite",
         "scroll-down": "scrollDown 32s linear infinite",
-        "scroll-left": "scrollLeft 28s linear infinite",
+        "scroll-left": "scrollLeft 15s linear infinite",
         "scroll-right": "scrollRight 28s linear infinite",
         "scroll-left-fast": "scrollLeft 16s linear infinite",
         "scroll-right-fast": "scrollRight 16s linear infinite",

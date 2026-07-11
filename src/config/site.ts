@@ -4,6 +4,8 @@ export const siteConfig = {
   heroPhrase: "Donde la noche cobra vida",
   heroSubphrase: "Villa Carlos Paz · Córdoba · Argentina",
 
+  email: "info@keopsoficial.com",
+
   whatsapp: {
     number: "54 9 3541 406061",
     url: "https://wa.me/+5493541406061?text=Hola%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20informaci%C3%B3n%20sobre%20KEOPS",

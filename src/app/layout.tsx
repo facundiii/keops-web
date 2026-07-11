@@ -41,6 +41,17 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${cormorant.variable} ${inter.variable}`}>
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/NotoSansEgyptianHieroglyphs-Regular.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link rel="preload" href="/landing-pc.png" as="image" media="(min-width: 768px)" />
+        <link rel="preload" href="/landing-mobile.png" as="image" media="(max-width: 767px)" />
+      </head>
       <body>
         <CustomCursor />
         {children}

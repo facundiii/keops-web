@@ -1,4 +1,4 @@
-import { Instagram } from "lucide-react";
+import { Instagram, Mail } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 function WhatsAppIcon({ size = 24 }: { size?: number }) {
@@ -17,7 +17,7 @@ interface ContactCTAProps {
 
 export function ContactCTA({
   title = "¿Listo para reservar?",
-  subtitle = "Contactanos por WhatsApp o seguinos en Instagram para no perderte ninguna novedad.",
+  subtitle = "Contactanos por WhatsApp, por mail o seguinos en Instagram para no perderte ninguna novedad.",
   ctaText,
 }: ContactCTAProps) {
   const waUrl = siteConfig.whatsapp.url;
@@ -29,7 +29,7 @@ export function ContactCTA({
         <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">{title}</h2>
         <p className="text-white/50 text-base md:text-lg leading-relaxed mb-8">{subtitle}</p>
 
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           {/* WhatsApp button */}
           <a
             href={waUrl}
@@ -39,6 +39,15 @@ export function ContactCTA({
           >
             <WhatsAppIcon size={20} />
             Chatear por WhatsApp
+          </a>
+
+          {/* Email button */}
+          <a
+            href={`mailto:${siteConfig.email}`}
+            className="group flex items-center gap-3 border border-gold/30 hover:border-gold text-gold/70 hover:text-gold px-7 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gold/10 text-sm tracking-wide"
+          >
+            <Mail size={20} />
+            Escribinos por e-mail
           </a>
 
           {/* Instagram button */}
@@ -54,10 +63,15 @@ export function ContactCTA({
         </div>
 
         {/* Contact info */}
-        <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-8 text-white/30 text-sm">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/30 text-sm">
           <span className="flex items-center gap-2">
             <WhatsAppIcon size={14} />
             +{siteConfig.whatsapp.number.replace(/(\d{2})(\d{2})(\d{4})(\d+)/, "$1 $2 $3 $4")}
+          </span>
+          <span className="hidden sm:block">·</span>
+          <span className="flex items-center gap-2">
+            <Mail size={14} />
+            {siteConfig.email}
           </span>
           <span className="hidden sm:block">·</span>
           <span className="flex items-center gap-2">
