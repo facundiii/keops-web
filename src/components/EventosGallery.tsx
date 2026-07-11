@@ -162,7 +162,7 @@ export function EventosGallery({
 
         <div
           className="flex gap-4 items-start max-w-5xl mx-auto px-4"
-          style={{ height: "680px", overflow: "hidden" }}
+          style={{ height: "720px", overflow: "hidden" }}
         >
           {/* Left strip — scrolls up */}
           <div className="w-52 shrink-0 h-full">
@@ -170,8 +170,8 @@ export function EventosGallery({
           </div>
 
           {/* Center — video */}
-          <div className="flex-1 flex items-center justify-center h-full py-6">
-            <div className="w-full max-w-[280px]">
+          <div className="flex-1 flex items-center justify-center h-full py-3">
+            <div className="w-full max-w-[360px]">
               <VideoSlot src={videoSrc} />
             </div>
           </div>
