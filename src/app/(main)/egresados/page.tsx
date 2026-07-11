@@ -4,6 +4,7 @@ import { SectionHero } from "@/components/SectionHero";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 import { InfiniteSlider } from "@/components/InfiniteSlider";
+import { EgresadosGallery, type MediaItem } from "@/components/EgresadosGallery";
 
 export const metadata: Metadata = {
   title: siteConfig.sections.egresados.title,
@@ -65,6 +66,27 @@ export default function EgresadosPage() {
               </div>
             </FadeInSection>
           )}
+        </div>
+      </section>
+
+      {/* ── Galería de videos e imágenes ── */}
+      <section className="bg-night-950 py-12 px-4 border-t border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <FadeInSection>
+            <div className="text-center mb-10">
+              <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">Galería</p>
+              <h2 className="font-serif text-3xl md:text-4xl text-cream">Momentos que quedan para siempre</h2>
+            </div>
+          </FadeInSection>
+          <EgresadosGallery
+            items={[
+              { type: "video", src: "/egresados/video-1.mp4", label: "Noche de egresados" },
+              { type: "video", src: "/egresados/video-2.mp4", label: "Noche de egresados" },
+              { type: "video", src: "/egresados/video-3.mp4", label: "Noche de egresados" },
+              // Acá van las imágenes cuando las tengas:
+              // { type: "image", src: "/egresados/foto-1.jpg" },
+            ] satisfies MediaItem[]}
+          />
         </div>
       </section>
 
