@@ -107,6 +107,13 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
 }) {
   const item = items[index];
   const touchStartX = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = 0.05;
+    }
+  }, [index]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -169,12 +176,13 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
       >
         {item.type === "video" ? (
           <video
+            ref={videoRef}
             key={item.src}
             src={item.src}
             controls
             autoPlay
             playsInline
-            onLoadedMetadata={(e) => { e.currentTarget.volume = 0.2; }}
+            onLoadedMetadata={(e) => { e.currentTarget.volume = 0.05; }}
             style={{
               maxWidth: "100%",
               maxHeight: "calc(100vh - 112px)",
