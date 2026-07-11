@@ -23,9 +23,18 @@ function VideoCard({ item, index, onClick }: {
       className="relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group border border-white/20 hover:border-gold/50 transition-colors duration-300"
       onClick={onClick}
     >
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-night-700 via-night-800 to-night-900" />
-      <div className="absolute inset-0 bg-gradient-to-t from-gold/8 via-transparent to-transparent" />
+      {/* Frame del video como fondo — solo carga metadata + primer frame */}
+      <video
+        src={item.src}
+        preload="metadata"
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+        onLoadedMetadata={(e) => { e.currentTarget.currentTime = 1; }}
+      />
+      {/* Overlay oscuro para que el play destaque */}
+      <div className="absolute inset-0 bg-night-950/55 group-hover:bg-night-950/40 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-t from-night-950/80 via-transparent to-transparent" />
 
       {/* Clip number */}
       <div className="absolute top-4 left-4 text-white/20 font-serif italic text-5xl leading-none select-none">
@@ -33,7 +42,7 @@ function VideoCard({ item, index, onClick }: {
       </div>
 
       {/* Film grain texture lines */}
-      <div className="absolute inset-0 opacity-[0.04]"
+      <div className="absolute inset-0 opacity-[0.025]"
         style={{ backgroundImage: "repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 4px)" }}
       />
 
@@ -165,6 +174,7 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
             controls
             autoPlay
             playsInline
+            onLoadedMetadata={(e) => { e.currentTarget.volume = 0.2; }}
             style={{
               maxWidth: "100%",
               maxHeight: "calc(100vh - 112px)",
