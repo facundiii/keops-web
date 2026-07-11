@@ -172,6 +172,15 @@ export function Footer() {
           <p className="text-white/25 text-xs tracking-widest">
             © {year} {siteConfig.name}. Todos los derechos reservados.
           </p>
+          <p className="text-white/15 text-[11px] tracking-wide mt-1">
+            Diseñado y desarrollado por{" "}
+            <a
+              href="mailto:facufergoye@gmail.com"
+              className="hover:text-white/40 transition-colors duration-200"
+            >
+              Facundo Fernandez Goyechea
+            </a>
+          </p>
         </div>
       </div>
     </footer>
