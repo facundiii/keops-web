@@ -68,7 +68,7 @@ export default function EventosPage() {
         <FadeInSection>
           <div className="text-center mb-8">
             <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">Fotos</p>
-            <h2 className="font-serif text-3xl md:text-4xl text-cream">Galería de imágenes</h2>
+            <h2 className="font-serif text-3xl md:text-4xl text-cream">Mirá en detalle lo que tenemos para ofrecerte</h2>
           </div>
         </FadeInSection>
         <div className="max-w-5xl mx-auto">
