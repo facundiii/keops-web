@@ -4,6 +4,7 @@ import { SectionHero } from "@/components/SectionHero";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 import { EventosGallery } from "@/components/EventosGallery";
+import { PhotoGallery } from "@/components/PhotoGallery";
 
 export const metadata: Metadata = {
   title: siteConfig.sections.eventos.title,
@@ -60,6 +61,31 @@ export default function EventosPage() {
           leftImages={leftImages}
           rightImages={rightImages}
         />
+      </section>
+
+      {/* ── Photo gallery ── */}
+      <section className="bg-night-950 py-12 px-4 border-b border-white/5">
+        <FadeInSection>
+          <div className="text-center mb-8">
+            <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">Fotos</p>
+            <h2 className="font-serif text-3xl md:text-4xl text-cream">Galería de imágenes</h2>
+          </div>
+        </FadeInSection>
+        <div className="max-w-5xl mx-auto">
+          <PhotoGallery
+            images={[
+              "/eventos/eventos-1.jpg",
+              "/eventos/eventos-2.jpg",
+              "/eventos/eventos-3.jpg",
+              "/eventos/eventos-4.jpg",
+              "/eventos/eventos-5.jpg",
+              "/eventos/eventos-6.jpg",
+              "/eventos/eventos-7.jpg",
+              "/eventos/eventos-8.jpg",
+              "/eventos/eventos-9.jpg",
+            ]}
+          />
+        </div>
       </section>
 
       {/* Body copy */}
