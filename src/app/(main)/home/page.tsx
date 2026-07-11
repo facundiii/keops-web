@@ -136,18 +136,18 @@ export default function HomePage() {
 
                     <div className="relative z-10">
                       <span className="text-3xl mb-5 block">{card.emoji}</span>
-                      <p className={`text-xs tracking-[0.3em] uppercase text-white/40 mb-2 transition-colors duration-300 ${card.accentHover}`}>
+                      <p className={`text-xs tracking-[0.3em] uppercase text-white/60 mb-2 transition-colors duration-300 ${card.accentHover}`}>
                         {section.title}
                       </p>
                       <h3 className="font-serif text-2xl md:text-3xl text-cream mb-4 leading-tight">
                         {section.tagline}
                       </h3>
-                      <p className="text-[var(--text-secondary)] text-sm leading-relaxed line-clamp-2">
+                      <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
                         {section.description}
                       </p>
-                      <div className={`mt-6 flex items-center gap-2 text-xs tracking-widest uppercase text-white/30 transition-colors duration-300 ${card.accentHover}`}>
+                      <div className={`mt-6 inline-flex items-center gap-2 text-xs tracking-widest uppercase px-4 py-2 rounded-full border border-white/20 text-white/60 transition-all duration-300 group-hover:border-current group-hover:gap-3 ${card.accentHover}`}>
                         Ver más
-                        <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform duration-300" />
+                        <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </div>
                     </div>
                   </Link>
