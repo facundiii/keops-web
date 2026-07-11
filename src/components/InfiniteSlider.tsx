@@ -3,29 +3,33 @@ import Image from "next/image";
 interface Company {
   name: string;
   logo?: string;
+  large?: boolean;
 }
 
 const companies: Company[] = [
   { name: "Flecha",     logo: "/egresados/flecha.png" },
-  { name: "Super Tour", logo: "/egresados/super-tour.png" },
+  { name: "Super Tour", logo: "/egresados/super-tour.png", large: true },
   { name: "Astros",     logo: "/egresados/astros.jpg" },
   { name: "Púrpura",    logo: "/egresados/purpura.png" },
-  { name: "Images",     logo: "/egresados/images.jpg" },
+  { name: "Auckland",   logo: "/egresados/auckland.jpg", large: true },
 ];
 
 function Separator() {
   return <span className="mx-10 text-gold/25 text-lg select-none">◆</span>;
 }
 
-function CompanyItem({ name, logo }: Company) {
+function CompanyItem({ name, logo, large }: Company) {
   if (logo) {
     return (
       <Image
         src={logo}
         alt={name}
-        width={160}
-        height={64}
-        className="h-12 w-auto max-w-[140px] object-contain"
+        width={240}
+        height={96}
+        className={large
+          ? "h-20 w-auto max-w-[240px] object-contain"
+          : "h-12 w-auto max-w-[140px] object-contain"
+        }
       />
     );
   }
