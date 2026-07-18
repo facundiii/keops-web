@@ -4,12 +4,30 @@ export const siteConfig = {
   heroPhrase: "Donde la noche cobra vida",
   heroSubphrase: "Villa Carlos Paz · Córdoba · Argentina",
 
-  email: "info@keopsoficial.com",
+  email: "rrpp@keops.ar",
 
   whatsapp: {
-    number: "54 9 3541 406061",
-    url: "https://wa.me/+5493541406061?text=Hola%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20informaci%C3%B3n%20sobre%20KEOPS",
+    number: "+54 9 3541 637856",
+    url: "https://wa.me/5493541637856?text=Hola%2C%20me%20gustar%C3%ADa%20conocer%20m%C3%A1s%20informaci%C3%B3n%20sobre%20KEOPS",
     message: "Hola Keops, quiero más información",
+  },
+
+  contactInfo: {
+    disco: {
+      email: "rrpp@keops.ar",
+      whatsappUrl: "https://wa.me/5493541637856?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20Keops%20Disco",
+      whatsappDisplay: "+54 9 3541 637856",
+    },
+    eventos: {
+      email: "eventos@keops.ar",
+      whatsappUrl: "https://wa.me/5493541579786?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20eventos%20privados%20en%20Keops",
+      whatsappDisplay: "+54 9 3541 579786",
+    },
+    egresados: {
+      email: "egresados@keops.ar",
+      whatsappUrl: "https://wa.me/5493541580808?text=Hola%2C%20me%20gustar%C3%ADa%20consultar%20sobre%20egresados%20en%20Keops",
+      whatsappDisplay: "+54 9 3541 580808",
+    },
   },
 
   instagram: {

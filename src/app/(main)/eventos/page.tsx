@@ -128,7 +128,12 @@ export default function EventosPage() {
         </div>
       </section>
 
-      <ContactCTA ctaText={cta} />
+      <ContactCTA
+        ctaText={cta}
+        email={siteConfig.contactInfo.eventos.email}
+        whatsappUrl={siteConfig.contactInfo.eventos.whatsappUrl}
+        whatsappDisplay={siteConfig.contactInfo.eventos.whatsappDisplay}
+      />
     </>
   );
 }

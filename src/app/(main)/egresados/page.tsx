@@ -102,7 +102,12 @@ export default function EgresadosPage() {
         </section>
       </FadeInSection>
 
-      <ContactCTA ctaText={siteConfig.sections.egresados.cta} />
+      <ContactCTA
+        ctaText={siteConfig.sections.egresados.cta}
+        email={siteConfig.contactInfo.egresados.email}
+        whatsappUrl={siteConfig.contactInfo.egresados.whatsappUrl}
+        whatsappDisplay={siteConfig.contactInfo.egresados.whatsappDisplay}
+      />
     </>
   );
 }

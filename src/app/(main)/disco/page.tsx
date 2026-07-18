@@ -79,7 +79,12 @@ export default function DiscoPage() {
         </div>
       </section>
 
-      <ContactCTA ctaText={cta} />
+      <ContactCTA
+        ctaText={cta}
+        email={siteConfig.contactInfo.disco.email}
+        whatsappUrl={siteConfig.contactInfo.disco.whatsappUrl}
+        whatsappDisplay={siteConfig.contactInfo.disco.whatsappDisplay}
+      />
     </>
   );
 }

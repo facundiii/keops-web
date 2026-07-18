@@ -11,6 +11,9 @@ interface SubpageTemplateProps {
   services?: string[];
   cta: string;
   mediaItems?: MediaItem[];
+  email?: string;
+  whatsappUrl?: string;
+  whatsappDisplay?: string;
 }
 
 export function SubpageTemplate({
@@ -21,6 +24,9 @@ export function SubpageTemplate({
   services,
   cta,
   mediaItems = [],
+  email,
+  whatsappUrl,
+  whatsappDisplay,
 }: SubpageTemplateProps) {
   return (
     <>
@@ -81,7 +87,7 @@ export function SubpageTemplate({
         </div>
       </section>
 
-      <ContactCTA ctaText={title} />
+      <ContactCTA ctaText={title} email={email} whatsappUrl={whatsappUrl} whatsappDisplay={whatsappDisplay} />
     </>
   );
 }

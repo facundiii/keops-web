@@ -13,14 +13,22 @@ interface ContactCTAProps {
   title?: string;
   subtitle?: string;
   ctaText?: string;
+  email?: string;
+  whatsappUrl?: string;
+  whatsappDisplay?: string;
 }
 
 export function ContactCTA({
   title = "¿Listo para reservar?",
   subtitle = "Contactanos por WhatsApp, por mail o seguinos en Instagram para no perderte ninguna novedad.",
   ctaText,
+  email,
+  whatsappUrl,
+  whatsappDisplay,
 }: ContactCTAProps) {
-  const waUrl = siteConfig.whatsapp.url;
+  const resolvedEmail = email ?? siteConfig.email;
+  const resolvedWaUrl = whatsappUrl ?? siteConfig.whatsapp.url;
+  const resolvedWaDisplay = whatsappDisplay ?? siteConfig.whatsapp.number;
 
   return (
     <section className="bg-night-950 border-t border-white/5 py-12 px-4">
@@ -32,7 +40,7 @@ export function ContactCTA({
         <div className="flex flex-wrap items-center justify-center gap-4">
           {/* WhatsApp button */}
           <a
-            href={waUrl}
+            href={resolvedWaUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-medium px-7 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#25D366]/25 text-sm tracking-wide"
@@ -43,7 +51,7 @@ export function ContactCTA({
 
           {/* Email button */}
           <a
-            href={`mailto:${siteConfig.email}`}
+            href={`mailto:${resolvedEmail}`}
             className="group flex items-center gap-3 border border-gold/30 hover:border-gold text-gold/70 hover:text-gold px-7 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gold/10 text-sm tracking-wide"
           >
             <Mail size={20} />
@@ -66,12 +74,12 @@ export function ContactCTA({
         <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/30 text-sm">
           <span className="flex items-center gap-2">
             <WhatsAppIcon size={14} />
-            +{siteConfig.whatsapp.number.replace(/(\d{2})(\d{2})(\d{4})(\d+)/, "$1 $2 $3 $4")}
+            {resolvedWaDisplay}
           </span>
           <span className="hidden sm:block">·</span>
           <span className="flex items-center gap-2">
             <Mail size={14} />
-            {siteConfig.email}
+            {resolvedEmail}
           </span>
           <span className="hidden sm:block">·</span>
           <span className="flex items-center gap-2">
