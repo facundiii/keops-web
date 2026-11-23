@@ -210,19 +210,6 @@
   font-display: swap;
 }
 
-/* ── Pantalla de entrada (se elimina en la Etapa 3) ────────────── */
-.splash-bg {
-  background-image: url('/landing-pc.png');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
-
-@media (max-width: 767px) {
-  .splash-bg {
-    background-image: url('/landing-mobile.png');
-  }
-}
-
 /* ── Hero de la home ───────────────────────────────────────────── */
 .hero-pyramid {
   animation: fadeInUp 0.6s ease-out 0.1s both;

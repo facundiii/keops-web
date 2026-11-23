@@ -30,11 +30,12 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.name} — ${siteConfig.location}`,
     template: `%s | ${siteConfig.name}`,
   },
-  description: `${siteConfig.heroPhrase}. Disco, eventos privados, egresados e institucionales en ${siteConfig.location}.`,
+  description: siteConfig.descripcion,
   keywords: ["boliche", "nightclub", "Villa Carlos Paz", "Keops", "egresados", "eventos"],
   icons: {
     icon: "/logo-piramide.png",
@@ -42,7 +43,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: siteConfig.name,
-    description: siteConfig.heroPhrase,
+    description: siteConfig.descripcion,
     siteName: siteConfig.name,
     locale: "es_AR",
     type: "website",
@@ -52,10 +53,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" data-scroll-behavior="smooth" className={`${outfit.variable} ${inter.variable} ${cormorant.variable}`}>
-      <head>
-        <link rel="preload" href="/landing-pc.png" as="image" media="(min-width: 768px)" />
-        <link rel="preload" href="/landing-mobile.png" as="image" media="(max-width: 767px)" />
-      </head>
       <body>
         <CustomCursor />
         {children}

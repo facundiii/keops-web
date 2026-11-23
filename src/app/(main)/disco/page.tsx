@@ -1,83 +1,49 @@
 import type { Metadata } from "next";
 import { siteConfig } from "@/config/site";
-import { SectionHero } from "@/components/SectionHero";
-import { Carousel } from "@/components/Carousel";
+import { Encabezado } from "@/components/Encabezado";
+import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 import { UpcomingEvents } from "@/components/UpcomingEvents";
 import { TicketSection } from "@/components/TicketSection";
-import type { MediaItem } from "@/components/Carousel";
 
 export const metadata: Metadata = {
   title: siteConfig.sections.disco.title,
   description: siteConfig.sections.disco.description,
 };
 
-// Reemplazá con las rutas reales de tus imágenes/videos en /public/disco/
-const mediaItems: MediaItem[] = [
-  // { type: "image", src: "/disco/foto-1.jpg", alt: "Pista de baile" },
-  // { type: "video", src: "/disco/promo.mp4", poster: "/disco/promo-poster.jpg" },
-];
-
-const { title, tagline, description, paragraphs, cta } = siteConfig.sections.disco;
+const { title, tagline, description, paragraphs } = siteConfig.sections.disco;
 
 export default function DiscoPage() {
   return (
     <>
-      <SectionHero title={title} tagline={tagline} />
+      <Encabezado antetitulo={title} titulo={tagline} bajada={description} />
 
-      {/* Descripción intro */}
-      <FadeInSection>
-        <section className="bg-negro py-16 px-4 border-b border-piedra">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="cuerpo text-arena">{description}</p>
-          </div>
-        </section>
-      </FadeInSection>
-
-      {/* Próximas aperturas */}
-      <section className="bg-negro py-12 px-4 border-b border-piedra">
-        <div className="max-w-5xl mx-auto">
-          <FadeInSection>
-            <div className="mb-12">
-              <p className="antetitulo mb-3">Cartelera</p>
-              <h2 className="titulo-2 text-marfil">La agenda de la pirámide</h2>
-            </div>
-          </FadeInSection>
-          <FadeInSection delay={100}>
-            <UpcomingEvents events={siteConfig.upcomingEvents} />
-          </FadeInSection>
-        </div>
-      </section>
+      {/* Cartelera */}
+      <Seccion ancho="medio">
+        <FadeInSection>
+          <TituloSeccion antetitulo="Cartelera" titulo="La agenda de la pirámide" />
+        </FadeInSection>
+        <FadeInSection delay={100}>
+          <UpcomingEvents events={siteConfig.upcomingEvents} />
+        </FadeInSection>
+      </Seccion>
 
       {/* Comprar entrada */}
       <TicketSection />
 
-      {/* Body copy */}
-      <section className="bg-negro py-10 px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="space-y-8">
-            {paragraphs.map((para, i) => (
-              <FadeInSection key={i} delay={i * 100}>
-                <p className="cuerpo text-arena">
-                  {para}
-                </p>
-              </FadeInSection>
-            ))}
-          </div>
-
-          <FadeInSection delay={300}>
-            <div className="mt-16 pt-16 border-t border-piedra">
-              <div className="w-8 h-px bg-oro mb-8" />
-              <p className="antetitulo mb-3">Galería</p>
-              <h2 className="titulo-2 text-marfil mb-10">
-                Conocé el espacio
-              </h2>
-              <Carousel items={mediaItems} autoplay={mediaItems.length > 1} />
-            </div>
-          </FadeInSection>
+      {/* Texto */}
+      <Seccion ancho="angosto">
+        <div className="space-y-6">
+          {paragraphs.map((para, i) => (
+            <FadeInSection key={i} delay={i * 100}>
+              <p className="cuerpo text-arena">{para}</p>
+            </FadeInSection>
+          ))}
         </div>
-      </section>
+      </Seccion>
+
+      {/* La galería vuelve cuando haya fotos (Etapa 4). */}
 
       <ContactCTA linea="disco" />
     </>

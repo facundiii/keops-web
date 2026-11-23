@@ -1,7 +1,7 @@
 // Menú principal del sitio, en el orden en que se muestra.
 
-/** Ruta de la home. Pasa a "/" en la Etapa 3, cuando se elimina la pantalla de entrada. */
-export const RUTA_INICIO = "/home";
+/** Ruta de la home. */
+export const RUTA_INICIO = "/";
 
 export interface ItemNav {
   etiqueta: string;

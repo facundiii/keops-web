@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Instagram, Mail } from "lucide-react";
 import { instagram, lineas, urlWhatsApp, type InstagramId, type LineaId } from "@/config/contacto";
 import { Boton } from "@/components/ui/Boton";
@@ -10,6 +11,8 @@ interface ContactCTAProps {
   linea?: LineaId;
   /** Cuenta de Instagram que se muestra */
   instagramDe?: InstagramId;
+  /** Contenido extra arriba de los botones (por ejemplo, un formulario) */
+  children?: ReactNode;
 }
 
 /**
@@ -21,6 +24,7 @@ export function ContactCTA({
   subtitle = "Contactanos por WhatsApp, por mail o seguinos en Instagram para no perderte ninguna novedad.",
   linea = "disco",
   instagramDe = "oficial",
+  children,
 }: ContactCTAProps) {
   const datos = lineas[linea];
   const cuenta = instagram[instagramDe];
@@ -32,10 +36,12 @@ export function ContactCTA({
     <section id="contacto" className="bg-negro border-t border-piedra py-16 px-4 scroll-mt-4">
       <div className="max-w-3xl mx-auto text-center">
         <p className="antetitulo mb-4">Contacto</p>
-        <h2 className="titulo-2 text-marfil mb-4">{title}</h2>
-        <p className="cuerpo text-arena mb-8">{subtitle}</p>
+        <h2 className="titulo-2 text-marfil">{title}</h2>
+        {subtitle && <p className="cuerpo text-arena mt-4">{subtitle}</p>}
 
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        {children && <div className="mt-10 text-left">{children}</div>}
+
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           {whatsapp && (
             <Boton variante="whatsapp" href={whatsapp}>
               <IconoWhatsApp size={20} />

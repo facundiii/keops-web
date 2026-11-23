@@ -8,7 +8,7 @@ export type MediaItem =
   | { type: "video"; src: string; label?: string }
   | { type: "image"; src: string; alt?: string };
 
-interface EgresadosGalleryProps {
+interface GaleriaProps {
   items: MediaItem[];
 }
 
@@ -256,7 +256,7 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
 }
 
 // ── Componente principal ─────────────────────────────────────────
-export function EgresadosGallery({ items }: EgresadosGalleryProps) {
+export function Galeria({ items }: GaleriaProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const open = useCallback((i: number) => setActiveIndex(i), []);
