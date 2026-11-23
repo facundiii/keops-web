@@ -13,7 +13,7 @@ Al completarlo, el bloque aparece solo. Buscá `A COMPLETAR` dentro de cada arch
 1. **Dirección de Keops** (`comoLlegar.ts`): sin ella, "Cómo llegar" muestra solo el texto y el botón del mapa.
 2. **Cartelera** (`cartelera.ts`): está vacía; Disco y la home muestran "Pronto anunciamos las próximas noches".
 3. **Preguntas frecuentes** (`faq.ts`): las 14 están cargadas pero sin confirmar; la página no existe hasta confirmar al menos una.
-4. **Historia** (`nosotros.ts`): los 5 hitos están cargados pero sin confirmar; el bloque no se ve.
+4. **Línea de tiempo** (`nosotros.ts` y `fotos.ts`): los 5 hitos están cargados pero sin confirmar, así que en el sitio publicado todavía no se ve. Faltan párrafos más completos y tres imágenes.
 5. **Academia** (`academia.ts` y `contacto.ts`): la página muestra solo el encabezado.
 
 ---
@@ -43,9 +43,10 @@ Al completarlo, el bloque aparece solo. Buscá `A COMPLETAR` dentro de cada arch
 
 ## `nosotros.ts`
 
-- [ ] **Historia:** revisar los 5 hitos (1969, 2010, 2019, 2020, septiembre 2021) y pasar `confirmado` a `true`. Las fotos de 2010 y 2019 ya están asignadas.
+- [ ] **Línea de tiempo (Historia):** cada hito lleva año, párrafo breve e imagen. Hoy cada año tiene una sola oración: ampliar el `texto` de 1969, 2010, 2019, 2020 y 2021.
+- [ ] **Línea de tiempo:** pasar `confirmado` a `true` en cada hito revisado. En tu PC se ven todos con la etiqueta "Sin confirmar"; en el sitio publicado solo salen los confirmados.
+- [ ] **Línea de tiempo:** faltan las imágenes de **1969, 2020 y 2021** (se asignan en `fotos.ts`). Las de 2010 y 2019 ya están.
 - [ ] **Espacios:** `capacidad` y `descripcion` de Pista Central, Salón Eletón, Salón Bar, Keops Garden y VIP +30.
-- [ ] **Equipo:** confirmar los 6 nombres y roles (vienen del pie del sitio anterior) y, si querés, agregar la `foto` de cada persona.
 - [ ] **Misión:** el texto es el propuesto; revisarlo.
 
 ## `lineas.ts`

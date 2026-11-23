@@ -78,10 +78,16 @@ export const fotos = {
       garden: [],
       vip: [],
     } as Record<string, Foto[]>,
-    /** Foto de cada hito de la historia, por su fecha (igual que en config/nosotros.ts). */
+    /**
+     * Imagen de cada hito de la línea de tiempo, por año (el mismo `anio` de config/nosotros.ts).
+     * Un año sin imagen muestra solo el año y el párrafo.
+     */
     historia: {
+      // "1969": A COMPLETAR
       "2010": historiaExterior2010,
       "2019": historia50Anios,
+      // "2020": A COMPLETAR
+      // "2021": A COMPLETAR
     } as Record<string, Foto | undefined>,
   },
 

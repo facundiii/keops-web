@@ -14,13 +14,20 @@ export const mision = {
     "Hacer que cada fiesta en Keops se recuerde: con la escala, la producción y el oficio que nos acompañan desde 1969.",
 };
 
-// ── Historia ─────────────────────────────────────────────────────
+// ── Historia: línea de tiempo ────────────────────────────────────
+//
+// Cada hito lleva el año, un párrafo breve y una imagen.
+// La imagen de cada año se asigna en config/fotos.ts (nosotros.historia), por el año.
+//
+// `confirmado`: en el sitio publicado SOLO se ven los hitos con `confirmado: true`.
+// Mientras trabajás en tu PC (npm run dev) se ven todos, y los que faltan confirmar
+// llevan la etiqueta "Sin confirmar" para que los puedas revisar antes de publicarlos.
 
 export interface Hito {
-  /** Como se muestra: "1969", "Septiembre 2021". La foto se asigna por esta fecha en config/fotos.ts. */
-  fecha: string;
+  /** Año del hito. Ej: "1969" */
+  anio: string;
+  /** Párrafo breve sobre ese año */
   texto: string;
-  /** SOLO se muestran los hitos con `confirmado: true`. */
   confirmado: boolean;
 }
 
@@ -28,17 +35,17 @@ export const historia: { antetitulo: string; titulo: string; hitos: Hito[] } = {
   antetitulo: "Historia",
   titulo: "Desde 1969",
   hitos: [
-    { fecha: "1969", texto: "Abre Keops en Villa Carlos Paz.", confirmado: false },
-    { fecha: "2010", texto: "El frente de Keops, con la pirámide iluminada.", confirmado: false },
-    { fecha: "2019", texto: "Keops cumple 50 años.", confirmado: false },
+    { anio: "1969", texto: "Abre Keops en Villa Carlos Paz.", confirmado: false },
+    { anio: "2010", texto: "El frente de Keops, con la pirámide iluminada.", confirmado: false },
+    { anio: "2019", texto: "Keops cumple 50 años.", confirmado: false },
     {
-      fecha: "2020",
+      anio: "2020",
       texto: "Una fiesta de verano en Keops llega a la tapa de la revista Paparazzi.",
       confirmado: false,
     },
     {
-      fecha: "Septiembre 2021",
-      texto: "Keops reabre después de 18 meses cerrado por la pandemia.",
+      anio: "2021",
+      texto: "En septiembre, Keops reabre después de 18 meses cerrado por la pandemia.",
       confirmado: false,
     },
   ],
@@ -64,31 +71,5 @@ export const espacios: { antetitulo: string; titulo: string; lista: Espacio[] } 
     { id: "salonBar", nombre: "Salón Bar", capacidad: "", descripcion: "" }, // A COMPLETAR
     { id: "garden", nombre: "Keops Garden", capacidad: "", descripcion: "" }, // A COMPLETAR
     { id: "vip", nombre: "VIP +30", capacidad: "", descripcion: "" }, // A COMPLETAR
-  ],
-};
-
-// ── Equipo ───────────────────────────────────────────────────────
-
-export interface PersonaEquipo {
-  nombre: string;
-  rol: string;
-  /** Ruta dentro de /public. Vacío = tarjeta sin foto. */
-  foto: string;
-}
-
-/**
- * Nuestro equipo. Sin personas cargadas, el bloque no se muestra.
- * Estos nombres y roles vienen del pie del sitio anterior.
- */
-export const equipo: { antetitulo: string; titulo: string; personas: PersonaEquipo[] } = {
-  antetitulo: "Equipo",
-  titulo: "Nuestro equipo",
-  personas: [
-    { nombre: "Diego Fernandez", rol: "DJ Residente", foto: "" },
-    { nombre: "Santi Dominguez", rol: "Animador", foto: "" },
-    { nombre: "Facu Fernandez", rol: "VJ / LJ / Visuales", foto: "" },
-    { nombre: "Facu Ercoles", rol: "LJ", foto: "" },
-    { nombre: "Santi Miñoz", rol: "VJ", foto: "" },
-    { nombre: "Diego Fernandez", rol: "Técnica", foto: "" },
   ],
 };
