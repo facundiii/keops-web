@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { Volume2, VolumeX } from "lucide-react";
 
@@ -27,20 +27,6 @@ function VideoSlot({ src }: { src?: string }) {
     if (!videoRef.current.muted) videoRef.current.volume = 0.2;
     setMuted(videoRef.current.muted);
   };
-
-  // Con "menos movimiento" activado en el sistema, el video queda quieto.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    const consulta = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const aplicar = () => {
-      if (consulta.matches) video.pause();
-      else video.play().catch(() => {});
-    };
-    aplicar();
-    consulta.addEventListener("change", aplicar);
-    return () => consulta.removeEventListener("change", aplicar);
-  }, [src]);
 
   if (!src) return null;
 

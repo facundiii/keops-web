@@ -71,7 +71,9 @@ export function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 inset-x-0 z-50 border-b transition-[transform,background-color,border-color] duration-300 focus-within:translate-y-0 ${
+        // has-[:focus-visible]: si alguien navega con teclado, el navbar no se esconde.
+        // (No se usa focus-within: después de un clic el foco queda en el link y el navbar no se ocultaría nunca.)
+        className={`fixed top-0 inset-x-0 z-50 border-b transition-[transform,background-color,border-color] duration-300 has-[:focus-visible]:translate-y-0 ${
           oculto && !abierto ? "-translate-y-full" : "translate-y-0"
         } ${
           abierto

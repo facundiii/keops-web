@@ -55,7 +55,8 @@ export interface PaginaLinea {
 export const argumentosEgresados: Argumento[] = [
   {
     titulo: "Diferencia tu paquete",
-    texto: "Un boliche con pirámide vende mejor el viaje que un salón de hotel.",
+    // TEXTO PROPUESTO: revisar
+    texto: "Sumá a tu viaje una fiesta en la pirámide de Carlos Paz.",
   },
   {
     titulo: "Es el recuerdo del viaje",
@@ -98,7 +99,8 @@ export const egresados = {
   },
   encabezado: {
     antetitulo: "Para agencias de viaje",
-    titulo: "La fiesta que ningún hotel puede igualar",
+    // Viene del sitio anterior
+    titulo: "Tu viaje de egresados, a otro nivel",
     bajada: "Fiestas separadas para primario y secundario, con coordinación directa con cada agencia.",
     boton: "Pedir propuesta",
   },

@@ -7,19 +7,18 @@ export const hero = {
   titulo: "La pirámide de Carlos Paz",
   bajada: "Disco, egresados, eventos privados e institucionales en el espacio más grande de la ciudad.",
   botones: [
-    { texto: "Soy agencia", href: "/egresados" },
-    { texto: "Ver cartelera", href: "/disco" },
+    { texto: "Egresados", href: "/egresados" },
+    { texto: "Ver próximas aperturas", href: "/disco" },
   ],
   /** Video de fondo, dentro de /public. Siempre sin sonido. */
   video: "/hero-video.mp4",
 };
 
-/** Franja de cifras. `detalle` es opcional: vacío = se muestra solo el dato. */
+/** Franja de cifras. Todas con el mismo formato: un número grande y una palabra debajo. */
 export const cifras: { dato: string; detalle: string }[] = [
   { dato: "5.000", detalle: "personas" },
   { dato: "5", detalle: "espacios" },
-  { dato: "Aire libre", detalle: "" },
-  { dato: "Desde 1969", detalle: "" },
+  { dato: "1969", detalle: "año de apertura" },
 ];
 
 export const proximasNoches = {
@@ -27,7 +26,7 @@ export const proximasNoches = {
   titulo: "Próximas noches",
   /** Cuántas noches se muestran como máximo */
   cantidad: 3,
-  boton: "Ver cartelera",
+  boton: "Ver próximas aperturas",
 };
 
 /** Frase de cierre, en Cormorant itálica. */
@@ -52,9 +51,9 @@ export const tarjetasLineas: TarjetaLinea[] = [
   {
     id: "egresados",
     antetitulo: "Egresados",
-    titulo: "La fiesta que ningún hotel puede igualar.",
+    titulo: "Tu viaje de egresados, a otro nivel.",
     texto: "Fiestas exclusivas para primario y secundario, con coordinación directa con cada agencia.",
-    boton: "Soy agencia",
+    boton: "Ver egresados",
     href: "/egresados",
   },
   {
@@ -79,7 +78,7 @@ export const tarjetasLineas: TarjetaLinea[] = [
     antetitulo: "Disco",
     titulo: "La noche más grande de Carlos Paz.",
     texto: "Cinco espacios, sectores al aire libre y VIP.",
-    boton: "Ver cartelera",
+    boton: "Ver próximas aperturas",
     href: "/disco",
   },
   {

@@ -107,6 +107,9 @@ Al completarlo, el bloque aparece solo. Buscá `A COMPLETAR` dentro de cada arch
 ## Textos que escribí o ajusté yo (para revisar)
 
 - **Encabezados de Egresados primario y secundario** (`lineas.ts`): el documento no los definía.
+- **Sin comparación con hoteles:** el título de Egresados pasó a "Tu viaje de egresados, a otro nivel" (el del sitio anterior) en la home y en `/egresados`. El argumento "Diferencia tu paquete" quedó como "Sumá a tu viaje una fiesta en la pirámide de Carlos Paz." (`lineas.ts`, marcado `TEXTO PROPUESTO`).
+- **Botones de la home** (`home.ts`): "Egresados" y "Ver próximas aperturas" en el hero; "Ver egresados" en la tarjeta de Egresados.
+- **Cifras de la home** (`home.ts`): tres, todas con número y palabra: 5.000 personas, 5 espacios, 1969 año de apertura.
 - **"Trayectoria desde 1969"** en lugar de "57 años de trayectoria" (`lineas.ts`), para que no venza.
 - **Servicios de Eventos privados e Institucionales** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad").
 - **Botón de la tarjeta Institucionales en la home** (`home.ts`): "Pedir propuesta" en vez de "Pedí una propuesta", para usar el mismo texto de botón en todo el sitio.

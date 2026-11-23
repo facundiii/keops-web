@@ -17,8 +17,8 @@ export default function HomePage() {
       {/* 1. Hero */}
       <section className="relative min-h-[100svh] flex items-end overflow-hidden">
         <VideoFondo src={hero.video} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-negro/55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/40 to-negro/30" />
+        {/* Oscurece el video lo justo para que se lea el texto */}
+        <div className="absolute inset-0 bg-gradient-to-b from-negro/55 via-negro/35 to-negro" />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pb-24">
           <p className="antetitulo mb-5 animate-fade-in">{hero.antetitulo}</p>
@@ -36,13 +36,11 @@ export default function HomePage() {
 
       {/* 2. Cifras */}
       <section aria-label="Keops en cifras" className="bg-negro border-t border-piedra">
-        <ul className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4">
+        <ul className="max-w-7xl mx-auto flex">
           {cifras.map((cifra, i) => (
             <li
               key={cifra.dato}
-              className={`px-4 sm:px-6 lg:px-8 py-10 lg:py-12 border-piedra ${i % 2 === 1 ? "border-l" : ""} ${
-                i > 1 ? "border-t lg:border-t-0" : ""
-              } ${i > 0 ? "lg:border-l" : ""}`}
+              className={`flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-10 lg:py-12 border-piedra ${i > 0 ? "border-l" : ""}`}
             >
               <p className="font-titulo font-bold text-marfil text-3xl lg:text-5xl leading-none">{cifra.dato}</p>
               {cifra.detalle && <p className="antetitulo mt-3">{cifra.detalle}</p>}
