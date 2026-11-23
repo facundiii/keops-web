@@ -85,8 +85,8 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
               className="transition-transform duration-500 group-hover:scale-[1.03]"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors duration-300 flex items-center justify-center">
-              <ZoomIn size={22} className="text-white opacity-0 group-hover:opacity-80 transition-opacity duration-300 drop-shadow-lg" />
+            <div className="absolute inset-0 bg-negro/0 group-hover:bg-negro/30 transition-colors duration-300 flex items-center justify-center">
+              <ZoomIn size={22} className="text-marfil opacity-0 group-hover:opacity-80 transition-opacity duration-300 drop-shadow-lg" />
             </div>
           </div>
         ))}
@@ -95,14 +95,14 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
       {/* ── Lightbox ── */}
       {isOpen && lightboxIndex !== null && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-negro/95 backdrop-blur-sm flex items-center justify-center"
           onClick={close}
           onTouchStart={onTouchStart}
           onTouchEnd={onTouchEnd}
         >
           {/* Close */}
           <button
-            className="absolute top-4 right-4 z-10 p-2 rounded-full border border-white/15 bg-white/5 text-white/60 hover:text-white transition-colors duration-200"
+            className="absolute top-4 right-4 z-10 p-2 rounded-full border border-piedra bg-carbon text-arena hover:text-marfil transition-colors duration-200"
             onClick={close}
             aria-label="Cerrar"
           >
@@ -110,13 +110,13 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
           </button>
 
           {/* Counter */}
-          <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/35 text-xs tracking-[0.3em] select-none">
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 text-arena text-xs tracking-[0.3em] select-none">
             {lightboxIndex + 1} / {images.length}
           </div>
 
           {/* Prev */}
           <button
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-white/15 bg-white/5 text-white/60 hover:text-white transition-colors duration-200"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-piedra bg-carbon text-arena hover:text-marfil transition-colors duration-200"
             onClick={(e) => { e.stopPropagation(); prev(); }}
             aria-label="Anterior"
           >
@@ -131,7 +131,7 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
             {/* Loading spinner */}
             {!imgLoaded && (
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <Loader2 size={32} className="text-gold/50 animate-spin" />
+                <Loader2 size={32} className="text-oro/50 animate-spin" />
               </div>
             )}
             {/* Native img — avoids next/image sizing issues in lightbox */}
@@ -157,7 +157,7 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
 
           {/* Next */}
           <button
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-white/15 bg-white/5 text-white/60 hover:text-white transition-colors duration-200"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-piedra bg-carbon text-arena hover:text-marfil transition-colors duration-200"
             onClick={(e) => { e.stopPropagation(); next(); }}
             aria-label="Siguiente"
           >
@@ -171,7 +171,7 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
                 key={i}
                 style={{ width: i === lightboxIndex ? "16px" : "6px" }}
                 className={`h-1.5 rounded-full transition-all duration-200 ${
-                  i === lightboxIndex ? "bg-gold" : "bg-white/25"
+                  i === lightboxIndex ? "bg-oro" : "bg-piedra"
                 }`}
                 onClick={(e) => { e.stopPropagation(); setImgLoaded(false); setLightboxIndex(i); }}
                 aria-label={`Ir a foto ${i + 1}`}

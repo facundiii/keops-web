@@ -2,13 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Tokens de identidad ──────────────────────────────────────────
+   Mismos valores que `colors` en tailwind.config.ts.
+   Si cambiás uno, cambialo en los dos archivos. */
 @layer base {
   :root {
-    --gold: #c9a961;
-    --gold-light: #e0c278;
-    --gold-dark: #a88b45;
-    --cream: #f0ece4;
-    --text-secondary: #a0a0a0;
+    --negro: #0A0A0A;        /* fondo general */
+    --carbon: #161412;       /* tarjetas y superficies */
+    --piedra: #2A2621;       /* bordes y divisores */
+    --marfil: #F0ECE4;       /* texto principal */
+    --arena: #A89F91;        /* texto secundario */
+    --oro: #C9A961;          /* acento, botones principales, antetítulos */
+    --oro-profundo: #A88A45; /* hover y presionado del dorado */
+    --laser: #A970FF;        /* SOLO en Disco, en detalles (etiquetas de fecha) */
+    --whatsapp: #25D366;     /* SOLO en el botón de WhatsApp */
+
+    color-scheme: dark;
   }
 
   * {
@@ -21,9 +30,20 @@
   }
 
   body {
-    @apply bg-night-950 font-sans antialiased;
-    color: var(--cream);
+    @apply bg-negro text-marfil font-sans antialiased;
+    font-size: 1rem;
+    line-height: 1.6;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  /* Foco visible para quien navega con teclado */
+  :focus-visible {
+    outline: 2px solid var(--oro);
+    outline-offset: 3px;
   }
 
   /* Hide default cursor on desktop/mouse devices */
@@ -33,19 +53,12 @@
     }
   }
 
-  /* Serif headings: semi-bold italic with open letter-spacing */
-  .font-serif {
-    font-style: italic;
-    font-weight: 600;
-    letter-spacing: 0.025em;
-  }
-
   ::selection {
-    background: rgba(201, 169, 97, 0.3);
-    color: var(--cream);
+    background: var(--oro-profundo);
+    color: var(--negro);
   }
 
-  /* Disable all motion for users who prefer reduced motion */
+  /* Sin movimiento para quien lo pide en su sistema */
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
@@ -60,13 +73,89 @@
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-night-900;
+    @apply bg-carbon;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-gold/40 rounded-full;
+    @apply bg-piedra rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gold/70;
+    @apply bg-oro-profundo;
+  }
+}
+
+/* ── Escala tipográfica ───────────────────────────────────────────
+   Tamaños con clamp(): mínimo en celular (375 px), máximo en desktop (1280 px). */
+@layer components {
+  /* Display (hero): Outfit 800, mayúsculas, 48–112 px */
+  .titulo-display {
+    font-family: theme("fontFamily.titulo");
+    font-weight: 800;
+    font-size: clamp(3rem, 1.6rem + 7vw, 7rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  /* H1: Outfit 700, 36–64 px */
+  .titulo-1 {
+    font-family: theme("fontFamily.titulo");
+    font-weight: 700;
+    font-size: clamp(2.25rem, 1.55rem + 3vw, 4rem);
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+
+  /* H2: Outfit 700, 32–40 px */
+  .titulo-2 {
+    font-family: theme("fontFamily.titulo");
+    font-weight: 700;
+    font-size: clamp(2rem, 1.8rem + 0.85vw, 2.5rem);
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  /* H3: Outfit 600, 20–24 px */
+  .titulo-3 {
+    font-family: theme("fontFamily.titulo");
+    font-weight: 600;
+    font-size: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  /* Antetítulo: Inter 500, mayúsculas, oro, 12–13 px */
+  .antetitulo {
+    font-family: theme("fontFamily.sans");
+    font-weight: 500;
+    font-size: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+    line-height: 1.4;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--oro);
+  }
+
+  /* Cuerpo: Inter 400, 16–18 px */
+  .cuerpo {
+    font-family: theme("fontFamily.sans");
+    font-weight: 400;
+    font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    line-height: 1.6;
+  }
+
+  /* Texto chico: Inter 400, 14 px */
+  .texto-chico {
+    font-family: theme("fontFamily.sans");
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  /* Acento: Cormorant Garamond itálica 500. Máximo una vez por sección. */
+  .acento {
+    font-family: theme("fontFamily.acento");
+    font-style: italic;
+    font-weight: 500;
   }
 }
 
@@ -87,7 +176,8 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    border: 1.5px solid rgba(240, 236, 228, 0.65);
+    border: 1.5px solid var(--marfil);
+    border-color: color-mix(in srgb, var(--marfil) 65%, transparent);
     transform: translate(-50%, -50%);
     transition: width 0.25s cubic-bezier(0.22,1,0.36,1),
                 height 0.25s cubic-bezier(0.22,1,0.36,1),
@@ -97,14 +187,14 @@
   .custom-cursor-ring.is-hovering {
     width: 48px;
     height: 48px;
-    border-color: rgba(201, 169, 97, 0.75);
+    border-color: var(--oro);
   }
   .custom-cursor-dot {
     display: block;
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--gold);
+    background: var(--oro);
     transform: translate(-50%, -50%);
     transition: transform 0.15s ease, opacity 0.2s ease;
   }
@@ -113,7 +203,14 @@
   }
 }
 
-/* ── Splash background ─────────────────────────────────────────── */
+/* ── Jeroglíficos: solo ornamento, nunca texto para leer ───────── */
+@font-face {
+  font-family: "NotoEgyptian";
+  src: url("/fonts/NotoSansEgyptianHieroglyphs-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+
+/* ── Pantalla de entrada (se elimina en la Etapa 3) ────────────── */
 .splash-bg {
   background-image: url('/landing-pc.png');
   background-size: 100% 100%;
@@ -126,151 +223,33 @@
   }
 }
 
-/* ── Noto Egyptian Hieroglyphs ─────────────────────────────────── */
-@font-face {
-  font-family: "NotoEgyptian";
-  src: url("/fonts/NotoSansEgyptianHieroglyphs-Regular.woff2") format("woff2");
-  font-display: swap;
+/* ── Hero de la home ───────────────────────────────────────────── */
+.hero-pyramid {
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+  filter:
+    drop-shadow(0 0 10px color-mix(in srgb, var(--oro) 90%, transparent))
+    drop-shadow(0 0 40px color-mix(in srgb, var(--oro) 45%, transparent));
 }
 
-.font-hieroglyph {
-  font-family: "NotoEgyptian", serif;
+.hero-logo {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
 }
 
-/* ── Splash page ───────────────────────────────────────────────── */
-
-/* ON 3s → fade off 1s → fade on 1s → repeat (5s total) */
-@keyframes splashBeatGold {
-  0%, 60% {
-    color: #f0d88a;
-    text-shadow:
-      0 0 10px rgba(240,216,138,1),
-      0 0 28px rgba(201,169,97,0.95),
-      0 0 65px rgba(201,169,97,0.7),
-      0 0 130px rgba(201,169,97,0.4),
-      0 0 220px rgba(201,169,97,0.15);
-  }
-  80% {
-    color: #c9a961;
-    text-shadow:
-      0 0 4px rgba(201,169,97,0.2),
-      0 0 12px rgba(201,169,97,0.08);
-  }
-  100% {
-    color: #f0d88a;
-    text-shadow:
-      0 0 10px rgba(240,216,138,1),
-      0 0 28px rgba(201,169,97,0.95),
-      0 0 65px rgba(201,169,97,0.7),
-      0 0 130px rgba(201,169,97,0.4),
-      0 0 220px rgba(201,169,97,0.15);
-  }
+.hero-subtitle-anim {
+  animation: fadeIn 0.6s ease-out 0.5s both;
 }
 
-@keyframes splashBeatWhite {
-  0%, 60% {
-    text-shadow:
-      0 0 10px rgba(255,255,255,0.95),
-      0 0 28px rgba(240,236,228,0.75),
-      0 0 65px rgba(240,236,228,0.4),
-      0 0 130px rgba(240,236,228,0.18);
-  }
-  80% {
-    text-shadow:
-      0 0 4px rgba(240,236,228,0.15),
-      0 0 12px rgba(240,236,228,0.06);
-  }
-  100% {
-    text-shadow:
-      0 0 10px rgba(255,255,255,0.95),
-      0 0 28px rgba(240,236,228,0.75),
-      0 0 65px rgba(240,236,228,0.4),
-      0 0 130px rgba(240,236,228,0.18);
-  }
-}
-
-@keyframes splashButtonBeat {
-  0%, 60% {
-    box-shadow:
-      0 0 14px rgba(201,169,97,0.65),
-      0 0 35px rgba(201,169,97,0.38),
-      0 0 75px rgba(201,169,97,0.18);
-  }
-  80% {
-    box-shadow:
-      0 0 4px rgba(201,169,97,0.08),
-      0 0 10px rgba(201,169,97,0.04);
-  }
-  100% {
-    box-shadow:
-      0 0 14px rgba(201,169,97,0.65),
-      0 0 35px rgba(201,169,97,0.38),
-      0 0 75px rgba(201,169,97,0.18);
-  }
-}
-
-@keyframes splashFadeUp {
-  from { opacity: 0; transform: translateY(20px); }
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.splash-hieroglyph {
-  animation:
-    splashFadeUp 1s ease 0.3s both,
-    splashBeatGold 5s ease-in-out 2s infinite;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-.splash-welcome {
-  animation:
-    splashFadeUp 0.9s ease 0.7s both,
-    splashBeatWhite 5s ease-in-out 2s infinite;
-}
-
-.splash-enter {
-  animation:
-    splashFadeUp 0.9s ease 1s both,
-    splashButtonBeat 5s ease-in-out 2s infinite;
-}
-
-/* ── Pyramid logo — glow fijo, sin pulso ──────────────────────── */
-.hero-pyramid {
-  animation: splashFadeUp 1s ease 0.1s both;
-  filter:
-    drop-shadow(0 0 10px rgba(201,169,97,0.95))
-    drop-shadow(0 0 28px rgba(201,169,97,0.7))
-    drop-shadow(0 0 65px rgba(201,169,97,0.4))
-    drop-shadow(0 0 130px rgba(201,169,97,0.2));
-}
-
-/* ── Hero logo compound animation ─────────────────────────────── */
-.hero-logo {
-  animation:
-    logoEntrance 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards,
-    logoPulse 5s ease-in-out 1.1s infinite;
-}
-
-@keyframes logoPulse {
-  0%, 100% {
-    filter: drop-shadow(0 0 30px rgba(201,169,97,0.15)) drop-shadow(0 0 60px rgba(201,169,97,0.08));
-    transform: scale(1);
-  }
-  50% {
-    filter: drop-shadow(0 0 70px rgba(201,169,97,0.45)) drop-shadow(0 0 130px rgba(201,169,97,0.2));
-    transform: scale(1.022);
-  }
-}
-
-/* Subtitle: left-to-right fade */
-.hero-subtitle-anim {
-  animation: fadeInFromLeft 0.9s ease 0.9s both;
-}
-
-@keyframes fadeInFromLeft {
-  from { opacity: 0; transform: translateX(-28px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-/* Cinema strip scroll */
+/* ── Tiras de fotos en movimiento ──────────────────────────────── */
 @keyframes scrollUp {
   from { transform: translateY(0); }
   to   { transform: translateY(-50%); }
@@ -289,48 +268,14 @@
   to   { transform: translateX(0); }
 }
 
-/* ── Fusion glow ────────────────────────────────────────────────── */
-@keyframes fusionGlow {
-  0%, 100% {
-    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.35)) drop-shadow(0 0 15px rgba(255,255,255,0.15));
-  }
-  50% {
-    filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(255,255,255,0.85)) drop-shadow(0 0 35px rgba(255,255,255,0.35));
-  }
-}
-
 @layer utilities {
-  .text-gold {
-    color: var(--gold);
-  }
-  .border-gold {
-    border-color: var(--gold);
-  }
-  .bg-gold {
-    background-color: var(--gold);
-  }
-  .text-cream {
-    color: var(--cream);
-  }
-  .text-secondary {
-    color: var(--text-secondary);
-  }
-
   .animate-delay-100 { animation-delay: 100ms; }
   .animate-delay-200 { animation-delay: 200ms; }
   .animate-delay-300 { animation-delay: 300ms; }
   .animate-delay-400 { animation-delay: 400ms; }
 
-  .opacity-0-init {
-    opacity: 0;
-  }
-
-  .fusion-glow {
-    filter: brightness(0) invert(1) drop-shadow(0 0 5px rgba(255,255,255,0.35));
-    animation: fusionGlow 2.8s ease-in-out infinite;
-  }
-
-  .fusion-glow-static {
-    filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.6));
+  /* Logo de Fusion en marfil (el archivo original es oscuro) */
+  .logo-claro {
+    filter: brightness(0) invert(0.93) sepia(0.1);
   }
 }

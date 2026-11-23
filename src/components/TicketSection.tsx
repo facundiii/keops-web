@@ -21,14 +21,14 @@ export function TicketSection() {
   return (
     <section
       id="comprar-entrada"
-      className="bg-night-950 border-t border-white/5 pt-12 pb-8 px-4"
+      className="bg-negro border-t border-piedra pt-12 pb-8 px-4"
     >
       <div className="max-w-2xl mx-auto text-center">
-        <p className="text-gold text-xs tracking-[0.35em] uppercase mb-4">Entradas</p>
-        <h2 className="font-serif text-3xl md:text-4xl text-cream mb-4">
+        <p className="antetitulo mb-4">Entradas</p>
+        <h2 className="titulo-2 text-marfil mb-4">
           Comprá tu entrada
         </h2>
-        <p className="text-[var(--text-secondary)] text-sm md:text-base leading-relaxed mb-10">
+        <p className="cuerpo text-arena mb-10">
           Descargá la app y asegurá tu lugar antes de que se agoten.
         </p>
 
@@ -44,14 +44,14 @@ export function TicketSection() {
             href={siteConfig.ticketApps.googlePlay}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-5 bg-night-800 hover:bg-night-700 border border-white/10 hover:border-white/20 text-cream px-8 py-5 rounded-2xl transition-all duration-300 hover:scale-105 w-full sm:w-auto min-w-[260px]"
+            className="group flex items-center gap-5 bg-carbon hover:bg-piedra border border-piedra hover:border-oro text-marfil px-8 py-5 rounded-2xl transition-colors duration-300 w-full sm:w-auto min-w-[260px]"
           >
-            <span className="text-white/60 group-hover:text-white transition-colors">
+            <span className="text-arena group-hover:text-marfil transition-colors">
               <GooglePlayIcon />
             </span>
             <div className="text-left">
-              <p className="text-white/40 text-[13px] tracking-widest uppercase leading-none mb-1">Disponible en</p>
-              <p className="text-cream text-base font-medium leading-none">Google Play</p>
+              <p className="text-arena text-xs tracking-widest uppercase leading-none mb-1">Disponible en</p>
+              <p className="text-marfil text-base font-medium leading-none">Google Play</p>
             </div>
           </a>
 
@@ -60,14 +60,14 @@ export function TicketSection() {
             href={siteConfig.ticketApps.appStore}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-5 bg-night-800 hover:bg-night-700 border border-white/10 hover:border-white/20 text-cream px-8 py-5 rounded-2xl transition-all duration-300 hover:scale-105 w-full sm:w-auto min-w-[260px]"
+            className="group flex items-center gap-5 bg-carbon hover:bg-piedra border border-piedra hover:border-oro text-marfil px-8 py-5 rounded-2xl transition-colors duration-300 w-full sm:w-auto min-w-[260px]"
           >
-            <span className="text-white/60 group-hover:text-white transition-colors">
+            <span className="text-arena group-hover:text-marfil transition-colors">
               <AppStoreIcon />
             </span>
             <div className="text-left">
-              <p className="text-white/40 text-[13px] tracking-widest uppercase leading-none mb-1">Disponible en</p>
-              <p className="text-cream text-base font-medium leading-none">App Store</p>
+              <p className="text-arena text-xs tracking-widest uppercase leading-none mb-1">Disponible en</p>
+              <p className="text-marfil text-base font-medium leading-none">App Store</p>
             </div>
           </a>
         </div>

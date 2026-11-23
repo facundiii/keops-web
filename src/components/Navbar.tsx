@@ -20,7 +20,7 @@ export function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-night-950/95 backdrop-blur-md shadow-lg shadow-black/30"
+          ? "bg-negro/95 backdrop-blur-md shadow-lg shadow-negro/30"
           : "bg-transparent backdrop-blur-sm"
       }`}
     >
@@ -44,7 +44,7 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm tracking-widest uppercase text-white/70 hover:text-gold transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-px after:bg-gold after:transition-all after:duration-300 hover:after:w-full"
+                className="text-sm tracking-widest uppercase text-arena hover:text-oro transition-colors duration-200 relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-px after:bg-oro after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.label}
               </Link>
@@ -61,14 +61,14 @@ export function Navbar() {
                 src={siteConfig.fusion.logoSrc}
                 alt="Fusion"
                 fill
-                className="object-contain fusion-glow"
+                className="object-contain logo-claro"
               />
             </Link>
           </nav>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-white/80 hover:text-gold transition-colors"
+            className="md:hidden p-2 text-marfil hover:text-oro transition-colors"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
@@ -83,13 +83,13 @@ export function Navbar() {
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="bg-night-950/98 backdrop-blur-md border-t border-white/5 px-4 py-2 flex flex-col">
+        <nav className="bg-negro/98 backdrop-blur-md border-t border-piedra px-4 py-2 flex flex-col">
           {siteConfig.nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               onClick={() => setIsOpen(false)}
-              className="py-3 px-2 text-sm tracking-widest uppercase text-white/70 hover:text-gold border-b border-white/5 transition-colors duration-200"
+              className="py-3 px-2 text-sm tracking-widest uppercase text-arena hover:text-oro border-b border-piedra transition-colors duration-200"
             >
               {item.label}
             </Link>
@@ -98,7 +98,7 @@ export function Navbar() {
           <Link
             href={siteConfig.fusion.href}
             onClick={() => setIsOpen(false)}
-            className="py-3 px-2 flex items-center border-b border-white/5"
+            className="py-3 px-2 flex items-center border-b border-piedra"
             aria-label="Fusion"
           >
             <Image
@@ -106,7 +106,7 @@ export function Navbar() {
               alt="Fusion"
               width={120}
               height={20}
-              className="h-[34px] w-auto fusion-glow"
+              className="h-[34px] w-auto logo-claro"
             />
           </Link>
         </nav>

@@ -1,5 +1,6 @@
 import { Instagram, Mail } from "lucide-react";
 import { siteConfig } from "@/config/site";
+import { Boton } from "@/components/ui/Boton";
 
 function WhatsAppIcon({ size = 24 }: { size?: number }) {
   return (
@@ -31,60 +32,38 @@ export function ContactCTA({
   const resolvedWaDisplay = whatsappDisplay ?? siteConfig.whatsapp.number;
 
   return (
-    <section className="bg-night-950 border-t border-white/5 py-12 px-4">
+    <section className="bg-negro border-t border-piedra py-12 px-4">
       <div className="max-w-3xl mx-auto text-center">
-        <p className="text-gold text-sm tracking-[0.3em] uppercase mb-4">Contacto</p>
-        <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">{title}</h2>
-        <p className="text-white/50 text-base md:text-lg leading-relaxed mb-8">{subtitle}</p>
+        <p className="antetitulo mb-4">Contacto</p>
+        <h2 className="titulo-2 text-marfil mb-4">{title}</h2>
+        <p className="cuerpo text-arena mb-8">{subtitle}</p>
 
         <div className="flex flex-wrap items-center justify-center gap-4">
-          {/* WhatsApp button */}
-          <a
-            href={resolvedWaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-medium px-7 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#25D366]/25 text-sm tracking-wide"
-          >
+          <Boton variante="whatsapp" href={resolvedWaUrl}>
             <WhatsAppIcon size={20} />
-            Chatear por WhatsApp
-          </a>
+            Escribinos por WhatsApp
+          </Boton>
 
-          {/* Email button */}
-          <a
-            href={`mailto:${resolvedEmail}`}
-            className="group flex items-center gap-3 border border-gold/30 hover:border-gold text-gold/70 hover:text-gold px-7 py-4 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-gold/10 text-sm tracking-wide"
-          >
-            <Mail size={20} />
-            Escribinos por e-mail
-          </a>
+          <Boton variante="secundario" href={`mailto:${resolvedEmail}`}>
+            <Mail size={20} strokeWidth={1.5} />
+            Escribinos por mail
+          </Boton>
 
-          {/* Instagram button */}
-          <a
-            href={siteConfig.instagram.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex items-center gap-3 border border-white/20 hover:border-[#E1306C] text-white/70 hover:text-white px-7 py-4 rounded-full transition-all duration-300 hover:scale-105 text-sm tracking-wide"
-          >
-            <Instagram size={20} className="group-hover:text-[#E1306C] transition-colors" />
+          <Boton variante="secundario" href={siteConfig.instagram.url}>
+            <Instagram size={20} strokeWidth={1.5} />
             {siteConfig.instagram.handle}
-          </a>
+          </Boton>
         </div>
 
         {/* Contact info */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-white/30 text-sm">
+        <div className="texto-chico mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-arena">
           <span className="flex items-center gap-2">
-            <WhatsAppIcon size={14} />
+            <WhatsAppIcon size={16} />
             {resolvedWaDisplay}
           </span>
-          <span className="hidden sm:block">·</span>
           <span className="flex items-center gap-2">
-            <Mail size={14} />
+            <Mail size={16} strokeWidth={1.5} />
             {resolvedEmail}
-          </span>
-          <span className="hidden sm:block">·</span>
-          <span className="flex items-center gap-2">
-            <Instagram size={14} />
-            {siteConfig.instagram.handle}
           </span>
         </div>
       </div>

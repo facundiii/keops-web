@@ -37,10 +37,10 @@ export default function FusionPage() {
   return (
     <>
       {/* ─── HERO + LOGOS ─────────────────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center px-4 pt-28 pb-12 bg-night-950 overflow-hidden">
+      <section className="relative flex flex-col items-center px-4 pt-28 pb-12 bg-negro overflow-hidden">
         {/* Glow radial background */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/[0.03] blur-3xl" />
+          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-marfil/[0.03] blur-3xl" />
         </div>
 
         <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto w-full">
@@ -50,21 +50,21 @@ export default function FusionPage() {
               src={siteConfig.fusion.logoSrc}
               alt="Fusion"
               fill
-              className="object-contain fusion-glow"
+              className="object-contain logo-claro"
               priority
             />
           </div>
 
           {/* Tagline */}
           <FadeInSection>
-            <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white leading-snug tracking-tight">
+            <h1 className="titulo-2 text-marfil">
               {siteConfig.fusion.tagline}
             </h1>
           </FadeInSection>
 
           {/* Divider */}
           <FadeInSection delay={120}>
-            <div className="mt-8 mb-8 w-16 h-px bg-white/20 mx-auto" />
+            <div className="mt-8 mb-8 w-16 h-px bg-piedra mx-auto" />
           </FadeInSection>
 
           {/* Partner logos — columna en mobile, fila en sm+ */}
@@ -73,7 +73,7 @@ export default function FusionPage() {
               <FadeInSection
                 key={partner.name}
                 delay={180 + i * 180}
-                className="w-full sm:flex-1 flex justify-center border-b sm:border-b-0 sm:border-r border-white/10 last:border-0"
+                className="w-full sm:flex-1 flex justify-center border-b sm:border-b-0 sm:border-r border-piedra last:border-0"
               >
                 <PartnerLogo
                   name={partner.name}

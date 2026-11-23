@@ -1,5 +1,13 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Tokens de color de Keops.
+ * Son los mismos valores que las variables CSS de src/app/globals.css (:root).
+ * Si cambiás uno, cambialo en los dos archivos.
+ *
+ * `colors` reemplaza la paleta de Tailwind a propósito: en el sitio solo
+ * existen estos colores, así ningún componente puede usar uno suelto.
+ */
 const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -7,31 +15,33 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        gold: {
-          DEFAULT: "#c9a961",
-          light: "#e0c278",
-          dark: "#a88b45",
-        },
-        cream: "#f0ece4",
-        night: {
-          950: "#0a0a0a",
-          900: "#111111",
-          800: "#1a1a1a",
-          700: "#252525",
-          600: "#333333",
-        },
+    colors: {
+      transparent: "transparent",
+      current: "currentColor",
+      inherit: "inherit",
+      negro: "#0A0A0A", // fondo general
+      carbon: "#161412", // tarjetas y superficies
+      piedra: "#2A2621", // bordes y divisores
+      marfil: "#F0ECE4", // texto principal
+      arena: "#A89F91", // texto secundario
+      oro: {
+        DEFAULT: "#C9A961", // acento, botones principales, antetítulos
+        profundo: "#A88A45", // hover y presionado del dorado
       },
+      laser: "#A970FF", // SOLO en Disco, en detalles
+      whatsapp: "#25D366", // SOLO en el botón de WhatsApp
+    },
+    extend: {
       fontFamily: {
-        serif: ["var(--font-playfair)", "Georgia", "serif"],
+        titulo: ["var(--font-outfit)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        acento: ["var(--font-cormorant)", "Georgia", "serif"],
+        jeroglifico: ["NotoEgyptian", "serif"],
       },
       animation: {
-        "fade-in-up": "fadeInUp 0.7s ease forwards",
-        "fade-in": "fadeIn 0.6s ease forwards",
+        "fade-in-up": "fadeInUp 0.5s ease-out both",
+        "fade-in": "fadeIn 0.5s ease-out both",
         "bounce-slow": "bounce 2s infinite",
-        "logo-entrance": "logoEntrance 1.1s cubic-bezier(0.22,1,0.36,1) forwards",
         "scroll-up": "scrollUp 32s linear infinite",
         "scroll-down": "scrollDown 32s linear infinite",
         "scroll-left": "scrollLeft 15s linear infinite",
@@ -41,17 +51,12 @@ const config: Config = {
       },
       keyframes: {
         fadeInUp: {
-          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
         fadeIn: {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
-        },
-        logoEntrance: {
-          "0%": { opacity: "0", transform: "scale(0.82) translateY(16px)" },
-          "70%": { opacity: "1", transform: "scale(1.03) translateY(-4px)" },
-          "100%": { opacity: "1", transform: "scale(1) translateY(0)" },
         },
       },
     },

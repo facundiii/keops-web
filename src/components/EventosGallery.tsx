@@ -9,8 +9,8 @@ import { Play, ImageIcon, Volume2, VolumeX } from "lucide-react";
 function ImageSlot({ src, alt }: { src?: string; alt?: string }) {
   if (!src) {
     return (
-      <div className="w-full aspect-[9/16] rounded-xl bg-night-800 border border-white/5 flex items-center justify-center shrink-0">
-        <ImageIcon size={20} className="text-white/10" />
+      <div className="w-full aspect-[9/16] rounded-xl bg-carbon border border-piedra flex items-center justify-center shrink-0">
+        <ImageIcon size={20} className="text-arena/60" />
       </div>
     );
   }
@@ -34,11 +34,11 @@ function VideoSlot({ src }: { src?: string }) {
 
   if (!src) {
     return (
-      <div className="w-full aspect-[9/16] rounded-2xl bg-night-800 border border-white/8 flex flex-col items-center justify-center gap-4">
-        <div className="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center">
-          <Play size={22} className="text-white/20 ml-1" />
+      <div className="w-full aspect-[9/16] rounded-2xl bg-carbon border border-piedra flex flex-col items-center justify-center gap-4">
+        <div className="w-16 h-16 rounded-full border border-piedra flex items-center justify-center">
+          <Play size={22} className="text-arena/60 ml-1" />
         </div>
-        <p className="text-white/20 text-[11px] tracking-[0.2em] uppercase">Video próximamente</p>
+        <p className="text-arena/60 text-xs tracking-[0.2em] uppercase">Video próximamente</p>
       </div>
     );
   }
@@ -55,12 +55,12 @@ function VideoSlot({ src }: { src?: string }) {
         playsInline
       />
       {/* Gradient base para el botón */}
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-negro/60 to-transparent pointer-events-none" />
       {/* Botón de sonido — overlay dentro del video */}
       <div className="absolute bottom-4 inset-x-0 flex justify-center z-20">
         <button
           onClick={toggleMute}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-gold/50 bg-night-950/70 backdrop-blur-sm text-gold/80 hover:text-gold hover:border-gold hover:bg-gold/10 transition-all duration-300 text-[11px] tracking-widest"
+          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-oro/50 bg-negro/70 backdrop-blur-sm text-oro/80 hover:text-oro hover:border-oro hover:bg-oro/10 transition-all duration-300 text-xs tracking-widest"
           aria-label={muted ? "Activar sonido" : "Silenciar"}
         >
           {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
@@ -104,8 +104,8 @@ function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | un
       {src ? (
         <Image src={src} alt="" fill className="object-cover" sizes="112px" />
       ) : (
-        <div className="w-full h-full bg-night-800 border border-white/5 flex items-center justify-center">
-          <ImageIcon size={16} className="text-white/10" />
+        <div className="w-full h-full bg-carbon border border-piedra flex items-center justify-center">
+          <ImageIcon size={16} className="text-arena/60" />
         </div>
       )}
     </div>
@@ -115,16 +115,16 @@ function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | un
     <div className="flex flex-col gap-3">
       {/* Fila 1 — izquierda */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-night-950 to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-negro to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-negro to-transparent pointer-events-none" />
         <div className="flex gap-3 w-max animate-scroll-left-fast">
           {leftItems.map(renderItem)}
         </div>
       </div>
       {/* Fila 2 — derecha */}
       <div className="relative overflow-hidden">
-        <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-night-950 to-transparent pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-negro to-transparent pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-negro to-transparent pointer-events-none" />
         <div className="flex gap-3 w-max animate-scroll-right-fast">
           {rightItems.map(renderItem)}
         </div>
@@ -158,8 +158,8 @@ export function EventosGallery({
       {/* ── Desktop: 3-column cinema strip ── */}
       <div className="hidden lg:block relative">
         {/* Top + bottom vignettes */}
-        <div className="absolute inset-x-0 top-0 h-12 z-10 bg-gradient-to-b from-night-950 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-12 z-10 bg-gradient-to-t from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-12 z-10 bg-gradient-to-b from-negro to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-12 z-10 bg-gradient-to-t from-negro to-transparent pointer-events-none" />
 
         <div
           className="flex gap-4 items-start max-w-5xl mx-auto px-4"

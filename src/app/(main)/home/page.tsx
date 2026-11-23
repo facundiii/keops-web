@@ -7,42 +7,10 @@ import { HeroCTAButton, HeroScrollIndicator } from "@/components/HeroScrollButto
 import { ContactCTA } from "@/components/ContactCTA";
 
 const sectionCards = [
-  {
-    key: "disco" as const,
-    href: "/disco",
-    gradient: "from-purple-950/80 to-night-950/80",
-    accentHover: "group-hover:text-purple-300",
-    borderHover: "group-hover:border-purple-500/40",
-    bgHover: "group-hover:bg-purple-500/5",
-    emoji: "🎵",
-  },
-  {
-    key: "eventos" as const,
-    href: "/eventos",
-    gradient: "from-gold-dark/60 to-night-950/80",
-    accentHover: "group-hover:text-gold",
-    borderHover: "group-hover:border-gold/40",
-    bgHover: "group-hover:bg-gold/5",
-    emoji: "✨",
-  },
-  {
-    key: "egresados" as const,
-    href: "/egresados",
-    gradient: "from-rose-950/80 to-night-950/80",
-    accentHover: "group-hover:text-rose-300",
-    borderHover: "group-hover:border-rose-500/40",
-    bgHover: "group-hover:bg-rose-500/5",
-    emoji: "🎓",
-  },
-  {
-    key: "institucionales" as const,
-    href: "/institucionales",
-    gradient: "from-sky-950/80 to-night-950/80",
-    accentHover: "group-hover:text-sky-300",
-    borderHover: "group-hover:border-sky-500/40",
-    bgHover: "group-hover:bg-sky-500/5",
-    emoji: "🏢",
-  },
+  { key: "disco" as const, href: "/disco" },
+  { key: "eventos" as const, href: "/eventos" },
+  { key: "egresados" as const, href: "/egresados" },
+  { key: "institucionales" as const, href: "/institucionales" },
 ];
 
 export default function HomePage() {
@@ -62,8 +30,8 @@ export default function HomePage() {
         />
 
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-night-950/60 via-night-950/50 to-night-950/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-night-950/30 via-transparent to-night-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-negro/60 via-negro/50 to-negro/90" />
+        <div className="absolute inset-0 bg-gradient-to-r from-negro/30 via-transparent to-negro/30" />
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
@@ -93,12 +61,12 @@ export default function HomePage() {
           </div>
 
           {/* Subtitle — pegado justo debajo del contenido real del logo */}
-          <p className="hero-subtitle-anim -mt-[27px] sm:-mt-[47px] md:-mt-[72px] text-white/45 text-xs md:text-sm tracking-[0.45em] uppercase">
+          <p className="hero-subtitle-anim antetitulo -mt-[27px] sm:-mt-[47px] md:-mt-[72px]">
             Villa Carlos Paz · Córdoba · Argentina
           </p>
 
           {/* CTA */}
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-400">
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-400">
             <HeroCTAButton />
           </div>
         </div>
@@ -108,16 +76,12 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECCIONES ────────────────────────────────────────────────────── */}
-      <section id="sections" className="bg-night-950 py-24 px-4">
+      <section id="sections" className="bg-negro py-24 px-4">
         <div className="max-w-7xl mx-auto">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="font-serif text-4xl md:text-5xl text-cream mb-3">
-                Nuestras propuestas
-              </h2>
-              <p className="text-[var(--text-secondary)] text-sm md:text-base tracking-wide">
-                Todo lo que Keops tiene para vos
-              </p>
+              <h2 className="titulo-2 text-marfil mb-3">Nuestras propuestas</h2>
+              <p className="cuerpo text-arena">Todo lo que Keops tiene para vos</p>
             </div>
           </FadeInSection>
 
@@ -128,29 +92,19 @@ export default function HomePage() {
                 <FadeInSection key={card.key} delay={i * 100}>
                   <Link
                     href={card.href}
-                    className={`group block relative overflow-hidden rounded-2xl border border-white/5 bg-night-900 p-8 md:p-10 transition-all duration-300 ${card.borderHover} ${card.bgHover} hover:-translate-y-1 hover:shadow-2xl hover:shadow-black/50`}
+                    className="group block h-full rounded-2xl border border-piedra bg-carbon p-8 md:p-10 transition-colors duration-300 hover:border-oro"
                   >
-                    {/* Background gradient on hover */}
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br ${card.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
-                    />
-
-                    <div className="relative z-10">
-                      <span className="text-3xl mb-5 block">{card.emoji}</span>
-                      <p className={`text-xs tracking-[0.3em] uppercase text-white mb-2 transition-colors duration-300 ${card.accentHover}`}>
-                        {section.title}
-                      </p>
-                      <h3 className="font-serif text-2xl md:text-3xl text-cream mb-4 leading-tight">
-                        {section.tagline}
-                      </h3>
-                      <p className="text-white/60 text-sm leading-relaxed line-clamp-2">
-                        {section.description}
-                      </p>
-                      <div className={`mt-6 inline-flex items-center gap-2 text-xs tracking-widest uppercase px-4 py-2 rounded-full border border-white/20 text-white/60 transition-all duration-300 group-hover:border-current group-hover:gap-3 ${card.accentHover}`}>
-                        Ver más
-                        <ArrowRight size={12} className="transition-transform duration-300 group-hover:translate-x-1" />
-                      </div>
-                    </div>
+                    <p className="antetitulo mb-3">{section.title}</p>
+                    <h3 className="titulo-3 text-marfil mb-4">{section.tagline}</h3>
+                    <p className="cuerpo text-arena line-clamp-2">{section.description}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro">
+                      Ver más
+                      <ArrowRight
+                        size={20}
+                        strokeWidth={1.5}
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                    </span>
                   </Link>
                 </FadeInSection>
               );
@@ -161,13 +115,13 @@ export default function HomePage() {
 
       {/* ─── MINI STATEMENT ──────────────────────────────────────────────── */}
       <FadeInSection>
-        <section className="bg-night-950 border-t border-white/5 py-24 px-4 text-center">
+        <section className="bg-negro border-t border-piedra py-24 px-4 text-center">
           <div className="max-w-2xl mx-auto">
-            <div className="w-12 h-px bg-gold mx-auto mb-8" />
-            <blockquote className="font-serif text-2xl md:text-3xl lg:text-4xl text-cream/85 leading-relaxed">
+            <div className="w-12 h-px bg-oro mx-auto mb-8" />
+            <blockquote className="acento text-3xl md:text-4xl text-marfil leading-snug">
               &ldquo;Más de 50 años generando recuerdos inolvidables.&rdquo;
             </blockquote>
-            <p className="mt-6 text-[var(--text-secondary)] text-sm tracking-widest uppercase">
+            <p className="mt-6 antetitulo">
               {siteConfig.name} · {siteConfig.location}
             </p>
           </div>

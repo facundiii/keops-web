@@ -16,7 +16,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-night-950 border-t border-white/5">
+    <footer className="bg-negro border-t border-piedra">
       {/* Google Maps */}
       <div className="relative w-full h-72 md:h-96 overflow-hidden">
         <iframe
@@ -29,15 +29,15 @@ export function Footer() {
           referrerPolicy="no-referrer-when-downgrade"
           title="Ubicación Keops"
         />
-        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-night-950 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-night-950 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-negro to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-negro to-transparent pointer-events-none" />
 
         {/* Location badge */}
         <a
           href={siteConfig.maps.shareUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-night-950/90 backdrop-blur-sm border border-white/10 hover:border-gold/40 text-white/70 hover:text-gold text-xs tracking-wide px-4 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-negro/90 backdrop-blur-sm border border-piedra hover:border-oro/40 text-arena hover:text-oro text-xs tracking-wide px-4 py-2.5 rounded-full transition-all duration-300 whitespace-nowrap"
         >
           <MapPin size={12} className="shrink-0" />
           {siteConfig.location} — Ver en Google Maps
@@ -45,8 +45,8 @@ export function Footer() {
       </div>
 
       {/* ── Social media strip ── */}
-      <div className="border-b border-white/5 py-7 px-4 text-center">
-        <p className="text-xs tracking-[0.3em] uppercase text-[var(--text-secondary)] mb-4">
+      <div className="border-b border-piedra py-7 px-4 text-center">
+        <p className="text-xs tracking-[0.3em] uppercase text-arena mb-4">
           Seguinos en nuestras redes
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
@@ -55,7 +55,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-[#E1306C]/50 hover:bg-[#E1306C]/5 transition-all duration-300 text-sm tracking-wider"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-piedra text-arena hover:text-marfil hover:border-oro transition-all duration-300 text-sm tracking-wider"
           >
             <Instagram size={16} />
             <span>Instagram</span>
@@ -65,7 +65,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-white/30 hover:bg-white/5 transition-all duration-300 text-sm tracking-wider"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-piedra text-arena hover:text-marfil hover:border-piedra hover:bg-carbon transition-all duration-300 text-sm tracking-wider"
           >
             <TikTokIcon size={16} />
             <span>TikTok</span>
@@ -75,7 +75,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/10 text-white/50 hover:text-white hover:border-[#1877F2]/50 hover:bg-[#1877F2]/5 transition-all duration-300 text-sm tracking-wider"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-piedra text-arena hover:text-marfil hover:border-oro transition-all duration-300 text-sm tracking-wider"
           >
             <Facebook size={16} />
             <span>Facebook</span>
@@ -84,11 +84,11 @@ export function Footer() {
       </div>
 
       {/* ── Staff ── */}
-      <div className="border-b border-white/5 py-8 px-4">
+      <div className="border-b border-piedra py-8 px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-6">
-            <p className="text-xs tracking-[0.35em] uppercase text-gold mb-1">Equipo</p>
-            <h3 className="font-serif text-xl text-cream">Nuestro Staff</h3>
+            <p className="antetitulo mb-1">Equipo</p>
+            <h3 className="titulo-3 text-marfil">Nuestro Staff</h3>
           </div>
           <ul className="flex flex-wrap justify-center gap-x-10 gap-y-4">
             {[
@@ -100,10 +100,10 @@ export function Footer() {
               { role: "Técnica", name: "Diego Fernandez" },
             ].map(({ role, name }) => (
               <li key={role} className="flex items-start gap-2 text-sm w-[155px]">
-                <span className="mt-[7px] w-1 h-1 rounded-full bg-gold/60 shrink-0" />
+                <span className="mt-[7px] w-1 h-1 rounded-full bg-oro/60 shrink-0" />
                 <span>
-                  <span className="block text-white/35 text-[10px] tracking-[0.2em] uppercase leading-none mb-0.5">{role}</span>
-                  <span className="text-white/70">{name}</span>
+                  <span className="block text-arena text-xs tracking-[0.2em] uppercase leading-none mb-0.5">{role}</span>
+                  <span className="text-arena">{name}</span>
                 </span>
               </li>
             ))}
@@ -132,7 +132,7 @@ export function Footer() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm tracking-widest uppercase text-white/40 hover:text-gold transition-colors duration-200"
+                className="text-sm tracking-widest uppercase text-arena hover:text-oro transition-colors duration-200"
               >
                 {item.label}
               </Link>
@@ -142,29 +142,29 @@ export function Footer() {
                 src={siteConfig.fusion.logoSrc}
                 alt="Fusion"
                 fill
-                className="object-contain fusion-glow"
+                className="object-contain logo-claro"
               />
             </Link>
           </nav>
 
         </div>
 
-        <div className="mt-4 pt-4 border-t border-white/5 text-center">
-          <p className="text-white/25 text-xs tracking-widest">
+        <div className="mt-4 pt-4 border-t border-piedra text-center">
+          <p className="text-arena/60 text-xs tracking-widest">
             © {year} {siteConfig.name}. Todos los derechos reservados.
           </p>
-          <p className="text-white/15 text-[11px] tracking-wide mt-1">
+          <p className="text-arena/60 text-xs tracking-wide mt-1">
             Diseñado y desarrollado por{" "}
             <a
               href="mailto:facufergoye@gmail.com"
-              className="hover:text-white/40 transition-colors duration-200"
+              className="hover:text-arena transition-colors duration-200"
             >
               Facundo Fernandez Goyechea
             </a>
             <span className="mx-2 opacity-50">|</span>
             <a
               href="mailto:facufergoye@gmail.com"
-              className="hover:text-white/40 transition-colors duration-200"
+              className="hover:text-arena transition-colors duration-200"
             >
               facufergoye@gmail.com
             </a>

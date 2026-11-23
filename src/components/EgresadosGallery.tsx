@@ -42,7 +42,7 @@ function VideoCard({ item, index, onClick }: {
   return (
     <div
       ref={containerRef}
-      className="relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group border border-white/20 hover:border-gold/50 transition-colors duration-300"
+      className="relative aspect-[9/16] rounded-2xl overflow-hidden cursor-pointer group border border-piedra hover:border-oro/50 transition-colors duration-300"
       onClick={onClick}
     >
       <video
@@ -55,39 +55,34 @@ function VideoCard({ item, index, onClick }: {
         onLoadedMetadata={(e) => { e.currentTarget.currentTime = 1; }}
       />
       {/* Overlay oscuro para que el play destaque */}
-      <div className="absolute inset-0 bg-night-950/55 group-hover:bg-night-950/40 transition-colors duration-300" />
-      <div className="absolute inset-0 bg-gradient-to-t from-night-950/80 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-negro/55 group-hover:bg-negro/40 transition-colors duration-300" />
+      <div className="absolute inset-0 bg-gradient-to-t from-negro/80 via-transparent to-transparent" />
 
       {/* Clip number */}
-      <div className="absolute top-4 left-4 text-white/20 font-serif italic text-5xl leading-none select-none">
+      <div className="absolute top-4 left-4 text-arena/60 font-titulo font-semibold text-5xl leading-none select-none">
         {String(index + 1).padStart(2, "0")}
       </div>
 
-      {/* Film grain texture lines */}
-      <div className="absolute inset-0 opacity-[0.025]"
-        style={{ backgroundImage: "repeating-linear-gradient(0deg, #fff 0px, #fff 1px, transparent 1px, transparent 4px)" }}
-      />
-
       {/* Play button */}
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-        <div className="relative flex items-center justify-center w-20 h-20 rounded-full border-2 border-gold/60 bg-gold/10 group-hover:border-gold group-hover:bg-gold/20 transition-all duration-300">
-          <div className="absolute inset-0 rounded-full bg-gold/15 scale-0 group-hover:scale-150 opacity-100 group-hover:opacity-0 transition-all duration-500" />
-          <Play size={30} className="text-gold ml-1.5 drop-shadow-[0_0_12px_rgba(201,169,97,0.9)]" />
+        <div className="relative flex items-center justify-center w-20 h-20 rounded-full border-2 border-oro/60 bg-oro/10 group-hover:border-oro group-hover:bg-oro/20 transition-all duration-300">
+          <div className="absolute inset-0 rounded-full bg-oro/15 scale-0 group-hover:scale-150 opacity-100 group-hover:opacity-0 transition-all duration-500" />
+          <Play size={30} className="text-oro ml-1.5" />
         </div>
         <div className="flex flex-col items-center gap-1">
           {item.label && (
-            <p className="text-white/60 text-xs tracking-[0.25em] uppercase group-hover:text-white/90 transition-colors duration-300">
+            <p className="text-arena text-xs tracking-[0.25em] uppercase group-hover:text-marfil transition-colors duration-300">
               {item.label}
             </p>
           )}
-          <p className="text-white/30 text-[10px] tracking-widest uppercase group-hover:text-gold/60 transition-colors duration-300">
+          <p className="text-arena/60 text-xs tracking-widest uppercase group-hover:text-oro/60 transition-colors duration-300">
             Reproducir
           </p>
         </div>
       </div>
 
       {/* Bottom fade */}
-      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-night-900/90 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-carbon/90 to-transparent" />
     </div>
   );
 }
@@ -112,8 +107,8 @@ function ImageCard({ item, onClick }: {
         className="transition-transform duration-500 group-hover:scale-[1.03]"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors duration-300 flex items-center justify-center">
-        <ZoomIn size={22} className="text-white opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
+      <div className="absolute inset-0 bg-negro/0 group-hover:bg-negro/25 transition-colors duration-300 flex items-center justify-center">
+        <ZoomIn size={22} className="text-marfil opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
       </div>
     </div>
   );
@@ -161,14 +156,14 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/97 backdrop-blur-sm flex items-center justify-center"
+      className="fixed inset-0 z-50 bg-negro/95 backdrop-blur-sm flex items-center justify-center"
       onClick={onClose}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
       {/* Close */}
       <button
-        className="absolute top-4 right-4 z-10 p-2 rounded-full border border-white/15 bg-white/5 text-white/60 hover:text-white transition-colors duration-200"
+        className="absolute top-4 right-4 z-10 p-2 rounded-full border border-piedra bg-carbon text-arena hover:text-marfil transition-colors duration-200"
         onClick={onClose}
         aria-label="Cerrar"
       >
@@ -176,14 +171,14 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
       </button>
 
       {/* Counter */}
-      <div className="absolute top-4 left-1/2 -translate-x-1/2 text-white/30 text-xs tracking-[0.3em] select-none">
+      <div className="absolute top-4 left-1/2 -translate-x-1/2 text-arena/60 text-xs tracking-[0.3em] select-none">
         {index + 1} / {items.length}
       </div>
 
       {/* Prev */}
       {items.length > 1 && (
         <button
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-white/15 bg-white/5 text-white/60 hover:text-white transition-colors duration-200"
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-piedra bg-carbon text-arena hover:text-marfil transition-colors duration-200"
           onClick={(e) => { e.stopPropagation(); onPrev(); }}
           aria-label="Anterior"
         >
@@ -234,7 +229,7 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
       {/* Next */}
       {items.length > 1 && (
         <button
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-white/15 bg-white/5 text-white/60 hover:text-white transition-colors duration-200"
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 p-2 sm:p-3 rounded-full border border-piedra bg-carbon text-arena hover:text-marfil transition-colors duration-200"
           onClick={(e) => { e.stopPropagation(); onNext(); }}
           aria-label="Siguiente"
         >
@@ -249,7 +244,7 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
             <button
               key={i}
               style={{ width: i === index ? "16px" : "6px" }}
-              className={`h-1.5 rounded-full transition-all duration-200 ${i === index ? "bg-gold" : "bg-white/25"}`}
+              className={`h-1.5 rounded-full transition-all duration-200 ${i === index ? "bg-oro" : "bg-piedra"}`}
               onClick={(e) => { e.stopPropagation(); }}
               aria-label={`Ir a item ${i + 1}`}
             />

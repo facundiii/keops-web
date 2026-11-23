@@ -10,16 +10,16 @@ interface AppQRCodeProps {
 export function AppQRCode({ value, label }: AppQRCodeProps) {
   return (
     <div className="flex flex-col items-center gap-2 min-w-[260px]">
-      <div className="p-2 bg-white rounded-xl w-full flex items-center justify-center">
+      <div className="p-2 bg-marfil rounded-xl w-full flex items-center justify-center">
         <QRCodeSVG
           value={value}
           size={172}
-          bgColor="#ffffff"
-          fgColor="#0a0a0a"
+          bgColor="var(--marfil)"
+          fgColor="var(--negro)"
           level="M"
         />
       </div>
-      <p className="text-white/30 text-[11px] tracking-widest uppercase">{label}</p>
+      <p className="antetitulo text-arena">{label}</p>
     </div>
   );
 }

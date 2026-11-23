@@ -39,9 +39,9 @@ export default function EventosPage() {
 
       {/* Description */}
       <FadeInSection>
-        <section className="bg-night-950 py-10 px-4 border-b border-white/5">
+        <section className="bg-negro py-10 px-4 border-b border-piedra">
           <div className="max-w-3xl mx-auto text-center">
-            <p className="text-[var(--text-secondary)] text-lg md:text-xl leading-relaxed">
+            <p className="cuerpo text-arena">
               {description}
             </p>
           </div>
@@ -49,11 +49,11 @@ export default function EventosPage() {
       </FadeInSection>
 
       {/* ── Creative gallery ── */}
-      <section className="bg-night-950 py-12 border-b border-white/5">
+      <section className="bg-negro py-12 border-b border-piedra">
         <FadeInSection>
           <div className="text-center px-4 mb-8">
-            <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">Galería</p>
-            <h2 className="font-serif text-3xl md:text-4xl text-cream">El espacio en imágenes</h2>
+            <p className="antetitulo mb-3">Galería</p>
+            <h2 className="titulo-2 text-marfil">El espacio en imágenes</h2>
           </div>
         </FadeInSection>
         <EventosGallery
@@ -64,11 +64,11 @@ export default function EventosPage() {
       </section>
 
       {/* ── Photo gallery ── */}
-      <section className="bg-night-950 py-12 px-4 border-b border-white/5">
+      <section className="bg-negro py-12 px-4 border-b border-piedra">
         <FadeInSection>
           <div className="text-center mb-8">
-            <p className="text-gold text-xs tracking-[0.35em] uppercase mb-3">Fotos</p>
-            <h2 className="font-serif text-3xl md:text-4xl text-cream">Mirá en detalle lo que tenemos para ofrecerte</h2>
+            <p className="antetitulo mb-3">Fotos</p>
+            <h2 className="titulo-2 text-marfil">Mirá en detalle lo que tenemos para ofrecerte</h2>
           </div>
         </FadeInSection>
         <div className="max-w-5xl mx-auto">
@@ -89,12 +89,12 @@ export default function EventosPage() {
       </section>
 
       {/* Body copy */}
-      <section className="bg-night-950 py-12 px-4">
+      <section className="bg-negro py-12 px-4">
         <div className="max-w-3xl mx-auto">
           <div className="space-y-6">
             {paragraphs.map((para, i) => (
               <FadeInSection key={i} delay={i * 100}>
-                <p className="text-[var(--text-secondary)] text-base md:text-lg leading-relaxed tracking-wide">
+                <p className="cuerpo text-arena">
                   {para}
                 </p>
               </FadeInSection>
@@ -104,19 +104,19 @@ export default function EventosPage() {
           {/* Services */}
           {services && services.length > 0 && (
             <FadeInSection delay={300}>
-              <div className="mt-10 pt-10 border-t border-white/5">
-                <div className="w-8 h-px bg-gold mb-6" />
-                <p className="text-gold text-xs tracking-[0.3em] uppercase mb-3">
+              <div className="mt-10 pt-10 border-t border-piedra">
+                <div className="w-8 h-px bg-oro mb-6" />
+                <p className="antetitulo mb-3">
                   Servicios incluidos
                 </p>
-                <h2 className="font-serif text-2xl md:text-3xl text-cream mb-6">
+                <h2 className="titulo-2 text-marfil mb-6">
                   ¿Qué ofrecemos?
                 </h2>
                 <ul className="space-y-3">
                   {[...services].map((service, i) => (
                     <FadeInSection key={i} delay={i * 80}>
-                      <li className="flex items-start gap-4 text-[var(--text-secondary)] text-base leading-relaxed">
-                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gold shrink-0" />
+                      <li className="flex items-start gap-4 cuerpo text-arena">
+                        <span className="mt-2 w-1.5 h-1.5 rounded-full bg-oro shrink-0" />
                         {service}
                       </li>
                     </FadeInSection>

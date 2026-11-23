@@ -51,8 +51,8 @@ export function Carousel({ items, autoplay = false, autoplayDelay = 4000 }: Caro
 
   if (items.length === 0) {
     return (
-      <div className="w-full aspect-video bg-night-800 rounded-xl flex items-center justify-center">
-        <p className="text-white/30 text-sm tracking-widest uppercase">Sin contenido aún</p>
+      <div className="w-full aspect-video bg-carbon rounded-xl flex items-center justify-center">
+        <p className="text-arena/60 text-sm tracking-widest uppercase">Sin contenido aún</p>
       </div>
     );
   }
@@ -63,7 +63,7 @@ export function Carousel({ items, autoplay = false, autoplayDelay = 4000 }: Caro
       <div className="overflow-hidden rounded-xl" ref={emblaRef}>
         <div className="flex">
           {items.map((item, i) => (
-            <div key={i} className="flex-[0_0_100%] min-w-0 relative aspect-video bg-night-800">
+            <div key={i} className="flex-[0_0_100%] min-w-0 relative aspect-video bg-carbon">
               {item.type === "image" ? (
                 <Image
                   src={item.src}
@@ -91,14 +91,14 @@ export function Carousel({ items, autoplay = false, autoplayDelay = 4000 }: Caro
         <>
           <button
             onClick={scrollPrev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-night-950/80 border border-white/10 flex items-center justify-center text-white/70 hover:text-gold hover:border-gold/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-negro/80 border border-piedra flex items-center justify-center text-arena hover:text-oro hover:border-oro/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
             aria-label="Anterior"
           >
             <ChevronLeft size={20} />
           </button>
           <button
             onClick={scrollNext}
-            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-night-950/80 border border-white/10 flex items-center justify-center text-white/70 hover:text-gold hover:border-gold/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-negro/80 border border-piedra flex items-center justify-center text-arena hover:text-oro hover:border-oro/50 transition-all duration-200 opacity-0 group-hover:opacity-100"
             aria-label="Siguiente"
           >
             <ChevronRight size={20} />
@@ -115,8 +115,8 @@ export function Carousel({ items, autoplay = false, autoplayDelay = 4000 }: Caro
               onClick={() => scrollTo(i)}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === selectedIndex
-                  ? "bg-gold w-6"
-                  : "bg-white/25 w-1.5 hover:bg-white/50"
+                  ? "bg-oro w-6"
+                  : "bg-piedra w-1.5 hover:bg-arena"
               }`}
               aria-label={`Ir a slide ${i + 1}`}
             />

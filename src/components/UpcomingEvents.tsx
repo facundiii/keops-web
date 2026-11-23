@@ -21,9 +21,9 @@ function FlyerImage({ src, name, fit = "cover" }: { src: string; name: string; f
 
   if (errored) {
     return (
-      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-night-700 to-night-900 gap-3">
-        <ImageIcon size={28} className="text-white/15" />
-        <span className="text-white/20 text-xs tracking-widest uppercase">Flyer próximamente</span>
+      <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-piedra to-carbon gap-3">
+        <ImageIcon size={28} className="text-arena/60" />
+        <span className="text-arena/60 text-xs tracking-widest uppercase">Flyer próximamente</span>
       </div>
     );
   }
@@ -98,8 +98,8 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
 
   if (events.length === 0) {
     return (
-      <div className="flex items-center justify-center py-16 px-8 rounded-2xl border border-white/5 bg-night-900">
-        <p className="text-white/25 text-sm tracking-widest uppercase text-center">
+      <div className="flex items-center justify-center py-16 px-8 rounded-2xl border border-piedra bg-carbon">
+        <p className="text-arena/60 text-sm tracking-widest uppercase text-center">
           Próximas fechas en camino — seguinos en Instagram para enterarte primero
         </p>
       </div>
@@ -114,7 +114,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
           <button
             onClick={scrollPrev}
             disabled={!prevEnabled}
-            className="absolute -left-4 md:-left-6 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-night-800 border border-white/10 flex items-center justify-center text-white/85 hover:text-gold hover:border-gold/40 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed"
+            className="absolute -left-4 md:-left-6 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-carbon border border-piedra flex items-center justify-center text-marfil hover:text-oro hover:border-oro/40 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed"
             aria-label="Anterior"
           >
             <ChevronLeft size={18} />
@@ -122,7 +122,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
           <button
             onClick={scrollNext}
             disabled={!nextEnabled}
-            className="absolute -right-4 md:-right-6 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-night-800 border border-white/10 flex items-center justify-center text-white/85 hover:text-gold hover:border-gold/40 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed"
+            className="absolute -right-4 md:-right-6 top-[40%] -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-carbon border border-piedra flex items-center justify-center text-marfil hover:text-oro hover:border-oro/40 transition-all duration-200 disabled:opacity-20 disabled:cursor-not-allowed"
             aria-label="Siguiente"
           >
             <ChevronRight size={18} />
@@ -138,12 +138,12 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
               key={event.id}
               className="flex-[0_0_100%] sm:flex-[0_0_calc(50%-12px)] lg:flex-[0_0_calc(33.333%-16px)] min-w-0"
             >
-              <div className="rounded-2xl overflow-hidden border border-white/5 bg-night-900 flex flex-col group hover:border-gold/20 transition-colors duration-300">
+              <div className="rounded-2xl overflow-hidden border border-piedra bg-carbon flex flex-col group hover:border-oro/20 transition-colors duration-300">
                 {/* Flyer 9:16 */}
-                <div className="relative w-full aspect-[9/16] bg-night-800 overflow-hidden">
+                <div className="relative w-full aspect-[9/16] bg-carbon overflow-hidden">
                   <FlyerImage src={event.flyer} name={event.name} fit={event.flyerFit} />
                   {/* Gradient bottom */}
-                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-night-900 to-transparent pointer-events-none" />
+                  <div className="absolute bottom-0 left-0 right-0 h-1/3 bg-gradient-to-t from-carbon to-transparent pointer-events-none" />
                 </div>
 
                 {/* Info */}
@@ -152,16 +152,16 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
                     {event.credits ? (
                       <div className="flex flex-col gap-0.5 mb-1">
                         {event.credits.map((credit, i) => (
-                          <p key={i} className="text-gold text-xs tracking-[0.2em] uppercase leading-tight">{credit}</p>
+                          <p key={i} className="antetitulo leading-tight">{credit}</p>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gold text-xs tracking-[0.25em] uppercase mb-1">{event.artist}</p>
+                      <p className="antetitulo mb-1">{event.artist}</p>
                     )}
-                    <h3 className="font-serif text-xl text-white leading-tight">{event.name}</h3>
+                    <h3 className="titulo-3 text-marfil">{event.name}</h3>
                   </div>
 
-                  <div className="flex flex-col gap-1.5 text-white/40 text-xs">
+                  <div className="flex flex-col gap-1.5 text-arena text-xs">
                     <span className="flex items-center gap-2">
                       <Calendar size={12} className="shrink-0" />
                       {event.date}
@@ -174,9 +174,9 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
 
                   <button
                     onClick={scrollToTickets}
-                    className="mt-auto w-full py-3 rounded-xl bg-gold/10 border border-gold/30 text-gold text-xs tracking-widest uppercase font-medium hover:bg-gold hover:text-night-950 transition-all duration-300 hover:scale-[1.02]"
+                    className="mt-auto w-full min-h-[44px] rounded-full bg-oro text-negro font-sans font-semibold text-sm uppercase tracking-[0.1em] hover:bg-oro-profundo transition-colors duration-300"
                   >
-                    Comprar Entrada
+                    Comprar entrada
                   </button>
                 </div>
               </div>
@@ -193,7 +193,7 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
               key={i}
               onClick={() => emblaApi?.scrollTo(i)}
               className={`h-1 rounded-full transition-all duration-300 ${
-                i === selectedIndex ? "bg-gold w-5" : "bg-white/20 w-1 hover:bg-white/40"
+                i === selectedIndex ? "bg-oro w-5" : "bg-piedra w-1 hover:bg-arena"
               }`}
               aria-label={`Ir a evento ${i + 1}`}
             />

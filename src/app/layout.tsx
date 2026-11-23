@@ -1,20 +1,31 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/CustomCursor";
 import { siteConfig } from "@/config/site";
 
-const cormorant = Cormorant_Garamond({
+// Títulos
+const outfit = Outfit({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
-  style: ["normal", "italic"],
-  variable: "--font-playfair",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-outfit",
   display: "swap",
 });
 
+// Texto, botones, antetítulos y formularios
 const inter = Inter({
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+// Solo como acento en itálica ("Desde 1969")
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["500"],
+  style: ["italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
 
@@ -40,15 +51,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${cormorant.variable} ${inter.variable}`}>
+    <html lang="es" className={`${outfit.variable} ${inter.variable} ${cormorant.variable}`}>
       <head>
-        <link
-          rel="preload"
-          href="/fonts/NotoSansEgyptianHieroglyphs-Regular.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
         <link rel="preload" href="/landing-pc.png" as="image" media="(min-width: 768px)" />
         <link rel="preload" href="/landing-mobile.png" as="image" media="(max-width: 767px)" />
       </head>
