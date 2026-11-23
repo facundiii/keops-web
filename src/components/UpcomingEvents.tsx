@@ -71,20 +71,27 @@ export function UpcomingEvents({ events }: UpcomingEventsProps) {
   const [prevEnabled, setPrevEnabled] = useState(false);
   const [nextEnabled, setNextEnabled] = useState(true);
 
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setPrevEnabled(emblaApi.canScrollPrev());
-    setNextEnabled(emblaApi.canScrollNext());
-  }, [emblaApi]);
+  const onInit = useCallback((api: NonNullable<typeof emblaApi>) => {
+    setScrollSnaps(api.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((api: NonNullable<typeof emblaApi>) => {
+    setSelectedIndex(api.selectedScrollSnap());
+    setPrevEnabled(api.canScrollPrev());
+    setNextEnabled(api.canScrollNext());
+  }, []);
 
   useEffect(() => {
     if (!emblaApi) return;
-    setScrollSnaps(emblaApi.scrollSnapList());
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-    onSelect();
-  }, [emblaApi, onSelect]);
+    // Lectura inicial del estado del carrusel (sistema externo): patrón oficial de Embla.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on("reInit", onInit).on("reInit", onSelect).on("select", onSelect);
+    return () => {
+      emblaApi.off("reInit", onInit).off("reInit", onSelect).off("select", onSelect);
+    };
+  }, [emblaApi, onInit, onSelect]);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);

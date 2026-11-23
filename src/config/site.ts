@@ -56,67 +56,18 @@ export const siteConfig = {
     appStore: "https://apps.apple.com/ar/app/fusion/id1658554122",
   },
 
-  upcomingEvents: [
-    {
-      id: "7",
-      name: "ANKH - Día del Amigo en Keops!",
-      artist: "Diego Fernandez",
-      credits: ["DJ Residente Diego Fernandez", "DJ Invitado Santino Pupplo"],
-      date: "Sábado 18 de julio",
-      time: "00:00",
-      flyer: "/disco/flyers/ankh-180726.jpg",
-      flyerFit: "fill" as const,
-    },
-    {
-      id: "1",
-      name: "¡Gusty DJ en Vivo!",
-      artist: "DJ Residente Diego Fernandez",
-      credits: ["DJ Residente Diego Fernandez", "DJ Invitado Facu Fernandez"],
-      date: "Sábado 7 de junio",
-      time: "00:00",
-      flyer: "/disco/flyers/gustydj-180126.png",
-    },
-    {
-      id: "2",
-      name: "Noche de Verano",
-      artist: "DJ Ejemplo",
-      date: "Sábado 14 de junio",
-      time: "00:00",
-      flyer: "/disco/flyers/gustydj-180126.png",
-    },
-    {
-      id: "3",
-      name: "Noche de Verano",
-      artist: "DJ Ejemplo",
-      date: "Sábado 21 de junio",
-      time: "00:00",
-      flyer: "/disco/flyers/gustydj-180126.png",
-    },
-    {
-      id: "4",
-      name: "Noche de Verano",
-      artist: "DJ Ejemplo",
-      date: "Sábado 28 de junio",
-      time: "00:00",
-      flyer: "/disco/flyer-4.jpg",
-    },
-    {
-      id: "5",
-      name: "Noche de Verano",
-      artist: "DJ Ejemplo",
-      date: "Sábado 5 de julio",
-      time: "00:00",
-      flyer: "/disco/flyer-5.jpg",
-    },
-    {
-      id: "6",
-      name: "Noche de Verano",
-      artist: "DJ Ejemplo",
-      date: "Sábado 12 de julio",
-      time: "00:00",
-      flyer: "/disco/flyer-6.jpg",
-    },
-  ] as {
+  // Cartelera: agregá acá cada fecha. Ejemplo:
+  // {
+  //   id: "1",
+  //   name: "Nombre de la fiesta",
+  //   artist: "DJ Residente ...",
+  //   credits: ["DJ Residente ...", "DJ Invitado ..."], // opcional
+  //   date: "Sábado 6 de diciembre",
+  //   time: "00:00",
+  //   flyer: "/disco/flyers/archivo.jpg",              // imagen 9:16 en public/disco/flyers/
+  //   flyerFit: "fill" as const,                        // opcional
+  // },
+  upcomingEvents: [] as {
     id: string;
     name: string;
     artist: string;

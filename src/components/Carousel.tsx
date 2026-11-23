@@ -29,11 +29,25 @@ export function Carousel({ items, autoplay = false, autoplayDelay = 4000 }: Caro
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
   const scrollTo = useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
 
+  const onInit = useCallback((api: NonNullable<typeof emblaApi>) => {
+    setScrollSnaps(api.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((api: NonNullable<typeof emblaApi>) => {
+    setSelectedIndex(api.selectedScrollSnap());
+  }, []);
+
   useEffect(() => {
     if (!emblaApi) return;
-    setScrollSnaps(emblaApi.scrollSnapList());
-    emblaApi.on("select", () => setSelectedIndex(emblaApi.selectedScrollSnap()));
-  }, [emblaApi]);
+    // Lectura inicial del estado del carrusel (sistema externo): patrón oficial de Embla.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on("reInit", onInit).on("reInit", onSelect).on("select", onSelect);
+    return () => {
+      emblaApi.off("reInit", onInit).off("reInit", onSelect).off("select", onSelect);
+    };
+  }, [emblaApi, onInit, onSelect]);
 
   if (items.length === 0) {
     return (
