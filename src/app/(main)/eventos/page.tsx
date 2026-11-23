@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { eventosPrivados } from "@/config/lineas";
 import { fotos } from "@/config/fotos";
+import { ejemplos } from "@/config/ejemplos";
 import { PlantillaLinea } from "@/components/PlantillaLinea";
 
 export const metadata: Metadata = {
@@ -13,6 +14,10 @@ export default function EventosPage() {
     <PlantillaLinea
       pagina={eventosPrivados}
       fotos={{ encabezado: fotos.eventos.encabezado, incluye: fotos.eventos.incluye }}
+      ejemplos={{
+        argumentos: ejemplos.argumentos.eventos,
+        testimonios: ejemplos.testimonios.eventos,
+      }}
     />
   );
 }

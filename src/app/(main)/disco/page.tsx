@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { disco } from "@/config/disco";
+import { cartelera as noches } from "@/config/cartelera";
 import { fotos } from "@/config/fotos";
+import { nochesDeEjemplo } from "@/config/ejemplos";
+import { MOSTRAR_EJEMPLOS, galeriaDeEjemplo, listaConEjemplo } from "@/lib/ejemplo";
 import { Encabezado } from "@/components/Encabezado";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { Cartelera } from "@/components/Cartelera";
@@ -18,6 +21,8 @@ export const metadata: Metadata = {
 export default function DiscoPage() {
   const { encabezado, cartelera, galeria, contacto } = disco;
   const foto = fotos.disco.encabezado;
+  // Con la cartelera vacía, en desarrollo se muestran noches de ejemplo.
+  const agenda = listaConEjemplo(noches, MOSTRAR_EJEMPLOS ? nochesDeEjemplo() : []);
 
   return (
     <>
@@ -35,14 +40,14 @@ export default function DiscoPage() {
         <FadeInSection>
           <TituloSeccion antetitulo={cartelera.antetitulo} titulo={cartelera.titulo} />
         </FadeInSection>
-        <Cartelera />
+        <Cartelera noches={agenda.datos} esEjemplo={agenda.esEjemplo} />
       </Seccion>
 
       {/* Comprar entrada */}
       <TicketSection />
 
       {/* Galería: oculta hasta tener fotos */}
-      <BloqueGaleria titulo={galeria.titulo} medios={galeria.medios} />
+      <BloqueGaleria titulo={galeria.titulo} medios={galeria.medios} ejemplo={galeriaDeEjemplo()} />
 
       <BloqueFaq grupo="disco" />
 

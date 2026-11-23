@@ -3,6 +3,9 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { hero, cifras, tarjetasLineas, proximasNoches, cierre, contacto } from "@/config/home";
 import { fotos } from "@/config/fotos";
+import { cartelera } from "@/config/cartelera";
+import { nochesDeEjemplo } from "@/config/ejemplos";
+import { MOSTRAR_EJEMPLOS, listaConEjemplo } from "@/lib/ejemplo";
 import { Boton } from "@/components/ui/Boton";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { VideoFondo } from "@/components/VideoFondo";
@@ -12,6 +15,9 @@ import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 
 export default function HomePage() {
+  // Con la cartelera vacía, en desarrollo se muestran noches de ejemplo.
+  const agenda = listaConEjemplo(cartelera, MOSTRAR_EJEMPLOS ? nochesDeEjemplo() : []);
+
   return (
     <>
       {/* 1. Hero */}
@@ -110,7 +116,12 @@ export default function HomePage() {
       <Seccion>
         <FadeInSection>
           <TituloSeccion antetitulo={proximasNoches.antetitulo} titulo={proximasNoches.titulo} />
-          <ProximasNoches />
+          <ProximasNoches
+            noches={agenda.datos}
+            cantidad={proximasNoches.cantidad}
+            boton={proximasNoches.boton}
+            esEjemplo={agenda.esEjemplo}
+          />
         </FadeInSection>
       </Seccion>
 

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Argumento } from "@/config/lineas";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { FadeInSection } from "@/components/FadeInSection";
 
 interface BloqueArgumentosProps {
@@ -8,16 +9,19 @@ interface BloqueArgumentosProps {
   argumentos: Argumento[];
   /** Foto opcional, arriba de los argumentos */
   foto?: { src: string; alt: string; posicion?: string };
+  /** true cuando los argumentos son de ejemplo (solo en desarrollo) */
+  esEjemplo?: boolean;
 }
 
 /** "Por qué Keops": argumentos numerados. Sin argumentos, no se muestra. */
-export function BloqueArgumentos({ titulo, argumentos, foto }: BloqueArgumentosProps) {
+export function BloqueArgumentos({ titulo, argumentos, foto, esEjemplo = false }: BloqueArgumentosProps) {
   if (argumentos.length === 0) return null;
 
   return (
     <Seccion>
       <FadeInSection>
-        <TituloSeccion titulo={titulo} />
+        <TituloSeccion titulo={titulo} className={esEjemplo ? "!mb-5" : ""} />
+        {esEjemplo && <EtiquetaEjemplo className="mb-8" />}
       </FadeInSection>
       {foto && (
         <FadeInSection>

@@ -4,10 +4,13 @@ import { Check } from "lucide-react";
 import { academia } from "@/config/academia";
 import { lineas } from "@/config/contacto";
 import { fotos } from "@/config/fotos";
-import { BloqueGaleria } from "@/components/BloqueGaleria";
-import { BloqueFaq } from "@/components/BloqueFaq";
+import { ejemplos } from "@/config/ejemplos";
+import { MOSTRAR_EJEMPLOS, galeriaDeEjemplo, listaConEjemplo, textoConEjemplo } from "@/lib/ejemplo";
 import { Encabezado } from "@/components/Encabezado";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
+import { BloqueGaleria } from "@/components/BloqueGaleria";
+import { BloqueFaq } from "@/components/BloqueFaq";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 
@@ -17,16 +20,25 @@ export const metadata: Metadata = {
 };
 
 export default function AcademiaPage() {
-  const { encabezado, temas, modalidad, docentes, galeria, inscripcion } = academia;
+  const { encabezado, modalidad, galeria, inscripcion } = academia;
 
+  // Donde falta el dato real, en desarrollo se muestra uno de ejemplo.
+  const bajada = textoConEjemplo(encabezado.bajada, ejemplos.academia.bajada);
+  const temas = listaConEjemplo(academia.temas.lista, ejemplos.academia.temas);
+  const docentes = listaConEjemplo(academia.docentes.lista, ejemplos.academia.docentes);
+  const bajadaInscripcion = textoConEjemplo(inscripcion.bajada, ejemplos.academia.inscripcionBajada);
+
+  const modalidadReal = [modalidad.duracion, modalidad.diasYHorarios, modalidad.cupos, modalidad.requisitos];
+  const modalidadEsEjemplo = MOSTRAR_EJEMPLOS && modalidadReal.every((v) => v.trim() === "");
+  const m = modalidadEsEjemplo ? ejemplos.academia.modalidad : modalidad;
   const datosModalidad = [
-    { etiqueta: "Duración", valor: modalidad.duracion },
-    { etiqueta: "Días y horarios", valor: modalidad.diasYHorarios },
-    { etiqueta: "Cupos", valor: modalidad.cupos },
-    { etiqueta: "Requisitos", valor: modalidad.requisitos },
+    { etiqueta: "Duración", valor: m.duracion },
+    { etiqueta: "Días y horarios", valor: m.diasYHorarios },
+    { etiqueta: "Cupos", valor: m.cupos },
+    { etiqueta: "Requisitos", valor: m.requisitos },
   ].filter((d) => d.valor.trim() !== "");
 
-  const hayContacto = Boolean(lineas.academia.whatsapp || lineas.academia.mail);
+  const hayContacto = Boolean(lineas.academia.whatsapp || lineas.academia.mail) || MOSTRAR_EJEMPLOS;
   const foto = fotos.academia.encabezado;
 
   return (
@@ -35,7 +47,8 @@ export default function AcademiaPage() {
       <Encabezado
         antetitulo={encabezado.antetitulo}
         titulo={encabezado.titulo}
-        bajada={encabezado.bajada}
+        bajada={bajada.texto}
+        bajadaDeEjemplo={bajada.esEjemplo}
         boton={hayContacto ? "Inscribite" : undefined}
         foto={foto?.src}
         fotoAlt={foto?.alt}
@@ -43,13 +56,14 @@ export default function AcademiaPage() {
       />
 
       {/* 2. Qué vas a aprender */}
-      {temas.lista.length > 0 && (
+      {temas.datos.length > 0 && (
         <Seccion>
           <FadeInSection>
-            <TituloSeccion titulo={temas.titulo} />
+            <TituloSeccion titulo={academia.temas.titulo} className={temas.esEjemplo ? "!mb-5" : ""} />
+            {temas.esEjemplo && <EtiquetaEjemplo className="mb-8" />}
           </FadeInSection>
           <ul className="grid gap-x-12 gap-y-5 sm:grid-cols-2">
-            {temas.lista.map((tema, i) => (
+            {temas.datos.map((tema, i) => (
               <li key={tema}>
                 <FadeInSection delay={i * 60}>
                   <span className="cuerpo text-marfil flex items-start gap-3">
@@ -67,7 +81,8 @@ export default function AcademiaPage() {
       {datosModalidad.length > 0 && (
         <Seccion>
           <FadeInSection>
-            <TituloSeccion titulo={modalidad.titulo} />
+            <TituloSeccion titulo={modalidad.titulo} className={modalidadEsEjemplo ? "!mb-5" : ""} />
+            {modalidadEsEjemplo && <EtiquetaEjemplo className="mb-8" />}
           </FadeInSection>
           <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {datosModalidad.map((dato) => (
@@ -81,13 +96,14 @@ export default function AcademiaPage() {
       )}
 
       {/* 4. Docentes (opcional) */}
-      {docentes.lista.length > 0 && (
+      {docentes.datos.length > 0 && (
         <Seccion>
           <FadeInSection>
-            <TituloSeccion titulo={docentes.titulo} />
+            <TituloSeccion titulo={academia.docentes.titulo} className={docentes.esEjemplo ? "!mb-5" : ""} />
+            {docentes.esEjemplo && <EtiquetaEjemplo className="mb-8" />}
           </FadeInSection>
           <ul className="grid gap-4 grid-cols-2 lg:grid-cols-3">
-            {docentes.lista.map((docente) => (
+            {docentes.datos.map((docente) => (
               <li key={docente.nombre} className="rounded-2xl border border-piedra bg-carbon overflow-hidden">
                 {docente.foto && (
                   <div className="relative aspect-square">
@@ -110,13 +126,19 @@ export default function AcademiaPage() {
         </Seccion>
       )}
 
-      {/* Galería: oculta hasta tener 6 fotos o un video */}
-      <BloqueGaleria titulo={galeria.titulo} medios={galeria.medios} />
+      {/* Galería: en el sitio publicado, oculta hasta tener 6 fotos o un video */}
+      <BloqueGaleria titulo={galeria.titulo} medios={galeria.medios} ejemplo={galeriaDeEjemplo()} />
 
       <BloqueFaq grupo="academia" />
 
       {/* 5. Inscripción: WhatsApp y mail de la academia */}
-      <ContactCTA title={inscripcion.titulo} subtitle={inscripcion.bajada} linea="academia" />
+      <ContactCTA
+        title={inscripcion.titulo}
+        subtitle={bajadaInscripcion.texto}
+        bajadaDeEjemplo={bajadaInscripcion.esEjemplo}
+        linea="academia"
+        contactoDeEjemplo={ejemplos.academia.contacto}
+      />
     </>
   );
 }

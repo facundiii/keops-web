@@ -107,6 +107,27 @@ export const fotos = {
   egresados: { porQue: showRobotsLed as Foto | undefined },
   academia: { encabezado: salonBarKeops as Foto | undefined },
 
+  /**
+   * Fotos DE EJEMPLO, para ver armadas las galerías y las tarjetas que todavía no tienen las suyas.
+   * Solo se ven en tu PC (npm run dev), con la etiqueta "De ejemplo". Nunca se publican.
+   */
+  deEjemplo: {
+    galeria: [
+      pistaCentralPiramide,
+      pistaCentral,
+      salonEletonArmado,
+      salonEletonBarra,
+      salonBar,
+      salonBarKeops,
+      showRobotsLed,
+      catering,
+    ],
+    espacios: {
+      garden: [salonBarKeops],
+      vip: [salonEletonBarra],
+    } as Record<string, Foto[]>,
+  },
+
   /** Para las galerías, cuando haya 6 fotos o más de cada una (config/lineas.ts). */
   paraGalerias: {
     pistaCentral: [pistaCentral],

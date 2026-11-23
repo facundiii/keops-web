@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { gruposConPreguntas } from "@/config/faq";
+import { gruposVisibles } from "@/lib/faq";
 import { Encabezado } from "@/components/Encabezado";
 import { Seccion } from "@/components/ui/Seccion";
 import { PreguntasFrecuentes } from "@/components/PreguntasFrecuentes";
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default function PreguntasFrecuentesPage() {
-  const grupos = gruposConPreguntas();
+  const grupos = gruposVisibles();
 
-  // Mientras no haya ninguna pregunta confirmada en config/faq.ts, la página no existe.
+  // En el sitio publicado, mientras no haya ninguna pregunta confirmada en config/faq.ts, la página no existe.
   if (grupos.length === 0) notFound();
 
   return (

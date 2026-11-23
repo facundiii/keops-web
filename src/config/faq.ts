@@ -1,8 +1,9 @@
 // Preguntas frecuentes, agrupadas por línea.
 //
-// SOLO se muestran las preguntas con `confirmado: true` y con respuesta escrita.
+// En el sitio publicado SOLO salen las preguntas con `confirmado: true` y con respuesta escrita.
 // Para publicar una: revisá el texto y cambiá `confirmado: false` por `confirmado: true`.
-// Mientras no haya ninguna confirmada, la página de Preguntas frecuentes y su link no aparecen.
+// Mientras no haya ninguna confirmada, la página de Preguntas frecuentes y su link no se publican.
+// En tu PC (npm run dev) se ven todas, con la etiqueta "Sin confirmar" o "De ejemplo".
 
 export type GrupoFaqId = "general" | "disco" | "egresados" | "eventos" | "academia";
 
@@ -123,20 +124,3 @@ export const faq: GrupoFaq[] = [
     ],
   },
 ];
-
-/** Preguntas publicables de un grupo: confirmadas y con respuesta. */
-export function preguntasDe(id: GrupoFaqId): Pregunta[] {
-  const grupo = faq.find((g) => g.id === id);
-  return grupo ? grupo.preguntas.filter((p) => p.confirmado && p.respuesta.trim() !== "") : [];
-}
-
-/** Grupos que tienen al menos una pregunta publicable. */
-export function gruposConPreguntas(): GrupoFaq[] {
-  return faq
-    .map((g) => ({ ...g, preguntas: preguntasDe(g.id) }))
-    .filter((g) => g.preguntas.length > 0);
-}
-
-export function hayPreguntas(): boolean {
-  return gruposConPreguntas().length > 0;
-}

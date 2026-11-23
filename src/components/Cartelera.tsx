@@ -4,7 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import { cartelera, type Noche } from "@/config/cartelera";
+import type { Noche } from "@/config/cartelera";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { fechaCorta, fechaLarga } from "@/lib/fechas";
 import { useVigentes } from "@/lib/useVigentes";
 import { claseBoton } from "@/components/ui/Boton";
@@ -84,9 +85,15 @@ function Ficha({ noche }: { noche: Noche }) {
   );
 }
 
+interface CarteleraProps {
+  noches: Noche[];
+  /** true cuando las noches son de ejemplo (solo en desarrollo) */
+  esEjemplo?: boolean;
+}
+
 /** Cartelera de Disco. Las fechas pasadas se ocultan solas. */
-export function Cartelera() {
-  const vigentes = useVigentes(cartelera);
+export function Cartelera({ noches, esEjemplo = false }: CarteleraProps) {
+  const vigentes = useVigentes(noches);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false, align: "start" });
   const [seleccionado, setSeleccionado] = useState(0);
   const [puntos, setPuntos] = useState<number[]>([]);
@@ -116,7 +123,7 @@ export function Cartelera() {
   }, [emblaApi, alIniciar, alSeleccionar]);
 
   // Sin noches cargadas, o todas pasadas: aviso con el Instagram.
-  if (cartelera.length === 0 || vigentes?.length === 0) return <SinFechas />;
+  if (noches.length === 0 || vigentes?.length === 0) return <SinFechas />;
 
   // Hay noches, pero todavía no se sabe la fecha de hoy: se reserva el lugar.
   if (vigentes === null) return <div className="min-h-[520px]" aria-hidden="true" />;
@@ -126,6 +133,7 @@ export function Cartelera() {
 
   return (
     <div className="relative">
+      {esEjemplo && <EtiquetaEjemplo className="mb-5" />}
       {vigentes.length > 1 && (
         <>
           <button

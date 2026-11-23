@@ -3,8 +3,14 @@
 Lista de lo que falta completar o revisar en el sitio, archivo por archivo.
 Todos los archivos están en `src/config/`. No hace falta tocar componentes.
 
-**Cómo funciona:** un dato vacío (`""`) o una lista vacía (`[]`) hace que ese bloque no se muestre.
+**Cómo funciona:** un dato vacío (`""`) o una lista vacía (`[]`) hace que ese bloque no se muestre en el sitio publicado.
 Al completarlo, el bloque aparece solo. Buscá `A COMPLETAR` dentro de cada archivo para encontrar el lugar exacto.
+
+**Contenido de ejemplo:** en tu PC (`npm run dev`) los bloques vacíos se rellenan con contenido genérico para que
+veas cómo queda cada página. Todo lo que es de ejemplo, está sin confirmar o sin autorizar lleva una etiqueta gris
+("De ejemplo: no se publica", "Sin confirmar: no se publica", "Sin autorizar: no se publican").
+Nada de eso entra en el sitio publicado (`npm run build`). Los textos de ejemplo están en `ejemplos.ts` y las fotos
+de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, el ejemplo deja de usarse solo.
 
 ---
 

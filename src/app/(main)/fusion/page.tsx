@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { fusion } from "@/config/fusion";
+import { ejemplos, nochesFusionDeEjemplo } from "@/config/ejemplos";
+import { MOSTRAR_EJEMPLOS, listaConEjemplo, textoConEjemplo } from "@/lib/ejemplo";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { Boton } from "@/components/ui/Boton";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { NochesFusion } from "@/components/NochesFusion";
@@ -14,7 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function FusionPage() {
-  const { logo, texto, url, textoBoton, discos, tickets, contacto } = fusion;
+  const { logo, texto, textoBoton, discos, tickets, contacto } = fusion;
+  // Sin link ni noches cargadas, en desarrollo se muestran los de ejemplo.
+  const { texto: url, esEjemplo: urlDeEjemplo } = textoConEjemplo(fusion.url, ejemplos.fusion.url);
+  const agenda = listaConEjemplo(tickets.noches, MOSTRAR_EJEMPLOS ? nochesFusionDeEjemplo() : []);
 
   return (
     <>
@@ -37,6 +43,11 @@ export default function FusionPage() {
                 {textoBoton}
                 <ArrowUpRight size={20} strokeWidth={1.5} aria-hidden="true" />
               </Boton>
+              {urlDeEjemplo && (
+                <div className="mt-4">
+                  <EtiquetaEjemplo texto="Link de ejemplo: no se publica" />
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -74,7 +85,7 @@ export default function FusionPage() {
         <FadeInSection>
           <TituloSeccion antetitulo={tickets.antetitulo} titulo={tickets.titulo} />
         </FadeInSection>
-        <NochesFusion />
+        <NochesFusion noches={agenda.datos} url={url} sinFechas={tickets.sinFechas} esEjemplo={agenda.esEjemplo} />
       </Seccion>
 
       <ContactCTA title={contacto.titulo} subtitle={contacto.bajada} linea="disco" />

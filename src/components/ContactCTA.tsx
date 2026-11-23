@@ -1,7 +1,9 @@
 import type { ReactNode } from "react";
 import { Instagram, Mail } from "lucide-react";
-import { instagram, lineas, urlWhatsApp, type InstagramId, type LineaId } from "@/config/contacto";
+import { instagram, lineas, urlWhatsApp, type InstagramId, type Linea, type LineaId } from "@/config/contacto";
+import { MOSTRAR_EJEMPLOS } from "@/lib/ejemplo";
 import { Boton } from "@/components/ui/Boton";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { IconoWhatsApp } from "@/components/ui/IconoWhatsApp";
 
 interface ContactCTAProps {
@@ -13,6 +15,10 @@ interface ContactCTAProps {
   instagramDe?: InstagramId;
   /** Contenido extra arriba de los botones (por ejemplo, un formulario) */
   children?: ReactNode;
+  /** Contacto de ejemplo: se usa solo en desarrollo, si la línea todavía no tiene datos cargados. */
+  contactoDeEjemplo?: Linea;
+  /** true cuando la bajada es de ejemplo (solo en desarrollo) */
+  bajadaDeEjemplo?: boolean;
 }
 
 /**
@@ -25,8 +31,13 @@ export function ContactCTA({
   linea = "disco",
   instagramDe = "oficial",
   children,
+  contactoDeEjemplo,
+  bajadaDeEjemplo = false,
 }: ContactCTAProps) {
-  const datos = lineas[linea];
+  const real = lineas[linea];
+  const hayReal = Boolean(real.whatsapp || real.mail);
+  const usaEjemplo = !hayReal && MOSTRAR_EJEMPLOS && contactoDeEjemplo !== undefined;
+  const datos = usaEjemplo && contactoDeEjemplo ? contactoDeEjemplo : real;
   const cuenta = instagram[instagramDe];
   const whatsapp = urlWhatsApp(datos);
 
@@ -38,6 +49,11 @@ export function ContactCTA({
         <p className="antetitulo mb-4">Contacto</p>
         <h2 className="titulo-2 text-marfil">{title}</h2>
         {subtitle && <p className="cuerpo text-arena mt-4">{subtitle}</p>}
+        {(usaEjemplo || (bajadaDeEjemplo && subtitle)) && (
+          <div className="mt-4">
+            <EtiquetaEjemplo texto={usaEjemplo ? "Contacto de ejemplo: no se publica" : undefined} />
+          </div>
+        )}
 
         {children && <div className="mt-10 text-left">{children}</div>}
 

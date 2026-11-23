@@ -1,20 +1,29 @@
 import { MapPin } from "lucide-react";
 import { comoLlegar } from "@/config/comoLlegar";
 import { mapa } from "@/config/contacto";
+import { ejemplos } from "@/config/ejemplos";
+import { textoConEjemplo } from "@/lib/ejemplo";
 import { Boton } from "@/components/ui/Boton";
 import { Seccion } from "@/components/ui/Seccion";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { FadeInSection } from "@/components/FadeInSection";
 
 /**
  * Sección "Cómo llegar": texto, mapa y el botón "Ver en Google Maps" sobre el mapa.
- * Los datos vacíos en config/comoLlegar.ts no se muestran.
+ * Los datos vacíos en config/comoLlegar.ts no se muestran en el sitio publicado;
+ * en desarrollo se completan con datos de ejemplo.
  */
 export function ComoLlegar() {
-  const { titulo, direccion, texto, estacionamiento, transporteContingentes } = comoLlegar;
+  const { titulo, texto } = comoLlegar;
+  const direccion = textoConEjemplo(comoLlegar.direccion, ejemplos.comoLlegar.direccion);
+  const estacionamiento = textoConEjemplo(comoLlegar.estacionamiento, ejemplos.comoLlegar.estacionamiento);
+  const transporte = textoConEjemplo(comoLlegar.transporteContingentes, ejemplos.comoLlegar.transporteContingentes);
+
   const extras = [
-    { etiqueta: "Estacionamiento", valor: estacionamiento },
-    { etiqueta: "Transporte para contingentes", valor: transporteContingentes },
+    { etiqueta: "Estacionamiento", valor: estacionamiento.texto },
+    { etiqueta: "Transporte para contingentes", valor: transporte.texto },
   ].filter((e) => e.valor.trim() !== "");
+  const hayEjemplos = direccion.esEjemplo || estacionamiento.esEjemplo || transporte.esEjemplo;
 
   const claseBotonMapa =
     "inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-piedra bg-negro/90 backdrop-blur-sm " +
@@ -25,10 +34,10 @@ export function ComoLlegar() {
       <FadeInSection>
         <h2 className="titulo-2 text-marfil mb-6">{titulo}</h2>
 
-        {direccion && (
+        {direccion.texto && (
           <p className="cuerpo text-marfil flex items-start gap-3 mb-4">
             <MapPin size={24} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-oro mt-0.5" />
-            {direccion}
+            {direccion.texto}
           </p>
         )}
 
@@ -43,6 +52,10 @@ export function ComoLlegar() {
               </div>
             ))}
           </dl>
+        )}
+
+        {hayEjemplos && (
+          <EtiquetaEjemplo texto="Dirección y datos de ejemplo: no se publican" className="mt-6" />
         )}
 
         {mapa.incrustado ? (

@@ -3,30 +3,40 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock } from "lucide-react";
-import { proximasNoches } from "@/config/home";
-import { cartelera } from "@/config/cartelera";
+import type { Noche } from "@/config/cartelera";
 import { fechaLarga } from "@/lib/fechas";
 import { useVigentes } from "@/lib/useVigentes";
 import { claseBoton } from "@/components/ui/Boton";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { SinFechas } from "@/components/SinFechas";
+
+interface ProximasNochesProps {
+  noches: Noche[];
+  /** Cuántas noches se muestran como máximo */
+  cantidad: number;
+  boton: string;
+  /** true cuando las noches son de ejemplo (solo en desarrollo) */
+  esEjemplo?: boolean;
+}
 
 /**
  * Las próximas noches de la cartelera (home). Las fechas pasadas no aparecen.
  * Sin fechas, muestra el aviso con el Instagram.
  */
-export function ProximasNoches() {
-  const vigentes = useVigentes(cartelera);
+export function ProximasNoches({ noches, cantidad, boton, esEjemplo = false }: ProximasNochesProps) {
+  const vigentes = useVigentes(noches);
 
   // Sin noches cargadas, o todas pasadas
-  if (cartelera.length === 0 || vigentes?.length === 0) return <SinFechas />;
+  if (noches.length === 0 || vigentes?.length === 0) return <SinFechas />;
 
   // Hay noches, pero todavía no se sabe la fecha de hoy: se reserva el lugar.
   if (vigentes === null) return <div className="min-h-[190px]" aria-hidden="true" />;
 
   return (
     <>
+      {esEjemplo && <EtiquetaEjemplo className="mb-5" />}
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {vigentes.slice(0, proximasNoches.cantidad).map((noche) => (
+        {vigentes.slice(0, cantidad).map((noche) => (
           <li key={noche.id}>
             <article className="h-full flex gap-5 rounded-2xl border border-piedra bg-carbon p-4">
               {noche.flyer && (
@@ -55,7 +65,7 @@ export function ProximasNoches() {
       </ul>
       <div className="mt-8">
         <Link href="/disco" className={claseBoton("secundario")}>
-          {proximasNoches.boton}
+          {boton}
         </Link>
       </div>
     </>

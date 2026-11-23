@@ -3,7 +3,7 @@ import Image from "next/image";
 import { CircleHelp, Mail, MapPin } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { lineas, mapa, urlWhatsApp } from "@/config/contacto";
-import { hayPreguntas } from "@/config/faq";
+import { hayPreguntasVisibles } from "@/lib/faq";
 import { RUTA_INICIO } from "@/config/navegacion";
 import { IconoWhatsApp } from "@/components/ui/IconoWhatsApp";
 import { InstagramDePagina } from "@/components/InstagramDePagina";
@@ -67,7 +67,7 @@ export function Footer() {
             <MapPin size={20} strokeWidth={1.5} aria-hidden="true" />
             Ver en Google Maps
           </a>
-          {hayPreguntas() && (
+          {hayPreguntasVisibles() && (
             <Link href="/preguntas-frecuentes" className={claseLink}>
               <CircleHelp size={20} strokeWidth={1.5} aria-hidden="true" />
               Preguntas frecuentes

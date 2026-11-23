@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { claseBoton } from "@/components/ui/Boton";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 
 interface EncabezadoProps {
   /** A quién le habla la página */
@@ -16,6 +17,8 @@ interface EncabezadoProps {
   fotoAlt?: string;
   /** Qué parte de la foto se ve al recortarla. Ej: "center 30%" */
   fotoPosicion?: string;
+  /** true cuando la bajada es de ejemplo (solo en desarrollo): muestra la etiqueta */
+  bajadaDeEjemplo?: boolean;
 }
 
 /** Encabezado de página interna: antetítulo, título, bajada y botón. */
@@ -28,6 +31,7 @@ export function Encabezado({
   foto,
   fotoAlt = "",
   fotoPosicion,
+  bajadaDeEjemplo = false,
 }: EncabezadoProps) {
   return (
     <section
@@ -59,6 +63,7 @@ export function Encabezado({
             {bajada}
           </p>
         )}
+        {bajada && bajadaDeEjemplo && <EtiquetaEjemplo className="mt-4" />}
         {boton && (
           <div className="mt-9 animate-fade-in-up animate-delay-200">
             <a href={botonHref} className={claseBoton("principal")}>

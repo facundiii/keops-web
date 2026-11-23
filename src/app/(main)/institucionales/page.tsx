@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { institucionales } from "@/config/lineas";
 import { fotos } from "@/config/fotos";
+import { ejemplos } from "@/config/ejemplos";
+import { galeriaDeEjemplo } from "@/lib/ejemplo";
 import { PlantillaLinea } from "@/components/PlantillaLinea";
 
 export const metadata: Metadata = {
@@ -9,5 +11,15 @@ export const metadata: Metadata = {
 };
 
 export default function InstitucionalesPage() {
-  return <PlantillaLinea pagina={institucionales} fotos={{ incluye: fotos.institucionales.incluye }} />;
+  return (
+    <PlantillaLinea
+      pagina={institucionales}
+      fotos={{ incluye: fotos.institucionales.incluye }}
+      ejemplos={{
+        argumentos: ejemplos.argumentos.institucionales,
+        galeria: galeriaDeEjemplo(),
+        testimonios: ejemplos.testimonios.institucionales,
+      }}
+    />
+  );
 }

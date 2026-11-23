@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { encabezado, mision, historia, espacios } from "@/config/nosotros";
 import { fotos } from "@/config/fotos";
+import { ejemplos } from "@/config/ejemplos";
+import { MOSTRAR_EJEMPLOS, listaConEjemplo, textoConEjemplo } from "@/lib/ejemplo";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { Encabezado } from "@/components/Encabezado";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { LineaDeTiempo } from "@/components/LineaDeTiempo";
@@ -13,12 +16,10 @@ export const metadata: Metadata = {
   description: encabezado.bajada,
 };
 
-// En el sitio publicado solo se ven los hitos confirmados.
-// En desarrollo (npm run dev) se ven todos, con una etiqueta en los que faltan confirmar.
-const enDesarrollo = process.env.NODE_ENV === "development";
-
 export default function NosotrosPage() {
-  const hitos = historia.hitos.filter((h) => h.texto.trim() !== "" && (h.confirmado || enDesarrollo));
+  // En el sitio publicado solo se ven los hitos confirmados.
+  // En desarrollo (npm run dev) se ven todos, con una etiqueta en los que faltan confirmar.
+  const hitos = historia.hitos.filter((h) => h.texto.trim() !== "" && (h.confirmado || MOSTRAR_EJEMPLOS));
 
   return (
     <>
@@ -65,7 +66,16 @@ export default function NosotrosPage() {
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {espacios.lista.map((espacio, i) => {
               // Hasta dos fotos por espacio. Sin fotos, la tarjeta muestra solo nombre y texto.
-              const fotosEspacio = (fotos.nosotros.espacios[espacio.id] ?? []).slice(0, 2);
+              // Donde falta el dato real, en desarrollo se muestra uno de ejemplo.
+              const deEjemplo = ejemplos.espacios[espacio.id];
+              const capacidad = textoConEjemplo(espacio.capacidad, deEjemplo?.capacidad ?? "");
+              const descripcion = textoConEjemplo(espacio.descripcion, deEjemplo?.descripcion ?? "");
+              const fotosDelEspacio = listaConEjemplo(
+                fotos.nosotros.espacios[espacio.id] ?? [],
+                fotos.deEjemplo.espacios[espacio.id] ?? []
+              );
+              const fotosEspacio = fotosDelEspacio.datos.slice(0, 2);
+              const esEjemplo = capacidad.esEjemplo || descripcion.esEjemplo || fotosDelEspacio.esEjemplo;
               return (
                 <li key={espacio.id}>
                   <FadeInSection delay={i * 60} className="h-full">
@@ -95,8 +105,9 @@ export default function NosotrosPage() {
                       )}
                       <div className="p-6 lg:p-7">
                         <h3 className="titulo-3 text-marfil">{espacio.nombre}</h3>
-                        {espacio.capacidad && <p className="antetitulo mt-2">{espacio.capacidad}</p>}
-                        {espacio.descripcion && <p className="cuerpo text-arena mt-3">{espacio.descripcion}</p>}
+                        {capacidad.texto && <p className="antetitulo mt-2">{capacidad.texto}</p>}
+                        {descripcion.texto && <p className="cuerpo text-arena mt-3">{descripcion.texto}</p>}
+                        {esEjemplo && <EtiquetaEjemplo className="mt-4" />}
                       </div>
                     </article>
                   </FadeInSection>

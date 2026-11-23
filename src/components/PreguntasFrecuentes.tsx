@@ -1,11 +1,17 @@
 import { ChevronDown } from "lucide-react";
-import type { Pregunta } from "@/config/faq";
+import type { PreguntaVisible } from "@/lib/faq";
+import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
+
+const etiquetas = {
+  sinConfirmar: "Sin confirmar: no se publica",
+  ejemplo: "De ejemplo: no se publica",
+};
 
 /**
  * Lista de preguntas en acordeón. Usa <details>, así funciona con teclado y sin JavaScript.
  * Sin preguntas, no muestra nada.
  */
-export function PreguntasFrecuentes({ preguntas }: { preguntas: Pregunta[] }) {
+export function PreguntasFrecuentes({ preguntas }: { preguntas: PreguntaVisible[] }) {
   if (preguntas.length === 0) return null;
 
   return (
@@ -21,7 +27,10 @@ export function PreguntasFrecuentes({ preguntas }: { preguntas: Pregunta[] }) {
               className="shrink-0 text-oro transition-transform duration-300 group-open:rotate-180"
             />
           </summary>
-          <p className="cuerpo text-arena pb-6 pr-10">{p.respuesta}</p>
+          <div className="pb-6 pr-10">
+            <p className="cuerpo text-arena">{p.respuesta}</p>
+            {p.estado !== "publicada" && <EtiquetaEjemplo texto={etiquetas[p.estado]} className="mt-4" />}
+          </div>
         </details>
       ))}
     </div>

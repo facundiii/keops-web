@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { egresadosPrimarios } from "@/config/lineas";
 import { fotos } from "@/config/fotos";
+import { ejemplos } from "@/config/ejemplos";
+import { galeriaDeEjemplo } from "@/lib/ejemplo";
 import { PlantillaLinea } from "@/components/PlantillaLinea";
 import { FormularioAgencia } from "@/components/FormularioAgencia";
 
@@ -11,7 +13,15 @@ export const metadata: Metadata = {
 
 export default function EgresadosPrimariosPage() {
   return (
-    <PlantillaLinea pagina={egresadosPrimarios} fotos={{ porQue: fotos.egresados.porQue }}>
+    <PlantillaLinea
+      pagina={egresadosPrimarios}
+      fotos={{ porQue: fotos.egresados.porQue }}
+      ejemplos={{
+        galeria: galeriaDeEjemplo(),
+        testimonios: ejemplos.testimonios.egresados,
+        parrafosExtra: ejemplos.paraLasFamilias,
+      }}
+    >
       <FormularioAgencia nivelInicial="Primario" />
     </PlantillaLinea>
   );
