@@ -14,6 +14,8 @@ interface EncabezadoProps {
   /** Foto de fondo (ruta dentro de /public) y su texto alternativo */
   foto?: string;
   fotoAlt?: string;
+  /** Qué parte de la foto se ve al recortarla. Ej: "center 30%" */
+  fotoPosicion?: string;
 }
 
 /** Encabezado de página interna: antetítulo, título, bajada y botón. */
@@ -25,6 +27,7 @@ export function Encabezado({
   botonHref = "#contacto",
   foto,
   fotoAlt = "",
+  fotoPosicion,
 }: EncabezadoProps) {
   return (
     <section
@@ -34,8 +37,16 @@ export function Encabezado({
     >
       {foto && (
         <>
-          <Image src={foto} alt={fotoAlt} fill priority sizes="100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-negro/70" />
+          <Image
+            src={foto}
+            alt={fotoAlt}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition: fotoPosicion }}
+          />
+          <div className="absolute inset-0 bg-negro/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/30 to-negro/60" />
         </>
       )}

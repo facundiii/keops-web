@@ -17,13 +17,9 @@ export const mision = {
 // ── Historia ─────────────────────────────────────────────────────
 
 export interface Hito {
-  /** Como se muestra: "1969", "Septiembre 2021" */
+  /** Como se muestra: "1969", "Septiembre 2021". La foto se asigna por esta fecha en config/fotos.ts. */
   fecha: string;
   texto: string;
-  /** Ruta dentro de /public. Vacío = hito sin foto. */
-  foto: string;
-  /** Texto alternativo de la foto */
-  fotoAlt: string;
   /** SOLO se muestran los hitos con `confirmado: true`. */
   confirmado: boolean;
 }
@@ -32,33 +28,17 @@ export const historia: { antetitulo: string; titulo: string; hitos: Hito[] } = {
   antetitulo: "Historia",
   titulo: "Desde 1969",
   hitos: [
-    { fecha: "1969", texto: "Abre Keops en Villa Carlos Paz.", foto: "", fotoAlt: "", confirmado: false },
-    {
-      fecha: "2010",
-      texto: "El frente de Keops, con la pirámide iluminada.",
-      foto: "", // se asigna en config/fotos.ts
-      fotoAlt: "Frente de Keops con la pirámide iluminada, en 2010",
-      confirmado: false,
-    },
-    {
-      fecha: "2019",
-      texto: "Keops cumple 50 años.",
-      foto: "", // se asigna en config/fotos.ts
-      fotoAlt: "Festejo de los 50 años de Keops",
-      confirmado: false,
-    },
+    { fecha: "1969", texto: "Abre Keops en Villa Carlos Paz.", confirmado: false },
+    { fecha: "2010", texto: "El frente de Keops, con la pirámide iluminada.", confirmado: false },
+    { fecha: "2019", texto: "Keops cumple 50 años.", confirmado: false },
     {
       fecha: "2020",
       texto: "Una fiesta de verano en Keops llega a la tapa de la revista Paparazzi.",
-      foto: "",
-      fotoAlt: "",
       confirmado: false,
     },
     {
       fecha: "Septiembre 2021",
       texto: "Keops reabre después de 18 meses cerrado por la pandemia.",
-      foto: "",
-      fotoAlt: "",
       confirmado: false,
     },
   ],

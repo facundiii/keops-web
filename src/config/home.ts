@@ -1,4 +1,44 @@
-// Contenido de la home.
+// Contenido de la home, en el orden en que se muestra:
+// hero · cifras · las líneas · próximas noches · cómo llegar · cierre · contacto
+// Las fotos de las tarjetas están en config/fotos.ts y "Cómo llegar" en config/comoLlegar.ts.
+
+export const hero = {
+  antetitulo: "Villa Carlos Paz · Desde 1969",
+  titulo: "La pirámide de Carlos Paz",
+  bajada: "Disco, egresados, eventos privados e institucionales en el espacio más grande de la ciudad.",
+  botones: [
+    { texto: "Soy agencia", href: "/egresados" },
+    { texto: "Ver cartelera", href: "/disco" },
+  ],
+  /** Video de fondo, dentro de /public. Siempre sin sonido. */
+  video: "/hero-video.mp4",
+};
+
+/** Franja de cifras. `detalle` es opcional: vacío = se muestra solo el dato. */
+export const cifras: { dato: string; detalle: string }[] = [
+  { dato: "5.000", detalle: "personas" },
+  { dato: "5", detalle: "espacios" },
+  { dato: "Aire libre", detalle: "" },
+  { dato: "Desde 1969", detalle: "" },
+];
+
+export const proximasNoches = {
+  antetitulo: "Disco",
+  titulo: "Próximas noches",
+  /** Cuántas noches se muestran como máximo */
+  cantidad: 3,
+  /** Texto cuando no hay fechas. El usuario de Instagram se agrega solo al final. */
+  sinFechas: "Pronto anunciamos las próximas noches. Seguinos en",
+  boton: "Ver cartelera",
+};
+
+/** Frase de cierre, en Cormorant itálica. */
+export const cierre = "Generaciones enteras bailaron bajo esta pirámide.";
+
+export const contacto = {
+  titulo: "Escribinos",
+  bajada: "",
+};
 
 export interface TarjetaLinea {
   id: "egresados" | "eventos" | "institucionales" | "disco" | "academia";

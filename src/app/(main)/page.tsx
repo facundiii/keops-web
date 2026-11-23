@@ -1,129 +1,138 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { siteConfig } from "@/config/site";
-import { tarjetasLineas } from "@/config/home";
-import { FadeInSection } from "@/components/FadeInSection";
-import { HeroCTAButton, HeroScrollIndicator } from "@/components/HeroScrollButton";
+import { hero, cifras, tarjetasLineas, proximasNoches, cierre, contacto } from "@/config/home";
+import { fotos } from "@/config/fotos";
+import { Boton } from "@/components/ui/Boton";
+import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
+import { VideoFondo } from "@/components/VideoFondo";
+import { ProximasNoches } from "@/components/ProximasNoches";
+import { ComoLlegar } from "@/components/ComoLlegar";
 import { ContactCTA } from "@/components/ContactCTA";
+import { FadeInSection } from "@/components/FadeInSection";
 
 export default function HomePage() {
   return (
     <>
-      {/* ─── HERO ─────────────────────────────────────────────────────────── */}
-      <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Video background */}
-        <video
-          className="absolute inset-0 w-full h-full object-cover"
-          src="/hero-video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-        />
+      {/* 1. Hero */}
+      <section className="relative min-h-[100svh] flex items-end overflow-hidden">
+        <VideoFondo src={hero.video} className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-negro/55" />
+        <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/40 to-negro/30" />
 
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-negro/60 via-negro/50 to-negro/90" />
-        <div className="absolute inset-0 bg-gradient-to-r from-negro/30 via-transparent to-negro/30" />
-
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
-          {/* Pyramid logo */}
-          <div className="hero-pyramid mb-1 sm:mb-2">
-            <Image
-              src="/logo-piramide.png"
-              alt=""
-              aria-hidden="true"
-              width={400}
-              height={400}
-              className="w-[94px] sm:w-[130px] md:w-[182px] h-auto mx-auto"
-              priority
-            />
-          </div>
-
-          {/* Keops logo — compensación de transparencias: -37px top, -39px bottom (mobile) */}
-          <div className="hero-logo -mt-[37px] sm:-mt-[57px] md:-mt-[84px]">
-            <Image
-              src="/logo.png"
-              alt="Keops"
-              width={1080}
-              height={445}
-              className="w-[300px] sm:w-[460px] md:w-[680px] h-auto mx-auto"
-              priority
-            />
-          </div>
-
-          {/* Subtitle — pegado justo debajo del contenido real del logo */}
-          <p className="hero-subtitle-anim antetitulo -mt-[27px] sm:-mt-[47px] md:-mt-[72px]">
-            Villa Carlos Paz · Córdoba · Argentina
-          </p>
-
-          {/* CTA */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-400">
-            <HeroCTAButton />
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <HeroScrollIndicator />
-      </section>
-
-      {/* ─── LAS LÍNEAS ───────────────────────────────────────────────────── */}
-      <section id="sections" className="bg-negro py-24 px-4">
-        <div className="max-w-7xl mx-auto">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <h2 className="titulo-2 text-marfil mb-3">Nuestras propuestas</h2>
-              <p className="cuerpo text-arena">Todo lo que Keops tiene para vos</p>
-            </div>
-          </FadeInSection>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {tarjetasLineas.map((tarjeta, i) => (
-              <FadeInSection key={tarjeta.id} delay={i * 80} className="h-full">
-                <Link
-                  href={tarjeta.href}
-                  className="group flex h-full flex-col rounded-2xl border border-piedra bg-carbon p-8 md:p-10 transition-colors duration-300 hover:border-oro"
-                >
-                  <p className="antetitulo mb-3">{tarjeta.antetitulo}</p>
-                  <h3 className="titulo-3 text-marfil mb-4">{tarjeta.titulo}</h3>
-                  <p className="cuerpo text-arena">{tarjeta.texto}</p>
-                  <span className="mt-auto pt-6 inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro">
-                    {tarjeta.boton}
-                    <ArrowRight
-                      size={20}
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                      className="transition-transform duration-300 group-hover:translate-x-1"
-                    />
-                  </span>
-                </Link>
-              </FadeInSection>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pb-24">
+          <p className="antetitulo mb-5 animate-fade-in">{hero.antetitulo}</p>
+          <h1 className="titulo-display text-marfil max-w-5xl animate-fade-in-up">{hero.titulo}</h1>
+          <p className="cuerpo text-marfil mt-6 max-w-xl animate-fade-in-up animate-delay-100">{hero.bajada}</p>
+          <div className="mt-9 flex flex-col sm:flex-row gap-4 animate-fade-in-up animate-delay-200">
+            {hero.botones.map((boton, i) => (
+              <Boton key={boton.href} href={boton.href} variante={i === 0 ? "principal" : "secundario"}>
+                {boton.texto}
+              </Boton>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── CIERRE ───────────────────────────────────────────────────────── */}
-      <FadeInSection>
-        <section className="bg-negro border-t border-piedra py-24 px-4 text-center">
-          <div className="max-w-2xl mx-auto">
-            <div className="w-12 h-px bg-oro mx-auto mb-8" />
-            <blockquote className="acento text-3xl md:text-4xl text-marfil leading-snug">
-              &ldquo;Más de 50 años generando recuerdos inolvidables.&rdquo;
-            </blockquote>
-            <p className="mt-6 antetitulo">
-              {siteConfig.name} · {siteConfig.location}
-            </p>
-          </div>
-        </section>
-      </FadeInSection>
+      {/* 2. Cifras */}
+      <section aria-label="Keops en cifras" className="bg-negro border-t border-piedra">
+        <ul className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4">
+          {cifras.map((cifra, i) => (
+            <li
+              key={cifra.dato}
+              className={`px-4 sm:px-6 lg:px-8 py-10 lg:py-12 border-piedra ${i % 2 === 1 ? "border-l" : ""} ${
+                i > 1 ? "border-t lg:border-t-0" : ""
+              } ${i > 0 ? "lg:border-l" : ""}`}
+            >
+              <p className="font-titulo font-bold text-marfil text-3xl lg:text-5xl leading-none">{cifra.dato}</p>
+              {cifra.detalle && <p className="antetitulo mt-3">{cifra.detalle}</p>}
+            </li>
+          ))}
+        </ul>
+      </section>
 
-      <ContactCTA
-        title="¿Querés saber más?"
-        subtitle="Contactanos por WhatsApp, por mail o seguinos en Instagram para enterarte de todo lo que pasa en Keops."
-      />
+      {/* 3. Las líneas */}
+      <Seccion ancho="amplio">
+        <h2 className="sr-only">Las líneas de Keops</h2>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6 lg:gap-6">
+          {tarjetasLineas.map((tarjeta, i) => {
+            const foto = fotos.home[tarjeta.id];
+            const grande = i < 2;
+            return (
+              <li
+                key={tarjeta.id}
+                className={`${grande ? "lg:col-span-3" : "lg:col-span-2"} ${
+                  i === tarjetasLineas.length - 1 ? "sm:col-span-2" : ""
+                }`}
+              >
+                <FadeInSection delay={i * 80} className="h-full">
+                  <Link
+                    href={tarjeta.href}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-piedra bg-carbon transition-colors duration-300 hover:border-oro"
+                  >
+                    {foto && (
+                      <div className={`relative overflow-hidden ${grande ? "aspect-[16/9]" : "aspect-[16/10]"}`}>
+                        <Image
+                          src={foto.src}
+                          alt={foto.alt}
+                          fill
+                          sizes={
+                            grande
+                              ? "(max-width: 640px) 100vw, 50vw"
+                              : "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          }
+                          className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                          style={{ objectPosition: foto.posicion }}
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6 lg:p-8">
+                      <p className="antetitulo mb-3">{tarjeta.antetitulo}</p>
+                      <h3 className="titulo-3 text-marfil mb-3">{tarjeta.titulo}</h3>
+                      <p className="cuerpo text-arena">{tarjeta.texto}</p>
+                      <span className="mt-auto pt-6 inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro">
+                        {tarjeta.boton}
+                        <ArrowRight
+                          size={20}
+                          strokeWidth={1.5}
+                          aria-hidden="true"
+                          className="transition-transform duration-300 group-hover:translate-x-1"
+                        />
+                      </span>
+                    </div>
+                  </Link>
+                </FadeInSection>
+              </li>
+            );
+          })}
+        </ul>
+      </Seccion>
+
+      {/* 4. Próximas noches */}
+      <Seccion>
+        <FadeInSection>
+          <TituloSeccion antetitulo={proximasNoches.antetitulo} titulo={proximasNoches.titulo} />
+          <ProximasNoches />
+        </FadeInSection>
+      </Seccion>
+
+      {/* 5. Cómo llegar */}
+      <ComoLlegar />
+
+      {/* 6. Cierre */}
+      {cierre && (
+        <Seccion ancho="angosto">
+          <FadeInSection>
+            <div className="text-center">
+              <div className="w-12 h-px bg-oro mx-auto mb-8" aria-hidden="true" />
+              <p className="acento text-3xl md:text-5xl text-marfil leading-tight">{cierre}</p>
+            </div>
+          </FadeInSection>
+        </Seccion>
+      )}
+
+      {/* 7. Contacto */}
+      <ContactCTA title={contacto.titulo} subtitle={contacto.bajada} />
     </>
   );
 }

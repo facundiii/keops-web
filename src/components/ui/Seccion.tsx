@@ -4,11 +4,11 @@ interface SeccionProps {
   children: ReactNode;
   id?: string;
   /** Ancho máximo del contenido */
-  ancho?: "angosto" | "medio" | "ancho";
+  ancho?: "angosto" | "medio" | "ancho" | "amplio";
   className?: string;
 }
 
-const anchos = { angosto: "max-w-3xl", medio: "max-w-5xl", ancho: "max-w-6xl" };
+const anchos = { angosto: "max-w-3xl", medio: "max-w-5xl", ancho: "max-w-6xl", amplio: "max-w-7xl" };
 
 /** Bloque de página: fondo negro, divisor arriba y aire parejo. */
 export function Seccion({ children, id, ancho = "ancho", className = "" }: SeccionProps) {
