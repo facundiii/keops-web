@@ -1,0 +1,114 @@
+# Keops — Contenido pendiente
+
+Lista de lo que falta completar o revisar en el sitio, archivo por archivo.
+Todos los archivos están en `src/config/`. No hace falta tocar componentes.
+
+**Cómo funciona:** un dato vacío (`""`) o una lista vacía (`[]`) hace que ese bloque no se muestre.
+Al completarlo, el bloque aparece solo. Buscá `A COMPLETAR` dentro de cada archivo para encontrar el lugar exacto.
+
+---
+
+## Lo más importante primero
+
+1. **Dirección de Keops** (`comoLlegar.ts`): sin ella, "Cómo llegar" muestra solo el texto y el botón del mapa.
+2. **Cartelera** (`cartelera.ts`): está vacía; Disco y la home muestran "Pronto anunciamos las próximas noches".
+3. **Preguntas frecuentes** (`faq.ts`): las 14 están cargadas pero sin confirmar; la página no existe hasta confirmar al menos una.
+4. **Historia** (`nosotros.ts`): los 5 hitos están cargados pero sin confirmar; el bloque no se ve.
+5. **Academia** (`academia.ts` y `contacto.ts`): la página muestra solo el encabezado.
+
+---
+
+## `contacto.ts`
+
+- [ ] **Academia:** `mail`, `whatsapp` (solo dígitos, con código de país) y `whatsappVisible`. Con esos datos aparecen el botón flotante de WhatsApp, el bloque de inscripción, el botón "Inscribite" y la línea Academia en el pie.
+
+## `comoLlegar.ts`
+
+- [ ] `direccion`: dirección de Keops.
+- [ ] `estacionamiento` (opcional).
+- [ ] `transporteContingentes` (opcional).
+
+## `cartelera.ts`
+
+- [ ] Cargar las próximas noches. Cada una lleva: `id`, `nombre`, `fecha` (formato `2026-12-05`), `hora`, `djs`, `flyer` y, si corresponde, `agotado: true`. Hay un ejemplo comentado en el archivo.
+- [ ] Subir el arte de cada noche (vertical 9:16) a `public/disco/flyers/`.
+- No hace falta borrar las noches viejas: se ocultan solas al mediodía del día siguiente.
+
+## `faq.ts`
+
+- [ ] Revisar cada pregunta y pasar `confirmado: false` a `confirmado: true` para publicarla (General 2, Disco 4, Egresados 4, Eventos privados e Institucionales 4).
+- [ ] Escribir la respuesta de **"¿Cuál es la edad mínima para entrar?"** (Disco).
+- [ ] Escribir la respuesta de **"¿Cómo se cuida a los chicos?"** (Egresados): controles de acceso, seguridad, personal.
+- [ ] Cargar las preguntas de **Academia** cuando estén los datos del curso.
+
+## `nosotros.ts`
+
+- [ ] **Historia:** revisar los 5 hitos (1969, 2010, 2019, 2020, septiembre 2021) y pasar `confirmado` a `true`. Las fotos de 2010 y 2019 ya están asignadas.
+- [ ] **Espacios:** `capacidad` y `descripcion` de Pista Central, Salón Eletón, Salón Bar, Keops Garden y VIP +30.
+- [ ] **Equipo:** confirmar los 6 nombres y roles (vienen del pie del sitio anterior) y, si querés, agregar la `foto` de cada persona.
+- [ ] **Misión:** el texto es el propuesto; revisarlo.
+
+## `lineas.ts`
+
+**Egresados primario**
+- [ ] Revisar `titulo` y `bajada` del encabezado: son una propuesta (marcados con `TEXTO PROPUESTO`).
+- [ ] `galeria.medios`: fotos o videos de primario (6 fotos o más, o un video).
+- [ ] `extra.parrafos` ("Para las familias"): texto sobre seguridad y controles que la agencia pueda reenviar.
+
+**Egresados secundario**
+- [ ] Revisar `titulo` y `bajada` del encabezado: son una propuesta (marcados con `TEXTO PROPUESTO`).
+- [ ] Confirmar que los 3 videos de la galería son de secundario.
+- [ ] `extra.parrafos` ("Para las familias"): mismo texto que en primario, o uno propio.
+
+**Agencias** (se ven en las dos páginas de nivel)
+- [ ] Pasar `autorizado` a `true` en cada agencia que pueda mostrarse: Flecha, Super Tour, Astros, Púrpura, Auckland. El bloque se titula "Agencias que trabajan con Keops".
+
+**Eventos privados**
+- [ ] `porQue.argumentos`: los cuatro argumentos de "Por qué Keops" (hoy el bloque está oculto).
+- [ ] `referencias`: testimonios o logos reales (opcional).
+- [ ] Mejorar el texto alternativo de las 9 fotos de la galería (hoy dicen "Evento privado en Keops").
+
+**Institucionales**
+- [ ] `porQue.argumentos`: los cuatro argumentos de "Por qué Keops" (hoy el bloque está oculto).
+- [ ] `incluye.servicios`: confirmar los seis (vienen del sitio anterior): espacios adaptables, pantallas y proyectores, WiFi, catering, coordinador, estacionamiento y acceso VIP.
+- [ ] `galeria.medios`: 6 fotos o más de eventos de empresa.
+- [ ] `referencias.logos`: pasar `autorizado` a `true` en Sancor Seguros y FIE cuando lo permitan, y agregar sus logos (sin logo se muestra el nombre).
+
+## `academia.ts`
+
+- [ ] `encabezado.bajada`.
+- [ ] `temas.lista`: qué se aprende.
+- [ ] `modalidad`: `duracion`, `diasYHorarios`, `cupos`, `requisitos`.
+- [ ] `docentes.lista` (opcional): nombre, rol y foto.
+- [ ] `galeria.medios`: 6 fotos o más (ya hay una disponible: `05-salon-bar.jpg`).
+- [ ] `inscripcion.bajada` (opcional).
+
+## `disco.ts`
+
+- [ ] `galeria.medios`: 6 fotos o más de la pista (ya hay una disponible: `02-pista-central.jpg`).
+
+## `fusion.ts`
+
+- [ ] `url`: link a la app o al sitio de Fusion. Sin él no aparecen el botón "Ir a Fusion" ni "Comprar entrada" en las noches que no tengan link propio.
+- [ ] `tickets.noches`: próximas noches Fusion (`id`, `nombre`, `fecha`, `lugar`, `urlEntradas`).
+
+## `fotos.ts`
+
+- [ ] Fotos de **Keops Garden** y **VIP +30** (hoy sus tarjetas muestran solo el nombre).
+- [ ] Revisar el encuadre de las fotos verticales recortadas (salón armado y catering). Se ajusta con `posicion`, por ejemplo `"center 40%"`.
+
+## Archivos que convendría conseguir
+
+- [ ] **Logo de Fusion en mayor tamaño:** el actual mide 168 px de ancho y no se puede agrandar sin que se vea borroso.
+- [ ] Más fotos para las galerías de Disco, Institucionales, Academia y Egresados primario.
+
+---
+
+## Textos que escribí o ajusté yo (para revisar)
+
+- **Encabezados de Egresados primario y secundario** (`lineas.ts`): el documento no los definía.
+- **"Trayectoria desde 1969"** en lugar de "57 años de trayectoria" (`lineas.ts`), para que no venza.
+- **Servicios de Eventos privados e Institucionales** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad").
+- **Botón de la tarjeta Institucionales en la home** (`home.ts`): "Pedir propuesta" en vez de "Pedí una propuesta", para usar el mismo texto de botón en todo el sitio.
+- **Títulos de contacto** "Escribinos" en la home, Disco y Fusion (`home.ts`, `disco.ts`, `fusion.ts`).
+- **Mensaje del formulario de agencias:** "Hola, quiero pedir una propuesta para egresados." seguido de agencia, nivel, cantidad y fecha.

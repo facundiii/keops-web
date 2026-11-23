@@ -1,19 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Play, ImageIcon, Volume2, VolumeX } from "lucide-react";
+import { Volume2, VolumeX } from "lucide-react";
 
 // ── Slot components ─────────────────────────────────────────────
+// Las fotos de las tiras son decorativas (alt vacío): las mismas fotos están,
+// con su descripción, en la grilla de abajo. Un lugar sin foto no se muestra.
 
 function ImageSlot({ src, alt }: { src?: string; alt?: string }) {
-  if (!src) {
-    return (
-      <div className="w-full aspect-[9/16] rounded-xl bg-carbon border border-piedra flex items-center justify-center shrink-0">
-        <ImageIcon size={20} className="text-arena/60" />
-      </div>
-    );
-  }
+  if (!src) return null;
   return (
     <div className="w-full aspect-[9/16] relative rounded-xl overflow-hidden shrink-0">
       <Image src={src} alt={alt ?? ""} fill className="object-cover" sizes="240px" />
@@ -32,16 +28,21 @@ function VideoSlot({ src }: { src?: string }) {
     setMuted(videoRef.current.muted);
   };
 
-  if (!src) {
-    return (
-      <div className="w-full aspect-[9/16] rounded-2xl bg-carbon border border-piedra flex flex-col items-center justify-center gap-4">
-        <div className="w-16 h-16 rounded-full border border-piedra flex items-center justify-center">
-          <Play size={22} className="text-arena/60 ml-1" />
-        </div>
-        <p className="text-arena/60 text-xs tracking-[0.2em] uppercase">Video próximamente</p>
-      </div>
-    );
-  }
+  // Con "menos movimiento" activado en el sistema, el video queda quieto.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const consulta = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const aplicar = () => {
+      if (consulta.matches) video.pause();
+      else video.play().catch(() => {});
+    };
+    aplicar();
+    consulta.addEventListener("change", aplicar);
+    return () => consulta.removeEventListener("change", aplicar);
+  }, [src]);
+
+  if (!src) return null;
 
   return (
     <div className="w-full aspect-[9/16] relative rounded-2xl overflow-hidden">
@@ -60,10 +61,9 @@ function VideoSlot({ src }: { src?: string }) {
       <div className="absolute bottom-4 inset-x-0 flex justify-center z-20">
         <button
           onClick={toggleMute}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-oro/50 bg-negro/70 backdrop-blur-sm text-oro/80 hover:text-oro hover:border-oro hover:bg-oro/10 transition-all duration-300 text-xs tracking-widest"
-          aria-label={muted ? "Activar sonido" : "Silenciar"}
+          className="texto-chico flex items-center gap-2 min-h-[44px] px-4 rounded-full border border-oro bg-negro/80 backdrop-blur-sm text-oro hover:bg-oro/10 transition-colors duration-300"
         >
-          {muted ? <VolumeX size={13} /> : <Volume2 size={13} />}
+          {muted ? <VolumeX size={20} strokeWidth={1.5} /> : <Volume2 size={20} strokeWidth={1.5} />}
           <span>{muted ? "Activar sonido" : "Silenciar"}</span>
         </button>
       </div>
@@ -99,17 +99,12 @@ function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | un
   const leftItems = [...leftImages, ...leftImages];
   const rightItems = [...rightImages, ...rightImages];
 
-  const renderItem = (src: string | undefined, i: number) => (
-    <div key={i} className="w-28 shrink-0 aspect-[9/16] relative rounded-xl overflow-hidden">
-      {src ? (
+  const renderItem = (src: string | undefined, i: number) =>
+    src ? (
+      <div key={i} className="w-28 shrink-0 aspect-[9/16] relative rounded-xl overflow-hidden">
         <Image src={src} alt="" fill className="object-cover" sizes="112px" />
-      ) : (
-        <div className="w-full h-full bg-carbon border border-piedra flex items-center justify-center">
-          <ImageIcon size={16} className="text-arena/60" />
-        </div>
-      )}
-    </div>
-  );
+      </div>
+    ) : null;
 
   return (
     <div className="flex flex-col gap-3">

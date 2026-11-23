@@ -71,7 +71,7 @@ export const tarjetasLineas: TarjetaLinea[] = [
     antetitulo: "Institucionales",
     titulo: "Tu evento dentro de un ícono de Carlos Paz.",
     texto: "Técnica, catering y un coordinador dedicado.",
-    boton: "Pedí una propuesta",
+    boton: "Pedir propuesta",
     href: "/institucionales",
   },
   {

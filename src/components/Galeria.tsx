@@ -198,6 +198,7 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
             src={item.src}
             controls
             autoPlay
+            muted
             playsInline
             onLoadedMetadata={(e) => { e.currentTarget.volume = 0.05; }}
             style={{
@@ -239,14 +240,12 @@ function Modal({ items, index, onClose, onPrev, onNext }: {
 
       {/* Dots */}
       {items.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5">
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5" aria-hidden="true">
           {items.map((_, i) => (
-            <button
+            <span
               key={i}
               style={{ width: i === index ? "16px" : "6px" }}
               className={`h-1.5 rounded-full transition-all duration-200 ${i === index ? "bg-oro" : "bg-piedra"}`}
-              onClick={(e) => { e.stopPropagation(); }}
-              aria-label={`Ir a item ${i + 1}`}
             />
           ))}
         </div>

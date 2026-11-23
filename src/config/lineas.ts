@@ -212,10 +212,10 @@ export const eventosPrivados: PaginaLinea = {
   incluye: {
     titulo: "Qué incluye",
     servicios: [
-      "Ambientación y decoración personalizada según la temática del evento",
-      "Barra abierta con tragos clásicos y opciones premium",
-      "DJ profesional o banda en vivo a elección",
-      "Servicio de catering con menú adaptable",
+      "Ambientación personalizada según la temática del evento",
+      "Barra abierta",
+      "DJ o banda en vivo, a elección",
+      "Catering con menú adaptable",
       "Coordinador exclusivo durante todo el evento",
       "Iluminación y sonido incluidos",
     ],
@@ -265,12 +265,13 @@ export const institucionales: PaginaLinea = {
   incluye: {
     titulo: "Qué incluye",
     servicios: [
-      "Sala principal con capacidad modular adaptable al tipo de evento",
-      "Equipamiento audiovisual profesional: pantallas, proyectores y micrófonos",
-      "Conectividad WiFi para presentaciones y streaming",
-      "Catering corporativo con opciones de coffee break, almuerzo y cena",
-      "Coordinador de eventos dedicado durante toda la jornada",
-      "Estacionamiento disponible y acceso diferenciado para invitados VIP",
+      // Vienen del sitio anterior: CONFIRMAR que todos sigan siendo ciertos.
+      "Espacios que se adaptan al tipo de evento",
+      "Pantallas, proyectores y micrófonos",
+      "WiFi para presentaciones y streaming",
+      "Catering: coffee break, almuerzo o cena",
+      "Coordinador dedicado durante toda la jornada",
+      "Estacionamiento y acceso diferenciado para invitados VIP",
     ],
   },
   galeria: {
