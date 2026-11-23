@@ -51,7 +51,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${inter.variable} ${cormorant.variable}`}>
+    <html lang="es" data-scroll-behavior="smooth" className={`${outfit.variable} ${inter.variable} ${cormorant.variable}`}>
       <head>
         <link rel="preload" href="/landing-pc.png" as="image" media="(min-width: 768px)" />
         <link rel="preload" href="/landing-mobile.png" as="image" media="(max-width: 767px)" />

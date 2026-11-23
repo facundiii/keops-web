@@ -24,9 +24,7 @@ export default function InstitucionalesPage() {
       services={[...services]}
       cta={cta}
       mediaItems={mediaItems}
-      email={siteConfig.contactInfo.eventos.email}
-      whatsappUrl={siteConfig.contactInfo.eventos.whatsappUrl}
-      whatsappDisplay={siteConfig.contactInfo.eventos.whatsappDisplay}
+      linea="eventos"
     />
   );
 }

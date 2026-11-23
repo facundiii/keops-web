@@ -89,9 +89,7 @@ export default function FusionPage() {
       <ContactCTA
         title="¿Querés ser parte?"
         subtitle="Escribinos para más información sobre las noches Fusion."
-        email={siteConfig.contactInfo.disco.email}
-        whatsappUrl={siteConfig.contactInfo.disco.whatsappUrl}
-        whatsappDisplay={siteConfig.contactInfo.disco.whatsappDisplay}
+        linea="disco"
       />
     </>
   );

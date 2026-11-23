@@ -34,3 +34,6 @@ yarn-error.log*
 
 # capturas de revisión
 capturas/
+
+# generado por Next
+next-env.d.ts

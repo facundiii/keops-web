@@ -2,6 +2,7 @@ import { SectionHero } from "@/components/SectionHero";
 import { Carousel, MediaItem } from "@/components/Carousel";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
+import type { LineaId } from "@/config/contacto";
 
 interface SubpageTemplateProps {
   title: string;
@@ -11,9 +12,7 @@ interface SubpageTemplateProps {
   services?: string[];
   cta: string;
   mediaItems?: MediaItem[];
-  email?: string;
-  whatsappUrl?: string;
-  whatsappDisplay?: string;
+  linea?: LineaId;
 }
 
 export function SubpageTemplate({
@@ -24,9 +23,7 @@ export function SubpageTemplate({
   services,
   cta,
   mediaItems = [],
-  email,
-  whatsappUrl,
-  whatsappDisplay,
+  linea,
 }: SubpageTemplateProps) {
   return (
     <>
@@ -87,7 +84,7 @@ export function SubpageTemplate({
         </div>
       </section>
 
-      <ContactCTA ctaText={title} email={email} whatsappUrl={whatsappUrl} whatsappDisplay={whatsappDisplay} />
+      <ContactCTA linea={linea} />
     </>
   );
 }
