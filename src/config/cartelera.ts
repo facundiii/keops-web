@@ -4,6 +4,9 @@
 // del día siguiente a su fecha. No hace falta borrarlas a mano ni volver a publicar.
 // Sin noches vigentes, el sitio muestra "Pronto anunciamos las próximas noches".
 
+/** Aviso cuando no hay fechas. El usuario de Instagram se agrega solo al final. */
+export const textoSinFechas = "Pronto anunciamos las próximas noches. Seguinos en";
+
 export interface Noche {
   /** Único por noche. Ej: "2026-12-05" */
   id: string;

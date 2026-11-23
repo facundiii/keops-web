@@ -1,96 +1,83 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { siteConfig } from "@/config/site";
+import { ArrowUpRight } from "lucide-react";
+import { fusion } from "@/config/fusion";
+import { Boton } from "@/components/ui/Boton";
+import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
+import { NochesFusion } from "@/components/NochesFusion";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 
 export const metadata: Metadata = {
-  title: "Fusion",
-  description: siteConfig.fusion.tagline,
+  title: fusion.meta.titulo,
+  description: fusion.meta.descripcion,
 };
 
-function PartnerLogo({ name, logoSrc, large }: { name: string; logoSrc: string; large?: boolean }) {
-  return (
-    <div className={`flex items-center justify-center px-8 py-6 sm:py-0 sm:px-10 w-full ${
-      large
-        ? "h-[134px] sm:h-[134px] md:h-44 lg:h-52"
-        : "h-28 sm:h-28 md:h-36 lg:h-44"
-    }`}>
-      <div className={`relative h-full ${
-        large
-          ? "w-44 sm:w-52 md:w-[269px] lg:w-[307px]"
-          : "w-36 sm:w-44 md:w-56 lg:w-64"
-      }`}>
-        <Image
-          src={logoSrc}
-          alt={name}
-          fill
-          className="object-contain"
-          sizes="(max-width: 640px) 60vw, (max-width: 768px) 33vw, 25vw"
-        />
-      </div>
-    </div>
-  );
-}
-
 export default function FusionPage() {
+  const { logo, texto, url, textoBoton, discos, tickets, contacto } = fusion;
+
   return (
     <>
-      {/* ─── HERO + LOGOS ─────────────────────────────────────────────────── */}
-      <section className="relative flex flex-col items-center px-4 pt-28 pb-12 bg-negro overflow-hidden">
-        {/* Glow radial background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-marfil/[0.03] blur-3xl" />
-        </div>
-
-        <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto w-full">
-          {/* Fusion logo */}
-          <div className="relative w-56 h-32 sm:w-72 sm:h-40 md:w-96 md:h-52 mb-10 md:mb-12">
-            <Image
-              src={siteConfig.fusion.logoSrc}
-              alt="Fusion"
-              fill
-              className="object-contain logo-claro"
-              priority
-            />
-          </div>
-
-          {/* Tagline */}
-          <FadeInSection>
-            <h1 className="titulo-2 text-marfil">
-              {siteConfig.fusion.tagline}
-            </h1>
-          </FadeInSection>
-
-          {/* Divider */}
-          <FadeInSection delay={120}>
-            <div className="mt-8 mb-8 w-16 h-px bg-piedra mx-auto" />
-          </FadeInSection>
-
-          {/* Partner logos — columna en mobile, fila en sm+ */}
-          <div className="flex flex-col sm:flex-row items-center justify-center w-full">
-            {siteConfig.fusion.partners.map((partner, i) => (
-              <FadeInSection
-                key={partner.name}
-                delay={180 + i * 180}
-                className="w-full sm:flex-1 flex justify-center border-b sm:border-b-0 sm:border-r border-piedra last:border-0"
-              >
-                <PartnerLogo
-                  name={partner.name}
-                  logoSrc={partner.logoSrc}
-                  large={partner.name === "Keops"}
-                />
-              </FadeInSection>
-            ))}
-          </div>
+      {/* Qué es Fusion */}
+      <section className="bg-negro px-4 sm:px-6 pt-32 pb-16 lg:pt-44 lg:pb-20">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* El archivo del logo mide 168 px de ancho: no se agranda para que no se vea borroso */}
+          <Image
+            src={logo}
+            alt="Fusion"
+            width={168}
+            height={74}
+            priority
+            className="mx-auto mb-10 logo-claro animate-fade-in"
+          />
+          <h1 className="titulo-2 text-marfil animate-fade-in-up">{texto}</h1>
+          {url && (
+            <div className="mt-9 animate-fade-in-up animate-delay-200">
+              <Boton href={url}>
+                {textoBoton}
+                <ArrowUpRight size={20} strokeWidth={1.5} aria-hidden="true" />
+              </Boton>
+            </div>
+          )}
         </div>
       </section>
 
-      <ContactCTA
-        title="¿Querés ser parte?"
-        subtitle="Escribinos para más información sobre las noches Fusion."
-        linea="disco"
-      />
+      {/* Las tres discos */}
+      <Seccion ancho="medio">
+        <h2 className="sr-only">Las tres discos de Fusion</h2>
+        <ul className="grid grid-cols-1 sm:grid-cols-3">
+          {discos.map((disco, i) => (
+            <li
+              key={disco.nombre}
+              className={`flex items-center justify-center px-8 py-8 sm:py-4 border-piedra ${
+                i > 0 ? "border-t sm:border-t-0 sm:border-l" : ""
+              }`}
+            >
+              <FadeInSection delay={i * 120}>
+                <div className="relative w-44 h-20 lg:w-56 lg:h-24">
+                  <Image
+                    src={disco.logo}
+                    alt={disco.nombre}
+                    fill
+                    sizes="(max-width: 640px) 176px, 224px"
+                    className="object-contain"
+                  />
+                </div>
+              </FadeInSection>
+            </li>
+          ))}
+        </ul>
+      </Seccion>
+
+      {/* Tickets */}
+      <Seccion id="tickets" ancho="medio">
+        <FadeInSection>
+          <TituloSeccion antetitulo={tickets.antetitulo} titulo={tickets.titulo} />
+        </FadeInSection>
+        <NochesFusion />
+      </Seccion>
+
+      <ContactCTA title={contacto.titulo} subtitle={contacto.bajada} linea="disco" />
     </>
   );
 }

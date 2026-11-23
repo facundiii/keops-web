@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { institucionales } from "@/config/lineas";
+import { fotos } from "@/config/fotos";
 import { PlantillaLinea } from "@/components/PlantillaLinea";
 
 export const metadata: Metadata = {
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function InstitucionalesPage() {
-  return <PlantillaLinea pagina={institucionales} />;
+  return <PlantillaLinea pagina={institucionales} fotos={{ incluye: fotos.institucionales.incluye }} />;
 }

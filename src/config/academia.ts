@@ -2,6 +2,8 @@
 // Todo lo vacío está A COMPLETAR. Regla: un bloque sin contenido no se muestra.
 // El WhatsApp y el mail de la academia se cargan en config/contacto.ts (línea "academia").
 
+import type { Medio } from "./lineas";
+
 export const academia = {
   meta: {
     titulo: "Academia",
@@ -33,6 +35,15 @@ export const academia = {
   docentes: {
     titulo: "Docentes",
     lista: [] as { nombre: string; rol: string; foto: string }[], // A COMPLETAR
+  },
+
+  /** Se muestra solo con 6 imágenes o más, o con al menos un video. */
+  galeria: {
+    titulo: "Galería",
+    medios: [
+      // A COMPLETAR. Ej:
+      // { tipo: "imagen", src: "/fotos/05-salon-bar.jpg", alt: "Barra del Salón Bar" },
+    ] as Medio[],
   },
 
   inscripcion: {

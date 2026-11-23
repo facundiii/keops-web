@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import { disco } from "@/config/disco";
 import { AppQRCode } from "@/components/AppQRCode";
 
 function GooglePlayIcon() {
@@ -17,31 +17,33 @@ function AppStoreIcon() {
   );
 }
 
+const { entradas } = disco;
+
 export function TicketSection() {
   return (
     <section
       id="comprar-entrada"
-      className="bg-negro border-t border-piedra pt-12 pb-8 px-4"
+      className="bg-negro border-t border-piedra py-16 lg:py-24 px-4 scroll-mt-4"
     >
       <div className="max-w-2xl mx-auto text-center">
-        <p className="antetitulo mb-4">Entradas</p>
+        <p className="antetitulo mb-4">{entradas.antetitulo}</p>
         <h2 className="titulo-2 text-marfil mb-4">
-          Comprá tu entrada
+          {entradas.titulo}
         </h2>
         <p className="cuerpo text-arena mb-10">
-          Descargá la app y asegurá tu lugar antes de que se agoten.
+          {entradas.texto}
         </p>
 
         {/* QR codes — visible on desktop only */}
         <div className="hidden sm:flex items-end justify-center gap-12 mb-8">
-          <AppQRCode value={siteConfig.ticketApps.googlePlay} label="Google Play" />
-          <AppQRCode value={siteConfig.ticketApps.appStore} label="App Store" />
+          <AppQRCode value={entradas.googlePlay} label="Google Play" />
+          <AppQRCode value={entradas.appStore} label="App Store" />
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           {/* Google Play */}
           <a
-            href={siteConfig.ticketApps.googlePlay}
+            href={entradas.googlePlay}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-5 bg-carbon hover:bg-piedra border border-piedra hover:border-oro text-marfil px-8 py-5 rounded-2xl transition-colors duration-300 w-full sm:w-auto min-w-[260px]"
@@ -57,7 +59,7 @@ export function TicketSection() {
 
           {/* App Store */}
           <a
-            href={siteConfig.ticketApps.appStore}
+            href={entradas.appStore}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-5 bg-carbon hover:bg-piedra border border-piedra hover:border-oro text-marfil px-8 py-5 rounded-2xl transition-colors duration-300 w-full sm:w-auto min-w-[260px]"

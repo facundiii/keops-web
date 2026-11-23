@@ -2,26 +2,21 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import type { PaginaLinea } from "@/config/lineas";
-import { preguntasDe } from "@/config/faq";
+import type { Foto } from "@/config/fotos";
 import { Encabezado } from "@/components/Encabezado";
 import { BloqueArgumentos } from "@/components/BloqueArgumentos";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { Galeria, type MediaItem } from "@/components/Galeria";
 import { EventosGallery } from "@/components/EventosGallery";
 import { PhotoGallery } from "@/components/PhotoGallery";
-import { PreguntasFrecuentes } from "@/components/PreguntasFrecuentes";
+import { BloqueFaq } from "@/components/BloqueFaq";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
-
-export interface FotoPagina {
-  src: string;
-  alt: string;
-}
 
 interface PlantillaLineaProps {
   pagina: PaginaLinea;
   /** Fotos opcionales de la página (se asignan desde config/fotos.ts) */
-  fotos?: { encabezado?: FotoPagina; porQue?: FotoPagina; incluye?: FotoPagina };
+  fotos?: { encabezado?: Foto; porQue?: Foto; incluye?: Foto };
   /** Contenido extra dentro del bloque de contacto (por ejemplo, un formulario) */
   children?: ReactNode;
 }
@@ -47,9 +42,6 @@ export function PlantillaLinea({ pagina, fotos = {}, children }: PlantillaLineaP
   const logos = referencias.logos.filter((r) => r.autorizado);
   const testimonios = referencias.testimonios.filter((t) => t.autorizado && t.texto.trim() !== "");
 
-  // 6. Preguntas frecuentes: solo las confirmadas
-  const preguntas = preguntasDe(pagina.faq);
-
   const parrafosExtra = extra?.parrafos.filter((p) => p.trim() !== "") ?? [];
 
   return (
@@ -62,6 +54,7 @@ export function PlantillaLinea({ pagina, fotos = {}, children }: PlantillaLineaP
         boton={encabezado.boton}
         foto={fotos.encabezado?.src}
         fotoAlt={fotos.encabezado?.alt}
+        fotoPosicion={fotos.encabezado?.posicion}
       />
 
       {/* 2. Por qué Keops */}
@@ -98,6 +91,7 @@ export function PlantillaLinea({ pagina, fotos = {}, children }: PlantillaLineaP
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     className="object-cover"
+                    style={{ objectPosition: fotos.incluye.posicion }}
                   />
                 </div>
               </FadeInSection>
@@ -121,7 +115,10 @@ export function PlantillaLinea({ pagina, fotos = {}, children }: PlantillaLineaP
               />
               {imagenes.length >= 6 && (
                 <div className="max-w-5xl mx-auto px-4 mt-12">
-                  <PhotoGallery images={imagenes.map((m) => m.src)} />
+                  <PhotoGallery
+                    images={imagenes.map((m) => m.src)}
+                    alts={imagenes.map((m) => (m.tipo === "imagen" ? m.alt : ""))}
+                  />
                 </div>
               )}
             </>
@@ -187,15 +184,8 @@ export function PlantillaLinea({ pagina, fotos = {}, children }: PlantillaLineaP
         </Seccion>
       )}
 
-      {/* 6. Preguntas frecuentes */}
-      {preguntas.length > 0 && (
-        <Seccion ancho="angosto">
-          <FadeInSection>
-            <TituloSeccion titulo="Preguntas frecuentes" />
-          </FadeInSection>
-          <PreguntasFrecuentes preguntas={preguntas} />
-        </Seccion>
-      )}
+      {/* 6. Preguntas frecuentes (solo las confirmadas) */}
+      <BloqueFaq grupo={pagina.faq} />
 
       {/* 7. Contacto */}
       <ContactCTA

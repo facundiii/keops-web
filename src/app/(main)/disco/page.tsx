@@ -1,51 +1,52 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import { disco } from "@/config/disco";
+import { fotos } from "@/config/fotos";
 import { Encabezado } from "@/components/Encabezado";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
+import { Cartelera } from "@/components/Cartelera";
+import { TicketSection } from "@/components/TicketSection";
+import { BloqueGaleria } from "@/components/BloqueGaleria";
+import { BloqueFaq } from "@/components/BloqueFaq";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
-import { UpcomingEvents } from "@/components/UpcomingEvents";
-import { TicketSection } from "@/components/TicketSection";
 
 export const metadata: Metadata = {
-  title: siteConfig.sections.disco.title,
-  description: siteConfig.sections.disco.description,
+  title: disco.meta.titulo,
+  description: disco.meta.descripcion,
 };
 
-const { title, tagline, description, paragraphs } = siteConfig.sections.disco;
-
 export default function DiscoPage() {
+  const { encabezado, cartelera, galeria, contacto } = disco;
+  const foto = fotos.disco.encabezado;
+
   return (
     <>
-      <Encabezado antetitulo={title} titulo={tagline} bajada={description} />
+      <Encabezado
+        antetitulo={encabezado.antetitulo}
+        titulo={encabezado.titulo}
+        bajada={encabezado.bajada}
+        foto={foto?.src}
+        fotoAlt={foto?.alt}
+        fotoPosicion={foto?.posicion}
+      />
 
-      {/* Cartelera */}
-      <Seccion ancho="medio">
+      {/* Cartelera: las fechas pasadas se ocultan solas */}
+      <Seccion id="cartelera">
         <FadeInSection>
-          <TituloSeccion antetitulo="Cartelera" titulo="La agenda de la pirámide" />
+          <TituloSeccion antetitulo={cartelera.antetitulo} titulo={cartelera.titulo} />
         </FadeInSection>
-        <FadeInSection delay={100}>
-          <UpcomingEvents events={siteConfig.upcomingEvents} />
-        </FadeInSection>
+        <Cartelera />
       </Seccion>
 
       {/* Comprar entrada */}
       <TicketSection />
 
-      {/* Texto */}
-      <Seccion ancho="angosto">
-        <div className="space-y-6">
-          {paragraphs.map((para, i) => (
-            <FadeInSection key={i} delay={i * 100}>
-              <p className="cuerpo text-arena">{para}</p>
-            </FadeInSection>
-          ))}
-        </div>
-      </Seccion>
+      {/* Galería: oculta hasta tener fotos */}
+      <BloqueGaleria titulo={galeria.titulo} medios={galeria.medios} />
 
-      {/* La galería vuelve cuando haya fotos (Etapa 4). */}
+      <BloqueFaq grupo="disco" />
 
-      <ContactCTA linea="disco" />
+      <ContactCTA title={contacto.titulo} subtitle={contacto.bajada} linea="disco" />
     </>
   );
 }

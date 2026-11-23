@@ -5,39 +5,23 @@ import Link from "next/link";
 import { Clock } from "lucide-react";
 import { proximasNoches } from "@/config/home";
 import { cartelera } from "@/config/cartelera";
-import { instagram } from "@/config/contacto";
 import { fechaLarga } from "@/lib/fechas";
-import { useNochesVigentes } from "@/lib/useNochesVigentes";
+import { useVigentes } from "@/lib/useVigentes";
 import { claseBoton } from "@/components/ui/Boton";
+import { SinFechas } from "@/components/SinFechas";
 
 /**
  * Las próximas noches de la cartelera (home). Las fechas pasadas no aparecen.
  * Sin fechas, muestra el aviso con el Instagram.
  */
 export function ProximasNoches() {
-  const vigentes = useNochesVigentes();
-  const sinFechas = cartelera.length === 0 || vigentes?.length === 0;
+  const vigentes = useVigentes(cartelera);
 
-  // Hay noches cargadas pero todavía no se sabe la fecha de hoy:
-  // se reserva el lugar para que la página no salte.
-  if (!sinFechas && vigentes === null) return <div className="min-h-[96px]" aria-hidden="true" />;
+  // Sin noches cargadas, o todas pasadas
+  if (cartelera.length === 0 || vigentes?.length === 0) return <SinFechas />;
 
-  if (sinFechas || vigentes === null) {
-    return (
-      <p className="cuerpo text-arena">
-        {proximasNoches.sinFechas}{" "}
-        <a
-          href={instagram.oficial.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-oro underline underline-offset-4 hover:text-oro-profundo transition-colors duration-200"
-        >
-          {instagram.oficial.usuario}
-        </a>
-        .
-      </p>
-    );
-  }
+  // Hay noches, pero todavía no se sabe la fecha de hoy: se reserva el lugar.
+  if (vigentes === null) return <div className="min-h-[190px]" aria-hidden="true" />;
 
   return (
     <>
@@ -61,7 +45,7 @@ export function ProximasNoches() {
                 <h3 className="titulo-3 text-marfil">{noche.nombre}</h3>
                 {noche.djs.length > 0 && <p className="texto-chico text-arena mt-2">{noche.djs.join(" · ")}</p>}
                 <p className="texto-chico text-arena mt-2 flex items-center gap-2">
-                  <Clock size={20} strokeWidth={1.5} aria-hidden="true" />
+                  <Clock size={20} strokeWidth={1.5} aria-hidden="true" className="shrink-0" />
                   Apertura {noche.hora} h
                 </p>
               </div>

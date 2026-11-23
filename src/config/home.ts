@@ -27,8 +27,6 @@ export const proximasNoches = {
   titulo: "Próximas noches",
   /** Cuántas noches se muestran como máximo */
   cantidad: 3,
-  /** Texto cuando no hay fechas. El usuario de Instagram se agrega solo al final. */
-  sinFechas: "Pronto anunciamos las próximas noches. Seguinos en",
   boton: "Ver cartelera",
 };
 

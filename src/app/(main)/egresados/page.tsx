@@ -2,10 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { egresados } from "@/config/lineas";
+import { fotos } from "@/config/fotos";
 import { Encabezado } from "@/components/Encabezado";
 import { BloqueArgumentos } from "@/components/BloqueArgumentos";
+import { BloqueFaq } from "@/components/BloqueFaq";
 import { Seccion } from "@/components/ui/Seccion";
 import { ContactCTA } from "@/components/ContactCTA";
+import { FormularioAgencia } from "@/components/FormularioAgencia";
 import { FadeInSection } from "@/components/FadeInSection";
 
 export const metadata: Metadata = {
@@ -51,9 +54,13 @@ export default function EgresadosPage() {
         </div>
       </Seccion>
 
-      <BloqueArgumentos titulo={porQue.titulo} argumentos={porQue.argumentos} />
+      <BloqueArgumentos titulo={porQue.titulo} argumentos={porQue.argumentos} foto={fotos.egresados.porQue} />
 
-      <ContactCTA title={contacto.titulo} subtitle={contacto.bajada} linea="egresados" />
+      <BloqueFaq grupo="egresados" />
+
+      <ContactCTA title={contacto.titulo} subtitle={contacto.bajada} linea="egresados">
+        <FormularioAgencia />
+      </ContactCTA>
     </>
   );
 }

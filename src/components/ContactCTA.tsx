@@ -42,7 +42,8 @@ export function ContactCTA({
         {children && <div className="mt-10 text-left">{children}</div>}
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-          {whatsapp && (
+          {/* Con formulario, el botón de WhatsApp ya está dentro del formulario */}
+          {whatsapp && !children && (
             <Boton variante="whatsapp" href={whatsapp}>
               <IconoWhatsApp size={20} />
               Escribinos por WhatsApp

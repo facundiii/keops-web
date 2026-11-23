@@ -3,6 +3,9 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { academia } from "@/config/academia";
 import { lineas } from "@/config/contacto";
+import { fotos } from "@/config/fotos";
+import { BloqueGaleria } from "@/components/BloqueGaleria";
+import { BloqueFaq } from "@/components/BloqueFaq";
 import { Encabezado } from "@/components/Encabezado";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { ContactCTA } from "@/components/ContactCTA";
@@ -14,7 +17,7 @@ export const metadata: Metadata = {
 };
 
 export default function AcademiaPage() {
-  const { encabezado, temas, modalidad, docentes, inscripcion } = academia;
+  const { encabezado, temas, modalidad, docentes, galeria, inscripcion } = academia;
 
   const datosModalidad = [
     { etiqueta: "Duración", valor: modalidad.duracion },
@@ -24,6 +27,7 @@ export default function AcademiaPage() {
   ].filter((d) => d.valor.trim() !== "");
 
   const hayContacto = Boolean(lineas.academia.whatsapp || lineas.academia.mail);
+  const foto = fotos.academia.encabezado;
 
   return (
     <>
@@ -33,6 +37,9 @@ export default function AcademiaPage() {
         titulo={encabezado.titulo}
         bajada={encabezado.bajada}
         boton={hayContacto ? "Inscribite" : undefined}
+        foto={foto?.src}
+        fotoAlt={foto?.alt}
+        fotoPosicion={foto?.posicion}
       />
 
       {/* 2. Qué vas a aprender */}
@@ -102,6 +109,11 @@ export default function AcademiaPage() {
           </ul>
         </Seccion>
       )}
+
+      {/* Galería: oculta hasta tener 6 fotos o un video */}
+      <BloqueGaleria titulo={galeria.titulo} medios={galeria.medios} />
+
+      <BloqueFaq grupo="academia" />
 
       {/* 5. Inscripción: WhatsApp y mail de la academia */}
       <ContactCTA title={inscripcion.titulo} subtitle={inscripcion.bajada} linea="academia" />

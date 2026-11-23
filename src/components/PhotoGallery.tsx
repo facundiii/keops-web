@@ -6,9 +6,11 @@ import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react";
 
 interface PhotoGalleryProps {
   images: string[];
+  /** Texto alternativo de cada foto, en el mismo orden */
+  alts?: string[];
 }
 
-export function PhotoGallery({ images }: PhotoGalleryProps) {
+export function PhotoGallery({ images, alts = [] }: PhotoGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [imgLoaded, setImgLoaded] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -77,7 +79,7 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
           >
             <Image
               src={src}
-              alt={`Foto ${i + 1}`}
+              alt={alts[i] ?? `Foto ${i + 1}`}
               width={0}
               height={0}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
@@ -139,7 +141,7 @@ export function PhotoGallery({ images }: PhotoGalleryProps) {
             <img
               key={images[lightboxIndex]}
               src={images[lightboxIndex]}
-              alt={`Foto ${lightboxIndex + 1}`}
+              alt={alts[lightboxIndex] ?? `Foto ${lightboxIndex + 1}`}
               onLoad={() => setImgLoaded(true)}
               style={{
                 maxWidth: "100%",
