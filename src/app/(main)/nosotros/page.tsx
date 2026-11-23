@@ -48,7 +48,11 @@ export default function NosotrosPage() {
           <FadeInSection>
             <TituloSeccion antetitulo={historia.antetitulo} titulo={historia.titulo} centrado />
           </FadeInSection>
-          <LineaDeTiempo hitos={hitos} fotos={fotos.nosotros.historia} />
+          <LineaDeTiempo
+            hitos={hitos}
+            fotos={fotos.nosotros.historia}
+            fotosDeEjemplo={fotos.nosotros.historiaDeEjemplo}
+          />
         </Seccion>
       )}
 

@@ -34,18 +34,38 @@ export interface Hito {
 export const historia: { antetitulo: string; titulo: string; hitos: Hito[] } = {
   antetitulo: "Historia",
   titulo: "Desde 1969",
+  // TEXTOS DE EJEMPLO: la primera oración de cada año es el dato real; el resto es relleno
+  // genérico para ver cómo queda la línea de tiempo. Reemplazalos por la historia real
+  // antes de pasar `confirmado` a true.
   hitos: [
-    { anio: "1969", texto: "Abre Keops en Villa Carlos Paz.", confirmado: false },
-    { anio: "2010", texto: "El frente de Keops, con la pirámide iluminada.", confirmado: false },
-    { anio: "2019", texto: "Keops cumple 50 años.", confirmado: false },
+    {
+      anio: "1969",
+      texto:
+        "Abre Keops en Villa Carlos Paz. La pirámide empieza a recibir a la ciudad y a quienes la visitan cada temporada, y se vuelve un punto de encuentro de la noche.",
+      confirmado: false,
+    },
+    {
+      anio: "2010",
+      texto:
+        "El frente de Keops, con la pirámide iluminada. Una imagen que ya es parte del paisaje de Carlos Paz y que se reconoce desde lejos.",
+      confirmado: false,
+    },
+    {
+      anio: "2019",
+      texto:
+        "Keops cumple 50 años. Medio siglo de noches, festejado con quienes pasaron por la pista en distintas épocas.",
+      confirmado: false,
+    },
     {
       anio: "2020",
-      texto: "Una fiesta de verano en Keops llega a la tapa de la revista Paparazzi.",
+      texto:
+        "Una fiesta de verano en Keops llega a la tapa de la revista Paparazzi. La temporada pone a la pirámide en el centro de la escena.",
       confirmado: false,
     },
     {
       anio: "2021",
-      texto: "En septiembre, Keops reabre después de 18 meses cerrado por la pandemia.",
+      texto:
+        "En septiembre, Keops reabre después de 18 meses cerrado por la pandemia. La pista vuelve a encenderse y empieza una nueva etapa.",
       confirmado: false,
     },
   ],

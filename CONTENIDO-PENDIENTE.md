@@ -43,7 +43,8 @@ Al completarlo, el bloque aparece solo. Buscá `A COMPLETAR` dentro de cada arch
 
 ## `nosotros.ts`
 
-- [ ] **Línea de tiempo (Historia):** cada hito lleva año, párrafo breve e imagen. Hoy cada año tiene una sola oración: ampliar el `texto` de 1969, 2010, 2019, 2020 y 2021.
+- [ ] **Línea de tiempo (Historia):** cada hito lleva año, párrafo breve e imagen. Los párrafos de 1969, 2010, 2019, 2020 y 2021 son **de ejemplo**: la primera oración es el dato real y el resto es relleno genérico. Reemplazarlos por la historia real.
+- [ ] **Línea de tiempo:** las imágenes de 1969, 2020 y 2021 son **de ejemplo** (fotos actuales, con la etiqueta "Imagen de ejemplo"). Solo se ven en tu PC; al confirmar un hito sin foto propia, sale sin imagen.
 - [ ] **Línea de tiempo:** pasar `confirmado` a `true` en cada hito revisado. En tu PC se ven todos con la etiqueta "Sin confirmar"; en el sitio publicado solo salen los confirmados.
 - [ ] **Línea de tiempo:** faltan las imágenes de **1969, 2020 y 2021** (se asignan en `fotos.ts`). Las de 2010 y 2019 ya están.
 - [ ] **Espacios:** `capacidad` y `descripcion` de Pista Central, Salón Eletón, Salón Bar, Keops Garden y VIP +30.

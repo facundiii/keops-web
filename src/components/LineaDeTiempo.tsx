@@ -7,6 +7,8 @@ interface LineaDeTiempoProps {
   hitos: Hito[];
   /** Foto de cada hito, por año */
   fotos: Record<string, Foto | undefined>;
+  /** Fotos de ejemplo, por año. Solo se usan en hitos sin confirmar (que no se publican). */
+  fotosDeEjemplo?: Record<string, Foto | undefined>;
 }
 
 /**
@@ -15,7 +17,7 @@ interface LineaDeTiempoProps {
  * y los hitos alternan de lado (texto de un lado, imagen del otro).
  * Un hito sin imagen muestra solo el año y el párrafo.
  */
-export function LineaDeTiempo({ hitos, fotos }: LineaDeTiempoProps) {
+export function LineaDeTiempo({ hitos, fotos, fotosDeEjemplo = {} }: LineaDeTiempoProps) {
   return (
     <ol className="relative">
       {/* La línea */}
@@ -25,7 +27,10 @@ export function LineaDeTiempo({ hitos, fotos }: LineaDeTiempoProps) {
       />
 
       {hitos.map((hito, i) => {
-        const foto = fotos[hito.anio];
+        // La foto real del año; si no hay y el hito está sin confirmar, una de ejemplo.
+        const fotoReal = fotos[hito.anio];
+        const foto = fotoReal ?? (hito.confirmado ? undefined : fotosDeEjemplo[hito.anio]);
+        const esDeEjemplo = !fotoReal && Boolean(foto);
         const textoALaIzquierda = i % 2 === 0;
 
         return (
@@ -69,6 +74,11 @@ export function LineaDeTiempo({ hitos, fotos }: LineaDeTiempoProps) {
                       className="object-cover"
                       style={{ objectPosition: foto.posicion }}
                     />
+                    {esDeEjemplo && (
+                      <span className="texto-chico absolute left-3 top-3 rounded-full border border-piedra bg-negro/90 px-3 py-1 text-arena">
+                        Imagen de ejemplo
+                      </span>
+                    )}
                   </div>
                 </FadeInSection>
               )}

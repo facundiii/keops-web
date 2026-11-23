@@ -89,6 +89,16 @@ export const fotos = {
       // "2020": A COMPLETAR
       // "2021": A COMPLETAR
     } as Record<string, Foto | undefined>,
+    /**
+     * Imágenes DE EJEMPLO para los años que todavía no tienen la suya.
+     * Son fotos actuales, puestas solo para ver cómo queda el diseño.
+     * Nunca se publican: solo se ven en tu PC, en los hitos sin confirmar.
+     */
+    historiaDeEjemplo: {
+      "1969": pistaCentralPiramide,
+      "2020": showRobotsLed,
+      "2021": pistaCentral,
+    } as Record<string, Foto | undefined>,
   },
 
   disco: { encabezado: pistaCentral as Foto | undefined },
