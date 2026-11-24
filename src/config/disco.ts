@@ -14,6 +14,8 @@ export const disco = {
     antetitulo: "Disco",
     titulo: "La noche más grande de Carlos Paz",
     bajada: "En verano, la temporada más intensa de Carlos Paz. El resto del año, noches especiales.",
+    /** Botón del encabezado: baja directo a "Comprá tu entrada". Vacío = sin botón. */
+    boton: "Comprar entrada",
   },
 
   cartelera: {

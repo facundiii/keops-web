@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Volume2, VolumeX } from "lucide-react";
+import { Pause, Play, Volume2, VolumeX } from "lucide-react";
 
 // ── Slot components ─────────────────────────────────────────────
 // Las fotos de las tiras son decorativas (alt vacío): las mismas fotos están,
@@ -17,9 +17,20 @@ function ImageSlot({ src, alt }: { src?: string; alt?: string }) {
   );
 }
 
-function VideoSlot({ src }: { src?: string }) {
+const claseControlVideo =
+  "flex items-center min-h-[44px] rounded-full border border-oro bg-negro/80 backdrop-blur-sm text-oro hover:bg-oro/10 transition-colors duration-300";
+
+function VideoSlot({ src, enPausa, alPausar }: { src?: string; enPausa: boolean; alPausar: () => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
+
+  // El botón de pausa frena el video junto con las tiras de fotos.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (enPausa) video.pause();
+    else video.play().catch(() => {});
+  }, [enPausa]);
 
   const toggleMute = () => {
     if (!videoRef.current) return;
@@ -43,13 +54,26 @@ function VideoSlot({ src }: { src?: string }) {
       />
       {/* Gradient base para el botón */}
       <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-negro/60 to-transparent pointer-events-none" />
-      {/* Botón de sonido — overlay dentro del video */}
-      <div className="absolute bottom-4 inset-x-0 flex justify-center z-20">
+      {/* Pausa (video y tiras de fotos) y sonido: dentro del video */}
+      <div className="absolute bottom-4 inset-x-0 flex justify-center gap-2 z-20">
         <button
-          onClick={toggleMute}
-          className="texto-chico flex items-center gap-2 min-h-[44px] px-4 rounded-full border border-oro bg-negro/80 backdrop-blur-sm text-oro hover:bg-oro/10 transition-colors duration-300"
+          type="button"
+          onClick={alPausar}
+          aria-label={enPausa ? "Reanudar el video y las fotos" : "Pausar el video y las fotos"}
+          className={`${claseControlVideo} justify-center w-11`}
         >
-          {muted ? <VolumeX size={20} strokeWidth={1.5} /> : <Volume2 size={20} strokeWidth={1.5} />}
+          {enPausa ? (
+            <Play size={20} strokeWidth={1.5} aria-hidden="true" />
+          ) : (
+            <Pause size={20} strokeWidth={1.5} aria-hidden="true" />
+          )}
+        </button>
+        <button type="button" onClick={toggleMute} className={`${claseControlVideo} texto-chico gap-2 px-4`}>
+          {muted ? (
+            <VolumeX size={20} strokeWidth={1.5} aria-hidden="true" />
+          ) : (
+            <Volume2 size={20} strokeWidth={1.5} aria-hidden="true" />
+          )}
           <span>{muted ? "Activar sonido" : "Silenciar"}</span>
         </button>
       </div>
@@ -62,15 +86,16 @@ function VideoSlot({ src }: { src?: string }) {
 interface StripProps {
   images: (string | undefined)[];
   direction: "up" | "down";
+  pausado: boolean;
 }
 
-function Strip({ images, direction }: StripProps) {
+function Strip({ images, direction, pausado }: StripProps) {
   const items = [...images, ...images];
   const animClass = direction === "up" ? "animate-scroll-up" : "animate-scroll-down";
 
   return (
     <div className="overflow-hidden" style={{ height: "100%" }}>
-      <div className={`flex flex-col gap-3 ${animClass}`}>
+      <div className={`flex flex-col gap-3 ${animClass} ${pausado ? "animacion-pausada" : ""}`}>
         {items.map((src, i) => (
           <ImageSlot key={i} src={src} />
         ))}
@@ -81,7 +106,16 @@ function Strip({ images, direction }: StripProps) {
 
 // ── Strip: horizontal infinite scroll (mobile) ──────────────────
 
-function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | undefined)[]; rightImages: (string | undefined)[] }) {
+function HorizontalStrip({
+  leftImages,
+  rightImages,
+  pausado,
+}: {
+  leftImages: (string | undefined)[];
+  rightImages: (string | undefined)[];
+  pausado: boolean;
+}) {
+  const pausa = pausado ? "animacion-pausada" : "";
   const leftItems = [...leftImages, ...leftImages];
   const rightItems = [...rightImages, ...rightImages];
 
@@ -98,7 +132,7 @@ function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | un
       <div className="relative overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-negro to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-negro to-transparent pointer-events-none" />
-        <div className="flex gap-3 w-max animate-scroll-left-fast">
+        <div className={`flex gap-3 w-max animate-scroll-left-fast ${pausa}`}>
           {leftItems.map(renderItem)}
         </div>
       </div>
@@ -106,7 +140,7 @@ function HorizontalStrip({ leftImages, rightImages }: { leftImages: (string | un
       <div className="relative overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-negro to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-negro to-transparent pointer-events-none" />
-        <div className="flex gap-3 w-max animate-scroll-right-fast">
+        <div className={`flex gap-3 w-max animate-scroll-right-fast ${pausa}`}>
           {rightItems.map(renderItem)}
         </div>
       </div>
@@ -134,6 +168,10 @@ export function EventosGallery({
   leftImages = defaultImages,
   rightImages = defaultImages,
 }: EventosGalleryProps) {
+  // Lo que se mueve solo se puede pausar (WCAG 2.2.2): un botón frena el video y las tiras.
+  const [enPausa, setEnPausa] = useState(false);
+  const alPausar = () => setEnPausa((v) => !v);
+
   return (
     <>
       {/* ── Desktop: 3-column cinema strip ── */}
@@ -148,19 +186,19 @@ export function EventosGallery({
         >
           {/* Left strip — scrolls up */}
           <div className="w-52 shrink-0 h-full">
-            <Strip images={leftImages} direction="up" />
+            <Strip images={leftImages} direction="up" pausado={enPausa} />
           </div>
 
           {/* Center — video */}
           <div className="flex-1 flex items-center justify-center h-full py-3">
             <div className="w-full max-w-[280px]">
-              <VideoSlot src={videoSrc} />
+              <VideoSlot src={videoSrc} enPausa={enPausa} alPausar={alPausar} />
             </div>
           </div>
 
           {/* Right strip — scrolls down */}
           <div className="w-52 shrink-0 h-full">
-            <Strip images={rightImages} direction="down" />
+            <Strip images={rightImages} direction="down" pausado={enPausa} />
           </div>
         </div>
       </div>
@@ -168,9 +206,9 @@ export function EventosGallery({
       {/* ── Mobile: video + horizontal carousel ── */}
       <div className="lg:hidden">
         <div className="max-w-xs mx-auto px-4 mb-6">
-          <VideoSlot src={videoSrc} />
+          <VideoSlot src={videoSrc} enPausa={enPausa} alPausar={alPausar} />
         </div>
-        <HorizontalStrip leftImages={leftImages} rightImages={rightImages} />
+        <HorizontalStrip leftImages={leftImages} rightImages={rightImages} pausado={enPausa} />
       </div>
     </>
   );

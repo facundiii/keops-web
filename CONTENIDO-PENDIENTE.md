@@ -38,6 +38,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 - [ ] Cargar las próximas noches. Cada una lleva: `id`, `nombre`, `fecha` (formato `2026-12-05`), `hora`, `djs`, `flyer` y, si corresponde, `agotado: true`. Hay un ejemplo comentado en el archivo.
 - [ ] Subir el arte de cada noche (vertical 9:16) a `public/disco/flyers/`.
+- [ ] (Opcional) `urlEntradas` de cada noche: el link para comprar esa noche en la app o la web de entradas. Con él, "Comprar entrada" abre directo la compra; sin él, lleva a la sección "Comprá tu entrada" de Disco.
 - No hace falta borrar las noches viejas: se ocultan solas al mediodía del día siguiente.
 
 ## `faq.ts`
@@ -123,3 +124,5 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - **Botón de la tarjeta Institucionales en la home** (`home.ts`): "Pedir propuesta" en vez de "Pedí una propuesta", para usar el mismo texto de botón en todo el sitio.
 - **Títulos de contacto** "Escribinos" en la home, Disco y Fusion (`home.ts`, `disco.ts`, `fusion.ts`).
 - **Mensaje del formulario de agencias:** "Hola, quiero pedir una propuesta para egresados." seguido de agencia, nivel, cantidad y fecha.
+- **Botón "Comprar entrada" en el encabezado de Disco** (`disco.ts`, `encabezado.boton`): baja directo a "Comprá tu entrada". Para sacarlo, dejá el texto vacío.
+- **Botones de las tiendas** en "Comprá tu entrada": ahora dicen solo "Google Play" y "App Store" (antes, "Disponible en Google Play").

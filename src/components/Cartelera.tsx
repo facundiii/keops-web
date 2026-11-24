@@ -10,6 +10,7 @@ import { fechaCorta, fechaLarga } from "@/lib/fechas";
 import { useVigentes } from "@/lib/useVigentes";
 import { claseBoton } from "@/components/ui/Boton";
 import { SinFechas } from "@/components/SinFechas";
+import { EnlaceEntrada } from "@/components/EnlaceEntrada";
 
 /** Arte del evento. Sin arte (o si falla la carga), el marco muestra la pirámide y el nombre. */
 function Arte({ noche }: { noche: Noche }) {
@@ -75,9 +76,9 @@ function Ficha({ noche }: { noche: Noche }) {
               Agotado
             </span>
           ) : (
-            <a href="#comprar-entrada" className={claseBoton("principal", "w-full")}>
+            <EnlaceEntrada noche={noche} enDisco className={claseBoton("principal", "w-full")}>
               Comprar entrada
-            </a>
+            </EnlaceEntrada>
           )}
         </div>
       </div>

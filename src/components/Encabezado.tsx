@@ -19,6 +19,11 @@ interface EncabezadoProps {
   fotoPosicion?: string;
   /** true cuando la bajada es de ejemplo (solo en desarrollo): muestra la etiqueta */
   bajadaDeEjemplo?: boolean;
+  /**
+   * Cuánto se oscurece la foto. "fuerte" (por defecto) para fotos cargadas de detalle;
+   * "suave" deja ver la parte de arriba de la foto y oscurece solo detrás del texto.
+   */
+  velo?: "fuerte" | "suave";
 }
 
 /** Encabezado de página interna: antetítulo, título, bajada y botón. */
@@ -32,6 +37,7 @@ export function Encabezado({
   fotoAlt = "",
   fotoPosicion,
   bajadaDeEjemplo = false,
+  velo = "fuerte",
 }: EncabezadoProps) {
   return (
     <section
@@ -45,13 +51,19 @@ export function Encabezado({
             src={foto}
             alt={fotoAlt}
             fill
-            priority
+            preload
             sizes="100vw"
             className="object-cover"
             style={{ objectPosition: fotoPosicion }}
           />
-          <div className="absolute inset-0 bg-negro/60" />
-          <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/30 to-negro/60" />
+          {velo === "fuerte" ? (
+            <>
+              <div className="absolute inset-0 bg-negro/60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/30 to-negro/60" />
+            </>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/70 to-negro/20" />
+          )}
         </>
       )}
 

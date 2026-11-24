@@ -31,6 +31,7 @@ export default function NosotrosPage() {
         foto={fotos.nosotros.encabezado?.src}
         fotoAlt={fotos.nosotros.encabezado?.alt}
         fotoPosicion={fotos.nosotros.encabezado?.posicion}
+        velo="suave"
       />
 
       {/* 2. Misión */}

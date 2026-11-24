@@ -1,0 +1,401 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T19:11:45.501Z",
+  "title": "Design System: Keops",
+  "extensions": {
+    "colorMeta": {
+      "negro": {
+        "role": "neutral",
+        "displayName": "Negro",
+        "canonical": "oklch(14.5% 0.000 89.9)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#262626",
+          "#454545",
+          "#666666",
+          "#898989",
+          "#AEAEAE",
+          "#CECECE",
+          "#EEEEEE"
+        ]
+      },
+      "carbon": {
+        "role": "neutral",
+        "displayName": "Carbón",
+        "canonical": "oklch(19.3% 0.005 67.5)",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#272625",
+          "#464543",
+          "#686563",
+          "#8B8986",
+          "#AFADAC",
+          "#CECDCC",
+          "#EFEEEE"
+        ]
+      },
+      "piedra": {
+        "role": "neutral",
+        "displayName": "Piedra",
+        "canonical": "oklch(27.1% 0.011 73.5)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#282624",
+          "#484440",
+          "#6A655F",
+          "#8D8883",
+          "#B1ADA9",
+          "#CFCDCB",
+          "#EFEEED"
+        ]
+      },
+      "marfil": {
+        "role": "neutral",
+        "displayName": "Marfil",
+        "canonical": "oklch(94.4% 0.012 84.6)",
+        "tonalRamp": [
+          "#0B0B0A",
+          "#272624",
+          "#474540",
+          "#69665F",
+          "#8C8982",
+          "#B0AEA9",
+          "#CFCDCB",
+          "#EFEEED"
+        ]
+      },
+      "arena": {
+        "role": "neutral",
+        "displayName": "Arena",
+        "canonical": "oklch(70.6% 0.023 79.0)",
+        "tonalRamp": [
+          "#0C0B0A",
+          "#292621",
+          "#4A443B",
+          "#6D6558",
+          "#90887B",
+          "#B3ADA4",
+          "#D1CDC8",
+          "#F0EEEC"
+        ]
+      },
+      "oro": {
+        "role": "primary",
+        "displayName": "Oro",
+        "canonical": "oklch(74.8% 0.099 86.1)",
+        "tonalRamp": [
+          "#0E0B05",
+          "#2F250C",
+          "#56420E",
+          "#7F6110",
+          "#A28544",
+          "#BFAC81",
+          "#D9CDB3",
+          "#F3EEE4"
+        ]
+      },
+      "oro-profundo": {
+        "role": "primary",
+        "displayName": "Oro profundo",
+        "canonical": "oklch(64.7% 0.095 86.1)",
+        "tonalRamp": [
+          "#0E0B05",
+          "#2F250D",
+          "#554212",
+          "#7E6117",
+          "#A18547",
+          "#BFAC83",
+          "#D8CDB4",
+          "#F3EEE4"
+        ]
+      },
+      "laser": {
+        "role": "secondary",
+        "displayName": "Láser",
+        "canonical": "oklch(67.0% 0.205 299.2)",
+        "tonalRamp": [
+          "#0D0816",
+          "#2D194A",
+          "#522A87",
+          "#7A3CC8",
+          "#9B68EA",
+          "#B99BF4",
+          "#D4C3FA",
+          "#F1EBFF"
+        ]
+      },
+      "whatsapp": {
+        "role": "tertiary",
+        "displayName": "WhatsApp",
+        "canonical": "oklch(76.1% 0.201 149.7)",
+        "tonalRamp": [
+          "#030F05",
+          "#013011",
+          "#005422",
+          "#057B36",
+          "#01A54A",
+          "#6FC482",
+          "#ABDCB4",
+          "#E1F5E4"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "titulo-display": {
+        "displayName": "Display",
+        "purpose": "Solo el título del hero de la home, en mayúsculas."
+      },
+      "titulo-1": {
+        "displayName": "Título 1",
+        "purpose": "H1 de páginas internas y años de la línea de tiempo."
+      },
+      "titulo-2": {
+        "displayName": "Título 2",
+        "purpose": "Título de cada bloque."
+      },
+      "titulo-3": {
+        "displayName": "Título 3",
+        "purpose": "Tarjetas, preguntas del acordeón y menú de celular."
+      },
+      "cuerpo": {
+        "displayName": "Cuerpo",
+        "purpose": "Texto corrido y bajadas; nunca menos de 16 px."
+      },
+      "texto-chico": {
+        "displayName": "Texto chico",
+        "purpose": "Datos de contacto, hora y DJs, notas al pie."
+      },
+      "antetitulo": {
+        "displayName": "Antetítulo",
+        "purpose": "Arriba de cada título, en mayúsculas y oro."
+      },
+      "boton": {
+        "displayName": "Botón",
+        "purpose": "Texto de botones y enlaces con flecha, en mayúsculas."
+      },
+      "etiqueta": {
+        "displayName": "Etiqueta",
+        "purpose": "Fecha corta de cada noche, en mayúsculas."
+      },
+      "acento": {
+        "displayName": "Acento",
+        "purpose": "Cormorant itálica, una vez por sección como máximo."
+      }
+    },
+    "shadows": [
+      {
+        "name": "flotante",
+        "value": "0 10px 15px -3px rgb(10 10 10 / 0.6), 0 4px 6px -4px rgb(10 10 10 / 0.6)",
+        "purpose": "Única sombra en uso: separa el botón flotante de WhatsApp del contenido."
+      },
+      {
+        "name": "halo-dorado",
+        "value": "0 0 24px rgb(201 169 97 / 0.25)",
+        "purpose": "Provisional, todavía no aplicado en el código. Solo en hover o foco, junto con el borde oro."
+      }
+    ],
+    "motion": [
+      {
+        "name": "aparicion",
+        "value": "opacity + translateY(16px), 500ms ease-out",
+        "purpose": "Entrada de bloques al hacer scroll, escalonada de 60 a 80 ms."
+      },
+      {
+        "name": "respuesta",
+        "value": "200ms a 300ms",
+        "purpose": "Cambios de color, borde y halo en hover y foco."
+      },
+      {
+        "name": "zoom-foto",
+        "value": "scale(1.03), 500ms",
+        "purpose": "Foto de una tarjeta de línea al pasar el mouse."
+      },
+      {
+        "name": "ease-cursor",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Cursor propio al crecer sobre algo clickeable."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "base",
+        "value": "375px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "boton-principal",
+      "description": "La acción principal de un bloque. Oro sobre negro; uno por bloque como máximo.",
+      "html": "<button class=\"ds-boton-principal\" type=\"button\">Comprar entrada</button>",
+      "css": ".ds-boton-principal { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 28px; border-radius: 9999px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background-color 300ms, border-color 300ms, box-shadow 300ms; background: var(--oro, #C9A961); color: var(--negro, #0A0A0A); } .ds-boton-principal:hover { background: var(--oro-profundo, #A88A45); box-shadow: 0 0 24px rgb(201 169 97 / 0.25); } .ds-boton-principal:active { background: var(--oro-profundo, #A88A45); } .ds-boton-principal:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; box-shadow: 0 0 24px rgb(201 169 97 / 0.25); }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "boton-secundario",
+      "description": "Acciones de apoyo: mail, Instagram, ver más. Contorno y texto oro.",
+      "html": "<a class=\"ds-boton-secundario\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/></svg>Escribinos por mail</a>",
+      "css": ".ds-boton-secundario { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 28px; border-radius: 9999px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background-color 300ms, border-color 300ms, box-shadow 300ms; background: transparent; color: var(--oro, #C9A961); border-color: var(--oro, #C9A961); } .ds-boton-secundario:hover { background: rgb(201 169 97 / 0.1); box-shadow: 0 0 24px rgb(201 169 97 / 0.25); } .ds-boton-secundario:active { background: rgb(201 169 97 / 0.2); } .ds-boton-secundario:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; }"
+    },
+    {
+      "name": "Botón de WhatsApp",
+      "kind": "button",
+      "refersTo": "boton-whatsapp",
+      "description": "Único lugar donde existe el verde WhatsApp: contacto y formulario de agencias.",
+      "html": "<a class=\"ds-boton-whatsapp\" href=\"#\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z\"/></svg>Escribinos por WhatsApp</a>",
+      "css": ".ds-boton-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 28px; border-radius: 9999px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background-color 300ms, border-color 300ms, box-shadow 300ms; background: var(--whatsapp, #25D366); color: var(--negro, #0A0A0A); } .ds-boton-whatsapp:hover { background: rgb(37 211 102 / 0.85); } .ds-boton-whatsapp:active { background: rgb(37 211 102 / 0.75); } .ds-boton-whatsapp:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; }"
+    },
+    {
+      "name": "Campo de formulario",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Campo del formulario de agencias: carbón, borde piedra, foco en oro.",
+      "html": "<label class=\"ds-campo\"><span class=\"ds-campo-etiqueta\">Agencia</span><input class=\"ds-campo-input\" type=\"text\" placeholder=\"Nombre de la agencia\"></label>",
+      "css": ".ds-campo { display: block; max-width: 360px; } .ds-campo-etiqueta { display: block; margin-bottom: 8px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 500; font-size: 0.875rem; color: var(--marfil, #F0ECE4); } .ds-campo-input { width: 100%; min-height: 48px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--piedra, #2A2621); background: var(--carbon, #161412); color: var(--marfil, #F0ECE4); font-family: var(--font-inter, Inter), system-ui, sans-serif; font-size: 1rem; transition: border-color 200ms; } .ds-campo-input::placeholder { color: rgb(168 159 145 / 0.7); } .ds-campo-input:hover { border-color: var(--arena, #A89F91); } .ds-campo-input:focus { border-color: var(--oro, #C9A961); } .ds-campo-input:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navbar",
+      "kind": "nav",
+      "refersTo": "navbar",
+      "description": "Barra fija: isotipo, ítems en Inter 500, divisor, Fusion y el botón Contacto.",
+      "html": "<nav class=\"ds-navbar\" aria-label=\"Principal\"><svg width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3 22 20H2Z\" fill=\"none\" stroke=\"var(--oro, #C9A961)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/></svg><ul class=\"ds-navbar-items\"><li><a href=\"#\">Nosotros</a></li><li><a href=\"#\" class=\"ds-activo\" aria-current=\"page\">Egresados</a></li><li><a href=\"#\">Eventos privados</a></li><li><a href=\"#\">Disco</a></li><li><span class=\"ds-divisor\" aria-hidden=\"true\"></span></li><li><a href=\"#\">Fusion</a></li></ul><a class=\"ds-navbar-contacto\" href=\"#\">Contacto</a></nav>",
+      "css": ".ds-navbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 80px; padding: 0 32px; background: rgb(10 10 10 / 0.95); border-bottom: 1px solid var(--piedra, #2A2621); backdrop-filter: blur(12px); } .ds-navbar-items { display: flex; align-items: center; gap: 24px; margin: 0; padding: 0; list-style: none; } .ds-navbar-items a { font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 500; font-size: 0.9375rem; color: var(--marfil, #F0ECE4); text-decoration: none; transition: color 200ms; } .ds-navbar-items a:hover, .ds-navbar-items .ds-activo { color: var(--oro, #C9A961); } .ds-navbar-items a:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; } .ds-divisor { display: block; width: 1px; height: 20px; background: var(--piedra, #2A2621); } .ds-navbar-contacto { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 28px; border-radius: 9999px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background-color 300ms, border-color 300ms, box-shadow 300ms; padding: 12px 24px; background: var(--oro, #C9A961); color: var(--negro, #0A0A0A); } .ds-navbar-contacto:hover { background: var(--oro-profundo, #A88A45); box-shadow: 0 0 24px rgb(201 169 97 / 0.25); } .ds-navbar-contacto:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; }"
+    },
+    {
+      "name": "Etiqueta de fecha",
+      "kind": "chip",
+      "refersTo": "etiqueta-fecha",
+      "description": "Fecha corta de cada noche de Disco. Único uso del color láser.",
+      "html": "<span class=\"ds-etiqueta-fecha\">Sáb 5 dic</span>",
+      "css": ".ds-etiqueta-fecha { display: inline-block; padding: 4px 12px; border-radius: 9999px; background: var(--laser, #A970FF); color: var(--negro, #0A0A0A); font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.75rem; line-height: 1rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }"
+    },
+    {
+      "name": "Tarjeta de línea",
+      "kind": "card",
+      "refersTo": "tarjeta",
+      "description": "Tarjeta de cada línea en la home: carbón, borde piedra que se enciende en oro, sin íconos.",
+      "html": "<a class=\"ds-tarjeta\" href=\"#\"><span class=\"ds-tarjeta-foto\" aria-hidden=\"true\"></span><span class=\"ds-tarjeta-cuerpo\"><span class=\"ds-antetitulo\">Disco</span><span class=\"ds-tarjeta-titulo\">La noche más grande de Carlos Paz.</span><span class=\"ds-tarjeta-texto\">Cinco espacios, sectores al aire libre y VIP.</span><span class=\"ds-tarjeta-enlace\">Ver próximas aperturas<svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" class=\"ds-flecha\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></span></span></a>",
+      "css": ".ds-tarjeta { display: flex; flex-direction: column; max-width: 400px; overflow: hidden; border-radius: 16px; border: 1px solid var(--piedra, #2A2621); background: var(--carbon, #161412); text-decoration: none; transition: border-color 300ms, box-shadow 300ms; } .ds-tarjeta:hover { border-color: var(--oro, #C9A961); box-shadow: 0 0 24px rgb(201 169 97 / 0.25); } .ds-tarjeta:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; } .ds-tarjeta-foto { display: block; aspect-ratio: 16 / 10; background: linear-gradient(160deg, var(--piedra, #2A2621), var(--negro, #0A0A0A)); } .ds-tarjeta-cuerpo { display: flex; flex-direction: column; padding: 32px; } .ds-antetitulo { font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--oro, #C9A961); margin-bottom: 12px; } .ds-tarjeta-titulo { font-family: var(--font-outfit, Outfit), system-ui, sans-serif; font-weight: 600; font-size: 1.5rem; line-height: 1.25; color: var(--marfil, #F0ECE4); margin-bottom: 12px; } .ds-tarjeta-texto { font-family: var(--font-inter, Inter), system-ui, sans-serif; font-size: 1.125rem; line-height: 1.6; color: var(--arena, #A89F91); } .ds-tarjeta-enlace { display: inline-flex; align-items: center; gap: 8px; padding-top: 24px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--oro, #C9A961); } .ds-flecha { transition: transform 300ms; } .ds-tarjeta:hover .ds-flecha { transform: translateX(4px); }"
+    },
+    {
+      "name": "Ficha de noche",
+      "kind": "custom",
+      "refersTo": "tarjeta",
+      "description": "La ficha de la cartelera: marco de Keops con isotipo y fecha láser, arte 9:16 y Comprar entrada.",
+      "html": "<article class=\"ds-ficha\"><div class=\"ds-ficha-marco\"><span class=\"ds-ficha-marca\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3 22 20H2Z\" fill=\"none\" stroke=\"var(--oro, #C9A961)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/></svg><span>Keops Disco</span></span><span class=\"ds-ficha-fecha\">Sáb 5 dic</span></div><div class=\"ds-ficha-arte\"><svg width=\"64\" height=\"64\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M12 3 22 20H2Z\" fill=\"none\" stroke=\"var(--oro, #C9A961)\" stroke-width=\"1.5\" stroke-linejoin=\"round\"/></svg><span>Noche de apertura</span></div><h3 class=\"ds-ficha-nombre\">Noche de apertura</h3><p class=\"ds-ficha-hora\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polyline points=\"12 6 12 12 16 14\"/></svg>Sábado 5 de diciembre · 00:30 h</p><a class=\"ds-ficha-boton\" href=\"#\">Comprar entrada</a></article>",
+      "css": ".ds-ficha { display: flex; flex-direction: column; width: 300px; padding: 12px; border-radius: 16px; border: 1px solid var(--piedra, #2A2621); background: var(--carbon, #161412); transition: border-color 300ms, box-shadow 300ms; } .ds-ficha:hover { border-color: var(--oro, #C9A961); box-shadow: 0 0 24px rgb(201 169 97 / 0.25); } .ds-ficha-marco { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 4px 12px; } .ds-ficha-marca { display: flex; align-items: center; gap: 8px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 500; font-size: 0.8125rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--marfil, #F0ECE4); } .ds-ficha-fecha { padding: 4px 12px; border-radius: 9999px; background: var(--laser, #A970FF); color: var(--negro, #0A0A0A); font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; } .ds-ficha-arte { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; aspect-ratio: 9 / 16; border-radius: 12px; border: 1px solid var(--piedra, #2A2621); background: var(--negro, #0A0A0A); font-family: var(--font-outfit, Outfit), system-ui, sans-serif; font-weight: 600; font-size: 1.25rem; color: var(--marfil, #F0ECE4); } .ds-ficha-nombre { margin: 16px 4px 0; font-family: var(--font-outfit, Outfit), system-ui, sans-serif; font-weight: 600; font-size: 1.25rem; color: var(--marfil, #F0ECE4); } .ds-ficha-hora { display: flex; align-items: center; gap: 8px; margin: 8px 4px 0; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-size: 0.875rem; color: var(--arena, #A89F91); } .ds-ficha-boton { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 12px 28px; border-radius: 9999px; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-weight: 600; font-size: 0.875rem; line-height: 1.25rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: 1px solid transparent; cursor: pointer; transition: background-color 300ms, border-color 300ms, box-shadow 300ms; margin: 20px 4px 4px; background: var(--oro, #C9A961); color: var(--negro, #0A0A0A); } .ds-ficha-boton:hover { background: var(--oro-profundo, #A88A45); } .ds-ficha-boton:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; }"
+    },
+    {
+      "name": "Acordeón de preguntas",
+      "kind": "custom",
+      "refersTo": "tarjeta",
+      "description": "Preguntas frecuentes con details/summary: filas con líneas piedra y chevron oro.",
+      "html": "<div class=\"ds-acordeon\"><details class=\"ds-acordeon-item\" open><summary>¿Hay sector VIP?<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" class=\"ds-chevron\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><p>Sí. Para reservas, escribinos por WhatsApp.</p></details><details class=\"ds-acordeon-item\"><summary>¿Cómo compro mi entrada?<svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\" class=\"ds-chevron\"><path d=\"m6 9 6 6 6-6\"/></svg></summary><p>Desde la app de entradas.</p></details></div>",
+      "css": ".ds-acordeon { max-width: 720px; border-bottom: 1px solid var(--piedra, #2A2621); } .ds-acordeon-item { border-top: 1px solid var(--piedra, #2A2621); } .ds-acordeon-item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; padding: 16px 0; list-style: none; cursor: pointer; font-family: var(--font-outfit, Outfit), system-ui, sans-serif; font-weight: 600; font-size: 1.5rem; line-height: 1.25; color: var(--marfil, #F0ECE4); transition: color 200ms; } .ds-acordeon-item summary::-webkit-details-marker { display: none; } .ds-acordeon-item summary:hover { color: var(--oro, #C9A961); } .ds-acordeon-item summary:focus-visible { outline: 2px solid var(--oro, #C9A961); outline-offset: 3px; } .ds-chevron { flex-shrink: 0; color: var(--oro, #C9A961); transition: transform 300ms; } .ds-acordeon-item[open] .ds-chevron { transform: rotate(180deg); } .ds-acordeon-item p { margin: 0; padding: 0 40px 24px 0; font-family: var(--font-inter, Inter), system-ui, sans-serif; font-size: 1.125rem; line-height: 1.6; color: var(--arena, #A89F91); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La pirámide encendida",
+    "overview": "Keops se ve como la pirámide de noche: una arquitectura oscura y enorme en la que la luz marca solo lo importante. El negro es el edificio y el oro es la luz que se enciende sobre él: en la acción principal, en el antetítulo que dice a quién se le habla, en el punto de cada año de la historia y en lo que la persona está por tocar. Todo lo demás se queda en la penumbra, en marfil y arena sobre negro.\n\nEl clima es **monumental y nocturno**. Monumental en la escala: títulos en Outfit muy pesados, en mayúscula en el hero, y fotos y videos de la pista a todo el ancho. Nocturno en la luz: fondo casi negro con tono tierra, nada de blanco puro y movimiento que aparece despacio, como una pista que se va llenando. La densidad es baja: mucho aire entre bloques, una sola idea por sección.\n\nLas piezas son **táctiles y luminosas**: en reposo son planas y quietas; cuando el mouse pasa por encima o el teclado las enfoca, se encienden en oro. La firma de la marca es la pirámide misma: el isotipo del triángulo y la foto del techo piramidal visto desde adentro. Los jeroglíficos existen solo como ornamento.",
+    "keyCharacteristics": [
+      "Fondo casi negro con tono tierra; el oro aparece como luz, nunca como relleno.",
+      "Outfit pesada para los títulos, Inter para leer y Cormorant itálica como única firma por sección.",
+      "Profundidad por capas de tono (negro, carbón, piedra), no por sombras.",
+      "Lo que se toca es una píldora; lo que contiene es una tarjeta de esquinas suaves.",
+      "Plano en reposo, encendido en oro al pasar el mouse o hacer foco.",
+      "Apariciones lentas y cortas que se apagan con `prefers-reduced-motion`."
+    ],
+    "rules": [
+      {
+        "name": "La regla 70 / 20 / 10",
+        "body": "En cualquier vista, alrededor de 70 % negro, 20 % marfil y 10 % oro. Si el oro pasa de una décima parte de la pantalla, deja de ser luz.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla del oro como luz",
+        "body": "El oro marca lo importante o lo que se está por tocar. Nunca es fondo de una sección ni relleno decorativo.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla del color de un solo lugar",
+        "body": "El láser vive solo en las etiquetas de fecha de Disco y el verde solo en el botón de WhatsApp. Fuera de ahí no existen.",
+        "section": "colors"
+      },
+      {
+        "name": "La regla del acento único",
+        "body": "Cormorant itálica aparece como máximo una vez por sección y nunca en un título.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla de la escala cerrada",
+        "body": "Todo texto usa uno de los roles de arriba. No se inventan tamaños, y el texto corrido nunca baja de 16 px.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla de las mayúsculas",
+        "body": "Mayúsculas solo en el display del hero, antetítulos, botones y etiquetas. Los demás títulos llevan mayúscula inicial y `text-wrap: balance`.",
+        "section": "typography"
+      },
+      {
+        "name": "La regla de la banda con junta",
+        "body": "Cada bloque es una banda negra con una línea piedra arriba. No se alternan fondos entre secciones ni hay cajas que corten la banda.",
+        "section": "layout"
+      },
+      {
+        "name": "La regla de la luz al tocar",
+        "body": "Nada brilla en reposo. El borde oro y el halo dorado aparecen solo como respuesta a hover o foco y se apagan al salir.",
+        "section": "elevation"
+      },
+      {
+        "name": "La regla de las capas",
+        "body": "Para separar planos se sube de negro a carbón y se marca la junta en piedra. No se usan sombras para dar profundidad.",
+        "section": "elevation"
+      },
+      {
+        "name": "La regla de la píldora y la tarjeta",
+        "body": "No hay esquinas rectas ni otros radios: 9999 px para lo que se toca y 16 px para lo que contiene (12 px y 8 px solo adentro).",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** usar solo los nueve tokens de color, con la proporción 70 % negro, 20 % marfil y 10 % oro.",
+      "**Do** dejar las piezas planas en reposo y encenderlas en oro (borde oro y halo dorado suave) solo en hover o foco.",
+      "**Do** armar cada bloque como una banda negra con línea piedra arriba y aire vertical de 64 px (96 px desde 1024 px).",
+      "**Do** usar píldora (9999 px) para lo que se toca y 16 px para lo que contiene.",
+      "**Do** mostrar la pirámide: el isotipo como firma y la foto del techo piramidal (`01-pista-central-piramide.jpg`) donde más pese, con el velo suave para que el techo se vea.",
+      "**Do** dejar la compra a un paso: \"Comprar entrada\" en cada noche, en la home y en Disco.",
+      "**Do** abrir todo con un botón o un link de verdad, con nombre, que funcione con teclado.",
+      "**Do** usar íconos Lucide de 16, 20 o 24 px con trazo 1.5, en oro o marfil.",
+      "**Do** probar cada pantalla a 375 px y a 1280 px."
+    ],
+    "donts": [
+      "**Don't** usar emoji en ningún lugar del sitio.",
+      "**Don't** usar colores sueltos: ni blancos con opacidad, ni grises de Tailwind, ni hex fuera de los tokens.",
+      "**Don't** usar el láser fuera de las etiquetas de fecha de Disco ni el verde fuera del botón de WhatsApp.",
+      "**Don't** usar Cormorant en títulos ni más de una vez por sección, ni los jeroglíficos para texto que haya que leer.",
+      "**Don't** dejar un halo o un brillo encendido en reposo, ni usar sombras para dar profundidad.",
+      "**Don't** poner íconos en las tarjetas de las líneas de la home.",
+      "**Don't** usar degradés decorativos: los degradés negros van solo sobre fotos o video, para que se lea el texto.",
+      "**Don't** mostrar a pantalla completa fotos de archivo de baja resolución, como la del frente en 2010."
+    ]
+  }
+}

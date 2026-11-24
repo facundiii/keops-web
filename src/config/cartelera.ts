@@ -23,6 +23,11 @@ export interface Noche {
   flyerAjuste?: "cover" | "fill";
   /** true = el botón pasa a decir "Agotado" */
   agotado?: boolean;
+  /**
+   * Link para comprar la entrada de esta noche (app o web de entradas). Opcional.
+   * Vacío = "Comprar entrada" lleva a la sección "Comprá tu entrada" de Disco, con los links de la app.
+   */
+  urlEntradas?: string;
 }
 
 export const cartelera: Noche[] = [
@@ -34,5 +39,6 @@ export const cartelera: Noche[] = [
   //   hora: "00:00",
   //   djs: ["DJ Residente Diego Fernandez", "DJ Invitado ..."],
   //   flyer: "/disco/flyers/archivo.jpg",
+  //   urlEntradas: "",
   // },
 ];

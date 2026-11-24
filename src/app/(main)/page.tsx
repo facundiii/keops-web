@@ -128,16 +128,36 @@ export default function HomePage() {
       {/* 5. Cómo llegar */}
       <ComoLlegar />
 
-      {/* 6. Cierre */}
+      {/* 6. Cierre: la frase sobre la pirámide vista desde la pista.
+          El velo oscurece solo abajo, detrás de la frase; arriba el techo queda a la vista. */}
       {cierre && (
-        <Seccion ancho="angosto">
-          <FadeInSection>
-            <div className="text-center">
-              <div className="w-12 h-px bg-oro mx-auto mb-8" aria-hidden="true" />
-              <p className="acento text-3xl md:text-5xl text-marfil leading-tight">{cierre}</p>
-            </div>
-          </FadeInSection>
-        </Seccion>
+        <section className="relative isolate overflow-hidden border-t border-piedra">
+          {fotos.cierre && (
+            <>
+              <Image
+                src={fotos.cierre.src}
+                alt={fotos.cierre.alt}
+                fill
+                sizes="100vw"
+                className="-z-10 object-cover"
+                style={{ objectPosition: fotos.cierre.posicion }}
+              />
+              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-negro via-negro/50 to-transparent" />
+            </>
+          )}
+          <div
+            className={`flex items-end justify-center px-4 sm:px-6 lg:px-8 pb-16 lg:pb-24 ${
+              fotos.cierre ? "aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/1]" : "pt-16 lg:pt-24"
+            }`}
+          >
+            <FadeInSection>
+              <div className="max-w-3xl text-center">
+                <div className="w-12 h-px bg-oro mx-auto mb-8" aria-hidden="true" />
+                <p className="acento text-3xl md:text-5xl text-marfil leading-tight">{cierre}</p>
+              </div>
+            </FadeInSection>
+          </div>
+        </section>
       )}
 
       {/* 7. Contacto */}

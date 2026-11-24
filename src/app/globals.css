@@ -246,6 +246,9 @@
   .animate-delay-300 { animation-delay: 300ms; }
   .animate-delay-400 { animation-delay: 400ms; }
 
+  /* Frena una animación en curso (botón de pausa de las tiras de fotos) */
+  .animacion-pausada { animation-play-state: paused; }
+
   /* Logo de Fusion en marfil (el archivo original es oscuro) */
   .logo-claro {
     filter: brightness(0) invert(0.93) sepia(0.1);

@@ -68,8 +68,12 @@ export const fotos = {
     academia: salonBarKeops,
   } as Record<string, Foto | undefined>,
 
+  /** Fondo de la frase de cierre de la home: la pirámide vista desde la pista. Arriba se ve el techo. */
+  cierre: { ...pistaCentralPiramide, posicion: "center 20%" } as Foto | undefined,
+
   nosotros: {
-    encabezado: pistaCentralPiramide as Foto | undefined,
+    /** El recorte va arriba, donde está el techo en forma de pirámide. */
+    encabezado: { ...pistaCentralPiramide, posicion: "center 8%" } as Foto | undefined,
     /** Fotos de cada espacio (se muestran hasta dos por tarjeta). Lista vacía = tarjeta sin foto. */
     espacios: {
       pistaCentral: [pistaCentralPiramide, pistaCentral],

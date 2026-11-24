@@ -8,6 +8,7 @@ import { Encabezado } from "@/components/Encabezado";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
 import { Cartelera } from "@/components/Cartelera";
 import { TicketSection } from "@/components/TicketSection";
+import { ANCLA_ENTRADAS } from "@/components/EnlaceEntrada";
 import { BloqueGaleria } from "@/components/BloqueGaleria";
 import { BloqueFaq } from "@/components/BloqueFaq";
 import { ContactCTA } from "@/components/ContactCTA";
@@ -30,6 +31,8 @@ export default function DiscoPage() {
         antetitulo={encabezado.antetitulo}
         titulo={encabezado.titulo}
         bajada={encabezado.bajada}
+        boton={encabezado.boton || undefined}
+        botonHref={`#${ANCLA_ENTRADAS}`}
         foto={foto?.src}
         fotoAlt={foto?.alt}
         fotoPosicion={foto?.posicion}

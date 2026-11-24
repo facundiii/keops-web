@@ -2,13 +2,18 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Clock } from "lucide-react";
+import { ArrowRight, Clock } from "lucide-react";
 import type { Noche } from "@/config/cartelera";
 import { fechaLarga } from "@/lib/fechas";
 import { useVigentes } from "@/lib/useVigentes";
 import { claseBoton } from "@/components/ui/Boton";
 import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { SinFechas } from "@/components/SinFechas";
+import { EnlaceEntrada } from "@/components/EnlaceEntrada";
+
+/** Enlace con flecha, como el de las tarjetas de las líneas. 44 px de alto para el dedo. */
+const claseEnlace =
+  "inline-flex min-h-[44px] items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em]";
 
 interface ProximasNochesProps {
   noches: Noche[];
@@ -50,7 +55,7 @@ export function ProximasNoches({ noches, cantidad, boton, esEjemplo = false }: P
                   />
                 </div>
               )}
-              <div className="flex min-w-0 flex-col py-1">
+              <div className="flex min-w-0 flex-1 flex-col pt-1">
                 <p className="antetitulo mb-2">{fechaLarga(noche.fecha)}</p>
                 <h3 className="titulo-3 text-marfil">{noche.nombre}</h3>
                 {noche.djs.length > 0 && <p className="texto-chico text-arena mt-2">{noche.djs.join(" · ")}</p>}
@@ -58,6 +63,22 @@ export function ProximasNoches({ noches, cantidad, boton, esEjemplo = false }: P
                   <Clock size={20} strokeWidth={1.5} aria-hidden="true" className="shrink-0" />
                   Apertura {noche.hora} h
                 </p>
+                {/* Un solo paso hasta comprar, sin tener que buscar la noche otra vez en Disco */}
+                <div className="mt-auto pt-3">
+                  {noche.agotado ? (
+                    <p className={`${claseEnlace} text-arena`}>Agotado</p>
+                  ) : (
+                    <EnlaceEntrada noche={noche} className={`group ${claseEnlace} text-oro`}>
+                      Comprar entrada
+                      <ArrowRight
+                        size={20}
+                        strokeWidth={1.5}
+                        aria-hidden="true"
+                        className="transition-transform duration-300 group-hover:translate-x-1"
+                      />
+                    </EnlaceEntrada>
+                  )}
+                </div>
               </div>
             </article>
           </li>
