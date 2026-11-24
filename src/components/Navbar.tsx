@@ -7,9 +7,13 @@ import { usePathname } from "next/navigation";
 import { ArrowLeft, ChevronDown, Menu, X } from "lucide-react";
 import { navegacion, navFusion, RUTA_INICIO } from "@/config/navegacion";
 import { claseBoton } from "@/components/ui/Boton";
+import { usePasoPortada } from "@/lib/usePasoPortada";
 
 const claseLink =
   "font-sans font-medium text-[0.9375rem] whitespace-nowrap transition-colors duration-200 hover:text-oro";
+/** "Contacto" en texto: así se ve mientras dura la primera vista de la home, que va sin botones. */
+const claseContactoTexto =
+  "inline-flex min-h-[44px] items-center font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro transition-colors duration-200 hover:text-marfil";
 
 export function Navbar() {
   const ruta = usePathname();
@@ -20,6 +24,9 @@ export function Navbar() {
 
   const esInicio = ruta === RUTA_INICIO || ruta === "/";
   const activo = (href: string) => ruta === href || ruta.startsWith(href + "/");
+  // En la primera vista de la home no hay botones: "Contacto" va en texto hasta que se baja
+  const pasoPortada = usePasoPortada();
+  const contactoEnTexto = esInicio && !pasoPortada;
 
   // Se oculta al bajar y reaparece apenas se sube o se vuelve al tope.
   useEffect(() => {
@@ -176,7 +183,11 @@ export function Navbar() {
               {navFusion.etiqueta}
             </Link>
 
-            <a href="#contacto" onClick={irAContacto} className={claseBoton("principal", "px-6")}>
+            <a
+              href="#contacto"
+              onClick={irAContacto}
+              className={contactoEnTexto ? claseContactoTexto : claseBoton("principal", "px-6")}
+            >
               Contacto
             </a>
           </nav>

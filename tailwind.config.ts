@@ -30,6 +30,11 @@ const config: Config = {
       },
       laser: "#A970FF", // SOLO en Disco, en detalles
       whatsapp: "#25D366", // SOLO en el botón de WhatsApp
+      // SOLO en la versión especial del aniversario (paleta del flyer)
+      lava: "#FF6A13", // vetas y fuego de la pirámide
+      brasa: "#FFC04D", // el centro del fuego
+      hielo: "#CFE8EF", // la fecha de arriba
+      "cielo-noche": "#0B1026", // fondo mientras carga el cielo
     },
     extend: {
       fontFamily: {

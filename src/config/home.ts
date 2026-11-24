@@ -2,14 +2,14 @@
 // hero · cifras · las líneas · próximas noches · cómo llegar · cierre · contacto
 // Las fotos de las tarjetas están en config/fotos.ts y "Cómo llegar" en config/comoLlegar.ts.
 
+/**
+ * Primera vista de la home. Va sin botones: el contacto y la compra aparecen al bajar.
+ * Durante el aniversario la reemplaza la portada especial (config/aniversario.ts).
+ */
 export const hero = {
   antetitulo: "Villa Carlos Paz · Desde 1969",
   titulo: "La pirámide de Carlos Paz",
   bajada: "Disco, egresados, eventos privados e institucionales en el espacio más grande de la ciudad.",
-  botones: [
-    { texto: "Egresados", href: "/egresados" },
-    { texto: "Ver próximas aperturas", href: "/disco" },
-  ],
   /** Video de fondo, dentro de /public. Siempre sin sonido. */
   video: "/hero-video.mp4",
 };

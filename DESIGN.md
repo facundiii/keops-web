@@ -11,6 +11,10 @@ colors:
   oro-profundo: "#A88A45"
   laser: "#A970FF"
   whatsapp: "#25D366"
+  lava: "#FF6A13"
+  brasa: "#FFC04D"
+  hielo: "#CFE8EF"
+  cielo-noche: "#0B1026"
 typography:
   titulo-display:
     fontFamily: "Outfit, system-ui, sans-serif"
@@ -66,6 +70,21 @@ typography:
     fontWeight: 500
   jeroglifico:
     fontFamily: "NotoEgyptian, serif"
+  aniv-fecha:
+    fontFamily: "Outfit, system-ui, sans-serif"
+    fontSize: "clamp(0.95rem, 0.8rem + 0.7vw, 1.35rem)"
+    fontWeight: 600
+    letterSpacing: "0.55em"
+  aniv-palabra:
+    fontFamily: "Outfit, system-ui, sans-serif"
+    fontSize: "clamp(0.75rem, 0.65rem + 0.45vw, 1.05rem)"
+    fontWeight: 600
+    letterSpacing: "0.85em"
+  aniv-numero:
+    fontFamily: "Outfit, system-ui, sans-serif"
+    fontSize: "clamp(2rem, 1.4rem + 2.6vw, 3.75rem)"
+    fontWeight: 600
+    lineHeight: 1
 rounded:
   lg: "8px"
   xl: "12px"
@@ -185,6 +204,15 @@ Una paleta de noche con un solo acento: negros con tono tierra, textos marfil y 
 
 **La regla del color de un solo lugar.** El láser vive solo en las etiquetas de fecha de Disco y el verde solo en el botón de WhatsApp. Fuera de ahí no existen.
 
+### Aniversario (paleta de evento)
+Los colores del flyer del aniversario de los 57 años. Existen solo en la versión especial de la home (`src/components/aniversario/`) y se van con ella.
+- **Lava** (#FF6A13): las vetas de la pirámide y el fuego de adentro; también el brillo del contador.
+- **Brasa** (#FFC04D): el centro del fuego y la línea de horizonte que abre la banda de compra.
+- **Hielo** (#CFE8EF): la fecha de arriba ("SÁB 12 DIC") y "Faltan", con tracking amplio, como en el flyer.
+- **Cielo noche** (#0B1026): el fondo de la portada mientras se dibuja el cielo.
+
+**La regla del evento que se apaga solo.** Una versión especial lleva su propia paleta y su propia fecha de fin (`config/aniversario.ts`). Pasada esa fecha la home vuelve sola a la normal, y su paleta no aparece en ningún otro lugar del sitio.
+
 ## Typography
 
 **Display Font:** Outfit (con system-ui y sans-serif)
@@ -217,11 +245,13 @@ Una paleta de noche con un solo acento: negros con tono tierra, textos marfil y 
 
 El sitio se arma con **bandas a todo el ancho**, una por bloque, siempre sobre negro y separadas por una línea piedra arriba. Cada banda tiene aire vertical de 64 px en celular y 96 px desde 1024 px, y márgenes laterales de 16 px, 24 px desde 640 px y 32 px desde 1024 px. Adentro, el contenido se centra en uno de cuatro anchos: angosto (768 px) para texto y cierres, medio (1024 px), ancho (1152 px, el de siempre) y amplio (1280 px) para grillas de tarjetas. El encabezado de un bloque (antetítulo, título 2 y bajada) deja 40 px abajo, 48 px desde 1024 px.
 
-Hay dos aperturas de página. La home abre con un **hero a pantalla completa** (100 svh) con video de fondo y el texto apoyado abajo a la izquierda. Las páginas internas abren con un **encabezado centrado**: antetítulo, título 1, bajada y botón; con foto de fondo es más alto.
+Hay dos aperturas de página. La home abre con un **hero a pantalla completa** (100 svh) con video de fondo y el texto apoyado abajo a la izquierda, **sin botones**: el contacto y la compra aparecen al bajar (durante el aniversario, la reemplaza la portada especial). Las páginas internas abren con un **encabezado centrado**: antetítulo, título 1, bajada y botón; con foto de fondo es más alto.
 
 Las grillas se piensan desde 375 px. La home ordena las líneas en una grilla de seis columnas desde 1024 px: las dos primeras tarjetas ocupan media fila cada una y las otras tres, un tercio. Los argumentos van en una, dos o cuatro columnas. La cartelera es un carrusel que muestra el 85 % de una ficha en celular, dos fichas desde 640 px y tres desde 1024 px. El navbar cambia a menú de celular por debajo de 1024 px.
 
 **La regla de la banda con junta.** Cada bloque es una banda negra con una línea piedra arriba. No se alternan fondos entre secciones ni hay cajas que corten la banda.
+
+**La regla de la primera vista sin botones.** La primera vista de la home no muestra ningún botón: ni en el hero, ni el "Contacto" dorado del navbar (va en texto hasta que se baja el 60 % de la pantalla), ni el WhatsApp flotante (aparece recién al bajar). La navegación queda; las acciones esperan en lo que sigue.
 
 ## Elevation & Depth
 
@@ -306,7 +336,17 @@ Una línea vertical piedra de 1 px con un punto oro de 11 px por hito, separado 
 Tres datos en una fila: número en Outfit 700 marfil (30 px, 48 px desde 1024 px) y la palabra abajo como antetítulo, separados por divisores verticales piedra.
 
 ### Botón flotante de WhatsApp
-Círculo verde de 56 px abajo a la derecha, a 20 px de los bordes, con el número de la línea de la página. Es la única pieza con sombra y crece al 105 % al pasar el mouse.
+Círculo verde de 56 px abajo a la derecha, a 20 px de los bordes, con el número de la línea de la página. Es la única pieza con sombra y crece al 105 % al pasar el mouse. En la home aparece recién al dejar la primera vista, con un fundido y una subida de 12 px en 300 ms.
+
+### Portada del aniversario (versión especial de la home)
+El flyer de los 57 años hecho primera vista: "La pirámide encendida" al pie de la letra.
+- **Escena:** un canvas a pantalla completa con cielo de atardecer (azul noche que baja a ámbar), mar frío con reflejo ondulado y una columna cálida debajo del sol, y una pirámide doble de pizarra flotando. Las vetas de lava se concentran en la franja del medio y brillan desde el primer cuadro; las puntas quedan casi como piedra fría.
+- **Animación:** una vuelta de 14 s. La pirámide se agrieta, se abre por la franja del medio dejando ver el fuego de adentro, tira esquirlas y se vuelve a cerrar. Arranca ya en la fase de grietas, así la primera apertura llega cuando el texto terminó de entrar. Se frena fuera de pantalla y con la pestaña oculta.
+- **Texto:** arriba la fecha en hielo; sobre el horizonte, "ANIVERSARIO" con halo oscuro, el logo KEOPS (el horizonte pasa por su mitad) y el "57 AÑOS" dibujado, que se arma por piezas al cargar (la barra entra de costado, el arco gira, el 7 cae). Abajo, el contador en una fila: días, horas, min, seg, en números tabulares.
+- **Sin botones:** la única acción es una pausa de la animación que aparece solo con el foco del teclado (debajo de la fecha en celular, arriba a la izquierda en escritorio).
+- **Movimiento reducido:** la pirámide sigue viva pero suave (gira a la mitad, se abre un 45 %, sin esquirlas, agua más lenta) y conserva toda la luz del fuego: la luz no es movimiento. El texto está desde el principio.
+- **Banda de compra:** la sigue como la última línea del flyer: título, bajada, "Comprar entrada" y la línea de la app de entradas, centrados, con la luz del fuego bajando desde arriba y una línea de brasa en lugar de la junta piedra.
+- **Fin:** pasada la fecha de `config/aniversario.ts`, la home normal aparece antes de pintar, sin un instante de la versión vieja, y el video del hero normal no se descarga mientras dura el evento.
 
 ### Movimiento
 Las piezas aparecen con un fundido y una subida de 16 px en 500 ms, escalonadas de 60 a 80 ms dentro de una grilla. Las respuestas de hover duran entre 200 y 300 ms; el zoom de las fotos, 500 ms. Con `prefers-reduced-motion` todo se ve desde el inicio, sin animación, y el sonido siempre arranca apagado. Lo que se mueve solo se puede pausar: en la galería de Eventos, un botón circular de 44 px junto al de sonido frena el video y las tiras de fotos.
@@ -321,6 +361,7 @@ Las piezas aparecen con un fundido y una subida de 16 px en 500 ms, escalonadas 
 - **Do** mostrar la pirámide: el isotipo como firma y la foto del techo piramidal (`01-pista-central-piramide.jpg`) donde más pese, con el velo suave para que el techo se vea.
 - **Do** dejar la compra a un paso: "Comprar entrada" en cada noche, en la home y en Disco.
 - **Do** abrir todo con un botón o un link de verdad, con nombre, que funcione con teclado.
+- **Do** dejar la primera vista de la home sin botones: las acciones van en lo que sigue.
 - **Do** usar íconos Lucide de 16, 20 o 24 px con trazo 1.5, en oro o marfil.
 - **Do** probar cada pantalla a 375 px y a 1280 px.
 
@@ -328,6 +369,7 @@ Las piezas aparecen con un fundido y una subida de 16 px en 500 ms, escalonadas 
 - **Don't** usar emoji en ningún lugar del sitio.
 - **Don't** usar colores sueltos: ni blancos con opacidad, ni grises de Tailwind, ni hex fuera de los tokens.
 - **Don't** usar el láser fuera de las etiquetas de fecha de Disco ni el verde fuera del botón de WhatsApp.
+- **Don't** usar la paleta del aniversario (lava, brasa, hielo, cielo noche) fuera de la versión especial.
 - **Don't** usar Cormorant en títulos ni más de una vez por sección, ni los jeroglíficos para texto que haya que leer.
 - **Don't** dejar un halo o un brillo encendido en reposo, ni usar sombras para dar profundidad.
 - **Don't** poner íconos en las tarjetas de las líneas de la home.

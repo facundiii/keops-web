@@ -6,39 +6,70 @@ import { fotos } from "@/config/fotos";
 import { cartelera } from "@/config/cartelera";
 import { nochesDeEjemplo } from "@/config/ejemplos";
 import { MOSTRAR_EJEMPLOS, listaConEjemplo } from "@/lib/ejemplo";
-import { Boton } from "@/components/ui/Boton";
+import { aniversario, aniversarioVigente } from "@/config/aniversario";
 import { Seccion, TituloSeccion } from "@/components/ui/Seccion";
+import { SegunFecha } from "@/components/SegunFecha";
+import { VideoFondoDiferido } from "@/components/VideoFondoDiferido";
+import { PortadaAniversario } from "@/components/aniversario/PortadaAniversario";
+import { BandaAniversario } from "@/components/aniversario/BandaAniversario";
 import { VideoFondo } from "@/components/VideoFondo";
 import { ProximasNoches } from "@/components/ProximasNoches";
 import { ComoLlegar } from "@/components/ComoLlegar";
 import { ContactCTA } from "@/components/ContactCTA";
 import { FadeInSection } from "@/components/FadeInSection";
 
+// La home es estática: esto se calcula al generar el sitio. Pasado el aniversario,
+// SegunFecha hace que el navegador vuelva solo a la home normal, sin volver a publicar.
+const ANIVERSARIO_AL_GENERAR = aniversarioVigente(Date.now());
+
+/**
+ * Primera vista de siempre: el video con el título. Sin botones.
+ * `diferirVideo`: cuando viene oculta en el HTML (durante el aniversario), el video se pide recién
+ * si esta es la versión que corresponde.
+ */
+function HeroVideo({ diferirVideo = false }: { diferirVideo?: boolean }) {
+  const claseVideo = "absolute inset-0 w-full h-full object-cover";
+  return (
+    <section className="relative min-h-[100svh] flex items-end overflow-hidden">
+      {diferirVideo ? (
+        <VideoFondoDiferido src={hero.video} className={claseVideo} />
+      ) : (
+        <VideoFondo src={hero.video} className={claseVideo} />
+      )}
+      {/* Oscurece el video lo justo para que se lea el texto */}
+      <div className="absolute inset-0 bg-gradient-to-b from-negro/55 via-negro/35 to-negro" />
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pb-24">
+        <p className="antetitulo mb-5 animate-fade-in">{hero.antetitulo}</p>
+        <h1 className="titulo-display text-marfil max-w-5xl animate-fade-in-up">{hero.titulo}</h1>
+        <p className="cuerpo text-marfil mt-6 max-w-xl animate-fade-in-up animate-delay-100">{hero.bajada}</p>
+      </div>
+    </section>
+  );
+}
+
 export default function HomePage() {
   // Con la cartelera vacía, en desarrollo se muestran noches de ejemplo.
   const agenda = listaConEjemplo(cartelera, MOSTRAR_EJEMPLOS ? nochesDeEjemplo() : []);
+  const conAniversario = ANIVERSARIO_AL_GENERAR;
 
   return (
     <>
-      {/* 1. Hero */}
-      <section className="relative min-h-[100svh] flex items-end overflow-hidden">
-        <VideoFondo src={hero.video} className="absolute inset-0 w-full h-full object-cover" />
-        {/* Oscurece el video lo justo para que se lea el texto */}
-        <div className="absolute inset-0 bg-gradient-to-b from-negro/55 via-negro/35 to-negro" />
-
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pb-24">
-          <p className="antetitulo mb-5 animate-fade-in">{hero.antetitulo}</p>
-          <h1 className="titulo-display text-marfil max-w-5xl animate-fade-in-up">{hero.titulo}</h1>
-          <p className="cuerpo text-marfil mt-6 max-w-xl animate-fade-in-up animate-delay-100">{hero.bajada}</p>
-          <div className="mt-9 flex flex-col sm:flex-row gap-4 animate-fade-in-up animate-delay-200">
-            {hero.botones.map((boton, i) => (
-              <Boton key={boton.href} href={boton.href} variante={i === 0 ? "principal" : "secundario"}>
-                {boton.texto}
-              </Boton>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* 1. Primera vista: sin botones */}
+      {conAniversario ? (
+        <SegunFecha
+          hasta={aniversario.fin}
+          antes={
+            <>
+              <PortadaAniversario />
+              <BandaAniversario />
+            </>
+          }
+          despues={<HeroVideo diferirVideo />}
+        />
+      ) : (
+        <HeroVideo />
+      )}
 
       {/* 2. Cifras */}
       <section aria-label="Keops en cifras" className="bg-negro border-t border-piedra">

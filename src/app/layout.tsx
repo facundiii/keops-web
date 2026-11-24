@@ -3,6 +3,13 @@ import { Cormorant_Garamond, Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/CustomCursor";
 import { siteConfig } from "@/config/site";
+import { aniversario } from "@/config/aniversario";
+
+// Pasado el aniversario, muestra la home normal antes de pintar (ver SegunFecha).
+// Corre antes que todo y no toca nada que maneje React: solo agrega una regla de estilo.
+const finAniversario =
+  `if(Date.now()>=${Date.parse(aniversario.fin)})document.head.insertAdjacentHTML("beforeend",` +
+  `"<style>.segun-antes:has(+.segun-despues){display:none!important}.segun-antes+.segun-despues{display:block!important}</style>")`;
 
 // Títulos
 const outfit = Outfit({
@@ -54,6 +61,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="es" data-scroll-behavior="smooth" className={`${outfit.variable} ${inter.variable} ${cormorant.variable}`}>
       <body>
+        {/* Script común, no next/script: tiene que correr en el parseo, antes de que se pinte la portada */}
+        <script id="fin-aniversario" dangerouslySetInnerHTML={{ __html: finAniversario }} />
         <CustomCursor />
         {children}
       </body>

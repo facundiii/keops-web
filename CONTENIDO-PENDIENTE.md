@@ -24,6 +24,14 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 ---
 
+## `aniversario.ts` (versión especial de la home, 57 años)
+
+- [ ] `banda.urlEntradas`: link directo a la noche del aniversario en Quickpass. Sin él, "Comprar entrada" lleva a "Comprá tu entrada" en Disco.
+- [ ] `banda.hora`: hora de apertura (ej. "00:30"). Vacía, no se muestra.
+- [ ] Revisar `banda.titulo` ("57 años bajo la pirámide") y `banda.bajada`: son una propuesta (marcados con `TEXTO PROPUESTO`).
+- [ ] Revisar `cuentaHasta` (hoy, sábado 12 a las 23:59) y `fin` (domingo 13 a las 12:00, cuando la home vuelve sola a la normal).
+- La noche del aniversario no está en la cartelera de Disco: si la cargás en `cartelera.ts` (con su flyer), aparece también en "Próximas noches".
+
 ## `contacto.ts`
 
 - [ ] **Academia:** `mail`, `whatsapp` (solo dígitos, con código de país) y `whatsappVisible`. Con esos datos aparecen el botón flotante de WhatsApp, el bloque de inscripción, el botón "Inscribite" y la línea Academia en el pie.
@@ -117,7 +125,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 - **Encabezados de Egresados primario y secundario** (`lineas.ts`): el documento no los definía.
 - **Sin comparación con hoteles:** el título de Egresados pasó a "Tu viaje de egresados, a otro nivel" (el del sitio anterior) en la home y en `/egresados`. El argumento "Diferencia tu paquete" quedó como "Sumá a tu viaje una fiesta en la pirámide de Carlos Paz." (`lineas.ts`, marcado `TEXTO PROPUESTO`).
-- **Botones de la home** (`home.ts`): "Egresados" y "Ver próximas aperturas" en el hero; "Ver egresados" en la tarjeta de Egresados.
+- **Primera vista de la home sin botones** (`home.ts`): se sacaron "Egresados" y "Ver próximas aperturas" del hero. "Contacto" se ve en texto y el WhatsApp flotante aparece recién al bajar. La tarjeta de Egresados sigue diciendo "Ver egresados".
 - **Cifras de la home** (`home.ts`): tres, todas con número y palabra: 5.000 personas, 5 espacios, 1969 año de apertura.
 - **"Trayectoria desde 1969"** en lugar de "57 años de trayectoria" (`lineas.ts`), para que no venza.
 - **Servicios de Eventos privados e Institucionales** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad").

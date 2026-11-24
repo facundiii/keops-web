@@ -32,6 +32,7 @@ Solo existen estos colores (`tailwind.config.ts` reemplaza la paleta de Tailwind
 | `oro-profundo` | `#A88A45` | hover y presionado del dorado |
 | `laser` | `#A970FF` | SOLO en Disco, en detalles |
 | `whatsapp` | `#25D366` | SOLO en el botón de WhatsApp |
+| `lava`, `brasa`, `hielo`, `cielo-noche` | flyer | SOLO en la versión especial del aniversario (`src/components/aniversario/`) |
 
 - Nada de hex, `rgb()` ni colores sueltos en componentes. Los modificadores de opacidad (`bg-oro/10`) están bien.
 - Si cambia un token, cambialo en `tailwind.config.ts` y en `:root` de `globals.css` a la vez.
@@ -53,6 +54,11 @@ Solo existen estos colores (`tailwind.config.ts` reemplaza la paleta de Tailwind
 - Excepción única: logos de marca que Lucide no tiene (WhatsApp: `src/components/ui/IconoWhatsApp.tsx`).
 - Nada de emojis como íconos ni de otras librerías (react-icons, heroicons, SVG copiados).
 - Ícono decorativo: `aria-hidden="true"`. Botón solo con ícono: `aria-label` y área de 44 px como mínimo.
+
+## Primera vista de la home
+
+- Sin botones: ni en el hero, ni el "Contacto" dorado (va en texto hasta bajar), ni el WhatsApp flotante (aparece al bajar). Ver `usePasoPortada`.
+- Las versiones especiales (como el aniversario) se configuran en `src/config/` con fecha de fin y se apagan solas (`SegunFecha`).
 
 ## Componentes
 
