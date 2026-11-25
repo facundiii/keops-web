@@ -12,6 +12,8 @@ export interface NocheFusion {
   urlEntradas: string;
   /** true = el botón pasa a decir "Agotado" */
   agotado?: boolean;
+  /** Arte de la noche, vertical 9:16, dentro de /public. Ej: "/fusion/flyers/archivo.jpg". Vacío = sin arte. */
+  flyer?: string;
 }
 
 export const fusion = {
@@ -42,7 +44,7 @@ export const fusion = {
     sinFechas: "Pronto anunciamos las próximas noches.",
     noches: [
       // A COMPLETAR. Ej:
-      // { id: "2026-12-12", nombre: "Fusion en Keops", fecha: "2026-12-12", lugar: "Keops", urlEntradas: "" },
+      // { id: "2026-12-12", nombre: "Fusion en Keops", fecha: "2026-12-12", lugar: "Keops", urlEntradas: "", flyer: "/fusion/flyers/archivo.jpg" },
     ] as NocheFusion[],
   },
 

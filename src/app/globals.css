@@ -72,6 +72,11 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+    /* Excepción: las tiras de fotos de Eventos siguen andando, a la mitad de velocidad.
+       Son lentas, lineales y tienen su botón de pausa junto al video. */
+    .tira-continua { animation-iteration-count: infinite !important; }
+    .tira-continua.animate-scroll-up, .tira-continua.animate-scroll-down { animation-duration: 64s !important; }
+    .tira-continua.animate-scroll-left-fast, .tira-continua.animate-scroll-right-fast { animation-duration: 32s !important; }
   }
 
   /* Scrollbar */
@@ -230,6 +235,26 @@
   }
   @media (min-width: 1024px) {
     .aniv-fecha { margin-top: calc(80px + 3.2svh); }
+  }
+
+  /* ── Encabezado de las páginas internas con foto o video: casi toda la pantalla ── */
+  .encabezado-alto {
+    min-height: 82svh;
+  }
+  /* El reel: en celular llena el encabezado; en pantallas anchas es un video vertical al costado del texto */
+  .encabezado-reel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  @media (min-width: 1024px) {
+    .encabezado-alto { min-height: 88svh; }
+    .encabezado-reel {
+      width: auto;
+      height: min(64svh, 600px);
+      aspect-ratio: 9 / 16;
+    }
   }
 
   /* ── DOT: la electrónica de la noche del aniversario. SOLO en esa sección ── */
@@ -492,6 +517,19 @@
 @keyframes anivBajar {
   0%, 100% { opacity: 0; transform: translateY(-4px); }
   50% { opacity: 0.7; transform: translateY(2px); }
+}
+
+/* ── Isotipo del navbar: la pirámide con un halo dorado ─────────────
+   Excepción pedida por el dueño a "nada brilla en reposo": un halo tenue que se enciende al tocar.
+   Es un drop-shadow estático sobre una imagen chica: se pinta una vez y no se anima en bucle. */
+.isotipo-luz {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--oro) 45%, transparent));
+  transition: filter 0.3s ease;
+}
+.isotipo:hover .isotipo-luz,
+.isotipo:focus-visible .isotipo-luz {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--oro) 70%, transparent))
+    drop-shadow(0 0 14px color-mix(in srgb, var(--oro) 55%, transparent));
 }
 
 /* ── Tiras de fotos en movimiento ──────────────────────────────── */

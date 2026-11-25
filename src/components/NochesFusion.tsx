@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { NocheFusion } from "@/config/fusion";
 import { fechaLarga } from "@/lib/fechas";
 import { useVigentes } from "@/lib/useVigentes";
@@ -37,10 +38,24 @@ export function NochesFusion({ noches, url, sinFechas, esEjemplo = false }: Noch
               key={noche.id}
               className="border-t border-piedra py-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div>
-                <p className="antetitulo mb-2">{fechaLarga(noche.fecha)}</p>
-                <h3 className="titulo-3 text-marfil">{noche.nombre}</h3>
-                {noche.lugar && <p className="texto-chico text-arena mt-1">{noche.lugar}</p>}
+              <div className="flex items-center gap-4 lg:gap-6">
+                {/* El flyer de la noche, chico, al lado de los datos */}
+                {noche.flyer && (
+                  <div className="relative w-20 lg:w-24 aspect-[9/16] shrink-0 overflow-hidden rounded-xl border border-piedra bg-negro">
+                    <Image
+                      src={noche.flyer}
+                      alt={`Arte de ${noche.nombre}`}
+                      fill
+                      sizes="96px"
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div>
+                  <p className="antetitulo mb-2">{fechaLarga(noche.fecha)}</p>
+                  <h3 className="titulo-3 text-marfil">{noche.nombre}</h3>
+                  {noche.lugar && <p className="texto-chico text-arena mt-1">{noche.lugar}</p>}
+                </div>
               </div>
               {noche.agotado ? (
                 <span className={claseBoton("secundario", "opacity-50 shrink-0")} aria-disabled="true">

@@ -31,7 +31,7 @@ export const lineas: Record<LineaId, Linea> = {
     mensaje: "Hola, me gustaría consultar sobre egresados en Keops",
   },
   eventos: {
-    nombre: "Eventos privados e Institucionales",
+    nombre: "Eventos privados",
     mail: "eventos@keops.ar",
     whatsapp: "5493541579786",
     whatsappVisible: "+54 9 3541 579786",
@@ -73,7 +73,7 @@ export function contactoDeRuta(ruta: string): { linea: LineaId; instagram: Insta
   if (ruta.startsWith("/egresados/primarios")) return { linea: "egresados", instagram: "primarios" };
   if (ruta.startsWith("/egresados/secundarios")) return { linea: "egresados", instagram: "secundarios" };
   if (ruta.startsWith("/egresados")) return { linea: "egresados", instagram: "oficial" };
-  if (ruta.startsWith("/eventos") || ruta.startsWith("/institucionales")) return { linea: "eventos", instagram: "oficial" };
+  if (ruta.startsWith("/eventos")) return { linea: "eventos", instagram: "oficial" };
   if (ruta.startsWith("/academia")) return { linea: "academia", instagram: "oficial" };
   return { linea: "disco", instagram: "oficial" };
 }

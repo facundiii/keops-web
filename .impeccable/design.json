@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-25T01:50:40.978Z",
+  "generatedAt": "2026-11-25T02:23:55.750Z",
   "title": "Design System: Keops",
   "extensions": {
     "colorMeta": {
@@ -460,7 +460,7 @@
       },
       {
         "name": "La regla de la luz al tocar",
-        "body": "Nada brilla en reposo. El borde oro y el halo dorado aparecen solo como respuesta a hover o foco y se apagan al salir.",
+        "body": "Nada brilla en reposo. El borde oro y el halo dorado aparecen solo como respuesta a hover o foco y se apagan al salir. **Única excepción, pedida por el dueño:** el isotipo del navbar lleva un halo dorado tenue en reposo (`drop-shadow` de 6 px al 45 %) que se enciende al tocarlo. Es estático: no titila ni late.",
         "section": "elevation"
       },
       {

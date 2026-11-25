@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { egresadosSecundarios } from "@/config/lineas";
-import { fotos } from "@/config/fotos";
+import { fotos, portadas } from "@/config/fotos";
 import { ejemplos } from "@/config/ejemplos";
 import { PlantillaLinea } from "@/components/PlantillaLinea";
 import { FormularioAgencia } from "@/components/FormularioAgencia";
@@ -15,10 +15,8 @@ export default function EgresadosSecundariosPage() {
     <PlantillaLinea
       pagina={egresadosSecundarios}
       fotos={{ porQue: fotos.egresados.porQue }}
-      ejemplos={{
-        testimonios: ejemplos.testimonios.egresados,
-        parrafosExtra: ejemplos.paraLasFamilias,
-      }}
+      video={portadas.secundarios}
+      ejemplos={{ testimonios: ejemplos.testimonios.egresados }}
     >
       <FormularioAgencia nivelInicial="Secundario" />
     </PlantillaLinea>

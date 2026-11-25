@@ -7,7 +7,7 @@ import { PreguntasFrecuentes } from "@/components/PreguntasFrecuentes";
 
 export const metadata: Metadata = {
   title: "Preguntas frecuentes",
-  description: "Respuestas a las consultas más comunes sobre Keops: disco, egresados, eventos privados e institucionales.",
+  description: "Respuestas a las consultas más comunes sobre Keops: disco, egresados y eventos privados.",
 };
 
 export default function PreguntasFrecuentesPage() {

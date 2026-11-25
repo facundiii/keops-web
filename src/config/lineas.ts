@@ -1,5 +1,5 @@
-// Contenido de las páginas de línea: Egresados (primarios y secundarios),
-// Eventos privados e Institucionales. Todas usan la misma plantilla, en este orden:
+// Contenido de las páginas de línea: Egresados (primarios y secundarios) y
+// Eventos privados (que incluye los eventos de empresa). Todas usan la misma plantilla, en este orden:
 //   1. Encabezado   2. Por qué Keops   3. Qué incluye   4. Galería
 //   5. Referencias  6. Preguntas frecuentes (config/faq.ts)   7. Contacto
 //
@@ -44,6 +44,11 @@ export interface PaginaLinea {
   /** Se muestra solo con 6 imágenes o más, o con al menos un video. */
   galeria: { titulo: string; estilo: "grilla" | "cine"; medios: Medio[] };
   referencias: { titulo: string; logos: Referencia[]; testimonios: Testimonio[] };
+  /**
+   * Opcional: cómo es la fiesta, en momentos, justo después del encabezado.
+   * Sirve para que se entienda de un vistazo qué vive el contingente. Sin momentos, no se muestra.
+   */
+  fiesta?: { antetitulo: string; titulo: string; momentos: Argumento[] };
   /** Bloque opcional de texto, antes de las preguntas frecuentes. Sin párrafos, no se muestra. */
   extra?: { antetitulo: string; titulo: string; parrafos: string[] };
   contacto: { titulo: string; bajada: string };
@@ -81,6 +86,36 @@ const serviciosEgresados: string[] = [
   "Barra según corresponda y normativa vigente",
 ];
 
+// Secundario: chicos de 17 y 18 años. No es una matinée: es la noche de egresados, y el foco es la fiesta.
+// TEXTO PROPUESTO: revisar argumentos y servicios de secundario
+const argumentosSecundarios: Argumento[] = [
+  {
+    titulo: "Diferencia tu paquete",
+    texto: "Sumá a tu viaje la noche de egresados en la pirámide de Carlos Paz.",
+  },
+  {
+    titulo: "Producción de boliche grande",
+    texto: "DJ, láser, pantallas LED y show, en el espacio más grande de la ciudad.",
+  },
+  {
+    titulo: "Es el recuerdo del viaje",
+    texto: "El show, las luces y la producción de video de la noche quedan en sus redes.",
+  },
+  {
+    titulo: "Un solo interlocutor",
+    texto: "Coordinamos todo directo con tu agencia.",
+  },
+];
+
+const serviciosSecundarios: string[] = [
+  "Noches exclusivas para contingentes",
+  "Coordinación directa con agencias",
+  "Aforo reservado para el contingente",
+  "DJ, show y animación",
+  "Producción de video de la noche",
+  "Barra según corresponda y normativa vigente",
+];
+
 /** Logos de agencias. Pasá `autorizado` a true para mostrar cada uno. */
 const agencias: Referencia[] = [
   { nombre: "Flecha", logo: "/egresados/flecha.png", autorizado: false },
@@ -105,8 +140,19 @@ export const egresados = {
     boton: "Pedir propuesta",
   },
   niveles: [
-    { titulo: "Egresados primario", href: "/egresados/primarios", boton: "Ver primario" },
-    { titulo: "Egresados secundario", href: "/egresados/secundarios", boton: "Ver secundario" },
+    // TEXTO PROPUESTO: las líneas de cada nivel
+    {
+      titulo: "Egresados primario",
+      texto: "Una matinée exclusiva para el contingente, con show y animación.",
+      href: "/egresados/primarios",
+      boton: "Ver primario",
+    },
+    {
+      titulo: "Egresados secundario",
+      texto: "La noche de egresados, con DJ, show y láser.",
+      href: "/egresados/secundarios",
+      boton: "Ver secundario",
+    },
   ],
   porQue: { titulo: "Por qué Keops", argumentos: argumentosEgresados },
   contacto: { titulo: "Pedí una propuesta para tu agencia", bajada: "" },
@@ -123,10 +169,22 @@ export const egresadosPrimarios: PaginaLinea = {
   encabezado: {
     antetitulo: "Egresados primario",
     // TEXTO PROPUESTO: revisar
-    titulo: "La fiesta de primario, pensada para su edad",
+    titulo: "La fiesta de su viaje",
     // TEXTO PROPUESTO: revisar
-    bajada: "Una fiesta exclusiva para contingentes de primario, separada de la de secundario y coordinada directo con tu agencia.",
+    bajada:
+      "Una matinée exclusiva para los contingentes de primario que viajan a Carlos Paz: show, luces, DJ y producción de video, coordinada directo con tu agencia.",
     boton: "Pedir propuesta",
+  },
+  // TEXTO PROPUESTO: revisar los momentos de la fiesta
+  fiesta: {
+    antetitulo: "La fiesta del viaje",
+    titulo: "Cómo es la matinée en Keops",
+    momentos: [
+      { titulo: "Llega el contingente", texto: "Los chicos llegan con sus coordinadores, en el horario que acordamos con tu agencia." },
+      { titulo: "La pirámide para ellos", texto: "Una matinée exclusiva para contingentes de primario, con lugar reservado para el suyo." },
+      { titulo: "Show en la pista", texto: "Robots de luces LED, animación y DJ, con las luces y las pantallas de la pista central." },
+      { titulo: "El video del viaje", texto: "La producción de video de la fiesta queda para los chicos y sus familias." },
+    ],
   },
   porQue: { titulo: "Por qué Keops", argumentos: argumentosEgresados },
   incluye: { titulo: "Qué incluye", servicios: serviciosEgresados },
@@ -152,7 +210,8 @@ export const egresadosPrimarios: PaginaLinea = {
 export const egresadosSecundarios: PaginaLinea = {
   meta: {
     titulo: "Egresados secundario",
-    descripcion: "Fiestas de egresados de secundario en Keops, Villa Carlos Paz, coordinadas con cada agencia.",
+    descripcion:
+      "La noche de egresados de secundario en Keops, Villa Carlos Paz: DJ, show, láser y producción de video, coordinada con cada agencia.",
   },
   linea: "egresados",
   instagram: "secundarios",
@@ -160,13 +219,25 @@ export const egresadosSecundarios: PaginaLinea = {
   encabezado: {
     antetitulo: "Egresados secundario",
     // TEXTO PROPUESTO: revisar
-    titulo: "La fiesta de secundario, en la pirámide de Carlos Paz",
+    titulo: "La noche más grande del viaje",
     // TEXTO PROPUESTO: revisar
-    bajada: "Una fiesta exclusiva para contingentes de secundario, con show, animación y producción de video, coordinada directo con tu agencia.",
+    bajada:
+      "La fiesta de egresados de secundario en la pirámide de Carlos Paz: una noche exclusiva para los contingentes, con DJ, show, láser y producción de video.",
     boton: "Pedir propuesta",
   },
-  porQue: { titulo: "Por qué Keops", argumentos: argumentosEgresados },
-  incluye: { titulo: "Qué incluye", servicios: serviciosEgresados },
+  // TEXTO PROPUESTO: revisar los momentos de la noche
+  fiesta: {
+    antetitulo: "La noche",
+    titulo: "Así es la noche de egresados",
+    momentos: [
+      { titulo: "La pirámide abre para ellos", texto: "Una noche exclusiva para contingentes de secundario, con lugar reservado para cada uno." },
+      { titulo: "Pista de boliche grande", texto: "DJ, láser, pantallas LED y el sonido de la pista central de Keops." },
+      { titulo: "Show en medio de la gente", texto: "Animación y show adentro de la pista, para que la fiesta no pare." },
+      { titulo: "Queda en video", texto: "La producción de video de la noche termina en sus redes." },
+    ],
+  },
+  porQue: { titulo: "Por qué Keops", argumentos: argumentosSecundarios },
+  incluye: { titulo: "Qué incluye", servicios: serviciosSecundarios },
   galeria: {
     titulo: "Galería",
     estilo: "grilla",
@@ -177,13 +248,7 @@ export const egresadosSecundarios: PaginaLinea = {
     ],
   },
   referencias: { titulo: "Agencias que trabajan con Keops", logos: agencias, testimonios: [] },
-  extra: {
-    antetitulo: "Para las familias",
-    titulo: "Seguridad y controles",
-    parrafos: [
-      // A COMPLETAR: texto sobre seguridad y controles que la agencia pueda reenviar a las familias.
-    ],
-  },
+  // Sin "Para las familias": en secundario el foco es la fiesta (decisión del dueño)
   contacto: { titulo: "Pedí una propuesta para tu agencia", bajada: "" },
 };
 
@@ -193,7 +258,7 @@ export const eventosPrivados: PaginaLinea = {
   meta: {
     titulo: "Eventos privados",
     descripcion:
-      "Casamientos, cumpleaños y celebraciones en Keops, Villa Carlos Paz: ambientación, barra, DJ o banda en vivo y catering en un solo lugar.",
+      "Casamientos, cumpleaños, celebraciones y eventos de empresa en Keops, Villa Carlos Paz: ambientación, barra, DJ y catering en un solo lugar.",
   },
   linea: "eventos",
   instagram: "oficial",
@@ -201,8 +266,9 @@ export const eventosPrivados: PaginaLinea = {
   encabezado: {
     antetitulo: "Eventos privados",
     titulo: "Tu fiesta, con la producción de un boliche",
+    // TEXTO PROPUESTO: suma los eventos de empresa, que antes tenían su página (Institucionales)
     bajada:
-      "Casamientos, cumpleaños y celebraciones, con ambientación, barra, DJ o banda en vivo y catering en un solo lugar.",
+      "Casamientos, cumpleaños, celebraciones y eventos de empresa, con ambientación, barra, DJ y catering en un solo lugar.",
     boton: "Armá tu evento",
   },
   porQue: {
@@ -216,7 +282,7 @@ export const eventosPrivados: PaginaLinea = {
     servicios: [
       "Ambientación personalizada según la temática del evento",
       "Barra abierta",
-      "DJ o banda en vivo, a elección",
+      "DJ",
       "Catering con menú adaptable",
       "Coordinador exclusivo durante todo el evento",
       "Iluminación y sonido incluidos",
@@ -239,57 +305,5 @@ export const eventosPrivados: PaginaLinea = {
     ],
   },
   referencias: { titulo: "Quienes ya festejaron en Keops", logos: [], testimonios: [] },
-  contacto: { titulo: "Contanos tu idea", bajada: "" },
-};
-
-// ── Institucionales ──────────────────────────────────────────────
-
-export const institucionales: PaginaLinea = {
-  meta: {
-    titulo: "Institucionales",
-    descripcion: "Eventos de empresa en Keops, Villa Carlos Paz: técnica, catering y un coordinador dedicado.",
-  },
-  linea: "eventos",
-  instagram: "oficial",
-  faq: "eventos",
-  encabezado: {
-    antetitulo: "Institucionales",
-    titulo: "Tu evento dentro de un ícono de Carlos Paz",
-    bajada: "Técnica, catering y un coordinador dedicado.",
-    boton: "Pedir propuesta",
-  },
-  porQue: {
-    titulo: "Por qué Keops",
-    argumentos: [
-      // A COMPLETAR: cuatro argumentos. Ej: { titulo: "...", texto: "..." },
-    ],
-  },
-  incluye: {
-    titulo: "Qué incluye",
-    servicios: [
-      // Vienen del sitio anterior: CONFIRMAR que todos sigan siendo ciertos.
-      "Espacios que se adaptan al tipo de evento",
-      "Pantallas, proyectores y micrófonos",
-      "WiFi para presentaciones y streaming",
-      "Catering: coffee break, almuerzo o cena",
-      "Coordinador dedicado durante toda la jornada",
-      "Estacionamiento y acceso diferenciado para invitados VIP",
-    ],
-  },
-  galeria: {
-    titulo: "Galería",
-    estilo: "grilla",
-    medios: [
-      // A COMPLETAR: fotos de eventos de empresa (6 o más para que se muestre la galería).
-    ],
-  },
-  referencias: {
-    titulo: "Empresas que eligieron Keops",
-    logos: [
-      { nombre: "Sancor Seguros", logo: "", autorizado: false },
-      { nombre: "FIE", logo: "", autorizado: false },
-    ],
-    testimonios: [],
-  },
   contacto: { titulo: "Contanos tu idea", bajada: "" },
 };

@@ -29,7 +29,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - [ ] `banda.urlEntradas`: link directo a la noche del aniversario en Quickpass. Sin él, "Comprar entrada" lleva a "Comprá tu entrada" en Disco.
 - [ ] `hora`: hora de apertura de la noche (ej. "00:30"). Es la misma para la pirámide y DOT, así que aparece en los dos lugares. Vacía, no se muestra.
 - [ ] Revisar `banda.titulo` ("La noche del aniversario"), `banda.bajada` e `invitacion` ("Lo que hay esa noche"): son una propuesta (marcados con `TEXTO PROPUESTO`).
-- [ ] **DOT** (`dot`): `sector` (en qué sector de Keops va); vacío, no se muestra.
+- [ ] **DOT** (`dot`): `sector` (el nombre del sector dedicado a DOT); vacío, no se muestra. La bajada ya dice "en un sector dedicado de Keops".
 - [ ] **DOT**: confirmar que la entrada de la noche sirve también para DOT. DOT no tiene botón propio: la compra está en el cierre. Si se confirma, conviene decirlo en la bajada.
 - [ ] **DOT**: revisar `bajada` (propuesta) y la escritura del lineup. Va en orden de salida: Fferniot; Lucas Reartes b2b Lukas Roldán; cierra Luciano Bertorello (nombres tomados del flyer).
 - [ ] **DOT**: el logo en PNG o SVG, si se quiere el del flyer en lugar del nombre escrito en Outfit.
@@ -43,6 +43,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 ## `comoLlegar.ts`
 
 - [ ] `direccion`: dirección de Keops.
+- [ ] Revisar `texto` (`TEXTO PROPUESTO`): ya no dice "fuera del centro"; ahora dice "La pirámide se reconoce desde lejos. Llegá en auto, taxi o remis: te dejan en la puerta."
 - [ ] `estacionamiento` (opcional).
 - [ ] `transporteContingentes` (opcional).
 
@@ -50,12 +51,13 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 - [ ] Cargar las próximas noches. Cada una lleva: `id`, `nombre`, `fecha` (formato `2026-12-05`), `hora`, `djs`, `flyer` y, si corresponde, `agotado: true`. Hay un ejemplo comentado en el archivo.
 - [ ] Subir el arte de cada noche (vertical 9:16) a `public/disco/flyers/`.
+- Para ver cómo quedan los flyers, en tu PC la cartelera muestra noches de ejemplo con artes armados con las fotos del sitio (`public/disco/flyers/ejemplo-*.jpg`, datos inventados). Lo mismo en Fusion (`public/fusion/flyers/`). No se publican; cuando cargues noches reales, se pueden borrar esos archivos.
 - [ ] (Opcional) `urlEntradas` de cada noche: el link para comprar esa noche en la app o la web de entradas. Con él, "Comprar entrada" abre directo la compra; sin él, lleva a la sección "Comprá tu entrada" de Disco.
 - No hace falta borrar las noches viejas: se ocultan solas al mediodía del día siguiente.
 
 ## `faq.ts`
 
-- [ ] Revisar cada pregunta y pasar `confirmado: false` a `confirmado: true` para publicarla (General 2, Disco 4, Egresados 4, Eventos privados e Institucionales 4).
+- [ ] Revisar cada pregunta y pasar `confirmado: false` a `confirmado: true` para publicarla (General 2, Disco 4, Egresados 4, Eventos privados 4).
 - [ ] Escribir la respuesta de **"¿Cuál es la edad mínima para entrar?"** (Disco).
 - [ ] Escribir la respuesta de **"¿Cómo se cuida a los chicos?"** (Egresados): controles de acceso, seguridad, personal.
 - [ ] Cargar las preguntas de **Academia** cuando estén los datos del curso.
@@ -72,28 +74,24 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 ## `lineas.ts`
 
 **Egresados primario**
-- [ ] Revisar `titulo` y `bajada` del encabezado: son una propuesta (marcados con `TEXTO PROPUESTO`).
-- [ ] `galeria.medios`: fotos o videos de primario (6 fotos o más, o un video).
+- [ ] Revisar el encabezado ("La fiesta de su viaje") y el bloque `fiesta` ("Cómo es la matinée en Keops", cuatro momentos): son una propuesta (`TEXTO PROPUESTO`).
+- [ ] `galeria.medios`: fotos o videos de primario (6 fotos o más, o un video). Un video de primario también serviría para el encabezado (hoy muestra la foto del show de robots LED).
 - [ ] `extra.parrafos` ("Para las familias"): texto sobre seguridad y controles que la agencia pueda reenviar.
 
-**Egresados secundario**
-- [ ] Revisar `titulo` y `bajada` del encabezado: son una propuesta (marcados con `TEXTO PROPUESTO`).
-- [ ] Confirmar que los 3 videos de la galería son de secundario.
-- [ ] `extra.parrafos` ("Para las familias"): mismo texto que en primario, o uno propio.
+**Egresados secundario** (17 y 18 años: la noche de egresados, no una matinée)
+- [ ] Revisar el encabezado ("La noche más grande del viaje"), el bloque `fiesta` ("Así es la noche de egresados"), los argumentos y los servicios de secundario: son una propuesta (`TEXTO PROPUESTO`).
+- [ ] Confirmar que los 3 videos de la galería son de secundario. El encabezado usa un tramo de 12 s de `video-1.mp4` (`public/portadas/secundarios.mp4`) y el de `/egresados`, otro tramo del mismo video.
+- Sin "Para las familias" ni el argumento de seguridad: en secundario el foco es la fiesta.
 
 **Agencias** (se ven en las dos páginas de nivel)
 - [ ] Pasar `autorizado` a `true` en cada agencia que pueda mostrarse: Flecha, Super Tour, Astros, Púrpura, Auckland. El bloque se titula "Agencias que trabajan con Keops".
 
-**Eventos privados**
+**Eventos privados** (incluye los eventos de empresa: Institucionales ya no tiene página y `/institucionales` lleva acá)
 - [ ] `porQue.argumentos`: los cuatro argumentos de "Por qué Keops" (hoy el bloque está oculto).
-- [ ] `referencias`: testimonios o logos reales (opcional).
+- [ ] Revisar la bajada y el texto de la tarjeta de la home, que ahora suman "eventos de empresa" (`TEXTO PROPUESTO`).
+- [ ] Revisar el servicio "DJ" (antes "DJ o banda en vivo, a elección"): si querés, sumale un detalle.
+- [ ] `referencias`: testimonios o logos reales (opcional). Si Sancor Seguros y FIE autorizan, pueden ir acá.
 - [ ] Mejorar el texto alternativo de las 9 fotos de la galería (hoy dicen "Evento privado en Keops").
-
-**Institucionales**
-- [ ] `porQue.argumentos`: los cuatro argumentos de "Por qué Keops" (hoy el bloque está oculto).
-- [ ] `incluye.servicios`: confirmar los seis (vienen del sitio anterior): espacios adaptables, pantallas y proyectores, WiFi, catering, coordinador, estacionamiento y acceso VIP.
-- [ ] `galeria.medios`: 6 fotos o más de eventos de empresa.
-- [ ] `referencias.logos`: pasar `autorizado` a `true` en Sancor Seguros y FIE cuando lo permitan, y agregar sus logos (sin logo se muestra el nombre).
 
 ## `academia.ts`
 
@@ -111,7 +109,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 ## `fusion.ts`
 
 - [ ] `url`: link a la app o al sitio de Fusion. Sin él no aparecen el botón "Ir a Fusion" ni "Comprar entrada" en las noches que no tengan link propio.
-- [ ] `tickets.noches`: próximas noches Fusion (`id`, `nombre`, `fecha`, `lugar`, `urlEntradas`).
+- [ ] `tickets.noches`: próximas noches Fusion (`id`, `nombre`, `fecha`, `lugar`, `urlEntradas` y, si hay, `flyer`, vertical 9:16 en `public/fusion/flyers/`).
 
 ## `fotos.ts`
 
@@ -121,7 +119,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 ## Archivos que convendría conseguir
 
 - [ ] **Logo de Fusion en mayor tamaño:** el actual mide 168 px de ancho y no se puede agrandar sin que se vea borroso.
-- [ ] Más fotos para las galerías de Disco, Institucionales, Academia y Egresados primario.
+- [ ] Más fotos para las galerías de Disco, Academia y Egresados primario.
 
 ---
 
@@ -132,8 +130,10 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - **Primera vista de la home sin botones** (`home.ts`): se sacaron "Egresados" y "Ver próximas aperturas" del hero. "Contacto" se ve en texto y el WhatsApp flotante aparece recién al bajar. La tarjeta de Egresados sigue diciendo "Ver egresados".
 - **Cifras de la home** (`home.ts`): tres, todas con número y palabra: 5.000 personas, 5 espacios, 1969 año de apertura.
 - **"Trayectoria desde 1969"** en lugar de "57 años de trayectoria" (`lineas.ts`), para que no venza.
-- **Servicios de Eventos privados e Institucionales** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad").
-- **Botón de la tarjeta Institucionales en la home** (`home.ts`): "Pedir propuesta" en vez de "Pedí una propuesta", para usar el mismo texto de botón en todo el sitio.
+- **Servicios de Eventos privados** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad"). Sin banda en vivo.
+- **Institucionales afuera:** sin página, sin tarjeta en la home y sin ítem en el menú. Eventos privados suma "eventos de empresa" y `/institucionales` redirige a `/eventos`.
+- **Encabezados de las páginas internas:** con foto o video ocupan casi toda la pantalla. `/egresados` y secundario tienen un video vertical (al costado del texto en la compu) y Disco, el video de la pista. Son tramos cortos y livianos de los videos propios (`public/portadas/`).
+- **"Nuestro equipo"** se sacó de Nosotros (ronda de revisión del 23/11).
 - **Títulos de contacto** "Escribinos" en la home, Disco y Fusion (`home.ts`, `disco.ts`, `fusion.ts`).
 - **Mensaje del formulario de agencias:** "Hola, quiero pedir una propuesta para egresados." seguido de agencia, nivel, cantidad y fecha.
 - **Botón "Comprar entrada" en el encabezado de Disco** (`disco.ts`, `encabezado.boton`): baja directo a "Comprá tu entrada". Para sacarlo, dejá el texto vacío.

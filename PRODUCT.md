@@ -8,17 +8,16 @@ web
 
 ## Users
 
-Keops tiene cinco públicos. **Ninguno tiene prioridad sobre otro**: cuando una decisión obliga a elegir, el sitio reparte el peso entre las líneas en lugar de favorecer una (confirmado).
+Keops tiene cuatro públicos. **Ninguno tiene prioridad sobre otro**: cuando una decisión obliga a elegir, el sitio reparte el peso entre las líneas en lugar de favorecer una (confirmado).
 
 - **Público de la noche (Disco y Fusion):** gente que sale en Villa Carlos Paz, sobre todo en la temporada de verano. Quiere saber qué noche abre, quién pasa música y sacar la entrada.
-- **Agencias de viaje de egresados (primario y secundario):** arman el viaje y contratan la fiesta. Necesitan argumentos para vender el paquete y algo que puedan reenviar a las familias, que también leen el sitio para quedarse tranquilas.
-- **Quienes organizan un evento privado:** casamientos, cumpleaños y celebraciones.
-- **Empresas (Institucionales):** eventos de empresa que necesitan técnica, catering y un coordinador.
+- **Agencias de viaje de egresados (primario y secundario):** arman el viaje y contratan la fiesta. Necesitan argumentos para vender el paquete. En primario (matinée), algo que puedan reenviar a las familias. En secundario (17 y 18 años, la noche de egresados) el foco es la fiesta, no la seguridad.
+- **Quienes organizan un evento privado:** casamientos, cumpleaños, celebraciones y eventos de empresa (Institucionales se sumó a Eventos privados).
 - **Aspirantes a bartender (Academia):** quieren aprender el oficio en la academia de Keops.
 
 ## Product Purpose
 
-El sitio de Keops (keops.ar) presenta el boliche de Villa Carlos Paz, Córdoba, abierto desde 1969, y sus cinco líneas: Disco, Egresados, Eventos privados, Institucionales y Academia, además de Fusion. A cada visitante lo lleva a su línea y al contacto de esa línea (WhatsApp, mail e Instagram propios).
+El sitio de Keops (keops.ar) presenta el boliche de Villa Carlos Paz, Córdoba, abierto desde 1969, y sus cuatro líneas: Disco, Egresados, Eventos privados (incluye los eventos de empresa) y Academia, además de Fusion. A cada visitante lo lleva a su línea y al contacto de esa línea (WhatsApp, mail e Instagram propios).
 
 **Medida de éxito confirmada: entradas vendidas.** Que el público de Disco y Fusion llegue desde la cartelera a la app de entradas. Los pedidos por WhatsApp de las demás líneas siguen siendo parte del sitio, pero no se eligieron como medida de éxito.
 
@@ -30,14 +29,14 @@ El sitio de Keops (keops.ar) presenta el boliche de Villa Carlos Paz, Córdoba, 
 
 - **Temporada:** en verano es la temporada más intensa de Carlos Paz; el resto del año hay noches especiales.
 - **Entradas:** se sacan desde la app de entradas. La cartelera de Disco y la sección Tickets de Fusion llevan ahí.
-- **Ubicación:** Keops está fuera del centro de Villa Carlos Paz; se recomienda llegar en auto, taxi o remis. Mapa: https://maps.app.goo.gl/NTLZpL4MJ9mrNuCR7
+- **Ubicación:** se recomienda llegar en auto, taxi o remis. En los textos no se remarca que está fuera del centro (decisión del dueño). Mapa: https://maps.app.goo.gl/NTLZpL4MJ9mrNuCR7
 - **Contacto por línea** (`src/config/contacto.ts`):
 
   | Línea | Mail | WhatsApp |
   | --- | --- | --- |
   | Disco y Fusion | rrpp@keops.ar | +54 9 3541 637856 |
   | Egresados | egresados@keops.ar | +54 9 3541 580808 |
-  | Eventos privados e Institucionales | eventos@keops.ar | +54 9 3541 579786 |
+  | Eventos privados | eventos@keops.ar | +54 9 3541 579786 |
   | Academia | a completar | a completar |
 
 - **Instagram por página:** @keopsprimarios (Egresados primario), @keopsecundarios (Egresados secundario), @keopsoficial (resto del sitio).
@@ -47,11 +46,11 @@ El sitio de Keops (keops.ar) presenta el boliche de Villa Carlos Paz, Córdoba, 
 
 ## Capabilities and Constraints
 
-- **Páginas:** `/` (home), `/nosotros`, `/egresados`, `/egresados/primarios`, `/egresados/secundarios`, `/eventos`, `/institucionales`, `/disco`, `/academia`, `/fusion`, `/preguntas-frecuentes`.
-- **Plantilla común** para Egresados (primario y secundario), Eventos privados e Institucionales: encabezado, por qué Keops, qué incluye, galería, referencias, preguntas frecuentes de la línea y contacto.
+- **Páginas:** `/` (home), `/nosotros`, `/egresados`, `/egresados/primarios`, `/egresados/secundarios`, `/eventos` (`/institucionales` redirige acá), `/disco`, `/academia`, `/fusion`, `/preguntas-frecuentes`.
+- **Plantilla común** para Egresados (primario y secundario) y Eventos privados: encabezado, por qué Keops, qué incluye, galería, referencias, preguntas frecuentes de la línea y contacto.
 - **Un bloque sin datos no se muestra.** Un campo vacío oculta su bloque en el sitio publicado. En desarrollo, los huecos se rellenan con contenido de ejemplo marcado con una etiqueta ("De ejemplo: no se publica") que nunca entra en el build.
 - **Fechas que se ocultan solas:** la cartelera esconde las noches pasadas comparando con la fecha actual.
-- **Publicación con permiso:** las preguntas frecuentes y los hitos de la historia solo se publican con `confirmado: true`; logos de agencias y referencias (Sancor Seguros, FIE), con `autorizado: true`.
+- **Publicación con permiso:** las preguntas frecuentes y los hitos de la historia solo se publican con `confirmado: true`; logos de agencias y referencias, con `autorizado: true`.
 - **Galerías:** solo se muestran con 6 imágenes o más, o con un video.
 - **Stack:** Next.js 16, React 19, Tailwind 3, TypeScript. Deploy en Netlify (`netlify.toml`).
 - **Sin decidir o sin cargar** (detalle en `CONTENIDO-PENDIENTE.md`): dirección de Keops, cartelera, datos de Academia, URL de Fusion, edad mínima para entrar, cuidado de los chicos en egresados, capacidad y descripción de cada espacio.

@@ -1,6 +1,6 @@
 ---
 name: Keops
-description: La pirámide de Carlos Paz. Disco, egresados, eventos privados, institucionales y academia, desde 1969.
+description: La pirámide de Carlos Paz. Disco, egresados, eventos privados y academia, desde 1969.
 colors:
   negro: "#0A0A0A"
   carbon: "#161412"
@@ -281,7 +281,7 @@ La luz aparece como respuesta: al pasar el mouse o hacer foco, el borde de una p
 - **Halo dorado** (`box-shadow: 0 0 24px rgb(201 169 97 / 0.25)`): valor provisional hasta implementarlo. Solo en hover o foco de tarjetas y botones, junto con el borde oro.
 
 ### Named Rules
-**La regla de la luz al tocar.** Nada brilla en reposo. El borde oro y el halo dorado aparecen solo como respuesta a hover o foco y se apagan al salir.
+**La regla de la luz al tocar.** Nada brilla en reposo. El borde oro y el halo dorado aparecen solo como respuesta a hover o foco y se apagan al salir. **Única excepción, pedida por el dueño:** el isotipo del navbar lleva un halo dorado tenue en reposo (`drop-shadow` de 6 px al 45 %) que se enciende al tocarlo. Es estático: no titila ni late.
 
 **La regla de las capas.** Para separar planos se sube de negro a carbón y se marca la junta en piedra. No se usan sombras para dar profundidad.
 
@@ -329,8 +329,20 @@ Firmes, en mayúsculas, con la luz puesta en el principal.
 - **Typography:** enlaces en Inter 500 de 15 px, marfil; el activo y el hover en oro.
 - **Comportamiento:** se esconde al bajar y vuelve apenas se sube o se llega al tope. No se esconde mientras haya foco de teclado adentro.
 - **Desplegable (Egresados):** tarjeta carbón con borde piedra y esquinas de 12 px; los ítems se tiñen de piedra en hover.
+- **Isotipo:** el triángulo de 48 px de ancho (64 px desde 1024 px), con su halo dorado tenue.
 - **Orden:** isotipo a la izquierda, ítems, un divisor vertical piedra, Fusion y el botón principal "Contacto".
 - **Celular:** menú negro a pantalla completa con ítems en título 3 de 56 px de alto separados por líneas piedra, y el botón "Contacto" al pie. En páginas internas, "← Inicio" a la izquierda y el isotipo centrado.
+
+### Encabezado de página interna
+La primera pantalla de cada página. Con foto o video entra con fuerza: ocupa el 82 % de la pantalla (88 % desde 1024 px), con antetítulo, título, bajada en marfil y el botón principal.
+- **Foto o video horizontal:** de fondo, con un velo negro de arriba abajo para que se lea el texto. Disco usa un tramo del video de la pista.
+- **Video vertical (reel):** en celular llena el encabezado; desde 1024 px va a la derecha como un reel de 9:16 con esquinas de 16 px y borde piedra, y el texto a la izquierda. Es el de `/egresados` y Egresados secundario.
+- **Título:** si es corto (30 caracteres o menos), va en el tamaño de la portada de la home; si no, en título 1.
+- **Videos:** tramos de 9 a 12 s, sin sonido, de unos 2 MB, con su primer cuadro como imagen mientras cargan (`public/portadas/`). Tienen un botón circular de 44 px para pausarlos, abajo a la derecha.
+- **Sin foto ni video** (Preguntas frecuentes): encabezado corto de texto.
+
+### Cómo es la fiesta (Egresados)
+Después del encabezado, cuatro momentos de la fiesta en orden, para que se entienda de un vistazo qué vive el contingente. Cada momento lleva una línea piedra arriba, su número ("01") en título 2 arena, título 3 y texto arena. Van de a cuatro en una fila desde 1024 px, de a dos en tablet y uno debajo del otro en celular. No son tarjetas: es una noche que avanza. Primario cuenta la matinée; secundario, la noche de egresados.
 
 ### Acordeón (preguntas frecuentes)
 Filas separadas por líneas piedra, cada pregunta en título 3 marfil que pasa a oro en hover, con un chevron oro de 24 px que gira en 300 ms al abrir. La respuesta va en cuerpo arena. Funciona con teclado y sin JavaScript.
@@ -367,7 +379,7 @@ El flyer de los 57 años hecho primera vista: "La pirámide encendida" al pie de
 - **Banda de compra:** cierra la noche después de DOT, como la última línea del flyer: título, bajada, "Comprar entrada" y la línea de la app de entradas, centrados, con la luz del fuego bajando desde arriba y una línea de brasa en lugar de la junta piedra. Es el único botón de compra de la noche: DOT no lleva botón propio.
 
 ### DOT (la electrónica de la noche del aniversario)
-El flyer de @dotbykeops hecho sección: la misma noche, en otro sector. Sigue a la pirámide y antes del cierre.
+El flyer de @dotbykeops hecho sección: la misma noche, en un sector dedicado. Sigue a la pirámide y antes del cierre.
 - **Escena:** el mismo atardecer sobre el mar, más claro y azul. En el centro, una esfera de vidrio que muestra el horizonte dado vuelta; alrededor, un enjambre de burbujas cromadas que reflejan ese cielo (una sola imagen de espejo, armada una vez, porque una esfera espejada se ve igual desde cualquier ángulo). Canvas 2D, sin librerías.
 - **Recorrido:** la sección mide 2,6 pantallas y la escena queda fija mientras se baja. El enjambre llega disperso y, al bajar, pasa por las formaciones del reel: anillo, columna, disco, estela y vuelta al anillo. Sigue al scroll con un poco de inercia, así un salto se ve como un vuelo. El texto entra de a partes: DOT. con la fecha, el lineup en orden de salida (b2b en chico), quien cierra la noche, último y en grande, y la bajada. La noche se lee de arriba abajo como se va a vivir y el scroll sube hasta quien la cierra.
 - **Electrónica:** la esfera y el enjambre laten apenas a 124 BPM y las burbujas se apartan del puntero (o del dedo).
@@ -378,7 +390,7 @@ El flyer de @dotbykeops hecho sección: la misma noche, en otro sector. Sigue a 
 - **Fin:** pasada la fecha de `config/aniversario.ts`, la home normal aparece antes de pintar, sin un instante de la versión vieja, y el video del hero normal no se descarga mientras dura el evento.
 
 ### Movimiento
-Las piezas aparecen con un fundido y una subida de 16 px en 500 ms, escalonadas de 60 a 80 ms dentro de una grilla. Las respuestas de hover duran entre 200 y 300 ms; el zoom de las fotos, 500 ms. Con `prefers-reduced-motion` todo se ve desde el inicio, sin animación, y el sonido siempre arranca apagado. Lo que se mueve solo se puede pausar: en la galería de Eventos, un botón circular de 44 px junto al de sonido frena el video y las tiras de fotos.
+Las piezas aparecen con un fundido y una subida de 16 px en 500 ms, escalonadas de 60 a 80 ms dentro de una grilla. Las respuestas de hover duran entre 200 y 300 ms; el zoom de las fotos, 500 ms. Con `prefers-reduced-motion` todo se ve desde el inicio, sin animación, y el sonido siempre arranca apagado. Lo que se mueve solo se puede pausar: en la galería de Eventos, un botón circular de 44 px junto al de sonido frena el video y las tiras de fotos. **Excepción pedida por el dueño:** con `prefers-reduced-motion`, las tiras de fotos de Eventos siguen andando, a la mitad de velocidad (clase `.tira-continua`); son lentas, lineales y tienen su pausa.
 
 ## Do's and Don'ts
 

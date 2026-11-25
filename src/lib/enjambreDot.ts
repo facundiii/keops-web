@@ -9,6 +9,8 @@
 // Se frena fuera de pantalla y con la pestaña oculta.
 // Con "reducir movimiento" queda en el anillo, girando lento, sin latir ni seguir el scroll.
 
+import { bucleVisible } from "@/lib/bucleLienzo";
+
 type V3 = [number, number, number];
 
 interface Burbuja {
@@ -184,10 +186,13 @@ export function iniciarEnjambre(
   }
 ): Enjambre {
   const ctx = canvas.getContext("2d");
+  // El cielo y el mar limpios (los ve la esfera) y el fondo de la escena, con la penumbra del texto encima
+  const limpio = document.createElement("canvas");
+  const lctx = limpio.getContext("2d");
   const fondo = document.createElement("canvas");
   const fctx = fondo.getContext("2d");
   const nada = { puntero: () => {}, pausar: () => {}, remedir: () => {}, destruir: () => {} };
-  if (!ctx || !fctx) return nada;
+  if (!ctx || !fctx || !lctx) return nada;
 
   const { suave: modoSuave } = opciones;
   const reflejo = armarReflejo();
@@ -197,7 +202,26 @@ export function iniciarEnjambre(
   const brillos: { x: number; y: number; l: number; f: number; v: number }[] = [];
 
   function pintarFondo() {
-    if (!fctx) return;
+    if (!lctx || !fctx) return;
+    pintarCielo(lctx);
+    fctx.clearRect(0, 0, W, H);
+    fctx.drawImage(limpio, 0, 0, W, H);
+    // Arriba sale del negro de la portada; en pantallas anchas, el lado del texto queda en penumbra
+    const arriba = fctx.createLinearGradient(0, 0, 0, H * 0.16);
+    arriba.addColorStop(0, "rgba(10,10,10,1)");
+    arriba.addColorStop(1, "rgba(10,10,10,0)");
+    fctx.fillStyle = arriba;
+    fctx.fillRect(0, 0, W, H * 0.16);
+    if (m.textoAlCostado) {
+      const lado = fctx.createLinearGradient(0, 0, W * 0.55, 0);
+      lado.addColorStop(0, "rgba(10,10,10,0.55)");
+      lado.addColorStop(1, "rgba(10,10,10,0)");
+      fctx.fillStyle = lado;
+      fctx.fillRect(0, 0, W * 0.55, H);
+    }
+  }
+
+  function pintarCielo(fctx: CanvasRenderingContext2D) {
     const { horizonte, sol } = m;
     // Cielo de la tarde, más claro que el de la pirámide
     const g = fctx.createLinearGradient(0, 0, 0, horizonte);
@@ -258,19 +282,6 @@ export function iniciarEnjambre(
     fctx.restore();
     fctx.fillStyle = "rgba(255,230,190,0.45)";
     fctx.fillRect(0, horizonte, W, 1);
-    // Arriba sale del negro de la portada; en pantallas anchas, el lado del texto queda en penumbra
-    const arriba = fctx.createLinearGradient(0, 0, 0, H * 0.16);
-    arriba.addColorStop(0, "rgba(10,10,10,1)");
-    arriba.addColorStop(1, "rgba(10,10,10,0)");
-    fctx.fillStyle = arriba;
-    fctx.fillRect(0, 0, W, H * 0.16);
-    if (m.textoAlCostado) {
-      const lado = fctx.createLinearGradient(0, 0, W * 0.55, 0);
-      lado.addColorStop(0, "rgba(10,10,10,0.55)");
-      lado.addColorStop(1, "rgba(10,10,10,0)");
-      fctx.fillStyle = lado;
-      fctx.fillRect(0, 0, W * 0.55, H);
-    }
   }
 
   function medir() {
@@ -278,12 +289,11 @@ export function iniciarEnjambre(
     W = canvas.clientWidth;
     H = canvas.clientHeight;
     if (!W || !H) return;
-    for (const c of [canvas, fondo]) {
+    for (const c of [canvas, fondo, limpio]) {
       c.width = Math.round(W * DPR);
       c.height = Math.round(H * DPR);
     }
-    ctx?.setTransform(DPR, 0, 0, DPR, 0, 0);
-    fctx?.setTransform(DPR, 0, 0, DPR, 0, 0);
+    for (const c of [ctx, fctx, lctx]) c?.setTransform(DPR, 0, 0, DPR, 0, 0);
     m = opciones.medir();
     if (!burbujas.length) burbujas = armarBurbujas(W < 768 ? 130 : 190);
     pintarFondo();
@@ -308,11 +318,25 @@ export function iniciarEnjambre(
     base.addColorStop(1, "#0e1836");
     ctx.fillStyle = base;
     ctx.fillRect(cx - Rs, cy - Rs, Rs * 2, Rs * 2);
+    // El cielo limpio (sin la penumbra del texto), dado vuelta. Con la esfera corrida a un costado,
+    // se agranda lo justo para que la imagen cubra la esfera entera y no quede un borde recto adentro.
+    const escalaX = Math.max((2.4 * Rs) / W, (1.08 * Rs) / Math.max(1, Math.min(cx, W - cx)));
+    const alto = 0.24 * Rs;
     ctx.save();
     ctx.translate(cx, cy);
-    ctx.scale(-(2.4 * Rs) / W, -(0.32 * Rs) / Math.max(40, horizonte - cy));
-    ctx.drawImage(fondo, -cx, -cy, W, H);
+    ctx.scale(-escalaX, -alto / Math.max(40, horizonte - cy));
+    ctx.drawImage(limpio, -cx, -cy, W, H);
     ctx.restore();
+    // El sol de atrás, dado vuelta adentro del vidrio: le da la luz cálida del flyer
+    ctx.globalCompositeOperation = "lighter";
+    const sx = cx - (m.sol - cx) * escalaX, sy = cy - alto;
+    const solAdentro = ctx.createRadialGradient(sx, sy, 0, sx, sy, Rs * 0.75);
+    solAdentro.addColorStop(0, "rgba(255,200,130,0.55)");
+    solAdentro.addColorStop(0.3, "rgba(255,150,90,0.2)");
+    solAdentro.addColorStop(1, "rgba(255,150,90,0)");
+    ctx.fillStyle = solAdentro;
+    ctx.fillRect(cx - Rs, cy - Rs, Rs * 2, Rs * 2);
+    ctx.globalCompositeOperation = "source-over";
     const borde = ctx.createRadialGradient(cx - Rs * 0.1, cy - Rs * 0.15, Rs * 0.5, cx, cy, Rs);
     borde.addColorStop(0, "rgba(10,14,24,0)");
     borde.addColorStop(0.75, "rgba(10,14,24,0.22)");
@@ -438,54 +462,21 @@ export function iniciarEnjambre(
     ctx.globalAlpha = 1;
   }
 
-  // Bucle: corre solo en pantalla, con la pestaña visible y sin pausa.
-  let corriendo = false, visible = false, enPausa = false, raf = 0, tiempo = 0, ultimo = 0;
-  const loop = (now: number) => {
-    tiempo += Math.min(0.05, (now - ultimo) / 1000);
-    ultimo = now;
-    cuadro(tiempo);
-    raf = requestAnimationFrame(loop);
-  };
-  const arrancar = () => {
-    if (corriendo || !visible || document.hidden || enPausa) return;
-    corriendo = true;
-    ultimo = performance.now();
-    raf = requestAnimationFrame(loop);
-  };
-  const parar = () => {
-    corriendo = false;
-    cancelAnimationFrame(raf);
-  };
-  const observador = new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
-    if (visible) arrancar();
-    else parar();
-  });
-  observador.observe(canvas);
-  const alCambiarPestana = () => (document.hidden ? parar() : arrancar());
-  document.addEventListener("visibilitychange", alCambiarPestana);
-
+  // Corre solo en pantalla, con la pestaña visible y sin pausa, a 60 cuadros por segundo como máximo
   medir();
   recorrido = Math.max(0, Math.min(RECORRIDO_TOTAL, opciones.leerRecorrido()));
-  cuadro(tiempo);
+  cuadro(0);
+  const bucle = bucleVisible(canvas, cuadro);
 
   return {
     puntero(x, y) {
       puntero = x === null || y === undefined ? null : [x, y];
     },
-    pausar(pausa) {
-      enPausa = pausa;
-      if (pausa) parar();
-      else arrancar();
-    },
+    pausar: bucle.pausar,
     remedir() {
       medir();
-      cuadro(tiempo);
+      cuadro(bucle.tiempo());
     },
-    destruir() {
-      parar();
-      observador.disconnect();
-      document.removeEventListener("visibilitychange", alCambiarPestana);
-    },
+    destruir: bucle.destruir,
   };
 }

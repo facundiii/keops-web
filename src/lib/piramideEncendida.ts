@@ -6,6 +6,8 @@
 // a armar cada 14 s. Se frena fuera de pantalla y con la pestaña oculta.
 // Con "reducir movimiento" no estalla ni se acerca: queda partida y encendida, y gira lento.
 
+import { bucleVisible } from "@/lib/bucleLienzo";
+
 type V3 = [number, number, number];
 
 interface Fragmento {
@@ -83,6 +85,40 @@ function girar(p: V3, ay: number, ax: number, az: number): V3 {
   [x, y] = [x * c - y * s, x * s + y * c];
   return [x, y, z];
 }
+
+// Matrices de 3×3 por filas. Cada cuadro arma los giros una vez y los aplica a todos los vértices,
+// en lugar de calcular senos y cosenos por cada punto.
+type M3 = number[];
+
+/** El mismo giro que girar(), como matriz: sus columnas son los ejes girados */
+function matrizGiro(ay: number, ax: number, az: number): M3 {
+  const x = girar([1, 0, 0], ay, ax, az), y = girar([0, 1, 0], ay, ax, az), z = girar([0, 0, 1], ay, ax, az);
+  return [x[0], y[0], z[0], x[1], y[1], z[1], x[2], y[2], z[2]];
+}
+
+/** El mismo giro que girarEje(), como matriz (Rodrigues) */
+function matrizEje(k: V3, ang: number): M3 {
+  const c = Math.cos(ang), s = Math.sin(ang), t = 1 - c;
+  const [x, y, z] = k;
+  return [
+    c + x * x * t, x * y * t - z * s, x * z * t + y * s,
+    y * x * t + z * s, c + y * y * t, y * z * t - x * s,
+    z * x * t - y * s, z * y * t + x * s, c + z * z * t,
+  ];
+}
+
+function multiplicar(a: M3, b: M3): M3 {
+  const r = new Array<number>(9);
+  for (let i = 0; i < 3; i++)
+    for (let j = 0; j < 3; j++) r[i * 3 + j] = a[i * 3] * b[j] + a[i * 3 + 1] * b[3 + j] + a[i * 3 + 2] * b[6 + j];
+  return r;
+}
+
+const aplicar = (m: M3, v: V3): V3 => [
+  m[0] * v[0] + m[1] * v[1] + m[2] * v[2],
+  m[3] * v[0] + m[4] * v[1] + m[5] * v[2],
+  m[6] * v[0] + m[7] * v[1] + m[8] * v[2],
+];
 
 /** Aleatorio con semilla: siempre la misma pirámide. */
 function crearAzar(semilla: number) {
@@ -309,8 +345,10 @@ export function iniciarPiramide(
   }
   let patron: CanvasPattern | null = null;
 
-  // Medidas
+  // Medidas. En un equipo que no llega, la escena se aligera: menos resolución, sin la textura
+  // de la piedra y el reflejo del agua en tiras más anchas. La forma y la luz quedan iguales.
   let W = 0, H = 0, DPR = 1, horizonte = 0, escala = 0, cx = 0, cy = 0;
+  let ligero = false;
   const brillos: { x: number; y: number; l: number; f: number; v: number }[] = [];
 
   function pintarFondo() {
@@ -345,7 +383,7 @@ export function iniciarPiramide(
   }
 
   function medir() {
-    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    DPR = Math.min(window.devicePixelRatio || 1, ligero ? 1.5 : 2);
     W = canvas.clientWidth;
     H = canvas.clientHeight;
     if (!W || !H) return;
@@ -463,25 +501,33 @@ export function iniciarPiramide(
     // La pirámide se pinta en su propio lienzo, para reflejarla en el agua
     rctx.clearRect(0, 0, W, H);
 
-    const lista = fragmentos
-      .map((f) => {
-        const salto = E * f.peso * ALCANCE;
-        // Los bloques sueltos aparecen cuando ya salieron de adentro
-        const vis = f.suelto ? entre01((salto - 0.12) / 0.1) : 1;
-        if (vis === 0) return null;
-        const desplazo = por(f.dir, salto);
-        const ang = E * f.giro;
-        const mover = (v: V3) => girar(suma(suma(girarEje(resta(v, f.centro), f.eje, ang), f.centro), desplazo), rotY, rotX, rotZ);
-        const pts = f.v.map(mover);
-        const dentro = f.dentro.map(mover);
-        const n = girar(girarEje(f.n, f.eje, ang), rotY, rotX, rotZ);
-        const z = (promedio(pts)[2] + promedio(dentro)[2]) / 2;
-        // El magma calienta lo que está cerca del centro; lo que sale volando se enfría
-        const cerca = Math.pow(1 - entre01((largo(suma(f.centro, desplazo)) - 0.25) / 1.0), 1.3);
-        return { f, pts, dentro, n, z, salto, vis, cerca };
-      })
-      .filter((x): x is NonNullable<typeof x> => x !== null)
-      .sort((a, b) => b.z - a.z);
+    // Cada pedazo gira sobre su eje, se corre hacia afuera y gira con toda la pirámide:
+    // M·(R·(v − centro) + centro + desplazo) = (M·R)·v + M·(centro + desplazo − R·centro)
+    const M = matrizGiro(rotY, rotX, rotZ);
+    const lista: {
+      f: Fragmento; pts: V3[]; dentro: V3[]; n: V3; z: number; salto: number; vis: number; cerca: number; cCara: V3; cDentro: V3;
+    }[] = [];
+    for (const f of fragmentos) {
+      const salto = E * f.peso * ALCANCE;
+      // Los bloques sueltos aparecen cuando ya salieron de adentro
+      const vis = f.suelto ? entre01((salto - 0.12) / 0.1) : 1;
+      if (vis === 0) continue;
+      const desplazo = por(f.dir, salto);
+      const R = matrizEje(f.eje, E * f.giro);
+      const MR = multiplicar(M, R);
+      const corrido = aplicar(M, resta(suma(f.centro, desplazo), aplicar(R, f.centro)));
+      const mover = (v: V3): V3 => {
+        const q = aplicar(MR, v);
+        return [q[0] + corrido[0], q[1] + corrido[1], q[2] + corrido[2]];
+      };
+      const pts = f.v.map(mover);
+      const dentro = f.dentro.map(mover);
+      const cCara = promedio(pts), cDentro = promedio(dentro);
+      // El magma calienta lo que está cerca del centro; lo que sale volando se enfría
+      const cerca = Math.pow(1 - entre01((largo(suma(f.centro, desplazo)) - 0.25) / 1.0), 1.3);
+      lista.push({ f, pts, dentro, n: aplicar(MR, f.n), z: (cCara[2] + cDentro[2]) / 2, salto, vis, cerca, cCara, cDentro });
+    }
+    lista.sort((a, b) => b.z - a.z);
 
     const poligono = (p: [number, number, number][]) => {
       rctx.beginPath();
@@ -490,12 +536,11 @@ export function iniciarPiramide(
       rctx.closePath();
     };
 
-    const pintarFragmento = ({ f, pts, dentro, n, salto, vis, cerca }: (typeof lista)[number]) => {
+    const pintarFragmento = ({ f, pts, dentro, n, salto, vis, cerca, cCara, cDentro }: (typeof lista)[number]) => {
       // Cerca de la cámara la perspectiva los agranda de más: ahí no se dibujan
-      if (f.suelto && CAMARA + promedio(pts)[2] < 1.5) return;
+      if (f.suelto && CAMARA + cCara[2] < 1.5) return;
       const P = pts.map(proyectar), Q = dentro.map(proyectar);
-      const cCara = promedio(pts);
-      const cCaja = mezcla(cCara, promedio(dentro), 0.5);
+      const cCaja = mezcla(cCara, cDentro, 0.5);
       const calor = fuego * f.brillo * (0.3 + 0.7 * f.rotura) * (0.12 + 0.88 * cerca);
       rctx.globalAlpha = vis;
       // Costados de roca: oscuros, encendidos solo cerca del magma. Solo cuando el pedazo se separó.
@@ -503,8 +548,10 @@ export function iniciarPiramide(
         rctx.fillStyle = rgb(20 + 200 * calor, 9 + 75 * calor, 6 + 14 * calor);
         for (let i = 0; i < pts.length; i++) {
           const j = (i + 1) % pts.length;
-          const centroLado = promedio([pts[i], pts[j], dentro[j], dentro[i]]);
-          if (punto(resta(centroLado, cCaja), resta(OJO, centroLado)) <= 0) continue;
+          const a = pts[i], b = pts[j], c = dentro[j], d = dentro[i];
+          // Centro del costado, y si mira hacia la cámara
+          const lx = (a[0] + b[0] + c[0] + d[0]) / 4, ly = (a[1] + b[1] + c[1] + d[1]) / 4, lz = (a[2] + b[2] + c[2] + d[2]) / 4;
+          if ((lx - cCaja[0]) * (OJO[0] - lx) + (ly - cCaja[1]) * (OJO[1] - ly) + (lz - cCaja[2]) * (OJO[2] - lz) <= 0) continue;
           poligono([P[i], P[j], Q[j], Q[i]]);
           rctx.fill();
         }
@@ -525,7 +572,7 @@ export function iniciarPiramide(
       const reflejoFuego = f.rotura * E * fuego * cerca * 0.35;
       rctx.fillStyle = rgb(235 * v + 150 * lado + 120 * reflejoFuego, 238 * v + 70 * lado + 45 * reflejoFuego, 255 * v + 35 * lado + 8 * reflejoFuego);
       rctx.fill();
-      if (patron) {
+      if (patron && !ligero) {
         rctx.globalAlpha = 0.18 * vis;
         rctx.fillStyle = patron;
         rctx.fill();
@@ -643,7 +690,7 @@ export function iniciarPiramide(
 
     // Reflejo en el agua, ondulado
     const alto = Math.min((H - horizonte) * 0.75, horizonte);
-    const paso = W < 768 ? 3 : 2;
+    const paso = (W < 768 ? 3 : 2) * (ligero ? 2 : 1);
     // En el modo suave el agua se mueve más lento y con menos oleaje
     const tAgua = t * (modoSuave ? 0.4 : 1);
     const oleaje = modoSuave ? 0.6 : 1;
@@ -676,53 +723,24 @@ export function iniciarPiramide(
     }
   }
 
-  // Bucle: corre solo en pantalla, con la pestaña visible y sin pausa.
-  let corriendo = false, visible = true, enPausa = false, raf = 0, tiempo = inicio, ultimo = 0;
+  // Corre solo en pantalla, con la pestaña visible y sin pausa, a 60 cuadros por segundo como máximo
   tPrevio = inicio;
-  const loop = (now: number) => {
-    tiempo += Math.min(0.05, (now - ultimo) / 1000);
-    ultimo = now;
-    cuadro(tiempo);
-    raf = requestAnimationFrame(loop);
-  };
-  const arrancar = () => {
-    if (corriendo || !visible || document.hidden || enPausa) return;
-    corriendo = true;
-    ultimo = performance.now();
-    raf = requestAnimationFrame(loop);
-  };
-  const parar = () => {
-    corriendo = false;
-    cancelAnimationFrame(raf);
-  };
-
-  const observador = new IntersectionObserver(([e]) => {
-    visible = e.isIntersecting;
-    if (visible) arrancar();
-    else parar();
-  });
-  observador.observe(canvas);
-  const alCambiarPestana = () => (document.hidden ? parar() : arrancar());
-  document.addEventListener("visibilitychange", alCambiarPestana);
-
   medir();
-  cuadro(tiempo);
-  arrancar();
+  cuadro(inicio);
+  const bucle = bucleVisible(canvas, cuadro, {
+    inicio,
+    alAtrasarse() {
+      ligero = true;
+      medir();
+    },
+  });
 
   return {
-    pausar(pausa) {
-      enPausa = pausa;
-      if (pausa) parar();
-      else arrancar();
-    },
+    pausar: bucle.pausar,
     remedir() {
       medir();
-      cuadro(tiempo);
+      cuadro(bucle.tiempo());
     },
-    destruir() {
-      parar();
-      observador.disconnect();
-      document.removeEventListener("visibilitychange", alCambiarPestana);
-    },
+    destruir: bucle.destruir,
   };
 }

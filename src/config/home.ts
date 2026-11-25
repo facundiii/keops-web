@@ -9,7 +9,7 @@
 export const hero = {
   antetitulo: "Villa Carlos Paz · Desde 1969",
   titulo: "La pirámide de Carlos Paz",
-  bajada: "Disco, egresados, eventos privados e institucionales en el espacio más grande de la ciudad.",
+  bajada: "Disco, egresados y eventos privados en el espacio más grande de la ciudad.",
   /** Video de fondo, dentro de /public. Siempre sin sonido. */
   video: "/hero-video.mp4",
 };
@@ -38,7 +38,7 @@ export const contacto = {
 };
 
 export interface TarjetaLinea {
-  id: "egresados" | "eventos" | "institucionales" | "disco" | "academia";
+  id: "egresados" | "eventos" | "disco" | "academia";
   antetitulo: string;
   titulo: string;
   texto: string;
@@ -60,18 +60,11 @@ export const tarjetasLineas: TarjetaLinea[] = [
     id: "eventos",
     antetitulo: "Eventos privados",
     titulo: "Tu fiesta, con la producción de un boliche.",
+    // TEXTO PROPUESTO: suma los eventos de empresa, que antes tenían su página (Institucionales)
     texto:
-      "Casamientos, cumpleaños y celebraciones, con ambientación, barra, DJ o banda en vivo y catering en un solo lugar.",
+      "Casamientos, cumpleaños, celebraciones y eventos de empresa, con ambientación, barra, DJ y catering en un solo lugar.",
     boton: "Armá tu evento",
     href: "/eventos",
-  },
-  {
-    id: "institucionales",
-    antetitulo: "Institucionales",
-    titulo: "Tu evento dentro de un ícono de Carlos Paz.",
-    texto: "Técnica, catering y un coordinador dedicado.",
-    boton: "Pedir propuesta",
-    href: "/institucionales",
   },
   {
     id: "disco",

@@ -15,7 +15,7 @@ export default function EgresadosPrimariosPage() {
   return (
     <PlantillaLinea
       pagina={egresadosPrimarios}
-      fotos={{ porQue: fotos.egresados.porQue }}
+      fotos={{ encabezado: fotos.primarios.encabezado, porQue: fotos.primarios.porQue }}
       ejemplos={{
         galeria: galeriaDeEjemplo(),
         testimonios: ejemplos.testimonios.egresados,

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import type { Argumento, Medio, PaginaLinea, Testimonio } from "@/config/lineas";
-import type { Foto } from "@/config/fotos";
+import type { Foto, VideoPortada } from "@/config/fotos";
 import { MOSTRAR_EJEMPLOS, listaConEjemplo } from "@/lib/ejemplo";
 import { Encabezado } from "@/components/Encabezado";
 import { BloqueArgumentos } from "@/components/BloqueArgumentos";
@@ -28,6 +28,8 @@ interface PlantillaLineaProps {
   pagina: PaginaLinea;
   /** Fotos opcionales de la página (se asignan desde config/fotos.ts) */
   fotos?: { encabezado?: Foto; porQue?: Foto; incluye?: Foto };
+  /** Video del encabezado (config/fotos.ts, `portadas`). Si está, reemplaza a la foto. */
+  video?: VideoPortada;
   ejemplos?: EjemplosLinea;
   /** Contenido extra dentro del bloque de contacto (por ejemplo, un formulario) */
   children?: ReactNode;
@@ -35,12 +37,12 @@ interface PlantillaLineaProps {
 
 /**
  * Plantilla común de las páginas de línea, en este orden:
- * 1. Encabezado  2. Por qué Keops  3. Qué incluye  4. Galería
- * 5. Referencias  6. Preguntas frecuentes  7. Contacto
+ * 1. Encabezado  (Cómo es la fiesta, si la página la tiene)  2. Por qué Keops  3. Qué incluye
+ * 4. Galería  5. Referencias  6. Preguntas frecuentes  7. Contacto
  * Cada bloque se oculta solo si no tiene contenido.
  */
-export function PlantillaLinea({ pagina, fotos = {}, ejemplos = {}, children }: PlantillaLineaProps) {
-  const { encabezado, porQue, incluye, galeria, referencias, extra, contacto } = pagina;
+export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, children }: PlantillaLineaProps) {
+  const { encabezado, fiesta, porQue, incluye, galeria, referencias, extra, contacto } = pagina;
 
   // 2. Por qué Keops
   const argumentos = listaConEjemplo(porQue.argumentos, ejemplos.argumentos ?? []);
@@ -80,7 +82,30 @@ export function PlantillaLinea({ pagina, fotos = {}, ejemplos = {}, children }: 
         foto={fotos.encabezado?.src}
         fotoAlt={fotos.encabezado?.alt}
         fotoPosicion={fotos.encabezado?.posicion}
+        video={video}
       />
+
+      {/* Cómo es la fiesta: momentos en orden, sobre una línea, como una noche que avanza */}
+      {fiesta && fiesta.momentos.length > 0 && (
+        <Seccion>
+          <FadeInSection>
+            <TituloSeccion antetitulo={fiesta.antetitulo} titulo={fiesta.titulo} />
+          </FadeInSection>
+          <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            {fiesta.momentos.map((m, i) => (
+              <li key={m.titulo}>
+                <FadeInSection delay={i * 80} className="h-full border-t border-piedra pt-6">
+                  <p className="titulo-2 text-arena" aria-hidden="true">
+                    {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="titulo-3 mt-4 text-marfil">{m.titulo}</h3>
+                  <p className="cuerpo mt-3 text-arena">{m.texto}</p>
+                </FadeInSection>
+              </li>
+            ))}
+          </ol>
+        </Seccion>
+      )}
 
       {/* 2. Por qué Keops */}
       <BloqueArgumentos

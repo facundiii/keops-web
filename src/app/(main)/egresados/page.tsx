@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { egresados } from "@/config/lineas";
-import { fotos } from "@/config/fotos";
+import { fotos, portadas } from "@/config/fotos";
 import { Encabezado } from "@/components/Encabezado";
 import { BloqueArgumentos } from "@/components/BloqueArgumentos";
 import { BloqueFaq } from "@/components/BloqueFaq";
@@ -26,6 +26,7 @@ export default function EgresadosPage() {
         titulo={encabezado.titulo}
         bajada={encabezado.bajada}
         boton={encabezado.boton}
+        video={portadas.egresados}
       />
 
       {/* Elección de nivel */}
@@ -38,7 +39,10 @@ export default function EgresadosPage() {
                 href={nivel.href}
                 className="group flex h-full min-h-[220px] flex-col justify-between rounded-2xl border border-piedra bg-carbon p-8 lg:p-10 transition-colors duration-300 hover:border-oro"
               >
-                <h3 className="titulo-2 text-marfil">{nivel.titulo}</h3>
+                <div>
+                  <h3 className="titulo-2 text-marfil">{nivel.titulo}</h3>
+                  {nivel.texto && <p className="cuerpo mt-3 text-arena">{nivel.texto}</p>}
+                </div>
                 <span className="mt-8 inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro">
                   {nivel.boton}
                   <ArrowRight

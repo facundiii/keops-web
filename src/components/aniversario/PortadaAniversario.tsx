@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { aniversario } from "@/config/aniversario";
 import { iniciarPiramide, type Piramide } from "@/lib/piramideEncendida";
+import { iniciarPasoNoche } from "@/lib/pasoNoche";
 import { claseBoton } from "@/components/ui/Boton";
 import { Contador } from "@/components/aniversario/Contador";
 
@@ -55,6 +56,8 @@ function hastaQueAterrice(logo: HTMLElement | null): number {
  * La compra está en la banda que sigue.
  */
 export function PortadaAniversario() {
+  const seccion = useRef<HTMLElement>(null);
+  const seguir = useRef<HTMLAnchorElement>(null);
   const lienzo = useRef<HTMLCanvasElement>(null);
   const fecha = useRef<HTMLParagraphElement>(null);
   const titulo = useRef<HTMLHeadingElement>(null);
@@ -114,8 +117,30 @@ export function PortadaAniversario() {
     piramide.current?.pausar(enPausa);
   }, [enPausa]);
 
+  // La pirámide es la introducción: un gesto hacia abajo pasa a DOT de una vez, en una animación.
+  // Con "reducir movimiento" el scroll es el de siempre.
+  useEffect(() => {
+    const portada = seccion.current;
+    const dot = document.getElementById("dot");
+    if (!portada || !dot) return;
+    const consulta = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let quitar: (() => void) | null = null;
+    const armar = () => {
+      quitar?.();
+      quitar = consulta.matches
+        ? null
+        : iniciarPasoNoche(portada, dot, { enlace: seguir.current, alLlegar: document.getElementById("titulo-dot") });
+    };
+    armar();
+    consulta.addEventListener("change", armar);
+    return () => {
+      consulta.removeEventListener("change", armar);
+      quitar?.();
+    };
+  }, []);
+
   return (
-    <section aria-labelledby="titulo-aniversario" className="aniv-portada relative isolate overflow-hidden bg-cielo-noche">
+    <section ref={seccion} aria-labelledby="titulo-aniversario" className="aniv-portada relative isolate overflow-hidden bg-cielo-noche">
       <canvas ref={lienzo} aria-hidden="true" className="absolute inset-0 -z-10 block h-full w-full" />
 
       <div className="aniv-capa absolute inset-0 flex flex-col items-center px-4 text-center">
@@ -141,7 +166,7 @@ export function PortadaAniversario() {
       </div>
 
       {/* La pirámide es la introducción: abajo, una invitación sutil a ver el resto de la noche */}
-      <a href="#dot" className="aniv-seguir">
+      <a ref={seguir} href="#dot" className="aniv-seguir">
         {aniversario.invitacion}
         <span aria-hidden="true" className="aniv-seguir-linea" />
       </a>

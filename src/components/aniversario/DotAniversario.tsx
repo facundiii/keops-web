@@ -9,7 +9,7 @@ import { claseBoton } from "@/components/ui/Boton";
 const entre01 = (x: number) => Math.max(0, Math.min(1, x));
 
 /**
- * DOT, la electrónica de la noche del aniversario en otro sector. Sigue a la pirámide al bajar:
+ * DOT, la electrónica de la noche del aniversario, en un sector dedicado. Sigue a la pirámide al bajar:
  * la escena queda fija mientras se recorre la sección, el enjambre pasa por las formaciones
  * del reel y el lineup entra en orden de salida. Sin JavaScript o con "reducir movimiento",
  * es una pantalla con todo el texto a la vista.
@@ -109,7 +109,8 @@ export function DotAniversario() {
 
         <div className="dot-capa absolute inset-0 flex flex-col items-center px-4 text-center lg:justify-center lg:items-start lg:px-24 lg:text-left">
           <div data-paso="0" className="dot-paso">
-            <h2 id="titulo-dot" className="dot-marca">
+            {/* Recibe el foco cuando se llega con "Lo que hay esa noche" desde el teclado */}
+            <h2 id="titulo-dot" tabIndex={-1} className="dot-marca outline-none">
               {dot.nombre}
             </h2>
             <p className="dot-fecha mt-2 lg:mt-3">{aniversario.fechaCorta}</p>

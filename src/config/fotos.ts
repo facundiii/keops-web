@@ -57,13 +57,31 @@ const historia50Anios: Foto = {
   alt: "Festejo de los 50 años de Keops, con una torta en forma de pirámide",
 };
 
+/** Video de fondo de un encabezado: un tramo corto y liviano de un video propio, con su primer cuadro. */
+export interface VideoPortada {
+  src: string;
+  /** Imagen que se ve mientras carga el video */
+  poster: string;
+  /** Video vertical (9:16): en pantallas anchas va al costado del texto, como un reel */
+  vertical?: boolean;
+}
+
+/**
+ * Videos de los encabezados, en /public/portadas/. Son recortes de 9 a 12 segundos, sin sonido,
+ * de los videos de Egresados y de la home (unos 2 MB cada uno en lugar de 6 a 13 MB).
+ */
+export const portadas = {
+  egresados: { src: "/portadas/egresados.mp4", poster: "/portadas/egresados.jpg", vertical: true } as VideoPortada | undefined,
+  secundarios: { src: "/portadas/secundarios.mp4", poster: "/portadas/secundarios.jpg", vertical: true } as VideoPortada | undefined,
+  disco: { src: "/portadas/disco.mp4", poster: "/portadas/disco.jpg" } as VideoPortada | undefined,
+};
+
 // ── Dónde va cada una ────────────────────────────────────────────
 export const fotos = {
   /** Tarjetas de las líneas en la home */
   home: {
     egresados: showRobotsLed,
     eventos: salonEletonArmado,
-    institucionales: catering,
     disco: pistaCentral,
     academia: salonBarKeops,
   } as Record<string, Foto | undefined>,
@@ -107,8 +125,12 @@ export const fotos = {
 
   disco: { encabezado: pistaCentral as Foto | undefined },
   eventos: { encabezado: salonEletonArmado as Foto | undefined, incluye: catering as Foto | undefined },
-  institucionales: { incluye: catering as Foto | undefined },
   egresados: { porQue: showRobotsLed as Foto | undefined },
+  /** Primario no tiene video propio: el encabezado muestra el show de robots LED */
+  primarios: {
+    encabezado: { ...showRobotsLed, posicion: "center 40%" } as Foto | undefined,
+    porQue: pistaCentralPiramide as Foto | undefined,
+  },
   academia: { encabezado: salonBarKeops as Foto | undefined },
 
   /**
@@ -135,7 +157,7 @@ export const fotos = {
   /** Para las galerías, cuando haya 6 fotos o más de cada una (config/lineas.ts). */
   paraGalerias: {
     pistaCentral: [pistaCentral],
-    institucionales: [salonEletonBarra],
+    eventos: [salonEletonBarra],
     academia: [salonBar],
   },
 };

@@ -29,46 +29,58 @@ function proximosSabados(cantidad: number): string[] {
   return fechas;
 }
 
-/** Cartelera de ejemplo: con arte, agotada y sin arte. */
+/**
+ * Cartelera de ejemplo, para ver cómo se ven los flyers: noches, DJs y artes inventados
+ * (los flyers de /disco/flyers/ejemplo-*.jpg están armados con las fotos del sitio).
+ * Incluye una agotada y una sin arte.
+ */
 export function nochesDeEjemplo(): Noche[] {
   const [s1, s2, s3, s4] = proximosSabados(4);
   return [
     {
       id: "ejemplo-1",
-      nombre: "Noche de ejemplo",
+      nombre: "Neon Night",
       fecha: s1,
       hora: "00:00",
-      djs: ["DJ Residente de ejemplo", "DJ Invitado de ejemplo"],
-      flyer: "/disco/flyers/ankh-180726.jpg",
-      flyerAjuste: "fill",
+      djs: ["Martín Ríos", "Sofi Lazo b2b Nico Ferrán"],
+      flyer: "/disco/flyers/ejemplo-neon.jpg",
     },
     {
       id: "ejemplo-2",
-      nombre: "Noche agotada de ejemplo",
+      nombre: "Sunset Sessions",
       fecha: s2,
       hora: "00:30",
-      djs: ["DJ Residente de ejemplo"],
-      flyer: "/disco/flyers/gustydj-180126.png",
+      djs: ["Juli Benítez", "DJ Residente"],
+      flyer: "/disco/flyers/ejemplo-sunset.jpg",
       agotado: true,
     },
-    { id: "ejemplo-3", nombre: "Noche sin arte de ejemplo", fecha: s3, hora: "00:00", djs: ["DJ de ejemplo"], flyer: "" },
     {
-      id: "ejemplo-4",
-      nombre: "Otra noche de ejemplo",
-      fecha: s4,
+      id: "ejemplo-3",
+      nombre: "Bajo la pirámide",
+      fecha: s3,
       hora: "00:00",
-      djs: ["DJ de ejemplo"],
-      flyer: "/disco/flyers/gustydj-180126.png",
+      djs: ["Tomi Acosta", "Luca Mora", "DJ Invitado"],
+      flyer: "/disco/flyers/ejemplo-piramide.jpg",
     },
+    { id: "ejemplo-4", nombre: "Noche sin arte", fecha: s4, hora: "00:00", djs: ["DJ Residente"], flyer: "" },
   ];
 }
 
+/** Noches Fusion de ejemplo, con flyers armados con las fotos del sitio (/fusion/flyers/ejemplo-*.jpg). */
 export function nochesFusionDeEjemplo(): NocheFusion[] {
   const [s1, s2, s3] = proximosSabados(3);
   return [
-    { id: "ejemplo-f1", nombre: "Fusion de ejemplo en Keops", fecha: s1, lugar: "Keops", urlEntradas: "" },
-    { id: "ejemplo-f2", nombre: "Fusion de ejemplo en Khalama", fecha: s2, lugar: "Khalama", urlEntradas: "" },
-    { id: "ejemplo-f3", nombre: "Fusion agotada de ejemplo", fecha: s3, lugar: "Molino", urlEntradas: "", agotado: true },
+    { id: "ejemplo-f1", nombre: "Fusion en Keops", fecha: s1, lugar: "Keops", urlEntradas: "", flyer: "/fusion/flyers/ejemplo-keops.jpg" },
+    { id: "ejemplo-f2", nombre: "Fusion en Khalama", fecha: s2, lugar: "Khalama", urlEntradas: "", flyer: "/fusion/flyers/ejemplo-khalama.jpg" },
+    {
+      id: "ejemplo-f3",
+      nombre: "Fusion en Molino",
+      fecha: s3,
+      lugar: "Molino",
+      urlEntradas: "",
+      agotado: true,
+      flyer: "/fusion/flyers/ejemplo-molino.jpg",
+    },
   ];
 }
 
@@ -109,12 +121,6 @@ export const ejemplos = {
       { titulo: "Producción de boliche", texto: "Sonido, luces y pantallas de una disco, puestos al servicio de tu evento." },
       { titulo: "Un coordinador para vos", texto: "Una persona te acompaña desde la primera reunión hasta el final de la noche." },
     ] as Argumento[],
-    institucionales: [
-      { titulo: "Un lugar con identidad", texto: "La pirámide es un ícono de Carlos Paz: tu evento se recuerda por dónde fue." },
-      { titulo: "Técnica lista", texto: "Pantallas, sonido e iluminación instalados, con operadores propios." },
-      { titulo: "Escala flexible", texto: "Desde reuniones chicas hasta eventos para 5.000 personas." },
-      { titulo: "Un solo interlocutor", texto: "Un coordinador dedicado resuelve todo con tu equipo." },
-    ] as Argumento[],
   },
 
   testimonios: {
@@ -134,13 +140,6 @@ export const ejemplos = {
       {
         texto: "Nos resolvieron el salón, la barra y la música en una sola reunión.",
         autor: "Nombre y apellido, casamiento",
-        autorizado: true,
-      },
-    ] as Testimonio[],
-    institucionales: [
-      {
-        texto: "La técnica estaba lista cuando llegamos y el coordinador nos acompañó toda la jornada.",
-        autor: "Nombre y apellido, empresa de ejemplo",
         autorizado: true,
       },
     ] as Testimonio[],

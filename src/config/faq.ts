@@ -26,7 +26,7 @@ export const faq: GrupoFaq[] = [
     preguntas: [
       {
         pregunta: "¿Dónde queda Keops?",
-        respuesta: "En Villa Carlos Paz, Córdoba, fuera del centro. Podés ver cómo llegar en Google Maps.",
+        respuesta: "En Villa Carlos Paz, Córdoba. Podés ver cómo llegar en Google Maps.",
         confirmado: false,
       },
       {
@@ -92,7 +92,7 @@ export const faq: GrupoFaq[] = [
   },
   {
     id: "eventos",
-    titulo: "Eventos privados e Institucionales",
+    titulo: "Eventos privados",
     preguntas: [
       {
         pregunta: "¿Qué tipo de eventos hacen?",

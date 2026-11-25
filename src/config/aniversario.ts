@@ -36,7 +36,7 @@ export const aniversario = {
   /** La invitación de abajo de la portada: la pirámide es la introducción y la noche sigue al bajar */
   invitacion: "Lo que hay esa noche", // TEXTO PROPUESTO
 
-  /** DOT: la electrónica de la misma noche, en otro sector. Datos del flyer de @dotbykeops. */
+  /** DOT: la electrónica de la misma noche, en un sector dedicado. Datos del flyer de @dotbykeops. */
   dot: {
     /** Nombre del sector, como en el flyer. Si llega el logo en archivo, reemplaza al texto. */
     nombre: "DOT.",
@@ -48,7 +48,7 @@ export const aniversario = {
     lineup: [["Fferniot"], ["Lucas Reartes", "Lukas Roldán"]],
     /** Quien cierra la noche: va después del lineup y en grande */
     cabeza: "Luciano Bertorello",
-    bajada: "Electrónica, la misma noche y en otro sector de Keops.", // TEXTO PROPUESTO
+    bajada: "Electrónica, la misma noche, en un sector dedicado de Keops.", // TEXTO PROPUESTO
     /** En qué sector de Keops va DOT, ej. "Salón Eletón". A COMPLETAR. Vacío = no se muestra. */
     sector: "",
   },

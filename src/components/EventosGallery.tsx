@@ -95,7 +95,7 @@ function Strip({ images, direction, pausado }: StripProps) {
 
   return (
     <div className="overflow-hidden" style={{ height: "100%" }}>
-      <div className={`flex flex-col gap-3 ${animClass} ${pausado ? "animacion-pausada" : ""}`}>
+      <div className={`tira-continua flex flex-col gap-3 ${animClass} ${pausado ? "animacion-pausada" : ""}`}>
         {items.map((src, i) => (
           <ImageSlot key={i} src={src} />
         ))}
@@ -132,7 +132,7 @@ function HorizontalStrip({
       <div className="relative overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-negro to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-negro to-transparent pointer-events-none" />
-        <div className={`flex gap-3 w-max animate-scroll-left-fast ${pausa}`}>
+        <div className={`tira-continua flex gap-3 w-max animate-scroll-left-fast ${pausa}`}>
           {leftItems.map(renderItem)}
         </div>
       </div>
@@ -140,7 +140,7 @@ function HorizontalStrip({
       <div className="relative overflow-hidden">
         <div className="absolute inset-y-0 left-0 w-8 z-10 bg-gradient-to-r from-negro to-transparent pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-8 z-10 bg-gradient-to-l from-negro to-transparent pointer-events-none" />
-        <div className={`flex gap-3 w-max animate-scroll-right-fast ${pausa}`}>
+        <div className={`tira-continua flex gap-3 w-max animate-scroll-right-fast ${pausa}`}>
           {rightItems.map(renderItem)}
         </div>
       </div>

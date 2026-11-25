@@ -108,16 +108,16 @@ export function Navbar() {
             href={RUTA_INICIO}
             onClick={cerrar}
             aria-label="Keops, ir al inicio"
-            className={`flex items-center justify-center min-h-[44px] min-w-[44px] transition-opacity duration-200 hover:opacity-80 ${
+            className={`isotipo group flex items-center justify-center min-h-[44px] min-w-[44px] ${
               esInicio ? "" : "absolute left-1/2 -translate-x-1/2 lg:static lg:translate-x-0"
             }`}
           >
             <Image
               src="/logo-piramide.png"
               alt=""
-              width={96}
-              height={96}
-              className="w-10 lg:w-12 h-auto"
+              width={281}
+              height={209}
+              className="isotipo-luz w-12 lg:w-16 h-auto"
               priority
             />
           </Link>

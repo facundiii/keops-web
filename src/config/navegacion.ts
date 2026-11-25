@@ -20,7 +20,6 @@ export const navegacion: ItemNav[] = [
     ],
   },
   { etiqueta: "Eventos privados", href: "/eventos" },
-  { etiqueta: "Institucionales", href: "/institucionales" },
   { etiqueta: "Disco", href: "/disco" },
   { etiqueta: "Academia", href: "/academia" },
 ];

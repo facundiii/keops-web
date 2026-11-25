@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { disco } from "@/config/disco";
 import { cartelera as noches } from "@/config/cartelera";
-import { fotos } from "@/config/fotos";
+import { fotos, portadas } from "@/config/fotos";
 import { nochesDeEjemplo } from "@/config/ejemplos";
 import { MOSTRAR_EJEMPLOS, galeriaDeEjemplo, listaConEjemplo } from "@/lib/ejemplo";
 import { Encabezado } from "@/components/Encabezado";
@@ -36,6 +36,7 @@ export default function DiscoPage() {
         foto={foto?.src}
         fotoAlt={foto?.alt}
         fotoPosicion={foto?.posicion}
+        video={portadas.disco}
       />
 
       {/* Cartelera: las fechas pasadas se ocultan solas */}

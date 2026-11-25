@@ -5,7 +5,7 @@
 //   navegacion.ts  menú principal
 //   fotos.ts       qué foto va en cada lugar
 //   home.ts        contenido de la home
-//   lineas.ts      Egresados, Eventos privados e Institucionales
+//   lineas.ts      Egresados y Eventos privados
 //   disco.ts       página Disco
 //   cartelera.ts   las próximas noches de Disco
 //   fusion.ts      página Fusion y sus noches
@@ -19,5 +19,5 @@ export const siteConfig = {
   location: "Villa Carlos Paz, Córdoba",
   url: "https://keops.ar",
   descripcion:
-    "Disco, egresados, eventos privados e institucionales en Villa Carlos Paz, Córdoba. Desde 1969.",
+    "Disco, egresados y eventos privados en Villa Carlos Paz, Córdoba. Desde 1969.",
 } as const;

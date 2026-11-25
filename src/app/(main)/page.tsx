@@ -96,11 +96,14 @@ export default function HomePage() {
           {tarjetasLineas.map((tarjeta, i) => {
             const foto = fotos.home[tarjeta.id];
             const grande = i < 2;
+            // Las dos primeras van grandes. Las demás completan la fila de a tres, o de a dos si son dos o cuatro.
+            const enFilaDeDos = (tarjetasLineas.length - 2) % 3 !== 0;
+            const impar = tarjetasLineas.length % 2 === 1;
             return (
               <li
                 key={tarjeta.id}
-                className={`${grande ? "lg:col-span-3" : "lg:col-span-2"} ${
-                  i === tarjetasLineas.length - 1 ? "sm:col-span-2" : ""
+                className={`${grande || enFilaDeDos ? "lg:col-span-3" : "lg:col-span-2"} ${
+                  impar && i === tarjetasLineas.length - 1 ? "sm:col-span-2" : ""
                 }`}
               >
                 <FadeInSection delay={i * 80} className="h-full">
