@@ -110,7 +110,7 @@ export const ejemplos = {
     },
     vip: {
       capacidad: "Hasta 300 personas",
-      descripcion: "Un sector reservado para mayores de 30, con barra y atención propias.",
+      descripcion: "Un sector reservado, con barra y atención propias.",
     },
   } as Record<string, { capacidad: string; descripcion: string }>,
 

@@ -9,7 +9,7 @@ import { IconoWhatsApp } from "@/components/ui/IconoWhatsApp";
 import { InstagramDePagina } from "@/components/InstagramDePagina";
 
 const claseLink =
-  "inline-flex items-center gap-2.5 min-h-[44px] text-marfil hover:text-oro transition-colors duration-200";
+  "inline-flex items-center gap-2 min-h-[44px] text-marfil hover:text-oro transition-colors duration-200";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -17,9 +17,9 @@ export function Footer() {
   const lineasConContacto = Object.values(lineas).filter((l) => l.whatsapp || l.mail);
 
   return (
-    <footer id="pie" className="bg-negro border-t border-piedra scroll-mt-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-20">
+    <footer id="pie" className="bg-negro border-t border-piedra scroll-mt-4 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto py-16">
+        <div className="grid gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
           <Link href={RUTA_INICIO} aria-label="Keops, ir al inicio" className="block w-36 shrink-0">
             <Image src="/logo.png" alt="Keops" width={288} height={119} className="w-full h-auto" />
           </Link>

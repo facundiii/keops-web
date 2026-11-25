@@ -30,7 +30,7 @@ export function BloqueGaleria({ titulo, medios, ejemplo = [] }: BloqueGaleriaPro
   return (
     <Seccion>
       <FadeInSection>
-        <TituloSeccion titulo={titulo} centrado className={esEjemplo ? "!mb-5" : ""} />
+        <TituloSeccion titulo={titulo} centrado className={esEjemplo ? "!mb-4" : ""} />
         {esEjemplo && (
           <div className="text-center mb-8">
             <EtiquetaEjemplo />

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface FadeInSectionProps {
   children: React.ReactNode;
@@ -9,39 +9,43 @@ interface FadeInSectionProps {
 }
 
 /**
- * Aparición suave al entrar en pantalla: fade + leve desplazamiento, 500 ms.
- * Con prefers-reduced-motion el contenido se ve desde el inicio, sin animación.
+ * Aparición suave al entrar en pantalla: fundido + subida de 16 px, 500 ms (estilos en globals.css).
+ *
+ * El contenido sale visible del servidor: sin JavaScript, o si el JavaScript falla, se lee igual.
+ * Al cargar se esconde solo lo que todavía está debajo de la pantalla, y aparece al llegar.
+ * Con prefers-reduced-motion no se esconde nada.
  */
 export function FadeInSection({ children, className = "", delay = 0 }: FadeInSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Lo que ya está a la vista (o más arriba) no se toca: así no parpadea al cargar
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
 
+    el.dataset.aparece = "espera";
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          el.dataset.aparece = "visto";
           observer.disconnect();
         }
       },
-      { threshold: 0.1 }
+      // Aparece cuando asoma un poco por abajo, sea del alto que sea
+      { rootMargin: "0px 0px -8% 0px" }
     );
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      delete el.dataset.aparece;
+    };
   }, []);
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-500 ease-out motion-reduce:opacity-100 motion-reduce:translate-y-0 ${
-        visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-      } ${className}`}
-      style={{ transitionDelay: visible ? `${delay}ms` : "0ms" }}
-    >
+    <div ref={ref} className={`aparece ${className}`.trim()} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
       {children}
     </div>
   );

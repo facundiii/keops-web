@@ -26,22 +26,26 @@ export function ComoLlegar() {
   const hayEjemplos = direccion.esEjemplo || estacionamiento.esEjemplo || transporte.esEjemplo;
 
   const claseBotonMapa =
-    "inline-flex items-center gap-2 min-h-[44px] px-5 rounded-full border border-piedra bg-negro/90 backdrop-blur-sm " +
+    "inline-flex items-center gap-2 min-h-[44px] px-6 rounded-full border border-piedra bg-negro/90 backdrop-blur-sm " +
     "font-sans font-medium text-sm text-marfil whitespace-nowrap transition-colors duration-300 hover:border-oro hover:text-oro";
 
   return (
-    <Seccion id="como-llegar" ancho="medio">
+    <Seccion id="como-llegar">
       <FadeInSection>
         <h2 className="titulo-2 text-marfil mb-6">{titulo}</h2>
 
         {direccion.texto && (
           <p className="cuerpo text-marfil flex items-start gap-3 mb-4">
-            <MapPin size={24} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-oro mt-0.5" />
+            {/* El ícono se centra con el primer renglón del texto */}
+            <span className="flex h-7 shrink-0 items-center text-oro">
+              <MapPin size={24} strokeWidth={1.5} aria-hidden="true" />
+            </span>
             {direccion.texto}
           </p>
         )}
 
-        {texto && <p className="cuerpo text-arena max-w-2xl">{texto}</p>}
+        {/* Sin ancho máximo: en pantallas anchas entra en una línea */}
+        {texto && <p className="cuerpo text-arena">{texto}</p>}
 
         {extras.length > 0 && (
           <dl className="mt-8 grid gap-6 sm:grid-cols-2 max-w-2xl">

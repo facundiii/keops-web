@@ -78,7 +78,6 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
         antetitulo={encabezado.antetitulo}
         titulo={encabezado.titulo}
         bajada={encabezado.bajada}
-        boton={encabezado.boton}
         foto={fotos.encabezado?.src}
         fotoAlt={fotos.encabezado?.alt}
         fotoPosicion={fotos.encabezado?.posicion}
@@ -123,12 +122,15 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
               <FadeInSection>
                 <TituloSeccion titulo={incluye.titulo} />
               </FadeInSection>
-              <ul className={`grid gap-x-12 gap-y-5 ${fotos.incluye ? "" : "sm:grid-cols-2"}`}>
+              <ul className={`grid gap-x-12 gap-y-4 ${fotos.incluye ? "" : "sm:grid-cols-2"}`}>
                 {incluye.servicios.map((servicio, i) => (
                   <li key={servicio}>
                     <FadeInSection delay={i * 60}>
                       <span className="cuerpo text-marfil flex items-start gap-3">
-                        <Check size={24} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-oro mt-0.5" />
+                        {/* El ícono se centra con el primer renglón del texto */}
+                        <span className="flex h-7 shrink-0 items-center text-oro">
+                          <Check size={24} strokeWidth={1.5} aria-hidden="true" />
+                        </span>
                         {servicio}
                       </span>
                     </FadeInSection>
@@ -159,7 +161,7 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
       {mediosGaleria.length > 0 && (
         <Seccion className={galeria.estilo === "cine" && hayGaleriaReal ? "!px-0" : ""}>
           <FadeInSection>
-            <TituloSeccion titulo={galeria.titulo} centrado className={galeriaEsEjemplo ? "px-4 !mb-5" : "px-4"} />
+            <TituloSeccion titulo={galeria.titulo} centrado className={galeriaEsEjemplo ? "px-4 !mb-4" : "px-4"} />
             {galeriaEsEjemplo && (
               <div className="text-center mb-8">
                 <EtiquetaEjemplo />
@@ -197,7 +199,7 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
 
           {logos.length > 0 && (
             <>
-              <ul className="flex flex-wrap items-center justify-center gap-x-14 gap-y-8">
+              <ul className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
                 {logos.map((r) => (
                   <li key={r.nombre}>
                     {r.logo ? (
@@ -223,7 +225,7 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
           )}
 
           {testimonios.datos.length > 0 && (
-            <div className={logos.length > 0 ? "mt-14" : ""}>
+            <div className={logos.length > 0 ? "mt-12" : ""}>
               {testimonios.esEjemplo && (
                 <div className="text-center mb-6">
                   <EtiquetaEjemplo texto="Testimonios de ejemplo: no se publican" />
@@ -231,9 +233,9 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
               )}
               <div className={`grid gap-4 ${testimonios.datos.length > 1 ? "md:grid-cols-2" : "max-w-2xl mx-auto"}`}>
                 {testimonios.datos.map((t) => (
-                  <figure key={t.texto} className="rounded-2xl border border-piedra bg-carbon p-7">
+                  <figure key={t.texto} className="rounded-2xl border border-piedra bg-carbon p-6 lg:p-8">
                     <blockquote className="cuerpo text-marfil">{t.texto}</blockquote>
-                    {t.autor && <figcaption className="antetitulo mt-5">{t.autor}</figcaption>}
+                    {t.autor && <figcaption className="antetitulo mt-4">{t.autor}</figcaption>}
                   </figure>
                 ))}
               </div>
@@ -247,7 +249,7 @@ export function PlantillaLinea({ pagina, fotos = {}, video, ejemplos = {}, child
         <Seccion ancho="angosto">
           <FadeInSection>
             <TituloSeccion antetitulo={extra.antetitulo} titulo={extra.titulo} />
-            <div className="space-y-5">
+            <div className="space-y-4">
               {parrafosExtra.datos.map((p) => (
                 <p key={p} className="cuerpo text-arena">
                   {p}

@@ -38,7 +38,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 ## `contacto.ts`
 
-- [ ] **Academia:** `mail`, `whatsapp` (solo dígitos, con código de país) y `whatsappVisible`. Con esos datos aparecen el botón flotante de WhatsApp, el bloque de inscripción, el botón "Inscribite" y la línea Academia en el pie.
+- [ ] **Academia:** `mail`, `whatsapp` (solo dígitos, con código de país) y `whatsappVisible`. Con esos datos aparecen el botón flotante de WhatsApp, el bloque de inscripción y la línea Academia en el pie.
 
 ## `comoLlegar.ts`
 
@@ -68,8 +68,9 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - [ ] **Línea de tiempo:** las imágenes de 1969, 2020 y 2021 son **de ejemplo** (fotos actuales, con la etiqueta "Imagen de ejemplo"). Solo se ven en tu PC; al confirmar un hito sin foto propia, sale sin imagen.
 - [ ] **Línea de tiempo:** pasar `confirmado` a `true` en cada hito revisado. En tu PC se ven todos con la etiqueta "Sin confirmar"; en el sitio publicado solo salen los confirmados.
 - [ ] **Línea de tiempo:** faltan las imágenes de **1969, 2020 y 2021** (se asignan en `fotos.ts`). Las de 2010 y 2019 ya están.
-- [ ] **Espacios:** `capacidad` y `descripcion` de Pista Central, Salón Eletón, Salón Bar, Keops Garden y VIP +30.
+- [ ] **Espacios:** `capacidad` y `descripcion` de Pista Central, Salón Eletón, Salón Bar, Keops Garden y Salón VIP.
 - [ ] **Misión:** el texto es el propuesto; revisarlo.
+- [ ] **Nuestro equipo** (`equipo`): está Administración (Francisco Giordano, Débora Bourdieu, Jessica Sosa). Se pueden sumar más áreas (por ejemplo, música, show o técnica) y un rol por persona.
 
 ## `lineas.ts`
 
@@ -113,8 +114,9 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 ## `fotos.ts`
 
-- [ ] Fotos de **Keops Garden** y **VIP +30** (hoy sus tarjetas muestran solo el nombre).
+- [ ] Fotos de **Salón Bar** y **Keops Garden** (hoy sus tarjetas muestran solo el nombre). La foto `05-salon-bar.jpg` es del Salón VIP y ya está en su tarjeta.
 - [ ] Revisar el encuadre de las fotos verticales recortadas (salón armado y catering). Se ajusta con `posicion`, por ejemplo `"center 40%"`.
+- [ ] **Foto de la pirámide en más resolución** (`01-pista-central-piramide.jpg`). Hoy mide 1367 × 2048 px y es vertical, pero va a todo el ancho en el encabezado de Nosotros y en el cierre de la home: en pantallas grandes se ve blanda. Hace falta una horizontal de 2560 px de ancho o más (o el original de la cámara).
 
 ## Archivos que convendría conseguir
 
@@ -133,8 +135,8 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - **Servicios de Eventos privados** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad"). Sin banda en vivo.
 - **Institucionales afuera:** sin página, sin tarjeta en la home y sin ítem en el menú. Eventos privados suma "eventos de empresa" y `/institucionales` redirige a `/eventos`.
 - **Encabezados de las páginas internas:** con foto o video ocupan casi toda la pantalla. `/egresados` y secundario tienen un video vertical (al costado del texto en la compu) y Disco, el video de la pista. Son tramos cortos y livianos de los videos propios (`public/portadas/`).
-- **"Nuestro equipo"** se sacó de Nosotros (ronda de revisión del 23/11).
+- **"Nuestro equipo"** volvió a Nosotros, por área y sin fotos: por ahora, Administración (Francisco Giordano, Débora Bourdieu y Jessica Sosa).
 - **Títulos de contacto** "Escribinos" en la home, Disco y Fusion (`home.ts`, `disco.ts`, `fusion.ts`).
 - **Mensaje del formulario de agencias:** "Hola, quiero pedir una propuesta para egresados." seguido de agencia, nivel, cantidad y fecha.
-- **Botón "Comprar entrada" en el encabezado de Disco** (`disco.ts`, `encabezado.boton`): baja directo a "Comprá tu entrada". Para sacarlo, dejá el texto vacío.
+- **Sin botones en la primera vista de ninguna página:** los encabezados ya no tienen botón (tampoco "Comprar entrada" en Disco) y el "Contacto" dorado y el WhatsApp flotante aparecen al bajar, como en la home.
 - **Botones de las tiendas** en "Comprá tu entrada": ahora dicen solo "Google Play" y "App Store" (antes, "Disponible en Google Play").

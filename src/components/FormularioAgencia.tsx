@@ -34,8 +34,8 @@ export function FormularioAgencia({ nivelInicial }: { nivelInicial?: NivelEgresa
   };
 
   return (
-    <form onSubmit={alEnviar} className="rounded-2xl border border-piedra bg-negro p-5 sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={alEnviar} className="rounded-2xl border border-piedra bg-negro p-4 sm:p-8">
+      <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label htmlFor="agencia" className={claseEtiqueta}>
             Agencia

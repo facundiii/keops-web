@@ -9,11 +9,10 @@ import { navegacion, navFusion, RUTA_INICIO } from "@/config/navegacion";
 import { claseBoton } from "@/components/ui/Boton";
 import { usePasoPortada } from "@/lib/usePasoPortada";
 
-const claseLink =
-  "font-sans font-medium text-[0.9375rem] whitespace-nowrap transition-colors duration-200 hover:text-oro";
+const claseLink = "enlace-menu whitespace-nowrap transition-colors duration-200 hover:text-oro";
 /** "Contacto" en texto: así se ve mientras dura la primera vista de la home, que va sin botones. */
 const claseContactoTexto =
-  "inline-flex min-h-[44px] items-center font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro transition-colors duration-200 hover:text-marfil";
+  "inline-flex min-h-[44px] items-center texto-boton text-oro transition-colors duration-200 hover:text-marfil";
 
 export function Navbar() {
   const ruta = usePathname();
@@ -24,9 +23,9 @@ export function Navbar() {
 
   const esInicio = ruta === RUTA_INICIO || ruta === "/";
   const activo = (href: string) => ruta === href || ruta.startsWith(href + "/");
-  // En la primera vista de la home no hay botones: "Contacto" va en texto hasta que se baja
+  // La primera vista de ninguna página lleva botones: "Contacto" va en texto hasta que se baja
   const pasoPortada = usePasoPortada();
-  const contactoEnTexto = esInicio && !pasoPortada;
+  const contactoEnTexto = !pasoPortada;
 
   // Se oculta al bajar y reaparece apenas se sube o se vuelve al tope.
   useEffect(() => {
@@ -80,7 +79,7 @@ export function Navbar() {
       <header
         // has-[:focus-visible]: si alguien navega con teclado, el navbar no se esconde.
         // (No se usa focus-within: después de un clic el foco queda en el link y el navbar no se ocultaría nunca.)
-        className={`fixed top-0 inset-x-0 z-50 border-b transition-[transform,background-color,border-color] duration-300 has-[:focus-visible]:translate-y-0 ${
+        className={`fixed top-0 inset-x-0 z-50 border-b px-4 sm:px-6 lg:px-8 transition-[transform,background-color,border-color] duration-300 has-[:focus-visible]:translate-y-0 ${
           oculto && !abierto ? "-translate-y-full" : "translate-y-0"
         } ${
           abierto
@@ -90,7 +89,8 @@ export function Navbar() {
               : "bg-negro/95 backdrop-blur-md border-piedra"
         }`}
       >
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 lg:h-20 flex items-center justify-between gap-6">
+        {/* Sobre la misma línea que el contenido: el ancho de siempre, con los márgenes de <Seccion> en el <header> */}
+        <div className="relative max-w-6xl mx-auto h-16 lg:h-20 flex items-center justify-between gap-6">
           {/* Celular, páginas internas: volver a la home */}
           {!esInicio && (
             <Link

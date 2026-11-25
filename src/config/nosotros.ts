@@ -90,6 +90,31 @@ export const espacios: { antetitulo: string; titulo: string; lista: Espacio[] } 
     { id: "salonEleton", nombre: "Salón Eletón", capacidad: "", descripcion: "" }, // A COMPLETAR
     { id: "salonBar", nombre: "Salón Bar", capacidad: "", descripcion: "" }, // A COMPLETAR
     { id: "garden", nombre: "Keops Garden", capacidad: "", descripcion: "" }, // A COMPLETAR
-    { id: "vip", nombre: "VIP +30", capacidad: "", descripcion: "" }, // A COMPLETAR
+    { id: "vip", nombre: "Salón VIP", capacidad: "", descripcion: "" }, // A COMPLETAR
+  ],
+};
+
+// ── Nuestro equipo ───────────────────────────────────────────────
+//
+// El equipo, por área. Un área sin personas no se muestra; sin ninguna, el bloque tampoco.
+// `rol` es opcional: vacío, se muestra solo el nombre debajo del área.
+
+export interface PersonaEquipo {
+  nombre: string;
+  rol: string;
+}
+
+export const equipo: { antetitulo: string; titulo: string; areas: { nombre: string; personas: PersonaEquipo[] }[] } = {
+  antetitulo: "Equipo",
+  titulo: "Nuestro equipo",
+  areas: [
+    {
+      nombre: "Administración",
+      personas: [
+        { nombre: "Francisco Giordano", rol: "" },
+        { nombre: "Débora Bourdieu", rol: "" },
+        { nombre: "Jessica Sosa", rol: "" },
+      ],
+    },
   ],
 };

@@ -106,12 +106,12 @@ export function Visor({ medios, indice, alCambiar, alCerrar }: VisorProps) {
           </button>
 
           {total > 1 && (
-            <p aria-live="polite" className="texto-chico absolute left-1/2 top-6 -translate-x-1/2 tracking-[0.2em] text-arena">
+            <p aria-live="polite" className="texto-chico absolute left-1/2 top-6 -translate-x-1/2 tracking-widest text-arena">
               {indice + 1} / {total}
             </p>
           )}
 
-          <div data-fondo="" className="flex h-full w-full items-center justify-center px-16 py-20 sm:px-24">
+          <div data-fondo="" className="flex h-full w-full items-center justify-center px-16 py-16 sm:px-24">
             {medio.tipo === "video" ? (
               <video
                 key={medio.src}
@@ -171,7 +171,7 @@ export function Visor({ medios, indice, alCambiar, alCerrar }: VisorProps) {
               </button>
 
               {/* Posición en la galería: solo visual, el número de arriba ya lo anuncia */}
-              <div aria-hidden="true" className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-1.5">
+              <div aria-hidden="true" className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
                 {medios.map((m, i) => (
                   <span
                     key={m.src + i}

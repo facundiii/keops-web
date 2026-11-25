@@ -12,14 +12,17 @@ import type { ReactNode } from "react";
  */
 export type VarianteBoton = "principal" | "secundario" | "whatsapp";
 
+// Las medidas internas (28 px de relleno, 10 px entre ícono y texto) son las de la ficha del botón
+// en DESIGN.md: no salen de la escala de espaciado y no se copian fuera de este componente.
 const base =
   "inline-flex items-center justify-center gap-2.5 min-h-[44px] px-7 py-3 rounded-full " +
-  "font-sans font-semibold text-sm uppercase tracking-[0.1em] text-center " +
-  "transition-colors duration-300 disabled:opacity-50 disabled:pointer-events-none";
+  "texto-boton text-center " +
+  "transition-[color,background-color,border-color,box-shadow] duration-300 disabled:opacity-50 disabled:pointer-events-none";
 
+// La luz al tocar: el halo dorado aparece solo en hover o foco, nunca en reposo
 const variantes: Record<VarianteBoton, string> = {
-  principal: "bg-oro text-negro hover:bg-oro-profundo active:bg-oro-profundo",
-  secundario: "border border-oro text-oro hover:bg-oro/10 active:bg-oro/20",
+  principal: "bg-oro text-negro hover:bg-oro-profundo hover:shadow-halo focus-visible:shadow-halo active:bg-oro-profundo",
+  secundario: "border border-oro text-oro hover:bg-oro/10 hover:shadow-halo focus-visible:shadow-halo active:bg-oro/20",
   whatsapp: "bg-whatsapp text-negro hover:bg-whatsapp/85 active:bg-whatsapp/75",
 };
 

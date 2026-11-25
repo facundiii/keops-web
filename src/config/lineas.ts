@@ -38,7 +38,8 @@ export interface PaginaLinea {
   linea: LineaId;
   instagram: InstagramId;
   faq: GrupoFaqId;
-  encabezado: { antetitulo: string; titulo: string; bajada: string; boton: string };
+  /** Primera vista de la página: va sin botones (el contacto aparece al bajar) */
+  encabezado: { antetitulo: string; titulo: string; bajada: string };
   porQue: { titulo: string; argumentos: Argumento[] };
   incluye: { titulo: string; servicios: string[] };
   /** Se muestra solo con 6 imágenes o más, o con al menos un video. */
@@ -137,7 +138,6 @@ export const egresados = {
     // Viene del sitio anterior
     titulo: "Tu viaje de egresados, a otro nivel",
     bajada: "Fiestas separadas para primario y secundario, con coordinación directa con cada agencia.",
-    boton: "Pedir propuesta",
   },
   niveles: [
     // TEXTO PROPUESTO: las líneas de cada nivel
@@ -173,7 +173,6 @@ export const egresadosPrimarios: PaginaLinea = {
     // TEXTO PROPUESTO: revisar
     bajada:
       "Una matinée exclusiva para los contingentes de primario que viajan a Carlos Paz: show, luces, DJ y producción de video, coordinada directo con tu agencia.",
-    boton: "Pedir propuesta",
   },
   // TEXTO PROPUESTO: revisar los momentos de la fiesta
   fiesta: {
@@ -223,7 +222,6 @@ export const egresadosSecundarios: PaginaLinea = {
     // TEXTO PROPUESTO: revisar
     bajada:
       "La fiesta de egresados de secundario en la pirámide de Carlos Paz: una noche exclusiva para los contingentes, con DJ, show, láser y producción de video.",
-    boton: "Pedir propuesta",
   },
   // TEXTO PROPUESTO: revisar los momentos de la noche
   fiesta: {
@@ -269,7 +267,6 @@ export const eventosPrivados: PaginaLinea = {
     // TEXTO PROPUESTO: suma los eventos de empresa, que antes tenían su página (Institucionales)
     bajada:
       "Casamientos, cumpleaños, celebraciones y eventos de empresa, con ambientación, barra, DJ y catering en un solo lugar.",
-    boton: "Armá tu evento",
   },
   porQue: {
     titulo: "Por qué Keops",

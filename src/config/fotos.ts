@@ -30,9 +30,10 @@ const salonEletonBarra: Foto = {
   src: "/fotos/04-salon-eleton-barra.jpg",
   alt: "Barra y mesas altas del Salón Eletón, con luces rojas y violetas",
 };
-const salonBar: Foto = {
+/** El archivo se llama salon-bar, pero es el Salón VIP. */
+const salonVip: Foto = {
   src: "/fotos/05-salon-bar.jpg",
-  alt: "Barra del Salón Bar, con estantes de botellas iluminados",
+  alt: "Barra del Salón VIP, con estantes de botellas iluminados",
 };
 const salonBarKeops: Foto = {
   src: "/fotos/06-salon-bar-keops.jpg",
@@ -96,9 +97,9 @@ export const fotos = {
     espacios: {
       pistaCentral: [pistaCentralPiramide, pistaCentral],
       salonEleton: [salonEletonArmado, salonEletonBarra],
-      salonBar: [salonBar],
+      salonBar: [],
       garden: [],
-      vip: [],
+      vip: [salonVip],
     } as Record<string, Foto[]>,
     /**
      * Imagen de cada hito de la línea de tiempo, por año (el mismo `anio` de config/nosotros.ts).
@@ -143,14 +144,14 @@ export const fotos = {
       pistaCentral,
       salonEletonArmado,
       salonEletonBarra,
-      salonBar,
+      salonVip,
       salonBarKeops,
       showRobotsLed,
       catering,
     ],
     espacios: {
-      garden: [salonBarKeops],
-      vip: [salonEletonBarra],
+      salonBar: [salonBarKeops],
+      garden: [salonEletonBarra],
     } as Record<string, Foto[]>,
   },
 
@@ -158,6 +159,6 @@ export const fotos = {
   paraGalerias: {
     pistaCentral: [pistaCentral],
     eventos: [salonEletonBarra],
-    academia: [salonBar],
+    academia: [salonVip],
   },
 };

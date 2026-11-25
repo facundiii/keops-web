@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { VideoPortada as DatosVideo } from "@/config/fotos";
-import { claseBoton } from "@/components/ui/Boton";
 import { EtiquetaEjemplo } from "@/components/ui/EtiquetaEjemplo";
 import { VideoPortada } from "@/components/VideoPortada";
 
@@ -10,10 +9,6 @@ interface EncabezadoProps {
   /** La promesa */
   titulo: string;
   bajada?: string;
-  /** Texto del botón de contacto. Lleva al bloque de contacto de la página. */
-  boton?: string;
-  /** A dónde lleva el botón. Por defecto, al bloque de contacto. */
-  botonHref?: string;
   /** Foto de fondo (ruta dentro de /public) y su texto alternativo */
   foto?: string;
   fotoAlt?: string;
@@ -31,7 +26,8 @@ interface EncabezadoProps {
 }
 
 /**
- * Encabezado de página interna: antetítulo, título, bajada y botón.
+ * Encabezado de página interna: antetítulo, título y bajada. Nunca lleva botones: la primera vista
+ * de cada página va sin botones (el contacto y la compra aparecen al bajar).
  * Con foto o video ocupa casi toda la pantalla, para que la página entre con fuerza:
  * - video horizontal o foto: de fondo, con un velo negro para que se lea el texto;
  * - video vertical: de fondo en celular y, en pantallas anchas, al costado del texto, como un reel.
@@ -41,8 +37,6 @@ export function Encabezado({
   antetitulo,
   titulo,
   bajada,
-  boton,
-  botonHref = "#contacto",
   foto,
   fotoAlt = "",
   fotoPosicion,
@@ -58,7 +52,7 @@ export function Encabezado({
   return (
     <section
       className={`relative bg-negro px-4 sm:px-6 lg:px-8 overflow-hidden ${
-        conMedio ? "encabezado-alto flex items-end pt-32 pb-16 lg:items-center lg:pt-32 lg:pb-20" : "pt-32 pb-16 lg:pt-44 lg:pb-20"
+        conMedio ? "encabezado-alto flex items-end bajo-navbar pb-16 lg:items-center lg:pb-24" : "bajo-navbar bajo-navbar-alto pb-16 lg:pb-24"
       }`}
     >
       {foto && !video && (
@@ -72,27 +66,20 @@ export function Encabezado({
             className="object-cover"
             style={{ objectPosition: fotoPosicion }}
           />
-          {velo === "fuerte" ? (
-            <>
-              <div className="absolute inset-0 bg-negro/50" />
-              <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/30 to-negro/60" />
-            </>
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/70 to-negro/20" />
-          )}
+          <div className={`absolute inset-0 ${velo === "fuerte" ? "velo-fuerte" : "velo-suave"}`} />
         </>
       )}
 
       {video && !reel && (
         <>
           <VideoPortada src={video.src} poster={video.poster} className="absolute inset-0 h-full w-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-negro/60 via-negro/35 to-negro" />
+          <div className="velo-video absolute inset-0" />
         </>
       )}
 
-      <div className={`mx-auto w-full ${reel ? "max-w-7xl lg:grid lg:grid-cols-12 lg:items-center lg:gap-12" : "max-w-4xl"}`}>
+      <div className={`mx-auto w-full ${reel ? "max-w-6xl lg:grid lg:grid-cols-12 lg:items-center lg:gap-12" : "max-w-4xl"}`}>
         <div className={`relative z-10 ${reel ? "text-center lg:col-span-7 lg:text-left" : "text-center"}`}>
-          <p className="antetitulo mb-5 animate-fade-in">{antetitulo}</p>
+          <p className="antetitulo mb-4 animate-fade-in">{antetitulo}</p>
           <h1 className={`${tituloGrande ? "titulo-display" : "titulo-1"} text-marfil animate-fade-in-up`}>{titulo}</h1>
           {bajada && (
             <p
@@ -104,13 +91,6 @@ export function Encabezado({
             </p>
           )}
           {bajada && bajadaDeEjemplo && <EtiquetaEjemplo className="mt-4" />}
-          {boton && (
-            <div className="mt-8 animate-fade-in-up animate-delay-200">
-              <a href={botonHref} className={claseBoton("principal")}>
-                {boton}
-              </a>
-            </div>
-          )}
         </div>
 
         {video && reel && (
@@ -118,7 +98,7 @@ export function Encabezado({
           <div className="absolute inset-0 lg:relative lg:inset-auto lg:col-span-5 lg:flex lg:justify-end">
             <div className="encabezado-reel lg:rounded-2xl lg:border lg:border-piedra">
               <VideoPortada src={video.src} poster={video.poster} className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-negro via-negro/55 to-negro/30 lg:hidden" />
+              <div className="velo-reel absolute inset-0 lg:hidden" />
             </div>
           </div>
         )}

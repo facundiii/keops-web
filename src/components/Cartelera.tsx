@@ -18,7 +18,7 @@ function Arte({ noche }: { noche: Noche }) {
 
   if (!noche.flyer || fallo) {
     return (
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 p-6 text-center">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center">
         <Image src="/logo-piramide.png" alt="" width={96} height={96} className="w-16 h-auto" />
         <p className="titulo-3 text-marfil">{noche.nombre}</p>
       </div>
@@ -48,7 +48,7 @@ function Ficha({ noche }: { noche: Noche }) {
           <span className="antetitulo text-marfil">Keops Disco</span>
         </span>
         {/* Etiqueta de fecha: único uso del color láser */}
-        <span className="rounded-full bg-laser px-3 py-1 font-sans font-semibold text-xs uppercase tracking-[0.1em] text-negro whitespace-nowrap">
+        <span className="etiqueta rounded-full bg-laser px-3 py-1 text-negro whitespace-nowrap">
           {fechaCorta(noche.fecha)}
         </span>
       </div>
@@ -70,7 +70,7 @@ function Ficha({ noche }: { noche: Noche }) {
             ))}
           </ul>
         )}
-        <div className="mt-auto pt-5">
+        <div className="mt-auto pt-4">
           {noche.agotado ? (
             <span className={claseBoton("secundario", "w-full opacity-50")} aria-disabled="true">
               Agotado
@@ -134,7 +134,7 @@ export function Cartelera({ noches, esEjemplo = false }: CarteleraProps) {
 
   return (
     <div className="relative">
-      {esEjemplo && <EtiquetaEjemplo className="mb-5" />}
+      {esEjemplo && <EtiquetaEjemplo className="mb-4" />}
       {vigentes.length > 1 && (
         <>
           <button

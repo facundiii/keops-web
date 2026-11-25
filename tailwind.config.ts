@@ -37,6 +37,14 @@ const config: Config = {
       "cielo-noche": "#0B1026", // fondo mientras carga el cielo
     },
     extend: {
+      // Las dos únicas sombras del sitio (DESIGN.md, "Elevation & Depth"). Siguen a los tokens de color.
+      boxShadow: {
+        // Separa lo que flota (el botón de WhatsApp) del contenido que pasa por debajo
+        flotante:
+          "0 10px 15px -3px color-mix(in srgb, var(--negro) 60%, transparent), 0 4px 6px -4px color-mix(in srgb, var(--negro) 60%, transparent)",
+        // La luz al tocar: solo en hover o foco de tarjetas y botones, junto con el borde oro
+        halo: "0 0 24px color-mix(in srgb, var(--oro) 25%, transparent)",
+      },
       fontFamily: {
         titulo: ["var(--font-outfit)", "system-ui", "sans-serif"],
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],

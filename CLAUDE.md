@@ -14,8 +14,9 @@ El sistema completo está en `DESIGN.md` (tokens, componentes y reglas) y el pro
 - **NotoEgyptian** (`font-jeroglifico`) solo como ornamento, nunca para texto que haya que leer.
 - No agregues fuentes, pesos ni estilos. Las fuentes se cargan en `src/app/layout.tsx`.
 - Tamaños: solo las clases de la escala de `src/app/globals.css`:
-  `.titulo-display`, `.titulo-1`, `.titulo-2`, `.titulo-3`, `.antetitulo`, `.cuerpo`, `.texto-chico`.
-  `text-sm` / `text-xs` solo en piezas chicas de interfaz (botones, etiquetas). Nunca `text-[...]`.
+  `.titulo-display`, `.titulo-1`, `.titulo-2`, `.titulo-3`, `.destacado`, `.cuerpo`, `.texto-chico`, `.antetitulo`,
+  `.texto-boton` (botones y enlaces con flecha), `.etiqueta`, `.enlace-menu`, `.cifra`, `.numeral`, `.acento-grande`.
+  `text-sm` / `text-xs` solo en piezas chicas de interfaz que no tengan rol. Nunca `text-[...]` ni `tracking-[...]`.
 
 ## Color: tokens fijos
 
@@ -36,8 +37,8 @@ Solo existen estos colores (`tailwind.config.ts` reemplaza la paleta de Tailwind
 
 - Nada de hex, `rgb()` ni colores sueltos en componentes. Los modificadores de opacidad (`bg-oro/10`) están bien.
 - Si cambia un token, cambialo en `tailwind.config.ts` y en `:root` de `globals.css` a la vez.
-- Sin degradés decorativos ni glassmorphism. Los degradés negros van solo sobre fotos o video, para que se lea el texto.
-- Plano en reposo: la única luz es el borde oro con un halo dorado suave en hover o foco (`DESIGN.md`, "La regla de la luz al tocar"). Nada brilla en reposo.
+- Sin degradés decorativos ni glassmorphism. Los degradés negros van solo sobre fotos o video, para que se lea el texto, con las clases `.velo-*` de `globals.css` (no `bg-gradient-*` a mano).
+- Plano en reposo: la única luz es el borde oro con un halo dorado suave (`shadow-halo`) en hover o foco (`DESIGN.md`, "La regla de la luz al tocar"). Nada brilla en reposo. Sombras: solo `shadow-halo` y `shadow-flotante`.
 
 ## Espaciado: escala de 4 px
 
@@ -45,6 +46,9 @@ Solo existen estos colores (`tailwind.config.ts` reemplaza la paleta de Tailwind
 - Sin valores arbitrarios (`p-[13px]`). Excepciones: áreas táctiles `min-h-[44px]` / `min-w-[44px]` y `aspect-[...]`.
 - Secciones: siempre con `<Seccion>` de `src/components/ui/Seccion.tsx`
   (`py-16 lg:py-24`, `px-4 sm:px-6 lg:px-8`, anchos `angosto | medio | ancho | amplio`).
+  Lo que va alineado a la izquierda no indica ancho: cae sobre la misma línea que el navbar y el pie
+  (`DESIGN.md`, "La regla de la línea única"). `amplio` es solo para una grilla de tarjetas con foto.
+- El aire de arriba de una primera vista sale de `.bajo-navbar` (no `pt-32`).
 - Encabezados de bloque: `<TituloSeccion>` (antetítulo + H2 + bajada, `mb-10 lg:mb-12`).
 - Radios: `rounded-full` en botones y chips, `rounded-2xl` en tarjetas y fotos, `rounded-xl` en piezas internas.
 
@@ -55,9 +59,9 @@ Solo existen estos colores (`tailwind.config.ts` reemplaza la paleta de Tailwind
 - Nada de emojis como íconos ni de otras librerías (react-icons, heroicons, SVG copiados).
 - Ícono decorativo: `aria-hidden="true"`. Botón solo con ícono: `aria-label` y área de 44 px como mínimo.
 
-## Primera vista de la home
+## Primera vista: sin botones, en todas las páginas
 
-- Sin botones: ni en el hero, ni el "Contacto" dorado (va en texto hasta bajar), ni el WhatsApp flotante (aparece al bajar). Ver `usePasoPortada`.
+- Nunca botones en la primera vista de ninguna página (decisión del dueño): ni en el hero o el encabezado, ni el "Contacto" dorado (va en texto hasta bajar), ni el WhatsApp flotante (aparece al bajar). Ver `usePasoPortada`. Una pausa de video o animación va oculta hasta que llega el foco del teclado.
 - Las versiones especiales (como el aniversario) se configuran en `src/config/` con fecha de fin y se apagan solas (`SegunFecha`).
 
 ## Componentes
@@ -72,6 +76,7 @@ Solo existen estos colores (`tailwind.config.ts` reemplaza la paleta de Tailwind
 - Nada de hero con degradé, tarjetas con sombra genérica, un ícono encima de cada título ni grillas de tres tarjetas iguales por reflejo.
 - El dorado es escaso: un acento por vista, no en todos los elementos.
 - Las animaciones salen de `tailwind.config.ts`; `globals.css` ya las apaga con `prefers-reduced-motion`, no lo saltees.
+- Nada sale oculto del servidor esperando un script: el contenido y el cursor del sistema tienen que verse sin JavaScript (`FadeInSection`, `CustomCursor`).
 
 ## Antes de dar algo por terminado
 

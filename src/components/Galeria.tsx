@@ -46,7 +46,7 @@ function VideoCard({ item, index, onClick }: {
       type="button"
       onClick={onClick}
       aria-label={`Reproducir video${item.label ? `: ${item.label}` : ` ${index + 1}`}`}
-      className="relative block w-full aspect-[9/16] rounded-2xl overflow-hidden group border border-piedra text-left transition-colors duration-300 hover:border-oro focus-visible:border-oro"
+      className="relative block w-full aspect-[9/16] rounded-2xl overflow-hidden group border border-piedra text-left transition-[border-color,box-shadow] duration-300 hover:border-oro hover:shadow-halo focus-visible:border-oro focus-visible:shadow-halo"
     >
       <video
         ref={videoRef}
@@ -69,18 +69,18 @@ function VideoCard({ item, index, onClick }: {
       </div>
 
       {/* Play */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-5">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
         <div className="relative flex items-center justify-center w-20 h-20 rounded-full border-2 border-oro/60 bg-oro/10 group-hover:border-oro group-hover:bg-oro/20 transition-all duration-300">
           <div className="absolute inset-0 rounded-full bg-oro/15 scale-0 group-hover:scale-150 opacity-100 group-hover:opacity-0 transition-all duration-500" />
-          <Play size={30} strokeWidth={1.5} aria-hidden="true" className="text-oro ml-1.5" />
+          <Play size={30} strokeWidth={1.5} aria-hidden="true" className="text-oro ml-1" />
         </div>
         <div className="flex flex-col items-center gap-1">
           {item.label && (
-            <p className="text-arena text-xs tracking-[0.25em] uppercase group-hover:text-marfil transition-colors duration-300">
+            <p className="etiqueta text-arena group-hover:text-marfil transition-colors duration-300">
               {item.label}
             </p>
           )}
-          <p className="text-arena text-xs tracking-widest uppercase group-hover:text-oro transition-colors duration-300">
+          <p className="etiqueta text-arena group-hover:text-oro transition-colors duration-300">
             Reproducir
           </p>
         </div>
@@ -154,19 +154,27 @@ export function Galeria({ items }: GaleriaProps) {
         </div>
       )}
 
-      {/* Imágenes en mosaico */}
-      {images.length > 0 && (
-        <div className="columns-2 sm:columns-3 gap-3">
-          {images.map((item, i) => (
-            <div key={i} className="break-inside-avoid mb-3">
-              <ImageCard
-                item={item as Extract<MediaItem, { type: "image" }>}
-                onClick={() => setActiveIndex(items.indexOf(item))}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+      {/* Imágenes en mosaico: dos columnas en celular, tres desde 640 px.
+          Se reparten de a una por columna, en orden de lectura: así las columnas quedan parejas
+          (con `columns` de CSS, pocas fotos altas dejaban una columna casi vacía). */}
+      {images.length > 0 &&
+        ([2, 3] as const).map((columnas) => (
+          <div key={columnas} className={`gap-3 ${columnas === 2 ? "flex sm:hidden" : "hidden sm:flex"}`}>
+            {Array.from({ length: columnas }, (_, columna) => (
+              <div key={columna} className="flex min-w-0 flex-1 flex-col gap-3">
+                {images
+                  .filter((_, i) => i % columnas === columna)
+                  .map((item) => (
+                    <ImageCard
+                      key={item.src}
+                      item={item as Extract<MediaItem, { type: "image" }>}
+                      onClick={() => setActiveIndex(items.indexOf(item))}
+                    />
+                  ))}
+              </div>
+            ))}
+          </div>
+        ))}
 
       <Visor medios={medios} indice={activeIndex} alCambiar={setActiveIndex} alCerrar={() => setActiveIndex(null)} />
     </>

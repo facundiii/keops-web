@@ -4,7 +4,6 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { aniversario } from "@/config/aniversario";
 import { iniciarEnjambre, PASOS_TEXTO, RECORRIDO_TOTAL, type Enjambre } from "@/lib/enjambreDot";
-import { claseBoton } from "@/components/ui/Boton";
 
 const entre01 = (x: number) => Math.max(0, Math.min(1, x));
 
@@ -63,6 +62,8 @@ export function DotAniversario() {
     };
     let p = armar();
     enjambre.current = p;
+    // La pausa se muestra recién cuando hay algo andando (sin JavaScript no hay nada que frenar)
+    s.classList.add("dot-anda");
     const alCambiarPreferencia = () => {
       p.destruir();
       p = armar();
@@ -89,6 +90,7 @@ export function DotAniversario() {
       observador.disconnect();
       p.destruir();
       enjambre.current = null;
+      s.classList.remove("dot-anda");
     };
   }, []);
 
@@ -107,46 +109,59 @@ export function DotAniversario() {
       <div ref={escena} className="dot-escena sticky top-0 overflow-hidden">
         <canvas ref={lienzo} aria-hidden="true" className="absolute inset-0 block h-full w-full" />
 
-        <div className="dot-capa absolute inset-0 flex flex-col items-center px-4 text-center lg:justify-center lg:items-start lg:px-24 lg:text-left">
-          <div data-paso="0" className="dot-paso">
-            {/* Recibe el foco cuando se llega con "Lo que hay esa noche" desde el teclado */}
-            <h2 id="titulo-dot" tabIndex={-1} className="dot-marca outline-none">
-              {dot.nombre}
-            </h2>
-            <p className="dot-fecha mt-2 lg:mt-3">{aniversario.fechaCorta}</p>
-            <p className="dot-sub mt-1">{dot.subtitulo}</p>
-          </div>
+        {/* El texto va sobre la misma línea que el resto del sitio (el ancho de siempre) */}
+        <div className="dot-capa absolute inset-0 px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto flex h-full w-full max-w-6xl flex-col items-center text-center lg:items-start lg:justify-center lg:text-left">
+            <div data-paso="0" className="dot-paso">
+              {/* Recibe el foco cuando se llega con "Lo que hay esa noche" desde el teclado */}
+              <h2 id="titulo-dot" tabIndex={-1} className="dot-marca outline-none">
+                {dot.nombre}
+              </h2>
+              <p className="dot-fecha mt-2 lg:mt-3">{aniversario.fechaCorta}</p>
+              <p className="dot-sub mt-1">{dot.subtitulo}</p>
+            </div>
 
-          <div className="flex-1 lg:hidden" aria-hidden="true" />
+            <div className="flex-1 lg:hidden" aria-hidden="true" />
 
-          {/* En orden de salida: la noche sube hasta quien la cierra, que entra último y en grande */}
-          <ol className="flex flex-col items-center gap-2 lg:mt-12 lg:max-w-xl lg:items-start" aria-label="Lineup en orden de salida">
-            {dot.lineup.map((fila) => (
-              <li key={fila.join("-")} data-paso="1" className="dot-paso dot-linea">
-                {fila.map((nombre, i) => (
-                  <Fragment key={nombre}>
-                    {i > 0 && <span className="dot-b2b">b2b</span>}
-                    {nombre}
-                  </Fragment>
-                ))}
+            {/* En orden de salida: la noche sube hasta quien la cierra, que entra último y en grande */}
+            <ol className="flex flex-col items-center gap-2 lg:mt-12 lg:max-w-xl lg:items-start" aria-label="Lineup en orden de salida">
+              {dot.lineup.map((fila) => (
+                <li key={fila.join("-")} data-paso="1" className="dot-paso dot-linea">
+                  {fila.map((nombre, i) => (
+                    <Fragment key={nombre}>
+                      {i > 0 && <span className="dot-b2b">b2b</span>}
+                      {nombre}
+                    </Fragment>
+                  ))}
+                </li>
+              ))}
+              <li data-paso="2" className="dot-paso dot-cabeza mt-2">
+                {dot.cabeza}
               </li>
-            ))}
-            <li data-paso="2" className="dot-paso dot-cabeza mt-2">
-              {dot.cabeza}
-            </li>
-          </ol>
+            </ol>
 
-          <div data-paso="3" className="dot-paso mt-4 lg:mt-6 lg:max-w-md">
-            {dot.bajada && <p className="texto-chico text-balance text-arena">{dot.bajada}</p>}
-            {lugar && <p className="texto-chico mt-1 text-marfil">{lugar}</p>}
+            <div data-paso="3" className="dot-paso mt-4 lg:mt-6 lg:max-w-md">
+              {dot.bajada && <p className="texto-chico text-balance text-arena">{dot.bajada}</p>}
+              {lugar && <p className="texto-chico mt-1 text-marfil">{lugar}</p>}
+            </div>
           </div>
         </div>
 
-        {/* Solo aparece con el foco del teclado */}
-        <button type="button" onClick={() => setEnPausa((v) => !v)} className={claseBoton("secundario", "aniv-pausa bg-negro/80")}>
-          {enPausa ? <Play size={20} strokeWidth={1.5} aria-hidden="true" /> : <Pause size={20} strokeWidth={1.5} aria-hidden="true" />}
-          {enPausa ? "Reanudar la animación" : "Pausar la animación"}
-        </button>
+        {/* La pausa, a la vista: DOT no es primera vista, y lo que se mueve solo se tiene que poder frenar
+            también con el mouse o con el dedo. Abajo a la izquierda, sobre la línea del texto;
+            la esquina derecha es del WhatsApp flotante. Aparece cuando la animación está andando. */}
+        <div className="dot-pausa pointer-events-none absolute inset-x-0 bottom-4 px-4 sm:px-6 lg:bottom-8 lg:px-8">
+          <div className="mx-auto w-full max-w-6xl">
+            <button
+              type="button"
+              onClick={() => setEnPausa((v) => !v)}
+              aria-label={enPausa ? "Reanudar la animación" : "Pausar la animación"}
+              className="pointer-events-auto flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full border border-piedra bg-negro/70 text-marfil transition-colors duration-300 hover:border-oro hover:text-oro"
+            >
+              {enPausa ? <Play size={20} strokeWidth={1.5} aria-hidden="true" /> : <Pause size={20} strokeWidth={1.5} aria-hidden="true" />}
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

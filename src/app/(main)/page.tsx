@@ -38,12 +38,15 @@ function HeroVideo({ diferirVideo = false }: { diferirVideo?: boolean }) {
         <VideoFondo src={hero.video} className={claseVideo} />
       )}
       {/* Oscurece el video lo justo para que se lea el texto */}
-      <div className="absolute inset-0 bg-gradient-to-b from-negro/55 via-negro/35 to-negro" />
+      <div className="velo-video absolute inset-0" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pb-24">
-        <p className="antetitulo mb-5 animate-fade-in">{hero.antetitulo}</p>
-        <h1 className="titulo-display text-marfil max-w-5xl animate-fade-in-up">{hero.titulo}</h1>
-        <p className="cuerpo text-marfil mt-6 max-w-xl animate-fade-in-up animate-delay-100">{hero.bajada}</p>
+      {/* El texto va sobre la misma línea que el resto del sitio (el ancho de siempre) */}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 bajo-navbar pb-16 lg:pb-24">
+        <div className="max-w-6xl mx-auto">
+          <p className="antetitulo mb-4 animate-fade-in">{hero.antetitulo}</p>
+          <h1 className="titulo-display text-marfil max-w-5xl animate-fade-in-up">{hero.titulo}</h1>
+          <p className="cuerpo text-marfil mt-6 max-w-xl animate-fade-in-up animate-delay-100">{hero.bajada}</p>
+        </div>
       </div>
     </section>
   );
@@ -75,14 +78,15 @@ export default function HomePage() {
       )}
 
       {/* 2. Cifras */}
-      <section aria-label="Keops en cifras" className="bg-negro border-t border-piedra">
-        <ul className="max-w-7xl mx-auto flex">
+      <section aria-label="Keops en cifras" className="bg-negro border-t border-piedra px-4 sm:px-6 lg:px-8">
+        {/* La primera cifra arranca sobre la línea del contenido; las demás, después de su divisor */}
+        <ul className="max-w-6xl mx-auto flex">
           {cifras.map((cifra, i) => (
             <li
               key={cifra.dato}
-              className={`flex-1 min-w-0 px-4 sm:px-6 lg:px-8 py-10 lg:py-12 border-piedra ${i > 0 ? "border-l" : ""}`}
+              className={`flex-1 min-w-0 py-10 lg:py-12 border-piedra ${i > 0 ? "border-l pl-4 sm:pl-6 lg:pl-8" : ""}`}
             >
-              <p className="font-titulo font-bold text-marfil text-3xl lg:text-5xl leading-none">{cifra.dato}</p>
+              <p className="cifra text-marfil">{cifra.dato}</p>
               {cifra.detalle && <p className="antetitulo mt-3">{cifra.detalle}</p>}
             </li>
           ))}
@@ -109,7 +113,7 @@ export default function HomePage() {
                 <FadeInSection delay={i * 80} className="h-full">
                   <Link
                     href={tarjeta.href}
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-piedra bg-carbon transition-colors duration-300 hover:border-oro"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-piedra bg-carbon transition-[border-color,box-shadow] duration-300 hover:border-oro hover:shadow-halo focus-visible:border-oro focus-visible:shadow-halo"
                   >
                     {foto && (
                       <div className={`relative overflow-hidden ${grande ? "aspect-[16/9]" : "aspect-[16/10]"}`}>
@@ -131,7 +135,7 @@ export default function HomePage() {
                       <p className="antetitulo mb-3">{tarjeta.antetitulo}</p>
                       <h3 className="titulo-3 text-marfil mb-3">{tarjeta.titulo}</h3>
                       <p className="cuerpo text-arena">{tarjeta.texto}</p>
-                      <span className="mt-auto pt-6 inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro">
+                      <span className="mt-auto pt-6 inline-flex items-center gap-2 texto-boton text-oro">
                         {tarjeta.boton}
                         <ArrowRight
                           size={20}
@@ -179,7 +183,7 @@ export default function HomePage() {
                 className="-z-10 object-cover"
                 style={{ objectPosition: fotos.cierre.posicion }}
               />
-              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-negro via-negro/50 to-transparent" />
+              <div className="velo-cierre absolute inset-0 -z-10" />
             </>
           )}
           <div
@@ -190,7 +194,7 @@ export default function HomePage() {
             <FadeInSection>
               <div className="max-w-3xl text-center">
                 <div className="w-12 h-px bg-oro mx-auto mb-8" aria-hidden="true" />
-                <p className="acento text-3xl md:text-5xl text-marfil leading-tight">{cierre}</p>
+                <p className="acento acento-grande text-marfil">{cierre}</p>
               </div>
             </FadeInSection>
           </div>

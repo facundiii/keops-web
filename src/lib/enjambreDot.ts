@@ -134,7 +134,11 @@ function girarFormacion(p: V3, forma: number, t: number): V3 {
   return girarZ(p, 0.08 * Math.sin(t * 0.3));
 }
 
-/** Una burbuja espejada: refleja el cielo arriba, el horizonte encendido al medio y el mar abajo. */
+/**
+ * Una burbuja de vidrio, como las del flyer: transparente, con el atardecer dado vuelta adentro
+ * (el mar oscuro arriba, el sol al medio y el cielo claro abajo), un anillo más oscuro cerca del
+ * borde, el borde claro y un brillo.
+ */
 function armarReflejo(): HTMLCanvasElement {
   const S = 128;
   const c = document.createElement("canvas");
@@ -145,32 +149,35 @@ function armarReflejo(): HTMLCanvasElement {
   x.arc(S / 2, S / 2, S / 2 - 1, 0, Math.PI * 2);
   x.clip();
   const g = x.createLinearGradient(0, 0, 0, S);
-  g.addColorStop(0, "#26324f");
-  g.addColorStop(0.3, "#6f86a8");
-  g.addColorStop(0.47, "#d8c3a2");
-  g.addColorStop(0.52, "#f6d9a6");
-  g.addColorStop(0.58, "#6e5546");
-  g.addColorStop(0.8, "#241f22");
-  g.addColorStop(1, "#0f0e10");
+  g.addColorStop(0, "rgba(34,40,58,0.6)");
+  g.addColorStop(0.32, "rgba(96,92,100,0.42)");
+  g.addColorStop(0.47, "rgba(232,190,140,0.72)");
+  g.addColorStop(0.56, "rgba(214,196,176,0.5)");
+  g.addColorStop(0.8, "rgba(176,190,212,0.45)");
+  g.addColorStop(1, "rgba(206,216,234,0.6)");
   x.fillStyle = g;
   x.fillRect(0, 0, S, S);
-  const sol = x.createRadialGradient(S * 0.3, S * 0.5, 0, S * 0.3, S * 0.5, S * 0.24);
-  sol.addColorStop(0, "rgba(255,226,170,0.85)");
+  // El sol refractado, corrido hacia un costado
+  const sol = x.createRadialGradient(S * 0.32, S * 0.46, 0, S * 0.32, S * 0.46, S * 0.2);
+  sol.addColorStop(0, "rgba(255,236,196,0.9)");
   sol.addColorStop(1, "rgba(255,226,170,0)");
   x.fillStyle = sol;
   x.fillRect(0, 0, S, S);
-  const volumen = x.createRadialGradient(S * 0.45, S * 0.42, S * 0.2, S * 0.5, S * 0.5, S * 0.52);
-  volumen.addColorStop(0, "rgba(10,10,14,0)");
-  volumen.addColorStop(1, "rgba(10,10,14,0.55)");
-  x.fillStyle = volumen;
+  // Lente: un anillo apenas más oscuro adentro del borde, y el borde que toma la luz
+  const lente = x.createRadialGradient(S / 2, S / 2, S * 0.28, S / 2, S / 2, S / 2);
+  lente.addColorStop(0, "rgba(16,18,26,0)");
+  lente.addColorStop(0.8, "rgba(16,18,26,0.28)");
+  lente.addColorStop(0.93, "rgba(16,18,26,0.12)");
+  lente.addColorStop(1, "rgba(236,242,252,0.7)");
+  x.fillStyle = lente;
   x.fillRect(0, 0, S, S);
-  const brillo = x.createRadialGradient(S * 0.36, S * 0.3, 0, S * 0.36, S * 0.3, S * 0.11);
-  brillo.addColorStop(0, "rgba(255,255,255,0.95)");
+  const brillo = x.createRadialGradient(S * 0.6, S * 0.27, 0, S * 0.6, S * 0.27, S * 0.07);
+  brillo.addColorStop(0, "rgba(255,255,255,1)");
   brillo.addColorStop(1, "rgba(255,255,255,0)");
   x.fillStyle = brillo;
   x.fillRect(0, 0, S, S);
-  x.strokeStyle = "rgba(255,240,220,0.3)";
-  x.lineWidth = 2;
+  x.strokeStyle = "rgba(255,255,255,0.45)";
+  x.lineWidth = 1.5;
   x.stroke();
   return c;
 }
@@ -297,6 +304,7 @@ export function iniciarEnjambre(
     m = opciones.medir();
     if (!burbujas.length) burbujas = armarBurbujas(W < 768 ? 130 : 190);
     pintarFondo();
+    armarInterior();
     brillos.length = 0;
     const b = crearAzar(1969);
     for (let i = 0; i < 90; i++) {
@@ -305,65 +313,86 @@ export function iniciarEnjambre(
     }
   }
 
-  // La esfera de vidrio: muestra lo que tiene atrás dado vuelta, con bordes que toman el cielo
+  // Lo que se ve adentro de la esfera, armado una vez por tamaño de pantalla: el cielo y el mar
+  // de atrás dados vuelta, estirados de costado y difuminados, como las franjas suaves del flyer.
+  const interior = document.createElement("canvas");
+  const ictx = interior.getContext("2d");
+  /** Altura de la franja del sol adentro de la esfera (0 arriba, 1 abajo) */
+  let franjaSol = 0.43;
+  function armarInterior() {
+    if (!ictx) return;
+    const { cx, horizonte, radio: R } = m;
+    const lado = Math.max(2, Math.round(2 * R * DPR));
+    interior.width = interior.height = lado;
+    ictx.setTransform(1, 0, 0, 1, 0, 0);
+    // Una tajada angosta de lo que hay detrás (más angosta que la esfera: así se estira en franjas)
+    const ancho = Math.min(W, R * 1.1);
+    const x0 = Math.max(0, Math.min(W - ancho, cx - ancho / 2));
+    const y0 = horizonte * 0.08;
+    franjaSol = 1 - (horizonte - y0) / (H - y0);
+    ictx.filter = `blur(${Math.max(1, R * DPR * 0.035)}px)`;
+    // Dada vuelta en los dos sentidos, como en una bola de vidrio. Se pasa un poco del borde
+    // para que el difuminado no deje bordes.
+    ictx.save();
+    ictx.translate(lado / 2, lado / 2);
+    ictx.scale(-1.15, -1.15);
+    ictx.drawImage(limpio, x0 * DPR, y0 * DPR, ancho * DPR, (H - y0) * DPR, -lado / 2, -lado / 2, lado, lado);
+    ictx.restore();
+    ictx.filter = "none";
+    // El vidrio junta la luz: todo un poco más claro que el cielo de atrás
+    ictx.globalCompositeOperation = "screen";
+    ictx.fillStyle = "rgba(120,128,150,0.22)";
+    ictx.fillRect(0, 0, lado, lado);
+    // La franja dorada del atardecer, ancha y suave, como en el flyer
+    const dorado = ictx.createLinearGradient(0, 0, 0, lado);
+    dorado.addColorStop(Math.max(0, franjaSol - 0.22), "rgba(255,190,120,0)");
+    dorado.addColorStop(franjaSol, "rgba(255,190,120,0.3)");
+    dorado.addColorStop(Math.min(1, franjaSol + 0.3), "rgba(255,190,120,0)");
+    ictx.globalCompositeOperation = "lighter";
+    ictx.fillStyle = dorado;
+    ictx.fillRect(0, 0, lado, lado);
+    ictx.globalCompositeOperation = "source-over";
+  }
+
+  // La esfera de vidrio: transparente, con el atardecer dado vuelta en franjas, el sol refractado,
+  // el borde que toma la luz y un brillo chico arriba
   function pintarEsfera(Rs: number) {
     if (!ctx) return;
-    const { cx, cy, horizonte } = m;
+    const { cx, cy } = m;
     ctx.save();
     ctx.beginPath();
     ctx.arc(cx, cy, Rs, 0, Math.PI * 2);
     ctx.clip();
-    const base = ctx.createLinearGradient(0, cy - Rs, 0, cy + Rs);
-    base.addColorStop(0, "#141820");
-    base.addColorStop(1, "#0e1836");
-    ctx.fillStyle = base;
-    ctx.fillRect(cx - Rs, cy - Rs, Rs * 2, Rs * 2);
-    // El cielo limpio (sin la penumbra del texto), dado vuelta. Con la esfera corrida a un costado,
-    // se agranda lo justo para que la imagen cubra la esfera entera y no quede un borde recto adentro.
-    const escalaX = Math.max((2.4 * Rs) / W, (1.08 * Rs) / Math.max(1, Math.min(cx, W - cx)));
-    const alto = 0.24 * Rs;
-    ctx.save();
-    ctx.translate(cx, cy);
-    ctx.scale(-escalaX, -alto / Math.max(40, horizonte - cy));
-    ctx.drawImage(limpio, -cx, -cy, W, H);
-    ctx.restore();
-    // El sol de atrás, dado vuelta adentro del vidrio: le da la luz cálida del flyer
+    ctx.drawImage(interior, cx - Rs, cy - Rs, Rs * 2, Rs * 2);
+    // El sol de atrás, refractado: un resplandor del lado contrario, sobre la franja del horizonte
     ctx.globalCompositeOperation = "lighter";
-    const sx = cx - (m.sol - cx) * escalaX, sy = cy - alto;
-    const solAdentro = ctx.createRadialGradient(sx, sy, 0, sx, sy, Rs * 0.75);
-    solAdentro.addColorStop(0, "rgba(255,200,130,0.55)");
-    solAdentro.addColorStop(0.3, "rgba(255,150,90,0.2)");
-    solAdentro.addColorStop(1, "rgba(255,150,90,0)");
+    const sx = cx - Rs * 0.42 * Math.sign(m.sol - cx || 1), sy = cy - Rs + 2 * Rs * franjaSol * 0.95;
+    const solAdentro = ctx.createRadialGradient(sx, sy, 0, sx, sy, Rs * 0.55);
+    solAdentro.addColorStop(0, "rgba(255,236,200,0.75)");
+    solAdentro.addColorStop(0.18, "rgba(255,196,130,0.35)");
+    solAdentro.addColorStop(1, "rgba(255,160,100,0)");
     ctx.fillStyle = solAdentro;
     ctx.fillRect(cx - Rs, cy - Rs, Rs * 2, Rs * 2);
     ctx.globalCompositeOperation = "source-over";
-    const borde = ctx.createRadialGradient(cx - Rs * 0.1, cy - Rs * 0.15, Rs * 0.5, cx, cy, Rs);
-    borde.addColorStop(0, "rgba(10,14,24,0)");
-    borde.addColorStop(0.75, "rgba(10,14,24,0.22)");
-    borde.addColorStop(1, "rgba(200,215,235,0.4)");
-    ctx.fillStyle = borde;
+    // Lente: un anillo apenas más oscuro adentro del borde y el borde claro
+    const lente = ctx.createRadialGradient(cx, cy, Rs * 0.55, cx, cy, Rs);
+    lente.addColorStop(0, "rgba(14,16,24,0)");
+    lente.addColorStop(0.82, "rgba(14,16,24,0.2)");
+    lente.addColorStop(0.95, "rgba(14,16,24,0.06)");
+    lente.addColorStop(1, "rgba(232,238,250,0.55)");
+    ctx.fillStyle = lente;
     ctx.fillRect(cx - Rs, cy - Rs, Rs * 2, Rs * 2);
+    // El brillo: un punto chico y nítido arriba al medio
     ctx.globalCompositeOperation = "lighter";
-    const foco = ctx.createRadialGradient(cx + Rs * 0.4, cy + Rs * 0.42, 0, cx + Rs * 0.4, cy + Rs * 0.42, Rs * 0.55);
-    foco.addColorStop(0, "rgba(255,200,130,0.35)");
-    foco.addColorStop(1, "rgba(255,200,130,0)");
-    ctx.fillStyle = foco;
-    ctx.fillRect(cx - Rs, cy - Rs, Rs * 2, Rs * 2);
-    ctx.save();
-    ctx.translate(cx - Rs * 0.42, cy - Rs * 0.45);
-    ctx.rotate(-0.6);
-    ctx.scale(1, 0.6);
-    const reflejoSol = ctx.createRadialGradient(0, 0, 0, 0, 0, Rs * 0.22);
-    reflejoSol.addColorStop(0, "rgba(255,255,255,0.85)");
-    reflejoSol.addColorStop(1, "rgba(255,255,255,0)");
-    ctx.fillStyle = reflejoSol;
-    ctx.beginPath();
-    ctx.arc(0, 0, Rs * 0.22, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
+    const bx = cx + Rs * 0.08, by = cy - Rs * 0.32;
+    const brillo = ctx.createRadialGradient(bx, by, 0, bx, by, Rs * 0.06);
+    brillo.addColorStop(0, "rgba(255,255,255,0.95)");
+    brillo.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = brillo;
+    ctx.fillRect(bx - Rs * 0.06, by - Rs * 0.06, Rs * 0.12, Rs * 0.12);
     ctx.globalCompositeOperation = "source-over";
     ctx.restore();
-    ctx.strokeStyle = "rgba(255,255,255,0.32)";
+    ctx.strokeStyle = "rgba(255,255,255,0.4)";
     ctx.lineWidth = 1.2;
     ctx.beginPath();
     ctx.arc(cx, cy, Rs, 0, Math.PI * 2);

@@ -36,7 +36,7 @@ export function LineaDeTiempo({ hitos, fotos, fotosDeEjemplo = {} }: LineaDeTiem
         return (
           <li
             key={hito.anio}
-            className="relative pl-10 pb-14 last:pb-0 md:pl-0 md:pb-20 md:grid md:grid-cols-2 md:gap-x-24 md:items-center"
+            className="relative pl-10 pb-12 last:pb-0 md:pl-0 md:pb-24 md:grid md:grid-cols-2 md:gap-x-24 md:items-center"
           >
             {/* El punto sobre la línea */}
             <span

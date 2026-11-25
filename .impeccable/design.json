@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-25T02:23:55.750Z",
+  "generatedAt": "2026-11-25T03:27:31.658Z",
   "title": "Design System: Keops",
   "extensions": {
     "colorMeta": {
@@ -455,7 +455,7 @@
       },
       {
         "name": "La regla de la primera vista sin botones",
-        "body": "La primera vista de la home no muestra ningún botón: ni en el hero, ni el \"Contacto\" dorado del navbar (va en texto hasta que se baja el 60 % de la pantalla), ni el WhatsApp flotante (aparece recién al bajar). La navegación queda; las acciones esperan en lo que sigue.",
+        "body": "La primera vista de ninguna página muestra botones (decisión del dueño): ni en el hero o el encabezado, ni el \"Contacto\" dorado del navbar (va en texto hasta que se baja el 60 % de la pantalla), ni el WhatsApp flotante (aparece recién al bajar). La pausa de un video o una animación de la primera vista aparece solo con el foco del teclado. La navegación queda; las acciones esperan en lo que sigue.",
         "section": "layout"
       },
       {
@@ -482,7 +482,7 @@
       "**Do** mostrar la pirámide: el isotipo como firma y la foto del techo piramidal (`01-pista-central-piramide.jpg`) donde más pese, con el velo suave para que el techo se vea.",
       "**Do** dejar la compra a un paso: \"Comprar entrada\" en cada noche, en la home y en Disco.",
       "**Do** abrir todo con un botón o un link de verdad, con nombre, que funcione con teclado.",
-      "**Do** dejar la primera vista de la home sin botones: las acciones van en lo que sigue.",
+      "**Do** dejar la primera vista de cada página sin botones: las acciones van en lo que sigue.",
       "**Do** usar íconos Lucide de 16, 20 o 24 px con trazo 1.5, en oro o marfil.",
       "**Do** probar cada pantalla a 375 px y a 1280 px."
     ],

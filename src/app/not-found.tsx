@@ -16,7 +16,7 @@ export default function NoEncontrada() {
         <p className="antetitulo mb-4">Error 404</p>
         <h1 className="titulo-1 text-marfil">No encontramos esa página</h1>
         <p className="cuerpo text-arena mt-6">Puede que el link esté mal escrito o que la página ya no exista.</p>
-        <div className="mt-9">
+        <div className="mt-8">
           <Boton href={RUTA_INICIO}>Volver al inicio</Boton>
         </div>
       </div>

@@ -32,7 +32,7 @@ export function Contador() {
     <div
       role="timer"
       aria-label="Cuenta regresiva al aniversario"
-      className="aniv-entra aniv-entra-contador mt-5 lg:mt-8 flex flex-col items-center gap-2.5"
+      className="aniv-entra aniv-entra-contador mt-4 lg:mt-8 flex flex-col items-center gap-2"
     >
       <p className="aniv-unidad text-hielo">{aniversario.contador.faltan}</p>
       <div className="flex">

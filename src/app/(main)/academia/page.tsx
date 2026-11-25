@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Check } from "lucide-react";
 import { academia } from "@/config/academia";
-import { lineas } from "@/config/contacto";
 import { fotos } from "@/config/fotos";
 import { ejemplos } from "@/config/ejemplos";
 import { MOSTRAR_EJEMPLOS, galeriaDeEjemplo, listaConEjemplo, textoConEjemplo } from "@/lib/ejemplo";
@@ -38,7 +37,6 @@ export default function AcademiaPage() {
     { etiqueta: "Requisitos", valor: m.requisitos },
   ].filter((d) => d.valor.trim() !== "");
 
-  const hayContacto = Boolean(lineas.academia.whatsapp || lineas.academia.mail) || MOSTRAR_EJEMPLOS;
   const foto = fotos.academia.encabezado;
 
   return (
@@ -49,7 +47,6 @@ export default function AcademiaPage() {
         titulo={encabezado.titulo}
         bajada={bajada.texto}
         bajadaDeEjemplo={bajada.esEjemplo}
-        boton={hayContacto ? "Inscribite" : undefined}
         foto={foto?.src}
         fotoAlt={foto?.alt}
         fotoPosicion={foto?.posicion}
@@ -59,15 +56,18 @@ export default function AcademiaPage() {
       {temas.datos.length > 0 && (
         <Seccion>
           <FadeInSection>
-            <TituloSeccion titulo={academia.temas.titulo} className={temas.esEjemplo ? "!mb-5" : ""} />
+            <TituloSeccion titulo={academia.temas.titulo} className={temas.esEjemplo ? "!mb-4" : ""} />
             {temas.esEjemplo && <EtiquetaEjemplo className="mb-8" />}
           </FadeInSection>
-          <ul className="grid gap-x-12 gap-y-5 sm:grid-cols-2">
+          <ul className="grid gap-x-12 gap-y-4 sm:grid-cols-2">
             {temas.datos.map((tema, i) => (
               <li key={tema}>
                 <FadeInSection delay={i * 60}>
                   <span className="cuerpo text-marfil flex items-start gap-3">
-                    <Check size={24} strokeWidth={1.5} aria-hidden="true" className="shrink-0 text-oro mt-0.5" />
+                    {/* El ícono se centra con el primer renglón del texto */}
+                    <span className="flex h-7 shrink-0 items-center text-oro">
+                      <Check size={24} strokeWidth={1.5} aria-hidden="true" />
+                    </span>
                     {tema}
                   </span>
                 </FadeInSection>
@@ -81,7 +81,7 @@ export default function AcademiaPage() {
       {datosModalidad.length > 0 && (
         <Seccion>
           <FadeInSection>
-            <TituloSeccion titulo={modalidad.titulo} className={modalidadEsEjemplo ? "!mb-5" : ""} />
+            <TituloSeccion titulo={modalidad.titulo} className={modalidadEsEjemplo ? "!mb-4" : ""} />
             {modalidadEsEjemplo && <EtiquetaEjemplo className="mb-8" />}
           </FadeInSection>
           <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -99,7 +99,7 @@ export default function AcademiaPage() {
       {docentes.datos.length > 0 && (
         <Seccion>
           <FadeInSection>
-            <TituloSeccion titulo={academia.docentes.titulo} className={docentes.esEjemplo ? "!mb-5" : ""} />
+            <TituloSeccion titulo={academia.docentes.titulo} className={docentes.esEjemplo ? "!mb-4" : ""} />
             {docentes.esEjemplo && <EtiquetaEjemplo className="mb-8" />}
           </FadeInSection>
           <ul className="grid gap-4 grid-cols-2 lg:grid-cols-3">
@@ -116,7 +116,7 @@ export default function AcademiaPage() {
                     />
                   </div>
                 )}
-                <div className="p-5 lg:p-6">
+                <div className="p-4 lg:p-6">
                   <h3 className="titulo-3 text-marfil">{docente.nombre}</h3>
                   {docente.rol && <p className="antetitulo mt-2">{docente.rol}</p>}
                 </div>

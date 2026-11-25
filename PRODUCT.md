@@ -69,10 +69,10 @@ El sitio de Keops (keops.ar) presenta el boliche de Villa Carlos Paz, Córdoba, 
 
 - **Fotos** (`public/fotos/`, mapeadas en `src/config/fotos.ts`): 10 fotos optimizadas. `01-pista-central-piramide.jpg` es la única que muestra el techo de la pirámide desde adentro y es la más valiosa. `09-historia-exterior-2010.jpg` es de baja resolución: siempre chica.
 - **Video:** `public/hero-video.mp4` (hero de la home) y 3 videos en la galería de Egresados secundario.
-- **Cifras reales:** 5.000 personas, 5 espacios (Pista Central, Salón Eletón, Salón Bar, Keops Garden, VIP +30), apertura en 1969.
+- **Cifras reales:** 5.000 personas, 5 espacios (Pista Central, Salón Eletón, Salón Bar, Keops Garden, Salón VIP), apertura en 1969.
 - **Historia:** 5 hitos cargados (1969, 2010, 2019, 2020, septiembre 2021), todos sin confirmar.
 - **Referencias:** logos de agencias (Flecha, Super Tour, Astros, Púrpura, Auckland) y de Sancor Seguros y FIE, todos sin autorizar.
-- **No hay y no se inventan:** testimonios, equipo, fotos de Keops Garden y VIP +30, párrafos de historia confirmados, capacidad por espacio. El logo de Fusion mide 168 px y no se puede agrandar.
+- **No hay y no se inventan:** testimonios, fotos del equipo, fotos de Salón Bar y Keops Garden, párrafos de historia confirmados, capacidad por espacio. El logo de Fusion mide 168 px y no se puede agrandar.
 
 ## Product Principles
 

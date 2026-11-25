@@ -12,8 +12,7 @@ import { SinFechas } from "@/components/SinFechas";
 import { EnlaceEntrada } from "@/components/EnlaceEntrada";
 
 /** Enlace con flecha, como el de las tarjetas de las líneas. 44 px de alto para el dedo. */
-const claseEnlace =
-  "inline-flex min-h-[44px] items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em]";
+const claseEnlace = "inline-flex min-h-[44px] items-center gap-2 texto-boton";
 
 interface ProximasNochesProps {
   noches: Noche[];
@@ -39,11 +38,11 @@ export function ProximasNoches({ noches, cantidad, boton, esEjemplo = false }: P
 
   return (
     <>
-      {esEjemplo && <EtiquetaEjemplo className="mb-5" />}
+      {esEjemplo && <EtiquetaEjemplo className="mb-4" />}
       <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {vigentes.slice(0, cantidad).map((noche) => (
           <li key={noche.id}>
-            <article className="h-full flex gap-5 rounded-2xl border border-piedra bg-carbon p-4">
+            <article className="h-full flex gap-4 rounded-2xl border border-piedra bg-carbon p-4">
               {noche.flyer && (
                 <div className="relative w-24 shrink-0 aspect-[9/16] rounded-lg overflow-hidden border border-piedra">
                   <Image

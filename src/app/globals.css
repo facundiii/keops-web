@@ -22,6 +22,9 @@
     --hielo: #CFE8EF;        /* la fecha de arriba */
     --cielo-noche: #0B1026;  /* fondo mientras carga el cielo */
 
+    /* Movimiento: la única curva propia. Entra rápido y frena largo (ver DESIGN.md, "Movimiento") */
+    --curva-entrada: cubic-bezier(0.16, 1, 0.3, 1);
+
     color-scheme: dark;
   }
 
@@ -52,10 +55,23 @@
     outline-offset: 3px;
   }
 
-  /* Hide default cursor on desktop/mouse devices */
+  /* Con mouse, el cursor del sistema se reemplaza por el propio. Se oculta solo cuando el cursor propio
+     ya está andando (CustomCursor agrega la clase a <html>): sin JavaScript, o si falla, queda el de siempre. */
   @media (hover: hover) and (pointer: fine) {
-    *, *::before, *::after {
+    html.cursor-propio, html.cursor-propio *, html.cursor-propio *::before, html.cursor-propio *::after {
       cursor: none !important;
+    }
+    /* En un campo se escribe: ahí va el cursor del sistema, y el propio se esconde */
+    html.cursor-propio :is(input, textarea, select) {
+      cursor: auto !important;
+    }
+    /* El visor de fotos y videos se abre por encima de todo, también del cursor propio:
+       adentro se usa el cursor del sistema para que no desaparezca */
+    dialog[open], dialog[open] * {
+      cursor: auto !important;
+    }
+    dialog[open] :is(a, button, [role="button"], label) {
+      cursor: pointer !important;
     }
   }
 
@@ -162,11 +178,125 @@
     line-height: 1.5;
   }
 
+  /* Destacado: Inter 400, 20–24 px. Una frase que abre un bloque (la misión) */
+  .destacado {
+    font-family: theme("fontFamily.sans");
+    font-weight: 400;
+    font-size: clamp(1.25rem, 1.146rem + 0.44vw, 1.5rem);
+    line-height: 1.625;
+  }
+
+  /* Botón: Inter 600, 14 px, mayúsculas. Texto de botones y de los enlaces con flecha */
+  .texto-boton {
+    font-family: theme("fontFamily.sans");
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Etiqueta: Inter 600, 12 px, mayúsculas. La fecha corta de cada noche */
+  .etiqueta {
+    font-family: theme("fontFamily.sans");
+    font-weight: 600;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Enlace del menú: Inter 500, 15 px */
+  .enlace-menu {
+    font-family: theme("fontFamily.sans");
+    font-weight: 500;
+    font-size: 0.9375rem;
+  }
+
+  /* Cifra: Outfit 700, 30–48 px. Los números de la franja de cifras */
+  .cifra {
+    font-family: theme("fontFamily.titulo");
+    font-weight: 700;
+    font-size: clamp(1.875rem, 1.41rem + 2vw, 3rem);
+    line-height: 1;
+  }
+
+  /* Numeral: Outfit 600, 14 px. El "01" de cada argumento */
+  .numeral {
+    font-family: theme("fontFamily.titulo");
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    letter-spacing: 0.1em;
+  }
+
   /* Acento: Cormorant Garamond itálica 500. Máximo una vez por sección. */
   .acento {
     font-family: theme("fontFamily.acento");
     font-style: italic;
     font-weight: 500;
+  }
+  /* El acento en tamaño de título (30–48 px): la frase de cierre de la home */
+  .acento-grande {
+    font-size: clamp(1.875rem, 0.8rem + 4.58vw, 3rem);
+    line-height: 1.25;
+  }
+
+  /* ── Velos ──
+     Degradés negros sobre una foto o un video, solo para que se lea el texto (DESIGN.md, "Velos").
+     Van en un <div> absoluto que cubre el medio. No se arman a mano con `bg-gradient-*`. */
+  /* Video de fondo: oscurece arriba (el menú) y se funde en negro abajo */
+  .velo-video {
+    background-image: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--negro) 60%, transparent),
+      color-mix(in srgb, var(--negro) 35%, transparent),
+      var(--negro)
+    );
+  }
+  /* Foto cargada de detalle: una capa pareja y un degradé encima */
+  .velo-fuerte {
+    background-color: color-mix(in srgb, var(--negro) 50%, transparent);
+    background-image: linear-gradient(
+      to top,
+      var(--negro),
+      color-mix(in srgb, var(--negro) 30%, transparent),
+      color-mix(in srgb, var(--negro) 60%, transparent)
+    );
+  }
+  /* Foto donde lo que se ve es el argumento (el techo de la pirámide): oscurece solo detrás del texto */
+  .velo-suave {
+    background-image: linear-gradient(
+      to top,
+      var(--negro),
+      color-mix(in srgb, var(--negro) 70%, transparent),
+      color-mix(in srgb, var(--negro) 20%, transparent)
+    );
+  }
+  /* Reel vertical de fondo, en celular */
+  .velo-reel {
+    background-image: linear-gradient(
+      to top,
+      var(--negro),
+      color-mix(in srgb, var(--negro) 55%, transparent),
+      color-mix(in srgb, var(--negro) 30%, transparent)
+    );
+  }
+  /* Banda de cierre: negro abajo, la foto limpia arriba */
+  .velo-cierre {
+    background-image: linear-gradient(to top, var(--negro), color-mix(in srgb, var(--negro) 50%, transparent), transparent);
+  }
+
+  /* ── Medidas de estructura ──
+     El aire de arriba de una primera vista: el navbar fijo (64 px, 80 px desde 1024 px) más el aire.
+     `bajo-navbar-alto` es para los encabezados de solo texto, que no tienen foto que los sostenga. */
+  .bajo-navbar {
+    padding-top: 8rem;
+  }
+  @media (min-width: 1024px) {
+    .bajo-navbar-alto {
+      padding-top: 11rem;
+    }
   }
 
   /* ── Aniversario: la tipografía del flyer. SOLO en la portada especial ── */
@@ -326,9 +456,12 @@
 /* DOT con movimiento: la sección es un recorrido de 2,6 pantallas con la escena fija,
    y el texto entra de a partes mientras se baja. Sin JavaScript o con "reducir movimiento", una pantalla. */
 .dot-recorrido.dot-guiado { height: 260svh; }
-.dot-paso { transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); }
+.dot-paso { transition: opacity 0.9s var(--curva-entrada), transform 0.9s var(--curva-entrada); }
 .dot-guiado .dot-paso:not(.visto) { opacity: 0; transform: translateY(16px); }
 .dot-linea + .dot-linea { transition-delay: 0.12s; }
+/* La pausa de DOT, a la vista (no es primera vista). Aparece cuando la animación está andando. */
+.dot-pausa { display: none; }
+.dot-anda .dot-pausa { display: block; }
 
 /* La invitación a seguir bajando: aparece cuando terminó la entrada de la portada */
 .aniv-seguir {
@@ -389,7 +522,9 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brasa) 70%, transparent), transparent);
 }
-.aniv-pausa:not(:focus-visible) {
+.aniv-pausa:not(:focus-visible),
+.pausa-portada:not(:focus-visible) {
+  min-width: 0;
   width: 1px;
   height: 1px;
   min-height: 0;
@@ -410,9 +545,15 @@
   z-index: 9999;
   top: 0;
   left: 0;
+  /* No se dibuja hasta el primer movimiento del mouse, ni fuera de la ventana */
+  opacity: 0;
 }
 
 @media (hover: hover) and (pointer: fine) {
+  .custom-cursor-ring.is-visible,
+  .custom-cursor-dot.is-visible {
+    opacity: 1;
+  }
   .custom-cursor-ring {
     display: block;
     width: 28px;
@@ -421,8 +562,8 @@
     border: 1.5px solid var(--marfil);
     border-color: color-mix(in srgb, var(--marfil) 65%, transparent);
     transform: translate(-50%, -50%);
-    transition: width 0.25s cubic-bezier(0.22,1,0.36,1),
-                height 0.25s cubic-bezier(0.22,1,0.36,1),
+    transition: width 0.25s var(--curva-entrada),
+                height 0.25s var(--curva-entrada),
                 border-color 0.25s ease,
                 opacity 0.25s ease;
   }
@@ -452,6 +593,17 @@
   font-display: swap;
 }
 
+/* ── Apariciones al bajar (FadeInSection) ──────────────────────────
+   El contenido sale visible del servidor. El JavaScript esconde solo lo que todavía está debajo
+   de la pantalla y lo muestra al llegar: sin JavaScript no queda nada oculto. */
+.aparece[data-aparece="espera"] {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.aparece[data-aparece="visto"] {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
 /* ── Apariciones ───────────────────────────────────────────────── */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(16px); }
@@ -466,15 +618,15 @@
 /* ── Aniversario: el texto entra una vez, como en el reel ──────────
    La fecha se cierra, "Aniversario" se abre y el logo aterriza desde la cámara justo cuando
    la pirámide estalla (el canvas lee esta animación para ir sincronizado). Después se arma el 57. */
-.aniv-entra { animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
-.aniv-fecha-entra { animation: anivFecha 1.3s cubic-bezier(0.16, 1, 0.3, 1) both 0.25s; }
-.aniv-aterriza { animation: anivAterriza 1.1s cubic-bezier(0.16, 1, 0.3, 1) both 1.2s; }
+.aniv-entra { animation: fadeInUp 0.9s var(--curva-entrada) both; }
+.aniv-fecha-entra { animation: anivFecha 1.3s var(--curva-entrada) both 0.25s; }
+.aniv-aterriza { animation: anivAterriza 1.1s var(--curva-entrada) both 1.2s; }
 .aniv-entra-contador { animation-delay: 2.4s; }
-.aniv-separar { animation: anivSeparar 1.4s cubic-bezier(0.16, 1, 0.3, 1) both 0.95s; }
+.aniv-separar { animation: anivSeparar 1.4s var(--curva-entrada) both 0.95s; }
 .aniv-pieza { transform-box: fill-box; transform-origin: 50% 50%; }
-.aniv-barra { animation: anivBarra 0.8s cubic-bezier(0.16, 1, 0.3, 1) both 1.65s; }
-.aniv-arco { animation: anivArco 1s cubic-bezier(0.16, 1, 0.3, 1) both 1.75s; }
-.aniv-siete { animation: anivSiete 0.85s cubic-bezier(0.16, 1, 0.3, 1) both 1.9s; }
+.aniv-barra { animation: anivBarra 0.8s var(--curva-entrada) both 1.65s; }
+.aniv-arco { animation: anivArco 1s var(--curva-entrada) both 1.75s; }
+.aniv-siete { animation: anivSiete 0.85s var(--curva-entrada) both 1.9s; }
 .aniv-anos { animation: fadeIn 0.7s ease-out both 2.2s; }
 /* Con "reducir movimiento" el texto está desde el principio: sin demoras escalonadas */
 @media (prefers-reduced-motion: reduce) {

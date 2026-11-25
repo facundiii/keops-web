@@ -25,7 +25,6 @@ export default function EgresadosPage() {
         antetitulo={encabezado.antetitulo}
         titulo={encabezado.titulo}
         bajada={encabezado.bajada}
-        boton={encabezado.boton}
         video={portadas.egresados}
       />
 
@@ -37,13 +36,13 @@ export default function EgresadosPage() {
             <FadeInSection key={nivel.href} delay={i * 100} className="h-full">
               <Link
                 href={nivel.href}
-                className="group flex h-full min-h-[220px] flex-col justify-between rounded-2xl border border-piedra bg-carbon p-8 lg:p-10 transition-colors duration-300 hover:border-oro"
+                className="group flex h-full min-h-[220px] flex-col justify-between rounded-2xl border border-piedra bg-carbon p-8 lg:p-10 transition-[border-color,box-shadow] duration-300 hover:border-oro hover:shadow-halo focus-visible:border-oro focus-visible:shadow-halo"
               >
                 <div>
                   <h3 className="titulo-2 text-marfil">{nivel.titulo}</h3>
                   {nivel.texto && <p className="cuerpo mt-3 text-arena">{nivel.texto}</p>}
                 </div>
-                <span className="mt-8 inline-flex items-center gap-2 font-sans font-semibold text-sm uppercase tracking-[0.1em] text-oro">
+                <span className="mt-8 inline-flex items-center gap-2 texto-boton text-oro">
                   {nivel.boton}
                   <ArrowRight
                     size={20}

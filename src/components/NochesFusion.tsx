@@ -29,7 +29,7 @@ export function NochesFusion({ noches, url, sinFechas, esEjemplo = false }: Noch
 
   return (
     <>
-      {esEjemplo && <EtiquetaEjemplo className="mb-5" />}
+      {esEjemplo && <EtiquetaEjemplo className="mb-4" />}
       <ul className="border-b border-piedra">
         {vigentes.map((noche) => {
           const link = noche.urlEntradas || url;

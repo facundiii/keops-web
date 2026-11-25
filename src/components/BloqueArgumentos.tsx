@@ -20,7 +20,7 @@ export function BloqueArgumentos({ titulo, argumentos, foto, esEjemplo = false }
   return (
     <Seccion>
       <FadeInSection>
-        <TituloSeccion titulo={titulo} className={esEjemplo ? "!mb-5" : ""} />
+        <TituloSeccion titulo={titulo} className={esEjemplo ? "!mb-4" : ""} />
         {esEjemplo && <EtiquetaEjemplo className="mb-8" />}
       </FadeInSection>
       {foto && (
@@ -34,8 +34,8 @@ export function BloqueArgumentos({ titulo, argumentos, foto, esEjemplo = false }
         {argumentos.map((a, i) => (
           <li key={a.titulo}>
             <FadeInSection delay={i * 80} className="h-full">
-              <div className="h-full rounded-2xl border border-piedra bg-carbon p-6 lg:p-7">
-                <p className="font-titulo font-semibold text-oro text-sm tracking-[0.1em] mb-5" aria-hidden="true">
+              <div className="h-full rounded-2xl border border-piedra bg-carbon p-6 lg:p-8">
+                <p className="numeral text-oro mb-4" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </p>
                 <h3 className="titulo-3 text-marfil mb-3">{a.titulo}</h3>

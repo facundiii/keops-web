@@ -25,7 +25,7 @@ export default function FusionPage() {
   return (
     <>
       {/* Qué es Fusion */}
-      <section className="bg-negro px-4 sm:px-6 pt-32 pb-16 lg:pt-44 lg:pb-20">
+      <section className="bg-negro px-4 sm:px-6 lg:px-8 bajo-navbar bajo-navbar-alto pb-16 lg:pb-24">
         <div className="max-w-4xl mx-auto text-center">
           {/* El archivo del logo mide 168 px de ancho: no se agranda para que no se vea borroso */}
           <Image
@@ -38,7 +38,7 @@ export default function FusionPage() {
           />
           <h1 className="titulo-2 text-marfil animate-fade-in-up">{texto}</h1>
           {url && (
-            <div className="mt-9 animate-fade-in-up animate-delay-200">
+            <div className="mt-8 animate-fade-in-up animate-delay-200">
               <Boton href={url}>
                 {textoBoton}
                 <ArrowUpRight size={20} strokeWidth={1.5} aria-hidden="true" />
@@ -81,7 +81,7 @@ export default function FusionPage() {
       </Seccion>
 
       {/* Tickets */}
-      <Seccion id="tickets" ancho="medio">
+      <Seccion id="tickets">
         <FadeInSection>
           <TituloSeccion antetitulo={tickets.antetitulo} titulo={tickets.titulo} />
         </FadeInSection>
