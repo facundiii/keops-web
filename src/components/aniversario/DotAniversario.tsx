@@ -4,14 +4,14 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { aniversario } from "@/config/aniversario";
 import { iniciarEnjambre, PASOS_TEXTO, RECORRIDO_TOTAL, type Enjambre } from "@/lib/enjambreDot";
-import { Boton, claseBoton } from "@/components/ui/Boton";
+import { claseBoton } from "@/components/ui/Boton";
 
 const entre01 = (x: number) => Math.max(0, Math.min(1, x));
 
 /**
  * DOT, la electrónica de la noche del aniversario en otro sector. Sigue a la pirámide al bajar:
  * la escena queda fija mientras se recorre la sección, el enjambre pasa por las formaciones
- * del reel y el lineup entra de a partes. Sin JavaScript o con "reducir movimiento",
+ * del reel y el lineup entra en orden de salida. Sin JavaScript o con "reducir movimiento",
  * es una pantalla con todo el texto a la vista.
  */
 export function DotAniversario() {
@@ -97,7 +97,10 @@ export function DotAniversario() {
     enjambre.current?.pausar(enPausa);
   }, [enPausa]);
 
-  const lugar = [dot.sector.trim(), dot.hora.trim() && `desde las ${dot.hora.trim()} h`].filter(Boolean).join(", ");
+  // DOT abre a la misma hora que el resto de la noche
+  const sector = dot.sector.trim();
+  const hora = aniversario.hora.trim();
+  const lugar = hora ? (sector ? `${sector}, desde las ${hora} h` : `Desde las ${hora} h`) : sector;
 
   return (
     <section id="dot" ref={seccion} aria-labelledby="titulo-dot" className="dot-recorrido relative bg-negro">
@@ -115,12 +118,10 @@ export function DotAniversario() {
 
           <div className="flex-1 lg:hidden" aria-hidden="true" />
 
-          <ul className="flex flex-col items-center gap-2 lg:mt-12 lg:max-w-xl lg:items-start" aria-label="Lineup">
-            <li data-paso="1" className="dot-paso dot-cabeza">
-              {dot.cabeza}
-            </li>
-            {dot.lineup.map((fila, i) => (
-              <li key={fila.join("-")} data-paso="2" className="dot-paso dot-linea">
+          {/* En orden de salida: la noche sube hasta quien la cierra, que entra último y en grande */}
+          <ol className="flex flex-col items-center gap-2 lg:mt-12 lg:max-w-xl lg:items-start" aria-label="Lineup en orden de salida">
+            {dot.lineup.map((fila) => (
+              <li key={fila.join("-")} data-paso="1" className="dot-paso dot-linea">
                 {fila.map((nombre, i) => (
                   <Fragment key={nombre}>
                     {i > 0 && <span className="dot-b2b">b2b</span>}
@@ -129,18 +130,14 @@ export function DotAniversario() {
                 ))}
               </li>
             ))}
-          </ul>
+            <li data-paso="2" className="dot-paso dot-cabeza mt-2">
+              {dot.cabeza}
+            </li>
+          </ol>
 
           <div data-paso="3" className="dot-paso mt-4 lg:mt-6 lg:max-w-md">
-            {dot.bajada && <p className="texto-chico text-arena">{dot.bajada}</p>}
+            {dot.bajada && <p className="texto-chico text-balance text-arena">{dot.bajada}</p>}
             {lugar && <p className="texto-chico mt-1 text-marfil">{lugar}</p>}
-            {dot.urlEntradas.trim() && (
-              <div className="mt-6">
-                <Boton href={dot.urlEntradas.trim()} variante="secundario">
-                  {dot.boton}
-                </Boton>
-              </div>
-            )}
           </div>
         </div>
 

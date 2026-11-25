@@ -11,7 +11,8 @@ import { ANCLA_ENTRADAS } from "@/components/EnlaceEntrada";
 export function BandaAniversario() {
   const { banda } = aniversario;
   const href = banda.urlEntradas.trim() || `/disco#${ANCLA_ENTRADAS}`;
-  const detalle = [banda.hora.trim() && `Apertura ${banda.hora.trim()} h`, banda.nota].filter(Boolean).join(" · ");
+  const hora = aniversario.hora.trim();
+  const detalle = [hora && `Apertura ${hora} h`, banda.nota].filter(Boolean).join(" · ");
 
   return (
     <section className="aniv-banda relative overflow-hidden px-4 py-16 text-center sm:px-6 lg:px-8 lg:py-24">

@@ -21,6 +21,12 @@ export const aniversario = {
   /** Texto del logo "57 años", para lectores de pantalla. El 57 está dibujado: otro año necesita otro dibujo. */
   anios: "57 años",
 
+  /**
+   * Hora de apertura de la noche, ej. "00:30": la pirámide y DOT abren a la misma hora.
+   * Se muestra en DOT y en el cierre. A COMPLETAR. Vacía = no se muestra.
+   */
+  hora: "",
+
   contador: {
     faltan: "Faltan",
     /** Se muestra cuando el contador llega a cero, hasta `fin` */
@@ -35,21 +41,19 @@ export const aniversario = {
     /** Nombre del sector, como en el flyer. Si llega el logo en archivo, reemplaza al texto. */
     nombre: "DOT.",
     subtitulo: "Aniversario de Keops",
-    /** Quien cierra la noche, en grande */
+    /**
+     * El lineup en orden de salida: la primera fila abre la noche.
+     * Dos nombres en la misma fila son un b2b.
+     */
+    lineup: [["Fferniot"], ["Lucas Reartes", "Lukas Roldán"]],
+    /** Quien cierra la noche: va después del lineup y en grande */
     cabeza: "Luciano Bertorello",
-    /** Cada fila del resto del lineup: dos nombres en la misma fila son un b2b */
-    lineup: [["Lucas Reartes", "Lukas Roldán"], ["Fferniot"]],
     bajada: "Electrónica, la misma noche y en otro sector de Keops.", // TEXTO PROPUESTO
     /** En qué sector de Keops va DOT, ej. "Salón Eletón". A COMPLETAR. Vacío = no se muestra. */
     sector: "",
-    /** Hora de DOT, ej. "01:00". A COMPLETAR. Vacía = no se muestra. */
-    hora: "",
-    /** Link de entradas solo para DOT, si tiene las suyas. Vacío = sin botón: la entrada está en el cierre. */
-    urlEntradas: "",
-    boton: "Entradas para DOT",
   },
 
-  /** Banda del cierre, después de DOT: acá va el botón de compra de la noche. */
+  /** Banda del cierre, después de DOT: acá va el único botón de compra de la noche. */
   banda: {
     titulo: "La noche del aniversario", // TEXTO PROPUESTO
     bajada: "El sábado 12 de diciembre festejamos los 57 años de Keops: la pirámide y DOT, la misma noche.", // TEXTO PROPUESTO
@@ -59,8 +63,6 @@ export const aniversario = {
      * Vacío = el botón lleva a "Comprá tu entrada" en Disco.
      */
     urlEntradas: "",
-    /** Hora de apertura, ej. "00:30". A COMPLETAR. Vacía = no se muestra. */
-    hora: "",
     /** Línea chica debajo del botón */
     nota: "Entradas en la app Quickpass",
   },
