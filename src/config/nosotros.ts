@@ -116,5 +116,15 @@ export const equipo: { antetitulo: string; titulo: string; areas: { nombre: stri
         { nombre: "Jessica Sosa", rol: "" },
       ],
     },
+    {
+      // La cabina: quien pone la música y quienes manejan las visuales (VJ) y las luces (LJ)
+      nombre: "Cabina",
+      personas: [
+        { nombre: "Diego Fernandez", rol: "DJ Residente" },
+        { nombre: "Facundo Fernandez", rol: "VJ / LJ" },
+        { nombre: "Facundo Ercoles", rol: "VJ / LJ" },
+        { nombre: "Santiago Miñoz", rol: "VJ / LJ" },
+      ],
+    },
   ],
 };

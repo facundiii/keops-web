@@ -484,7 +484,7 @@ Después del encabezado, cuatro momentos de la fiesta en orden, para que se enti
 Una tarjeta por espacio, en la misma grilla de seis columnas que las líneas de la home: las dos primeras van grandes (media fila cada una) y las demás completan la fila de a tres, o de a dos si son dos o cuatro. Nunca queda un hueco al final. Cada tarjeta lleva hasta dos fotos arriba (una sola en 3:2; dos, lado a lado en 3:4 con una junta piedra de 1 px), el nombre en título 3, la capacidad como antetítulo y la descripción en cuerpo arena. Relleno de 24 px, 32 px desde 1024 px. No son enlaces: no se encienden.
 
 ### Nuestro equipo (Nosotros)
-Como los créditos de una noche, no como tarjetas: cada área (por ahora, Administración) lleva una línea piedra arriba, su nombre como antetítulo y debajo los nombres en título 3 marfil, con el rol en texto chico arena si lo tiene. Sin fotos. Hasta tres áreas por fila desde 1024 px. Con una sola área, son los nombres los que se reparten de a tres por fila, para no dejar dos tercios de la banda vacíos.
+Como los créditos de una noche, no como tarjetas: cada área (por ahora, Administración y Cabina) lleva una línea piedra arriba, su nombre como antetítulo y debajo los nombres en título 3 marfil, con el rol en texto chico arena si lo tiene. Sin fotos. Las áreas ocupan toda la fila: dos áreas, media fila cada una; tres o más, hasta tres por fila desde 1024 px. Con una sola área, son los nombres los que se reparten de a tres por fila. Nunca queda parte de la banda vacía.
 
 ### Acordeón (preguntas frecuentes)
 Filas separadas por líneas piedra, cada pregunta en título 3 marfil que pasa a oro en hover, con un chevron oro de 24 px que gira en 300 ms al abrir. La respuesta va en cuerpo arena. Funciona con teclado y sin JavaScript.

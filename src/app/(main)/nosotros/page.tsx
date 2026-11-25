@@ -139,8 +139,17 @@ export default function NosotrosPage() {
           <FadeInSection>
             <TituloSeccion antetitulo={equipo.antetitulo} titulo={equipo.titulo} />
           </FadeInSection>
-          {/* Con una sola área, los nombres se reparten a lo ancho: si no, dos tercios de la fila quedan vacíos */}
-          <div className={areasEquipo.length > 1 ? "grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12" : ""}>
+          {/* Las áreas ocupan toda la fila: con una sola, los nombres se reparten a lo ancho; con dos, media fila
+              cada una; con tres o más, un tercio. Si no, parte de la fila queda vacía. */}
+          <div
+            className={
+              areasEquipo.length > 2
+                ? "grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-12"
+                : areasEquipo.length === 2
+                  ? "grid gap-10 sm:grid-cols-2 lg:gap-12"
+                  : ""
+            }
+          >
             {areasEquipo.map((area, i) => (
               <FadeInSection key={area.nombre} delay={i * 80} className="border-t border-piedra pt-6">
                 <h3 className="antetitulo">{area.nombre}</h3>

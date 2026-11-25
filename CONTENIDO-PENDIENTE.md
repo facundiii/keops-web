@@ -70,7 +70,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - [ ] **Línea de tiempo:** faltan las imágenes de **1969, 2020 y 2021** (se asignan en `fotos.ts`). Las de 2010 y 2019 ya están.
 - [ ] **Espacios:** `capacidad` y `descripcion` de Pista Central, Salón Eletón, Salón Bar, Keops Garden y Salón VIP.
 - [ ] **Misión:** el texto es el propuesto; revisarlo.
-- [ ] **Nuestro equipo** (`equipo`): está Administración (Francisco Giordano, Débora Bourdieu, Jessica Sosa). Se pueden sumar más áreas (por ejemplo, música, show o técnica) y un rol por persona.
+- [ ] **Nuestro equipo** (`equipo`): están Administración (Francisco Giordano, Débora Bourdieu, Jessica Sosa) y Cabina (Diego Fernandez, DJ Residente; Facundo Fernandez, Facundo Ercoles y Santiago Miñoz, VJ / LJ). Se pueden sumar más áreas (por ejemplo, show o técnica) y un rol por persona.
 
 ## `lineas.ts`
 
@@ -135,7 +135,7 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 - **Servicios de Eventos privados** (`lineas.ts`): los acorté y les saqué adjetivos ("premium", "de último nivel", "de alta velocidad"). Sin banda en vivo.
 - **Institucionales afuera:** sin página, sin tarjeta en la home y sin ítem en el menú. Eventos privados suma "eventos de empresa" y `/institucionales` redirige a `/eventos`.
 - **Encabezados de las páginas internas:** con foto o video ocupan casi toda la pantalla. `/egresados` y secundario tienen un video vertical (al costado del texto en la compu) y Disco, el video de la pista. Son tramos cortos y livianos de los videos propios (`public/portadas/`).
-- **"Nuestro equipo"** volvió a Nosotros, por área y sin fotos: por ahora, Administración (Francisco Giordano, Débora Bourdieu y Jessica Sosa).
+- **"Nuestro equipo"** volvió a Nosotros, por área y sin fotos: Administración (Francisco Giordano, Débora Bourdieu y Jessica Sosa) y Cabina (Diego Fernandez, Facundo Fernandez, Facundo Ercoles y Santiago Miñoz), que vuelve como estaba antes del rediseño.
 - **Títulos de contacto** "Escribinos" en la home, Disco y Fusion (`home.ts`, `disco.ts`, `fusion.ts`).
 - **Mensaje del formulario de agencias:** "Hola, quiero pedir una propuesta para egresados." seguido de agencia, nivel, cantidad y fecha.
 - **Sin botones en la primera vista de ninguna página:** los encabezados ya no tienen botón (tampoco "Comprar entrada" en Disco) y el "Contacto" dorado y el WhatsApp flotante aparecen al bajar, como en la home.
