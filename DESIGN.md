@@ -341,7 +341,7 @@ El sitio se arma con **bandas a todo el ancho**, una por bloque, siempre sobre n
 | `medio` | 1024 px | Solo bloques con el título centrado, como la línea de tiempo. |
 | `amplio` | 1280 px | Solo una grilla de tarjetas con foto que se abre más que el texto (las líneas de la home). Nunca un título. |
 
-Hay dos aperturas de página. La home abre con un **hero a pantalla completa** (100 svh) con video de fondo y el texto apoyado abajo a la izquierda, **sin botones**: el contacto y la compra aparecen al bajar (durante el aniversario, la reemplaza la portada especial). Las páginas internas abren con un **encabezado centrado**: antetítulo, título 1 y bajada, también sin botones; con foto o video de fondo es más alto.
+Hay dos aperturas de página. La home abre con un **hero a pantalla completa** (100 svh) con video de fondo y el texto apoyado abajo a la izquierda, **sin botones**: el contacto y la compra aparecen al bajar (durante el aniversario, la reemplaza la portada especial). El video de la pista es vertical, así que va en dos versiones sin deformar, como el de Disco: una franja horizontal para compu y tablet (10,6 MB), que cambia de altura en cada toma para no cortar caras ni carteles, y el cuadro vertical para celular (6,8 MB). La receta está en `config/home.ts`. Las páginas internas abren con un **encabezado centrado**: antetítulo, título 1 y bajada, también sin botones; con foto o video de fondo es más alto.
 
 Las grillas se piensan desde 375 px. La home ordena las líneas en una grilla de seis columnas desde 1024 px: las dos primeras tarjetas ocupan media fila cada una y las otras tres, un tercio. Los argumentos van en una, dos o cuatro columnas. La cartelera es un carrusel que muestra el 85 % de una ficha en celular, dos fichas desde 640 px y tres desde 1024 px. El navbar cambia a menú de celular por debajo de 1024 px.
 
@@ -470,10 +470,10 @@ Firmes, en mayúsculas, con la luz puesta en el principal.
 
 ### Encabezado de página interna
 La primera pantalla de cada página. Con foto o video entra con fuerza: ocupa el 82 % de la pantalla (88 % desde 1024 px), con antetítulo, título y bajada en marfil. Sin botones: el contacto y la compra aparecen al bajar.
-- **Foto o video horizontal:** de fondo, con un velo negro de arriba abajo para que se lea el texto. Disco usa un tramo del video de la pista.
+- **Foto o video horizontal:** de fondo, con un velo negro de arriba abajo para que se lea el texto. Disco usa un tramo del video de la pista. El original de ese video es vertical, así que hay dos versiones: una franja horizontal sin deformar para compu y tablet, y el cuadro vertical entero para celular (menos de 768 px). El navegador baja solo la que corresponde.
 - **Video vertical (reel):** en celular llena el encabezado; desde 1024 px va a la derecha como un reel de 9:16 con esquinas de 16 px y borde piedra, y el texto a la izquierda. Es el de `/egresados` y Egresados secundario.
 - **Título:** si es corto (30 caracteres o menos), va en el tamaño de la portada de la home; si no, en título 1.
-- **Videos:** tramos de 9 a 12 s, sin sonido, de unos 2 MB, con su primer cuadro como imagen mientras cargan (`public/portadas/`). La pausa, un círculo de 44 px abajo a la derecha, aparece solo con el foco del teclado.
+- **Videos:** tramos de 9 a 12 s, sin sonido, de 2 a 3,5 MB, a 30 cuadros por segundo, con su primer cuadro como imagen mientras cargan (`public/portadas/`). Se cortan siempre del original, una sola vez: recomprimir un video ya comprimido lo empasta. Un video nunca se estira para llenar un formato; se recorta. La pausa, un círculo de 44 px abajo a la derecha, aparece solo con el foco del teclado.
 - **Sin foto ni video** (Preguntas frecuentes): encabezado corto de texto.
 
 ### Cómo es la fiesta (Egresados)
@@ -590,3 +590,4 @@ Las animaciones con nombre salen de `tailwind.config.ts` (`animate-fade-in`, `an
 - **Don't** ocultar el cursor del sistema, ni ningún contenido, a la espera de que cargue un script.
 - **Don't** inventar sombras, curvas, duraciones ni capas: las que existen están en este documento.
 - **Don't** mostrar a pantalla completa fotos de archivo de baja resolución, como la del frente en 2010.
+- **Don't** estirar una foto o un video para que llene un formato que no es el suyo: se recorta, o se usa otra versión.

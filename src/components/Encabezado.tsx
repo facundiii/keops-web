@@ -72,7 +72,12 @@ export function Encabezado({
 
       {video && !reel && (
         <>
-          <VideoPortada src={video.src} poster={video.poster} className="absolute inset-0 h-full w-full object-cover" />
+          <VideoPortada
+            src={video.src}
+            poster={video.poster}
+            celular={video.celular}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div className="velo-video absolute inset-0" />
         </>
       )}

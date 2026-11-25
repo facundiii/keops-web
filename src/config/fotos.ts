@@ -65,16 +65,31 @@ export interface VideoPortada {
   poster: string;
   /** Video vertical (9:16): en pantallas anchas va al costado del texto, como un reel */
   vertical?: boolean;
+  /**
+   * Versión vertical del mismo video de fondo, solo para celular (menos de 768 px de ancho).
+   * Es para un video horizontal cuyo original es vertical: en el celular calza entero, sin recortar.
+   */
+  celular?: { src: string; poster: string };
 }
 
 /**
  * Videos de los encabezados, en /public/portadas/. Son recortes de 9 a 12 segundos, sin sonido,
- * de los videos de Egresados y de la home (unos 2 MB cada uno en lugar de 6 a 13 MB).
+ * de los videos de Egresados y de la home (de 2 a 3,5 MB cada uno en lugar de 6 a 13 MB).
+ *
+ * El de Disco sale del video original de la pista, que es vertical (1080 × 1920; está en el historial
+ * de git, en el primer commit de `public/hero-video.mp4`). Nunca se estira para llenar un formato:
+ * - `disco.mp4`: una franja horizontal de 1080 × 720 (desde la fila 680), sin deformar, para compu y tablet.
+ * - `disco-vertical.mp4`: el cuadro entero a 576 × 1024, para celular.
+ * Tramo: del segundo 12,03 al 21,03, a 30 cuadros por segundo.
  */
 export const portadas = {
   egresados: { src: "/portadas/egresados.mp4", poster: "/portadas/egresados.jpg", vertical: true } as VideoPortada | undefined,
   secundarios: { src: "/portadas/secundarios.mp4", poster: "/portadas/secundarios.jpg", vertical: true } as VideoPortada | undefined,
-  disco: { src: "/portadas/disco.mp4", poster: "/portadas/disco.jpg" } as VideoPortada | undefined,
+  disco: {
+    src: "/portadas/disco.mp4",
+    poster: "/portadas/disco.jpg",
+    celular: { src: "/portadas/disco-vertical.mp4", poster: "/portadas/disco-vertical.jpg" },
+  } as VideoPortada | undefined,
 };
 
 // ── Dónde va cada una ────────────────────────────────────────────

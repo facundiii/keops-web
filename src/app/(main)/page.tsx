@@ -33,9 +33,9 @@ function HeroVideo({ diferirVideo = false }: { diferirVideo?: boolean }) {
   return (
     <section className="relative min-h-[100svh] flex items-end overflow-hidden">
       {diferirVideo ? (
-        <VideoFondoDiferido src={hero.video} className={claseVideo} />
+        <VideoFondoDiferido src={hero.video} celular={hero.videoCelular} className={claseVideo} />
       ) : (
-        <VideoFondo src={hero.video} className={claseVideo} />
+        <VideoFondo src={hero.video} celular={hero.videoCelular} className={claseVideo} />
       )}
       {/* Oscurece el video lo justo para que se lea el texto */}
       <div className="velo-video absolute inset-0" />

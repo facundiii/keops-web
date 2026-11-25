@@ -10,8 +10,20 @@ export const hero = {
   antetitulo: "Villa Carlos Paz · Desde 1969",
   titulo: "La pirámide de Carlos Paz",
   bajada: "Disco, egresados y eventos privados en el espacio más grande de la ciudad.",
-  /** Video de fondo, dentro de /public. Siempre sin sonido. */
+  /**
+   * Video de fondo, dentro de /public. Siempre sin sonido.
+   *
+   * El original es vertical (1080 × 1920, 39,5 s; está en el historial de git, en el primer commit de este
+   * archivo). Nunca se estira: `video` es una franja horizontal de 1080 × 720 para compu y tablet, y
+   * `videoCelular`, el cuadro vertical (sin la franja de abajo, que trae un rótulo "KEOPS") a 576 × 870.
+   *
+   * La franja horizontal no está siempre a la misma altura: cambia con cada toma para que no corte
+   * caras ni carteles. Fila donde arranca, por tramo (en segundos): 0 → 200 · 2,37 → 600 · 3,40 → 400 ·
+   * 4,63 → 330 · 7,33 → 580 · 11,0 → 680 · 25,03 → 220 · 27,2 → 560 · 28,2 → 300 · 29,2 → 160 ·
+   * 30,67 → 680 · 32,17 → 360 · 33,33 → 300 · 34,33 → 460 · 35,33 → 680.
+   */
   video: "/hero-video.mp4",
+  videoCelular: "/hero-video-vertical.mp4",
 };
 
 /** Franja de cifras. Todas con el mismo formato: un número grande y una palabra debajo. */
