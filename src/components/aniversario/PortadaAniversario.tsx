@@ -38,8 +38,20 @@ function Cincuenta({ etiqueta }: { etiqueta: string }) {
 }
 
 /**
+ * Segundos que faltan para que el logo aterrice: la pirámide estalla en ese momento.
+ * Si el logo ya entró (la página tardó en cargar), estalla apenas se enciende.
+ */
+function hastaQueAterrice(logo: HTMLElement | null): number {
+  const animacion = logo?.getAnimations?.()[0];
+  const actual = animacion?.currentTime;
+  if (!animacion || animacion.playState !== "running" || typeof actual !== "number") return 0;
+  const retraso = Number(animacion.effect?.getTiming().delay ?? 0);
+  return Math.max(0, (retraso + 300 - actual) / 1000);
+}
+
+/**
  * Primera vista de la home durante el aniversario. Sin botones: la fecha, la pirámide
- * que se abre con fuego adentro, "Aniversario Keops 57 años" y la cuenta regresiva.
+ * que estalla con magma adentro, "Aniversario Keops 57 años" y la cuenta regresiva.
  * La compra está en la banda que sigue.
  */
 export function PortadaAniversario() {
@@ -54,20 +66,25 @@ export function PortadaAniversario() {
   useEffect(() => {
     const canvas = lienzo.current;
     if (!canvas) return;
+    // Como en el reel, la pirámide va pegada a la cámara: la punta llega a la fecha y la de abajo
+    // queda detrás de "Aniversario". En pantallas anchas baja hasta el medio del logo y el mar, más abajo.
     const medir = () => {
       const f = fecha.current;
       const m = marca.current;
-      const movil = canvas.clientWidth < 768;
-      return {
-        techo: f ? f.offsetTop + f.offsetHeight + (movil ? 30 : 20) : canvas.clientHeight * 0.18,
-        horizonte: m && m.offsetHeight ? m.offsetTop + m.offsetHeight * 0.5 : canvas.clientHeight * 0.62,
-      };
+      const alto = canvas.clientHeight;
+      if (!f || !m || !m.offsetHeight) return { techo: alto * 0.1, piso: alto * 0.58, horizonte: alto * 0.64 };
+      const fechaMedio = f.offsetTop + f.offsetHeight / 2;
+      if (canvas.clientWidth < 768) {
+        return { techo: fechaMedio - alto * 0.06, piso: m.offsetTop, horizonte: m.offsetTop + m.offsetHeight / 2 };
+      }
+      // En pantallas anchas la punta se sale por arriba, como cuando la cámara se acerca en el reel
+      return { techo: fechaMedio - alto * 0.22, piso: m.offsetTop + m.offsetHeight / 2, horizonte: m.offsetTop + m.offsetHeight };
     };
-    // Con "reducir movimiento" la pirámide sigue viva, pero gira más lento, se abre menos y no tira esquirlas.
+    // Con "reducir movimiento" la pirámide no estalla ni se acerca: queda partida y encendida, y gira lento.
     // Si la preferencia cambia con la página abierta, se vuelve a armar.
     const consulta = window.matchMedia("(prefers-reduced-motion: reduce)");
     const armar = () => {
-      const p = iniciarPiramide(canvas, { medir, suave: consulta.matches });
+      const p = iniciarPiramide(canvas, { medir, suave: consulta.matches, explosion: hastaQueAterrice(marca.current) });
       p.pausar(pausada.current);
       return p;
     };
@@ -102,7 +119,7 @@ export function PortadaAniversario() {
       <canvas ref={lienzo} aria-hidden="true" className="absolute inset-0 -z-10 block h-full w-full" />
 
       <div className="aniv-capa absolute inset-0 flex flex-col items-center px-4 text-center">
-        <p ref={fecha} className="aniv-fecha aniv-entra aniv-entra-fecha">
+        <p ref={fecha} className="aniv-fecha aniv-fecha-entra">
           {aniversario.fechaCorta}
         </p>
         <div className="flex-1" aria-hidden="true" />
@@ -116,14 +133,18 @@ export function PortadaAniversario() {
             height={445}
             sizes="330px"
             preload
-            className="aniv-marca aniv-entra aniv-entra-marca mt-2 lg:mt-3"
+            className="aniv-marca aniv-aterriza mt-2 lg:mt-3"
           />
           <Cincuenta etiqueta={aniversario.anios} />
         </h1>
         <Contador />
       </div>
 
-      <span aria-hidden="true" className="aniv-indicador aniv-bajar" />
+      {/* La pirámide es la introducción: abajo, una invitación sutil a ver el resto de la noche */}
+      <a href="#dot" className="aniv-seguir">
+        {aniversario.invitacion}
+        <span aria-hidden="true" className="aniv-seguir-linea" />
+      </a>
 
       {/* Solo aparece con el foco del teclado */}
       <button

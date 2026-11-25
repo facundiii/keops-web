@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-24T20:19:11.368Z",
+  "generatedAt": "2026-11-24T23:39:25.408Z",
   "title": "Design System: Keops",
   "extensions": {
     "colorMeta": {
@@ -256,6 +256,18 @@
       "aniv-numero": {
         "displayName": "Aniversario: contador",
         "purpose": "Números tabulares de la cuenta regresiva."
+      },
+      "dot-marca": {
+        "displayName": "DOT: nombre",
+        "purpose": "DOT. arriba de la sección de la electrónica del aniversario."
+      },
+      "dot-cabeza": {
+        "displayName": "DOT: quien cierra",
+        "purpose": "El nombre más grande del lineup de DOT."
+      },
+      "dot-linea": {
+        "displayName": "DOT: lineup",
+        "purpose": "El resto del lineup de DOT, con b2b en chico."
       }
     },
     "shadows": [

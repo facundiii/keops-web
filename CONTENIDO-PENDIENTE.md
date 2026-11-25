@@ -28,7 +28,11 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 - [ ] `banda.urlEntradas`: link directo a la noche del aniversario en Quickpass. Sin él, "Comprar entrada" lleva a "Comprá tu entrada" en Disco.
 - [ ] `banda.hora`: hora de apertura (ej. "00:30"). Vacía, no se muestra.
-- [ ] Revisar `banda.titulo` ("57 años bajo la pirámide") y `banda.bajada`: son una propuesta (marcados con `TEXTO PROPUESTO`).
+- [ ] Revisar `banda.titulo` ("La noche del aniversario"), `banda.bajada` e `invitacion` ("Lo que hay esa noche"): son una propuesta (marcados con `TEXTO PROPUESTO`).
+- [ ] **DOT** (`dot`): `sector` (en qué sector de Keops va) y `hora`; vacíos, no se muestran.
+- [ ] **DOT** `urlEntradas`: solo si DOT tiene entradas propias. Vacío, no hay botón en DOT y la entrada de la noche queda en el cierre.
+- [ ] **DOT**: revisar `bajada` (propuesta) y la escritura del lineup (Luciano Bertorello; Lucas Reartes b2b Lukas Roldán; Fferniot, tomado del flyer).
+- [ ] **DOT**: el logo en PNG o SVG, si se quiere el del flyer en lugar del nombre escrito en Outfit.
 - [ ] Revisar `cuentaHasta` (hoy, sábado 12 a las 23:59) y `fin` (domingo 13 a las 12:00, cuando la home vuelve sola a la normal).
 - La noche del aniversario no está en la cartelera de Disco: si la cargás en `cartelera.ts` (con su flyer), aparece también en "Próximas noches".
 

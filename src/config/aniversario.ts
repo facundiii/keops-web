@@ -27,10 +27,32 @@ export const aniversario = {
     esNoche: "Es esta noche",
   },
 
-  /** Banda que sigue a la primera vista, como la última línea del flyer: acá va el botón de compra. */
+  /** La invitación de abajo de la portada: la pirámide es la introducción y la noche sigue al bajar */
+  invitacion: "Lo que hay esa noche", // TEXTO PROPUESTO
+
+  /** DOT: la electrónica de la misma noche, en otro sector. Datos del flyer de @dotbykeops. */
+  dot: {
+    /** Nombre del sector, como en el flyer. Si llega el logo en archivo, reemplaza al texto. */
+    nombre: "DOT.",
+    subtitulo: "Aniversario de Keops",
+    /** Quien cierra la noche, en grande */
+    cabeza: "Luciano Bertorello",
+    /** Cada fila del resto del lineup: dos nombres en la misma fila son un b2b */
+    lineup: [["Lucas Reartes", "Lukas Roldán"], ["Fferniot"]],
+    bajada: "Electrónica, la misma noche y en otro sector de Keops.", // TEXTO PROPUESTO
+    /** En qué sector de Keops va DOT, ej. "Salón Eletón". A COMPLETAR. Vacío = no se muestra. */
+    sector: "",
+    /** Hora de DOT, ej. "01:00". A COMPLETAR. Vacía = no se muestra. */
+    hora: "",
+    /** Link de entradas solo para DOT, si tiene las suyas. Vacío = sin botón: la entrada está en el cierre. */
+    urlEntradas: "",
+    boton: "Entradas para DOT",
+  },
+
+  /** Banda del cierre, después de DOT: acá va el botón de compra de la noche. */
   banda: {
-    titulo: "57 años bajo la pirámide", // TEXTO PROPUESTO
-    bajada: "El sábado 12 de diciembre festejamos el aniversario de Keops.", // TEXTO PROPUESTO
+    titulo: "La noche del aniversario", // TEXTO PROPUESTO
+    bajada: "El sábado 12 de diciembre festejamos los 57 años de Keops: la pirámide y DOT, la misma noche.", // TEXTO PROPUESTO
     boton: "Comprar entrada",
     /**
      * Link directo a esta noche en la app de entradas (Quickpass). A COMPLETAR.

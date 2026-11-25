@@ -85,6 +85,23 @@ typography:
     fontSize: "clamp(2rem, 1.4rem + 2.6vw, 3.75rem)"
     fontWeight: 600
     lineHeight: 1
+  dot-marca:
+    fontFamily: "Outfit, system-ui, sans-serif"
+    fontSize: "clamp(3rem, 2.2rem + 3.5vw, 5.5rem)"
+    fontWeight: 800
+    lineHeight: 0.9
+    letterSpacing: "-0.02em"
+  dot-cabeza:
+    fontFamily: "Outfit, system-ui, sans-serif"
+    fontSize: "clamp(2.25rem, 1.5rem + 3vw, 4.5rem)"
+    fontWeight: 800
+    lineHeight: 0.92
+    letterSpacing: "-0.01em"
+  dot-linea:
+    fontFamily: "Inter, system-ui, sans-serif"
+    fontSize: "clamp(1rem, 0.9rem + 0.45vw, 1.35rem)"
+    fontWeight: 600
+    letterSpacing: "0.04em"
 rounded:
   lg: "8px"
   xl: "12px"
@@ -340,12 +357,24 @@ Círculo verde de 56 px abajo a la derecha, a 20 px de los bordes, con el númer
 
 ### Portada del aniversario (versión especial de la home)
 El flyer de los 57 años hecho primera vista: "La pirámide encendida" al pie de la letra.
-- **Escena:** un canvas a pantalla completa con cielo de atardecer (azul noche que baja a ámbar), mar frío con reflejo ondulado y una columna cálida debajo del sol, y una pirámide doble de pizarra flotando. Las vetas de lava se concentran en la franja del medio y brillan desde el primer cuadro; las puntas quedan casi como piedra fría.
-- **Animación:** una vuelta de 14 s. La pirámide se agrieta, se abre por la franja del medio dejando ver el fuego de adentro, tira esquirlas y se vuelve a cerrar. Arranca ya en la fase de grietas, así la primera apertura llega cuando el texto terminó de entrar. Se frena fuera de pantalla y con la pestaña oculta.
-- **Texto:** arriba la fecha en hielo; sobre el horizonte, "ANIVERSARIO" con halo oscuro, el logo KEOPS (el horizonte pasa por su mitad) y el "57 AÑOS" dibujado, que se arma por piezas al cargar (la barra entra de costado, el arco gira, el 7 cae). Abajo, el contador en una fila: días, horas, min, seg, en números tabulares.
+- **Escena:** un canvas a pantalla completa con cielo de atardecer (azul noche que baja a ámbar), mar frío con reflejo ondulado y una columna cálida debajo del sol, y una pirámide doble de piedra casi negra, con proporciones de Keops, pegada a la cámara como en el reel. En celular desborda los costados, la punta llega a la fecha y la de abajo queda detrás de "ANIVERSARIO". En pantallas anchas la punta se sale por arriba y la de abajo llega al medio del logo. La punta queda entera; la franja del medio se parte en bloques y la pirámide de abajo, en una red de grietas con lava. La luz sale solo de las grietas y del magma del centro: la roca no brilla.
+- **Animación:** una vuelta de 14 s. La pirámide se agrieta, estalla por la franja del medio en bloques que salen volando con escombros, deja ver el magma y se vuelve a armar. Se frena fuera de pantalla y con la pestaña oculta.
+- **Entrada:** un solo momento armado. La escena sale de la noche, la pirámide entra de lejos y a oscuras, se le encienden las grietas y estalla con un destello justo cuando el logo aterriza (el canvas lee la animación del logo para ir sincronizado); la cámara se acerca con el estallido. Antes, la fecha se cierra y "ANIVERSARIO" se abre; después se arma el 57 y entra el contador.
+- **Texto:** arriba la fecha en hielo; sobre el horizonte, "ANIVERSARIO" con halo oscuro, el logo KEOPS (el horizonte pasa por su mitad) y el "57 AÑOS" dibujado, que se arma por piezas al cargar (la barra entra de costado, el arco gira, el 7 cae). El logo y el 57 llevan una sombra oscura que los despega del fuego. Abajo, el contador en una fila: días, horas, min, seg, en números tabulares.
 - **Sin botones:** la única acción es una pausa de la animación que aparece solo con el foco del teclado (debajo de la fecha en celular, arriba a la izquierda en escritorio).
-- **Movimiento reducido:** la pirámide sigue viva pero suave (gira a la mitad, se abre un 45 %, sin esquirlas, agua más lenta) y conserva toda la luz del fuego: la luz no es movimiento. El texto está desde el principio.
-- **Banda de compra:** la sigue como la última línea del flyer: título, bajada, "Comprar entrada" y la línea de la app de entradas, centrados, con la luz del fuego bajando desde arriba y una línea de brasa en lugar de la junta piedra.
+- **Movimiento reducido:** la pirámide no estalla ni se acerca: queda partida y quieta, apenas respira, gira a menos de la mitad y no tira escombros; el agua va más lenta. Conserva toda la luz: se enciende al entrar y el fuego titila, porque la luz no es movimiento y la rotura tampoco. El texto está desde el principio.
+- **Introducción, no portada suelta:** la pirámide abre la noche. Abajo, cuando termina la entrada, aparece "Lo que hay esa noche" con una línea que baja: un link de texto chico, en arena, que lleva a DOT. Es la única invitación a seguir; no hay flechas ni botones.
+- **Banda de compra:** cierra la noche después de DOT, como la última línea del flyer: título, bajada, "Comprar entrada" y la línea de la app de entradas, centrados, con la luz del fuego bajando desde arriba y una línea de brasa en lugar de la junta piedra. Es el único botón de compra de la noche, salvo que DOT tenga entradas propias.
+
+### DOT (la electrónica de la noche del aniversario)
+El flyer de @dotbykeops hecho sección: la misma noche, en otro sector. Sigue a la pirámide y antes del cierre.
+- **Escena:** el mismo atardecer sobre el mar, más claro y azul. En el centro, una esfera de vidrio que muestra el horizonte dado vuelta; alrededor, un enjambre de burbujas cromadas que reflejan ese cielo (una sola imagen de espejo, armada una vez, porque una esfera espejada se ve igual desde cualquier ángulo). Canvas 2D, sin librerías.
+- **Recorrido:** la sección mide 2,6 pantallas y la escena queda fija mientras se baja. El enjambre llega disperso y, al bajar, pasa por las formaciones del reel: anillo, columna, disco, estela y vuelta al anillo. Sigue al scroll con un poco de inercia, así un salto se ve como un vuelo. El texto entra de a partes: DOT. con la fecha, quien cierra la noche, el resto del lineup (b2b en chico) y la bajada.
+- **Electrónica:** la esfera y el enjambre laten apenas a 124 BPM y las burbujas se apartan del puntero (o del dedo).
+- **Composición:** en celular todo centrado, como el reel: DOT. arriba, la esfera, el lineup sobre el mar. En pantallas anchas la esfera va a la derecha, con el sol detrás, y el texto a la izquierda sobre una penumbra que sale del borde.
+- **Texto:** DOT. en Outfit 800, la fecha en hielo como en el flyer, el lineup en mayúsculas (Outfit 800 para quien cierra, Inter 600 para el resto) con una sombra que lo despega de las burbujas.
+- **Movimiento reducido y sin JavaScript:** una sola pantalla con todo el texto a la vista; el enjambre queda en el anillo, girando lento, sin latir ni seguir el scroll. Tiene la misma pausa por teclado que la pirámide.
+- **Datos:** en `config/aniversario.ts` (`dot`): lineup del flyer; sector, hora y link de entradas propio quedan vacíos hasta tenerlos y, vacíos, no se muestran.
 - **Fin:** pasada la fecha de `config/aniversario.ts`, la home normal aparece antes de pintar, sin un instante de la versión vieja, y el video del hero normal no se descarga mientras dura el evento.
 
 ### Movimiento

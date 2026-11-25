@@ -12,6 +12,7 @@ import { SegunFecha } from "@/components/SegunFecha";
 import { VideoFondoDiferido } from "@/components/VideoFondoDiferido";
 import { PortadaAniversario } from "@/components/aniversario/PortadaAniversario";
 import { BandaAniversario } from "@/components/aniversario/BandaAniversario";
+import { DotAniversario } from "@/components/aniversario/DotAniversario";
 import { VideoFondo } from "@/components/VideoFondo";
 import { ProximasNoches } from "@/components/ProximasNoches";
 import { ComoLlegar } from "@/components/ComoLlegar";
@@ -55,13 +56,15 @@ export default function HomePage() {
 
   return (
     <>
-      {/* 1. Primera vista: sin botones */}
+      {/* 1. Primera vista: sin botones. Durante el aniversario, la noche en orden:
+          la pirámide como introducción, DOT al bajar y el cierre con la entrada. */}
       {conAniversario ? (
         <SegunFecha
           hasta={aniversario.fin}
           antes={
             <>
               <PortadaAniversario />
+              <DotAniversario />
               <BandaAniversario />
             </>
           }
