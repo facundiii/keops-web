@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { ArrowLeft, ChevronDown, Menu, X } from "lucide-react";
-import { navegacion, navFusion, RUTA_INICIO } from "@/config/navegacion";
+import { ArrowLeft, ChevronDown, CircleHelp, Menu, X } from "lucide-react";
+import { navegacion, navFusion, navPreguntas, RUTA_INICIO } from "@/config/navegacion";
 import { claseBoton } from "@/components/ui/Boton";
 import { usePasoPortada } from "@/lib/usePasoPortada";
 
@@ -13,8 +13,16 @@ const claseLink = "enlace-menu whitespace-nowrap transition-colors duration-200 
 /** "Contacto" en texto: así se ve mientras dura la primera vista de la home, que va sin botones. */
 const claseContactoTexto =
   "inline-flex min-h-[44px] items-center texto-boton text-oro transition-colors duration-200 hover:text-marfil";
+/** Enlace de solo ícono (el signo de pregunta): 44 px de área, sin fondo ni borde, como un ítem más del menú. */
+const claseIcono =
+  "flex items-center justify-center min-h-[44px] min-w-[44px] transition-colors duration-200 hover:text-oro";
 
-export function Navbar() {
+interface NavbarProps {
+  /** true si hay preguntas frecuentes para mostrar: suma el signo de pregunta que lleva a esa página. */
+  conPreguntas?: boolean;
+}
+
+export function Navbar({ conPreguntas = false }: NavbarProps) {
   const ruta = usePathname();
   const [abierto, setAbierto] = useState(false);
   const [oculto, setOculto] = useState(false);
@@ -183,6 +191,19 @@ export function Navbar() {
               {navFusion.etiqueta}
             </Link>
 
+            {/* Preguntas frecuentes: solo el signo de pregunta. -mx-2: que el área de 44 px no abra el espacio entre ítems */}
+            {conPreguntas && (
+              <Link
+                href={navPreguntas.href}
+                aria-label={navPreguntas.etiqueta}
+                title={navPreguntas.etiqueta}
+                aria-current={ruta === navPreguntas.href ? "page" : undefined}
+                className={`${claseIcono} -mx-2 ${activo(navPreguntas.href) ? "text-oro" : "text-marfil"}`}
+              >
+                <CircleHelp size={20} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
+            )}
+
             <a
               href="#contacto"
               onClick={irAContacto}
@@ -192,17 +213,30 @@ export function Navbar() {
             </a>
           </nav>
 
-          {/* Botón del menú en celular */}
-          <button
-            type="button"
-            className="lg:hidden flex items-center justify-center w-11 h-11 -mr-2 text-marfil hover:text-oro transition-colors duration-200"
-            onClick={() => setAbierto((v) => !v)}
-            aria-expanded={abierto}
-            aria-controls="menu-celular"
-            aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
-          >
-            {abierto ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
-          </button>
+          {/* Celular: el signo de pregunta y el botón del menú */}
+          <div className="lg:hidden flex items-center -mr-2">
+            {conPreguntas && (
+              <Link
+                href={navPreguntas.href}
+                onClick={cerrar}
+                aria-label={navPreguntas.etiqueta}
+                aria-current={ruta === navPreguntas.href ? "page" : undefined}
+                className={`${claseIcono} ${activo(navPreguntas.href) ? "text-oro" : "text-marfil"}`}
+              >
+                <CircleHelp size={24} strokeWidth={1.5} aria-hidden="true" />
+              </Link>
+            )}
+            <button
+              type="button"
+              className="flex items-center justify-center w-11 h-11 text-marfil hover:text-oro transition-colors duration-200"
+              onClick={() => setAbierto((v) => !v)}
+              aria-expanded={abierto}
+              aria-controls="menu-celular"
+              aria-label={abierto ? "Cerrar menú" : "Abrir menú"}
+            >
+              {abierto ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -247,7 +281,7 @@ export function Navbar() {
                 )}
               </li>
             ))}
-            <li>
+            <li className={conPreguntas ? "border-b border-piedra" : undefined}>
               <Link
                 href={navFusion.href}
                 onClick={cerrar}
@@ -259,6 +293,22 @@ export function Navbar() {
                 {navFusion.etiqueta}
               </Link>
             </li>
+            {/* Preguntas frecuentes: un renglón de ayuda, más chico que las líneas */}
+            {conPreguntas && (
+              <li>
+                <Link
+                  href={navPreguntas.href}
+                  onClick={cerrar}
+                  aria-current={ruta === navPreguntas.href ? "page" : undefined}
+                  className={`cuerpo flex items-center gap-2 min-h-[56px] transition-colors duration-200 hover:text-oro ${
+                    ruta === navPreguntas.href ? "text-oro" : "text-arena"
+                  }`}
+                >
+                  <CircleHelp size={20} strokeWidth={1.5} aria-hidden="true" />
+                  {navPreguntas.etiqueta}
+                </Link>
+              </li>
+            )}
           </ul>
 
           <div className="mt-auto pt-8">

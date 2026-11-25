@@ -464,9 +464,10 @@ Firmes, en mayúsculas, con la luz puesta en el principal.
 - **Comportamiento:** se esconde al bajar y vuelve apenas se sube o se llega al tope. No se esconde mientras haya foco de teclado adentro.
 - **Desplegable (Egresados):** tarjeta carbón con borde piedra y esquinas de 12 px; los ítems se tiñen de piedra en hover.
 - **Isotipo:** el triángulo de 48 px de ancho (64 px desde 1024 px), con su halo dorado tenue.
-- **Orden:** isotipo a la izquierda, ítems, un divisor vertical piedra, Fusion y "Contacto": en texto en la primera vista y como botón principal al bajar.
+- **Orden:** isotipo a la izquierda, ítems, un divisor vertical piedra, Fusion, el signo de pregunta y "Contacto": en texto en la primera vista y como botón principal al bajar.
+- **Preguntas frecuentes:** un signo de pregunta en un círculo (ícono de 20 px; 24 px en la barra de celular, a la izquierda del botón del menú), con área de 44 px, sin fondo ni borde: marfil, oro en hover y en su página. Es navegación, no un botón, así que puede estar en la primera vista. Aparece solo si la página existe (hay alguna pregunta para mostrar).
 - **Ancho:** el de siempre (1152 px), con los márgenes de las bandas: el isotipo cae sobre la misma línea que los títulos.
-- **Celular:** menú negro a pantalla completa con ítems en título 3 de 56 px de alto separados por líneas piedra, y el botón "Contacto" al pie. En páginas internas, "← Inicio" a la izquierda y el isotipo centrado.
+- **Celular:** menú negro a pantalla completa con ítems en título 3 de 56 px de alto separados por líneas piedra, un último renglón "Preguntas frecuentes" en cuerpo y arena con su ícono, y el botón "Contacto" al pie. En páginas internas, "← Inicio" a la izquierda y el isotipo centrado.
 
 ### Encabezado de página interna
 La primera pantalla de cada página. Con foto o video entra con fuerza: ocupa el 82 % de la pantalla (88 % desde 1024 px), con antetítulo, título y bajada en marfil. Sin botones: el contacto y la compra aparecen al bajar.

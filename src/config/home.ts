@@ -58,8 +58,16 @@ export interface TarjetaLinea {
   href: string;
 }
 
-/** Las líneas, en el orden en que se muestran. Sin íconos. */
+/** Las líneas, en el orden en que se muestran: el mismo del menú (config/navegacion.ts). Sin íconos. */
 export const tarjetasLineas: TarjetaLinea[] = [
+  {
+    id: "disco",
+    antetitulo: "Disco",
+    titulo: "La noche más grande de Carlos Paz.",
+    texto: "Cinco espacios, sectores al aire libre y VIP.",
+    boton: "Ver próximas aperturas",
+    href: "/disco",
+  },
   {
     id: "egresados",
     antetitulo: "Egresados",
@@ -77,14 +85,6 @@ export const tarjetasLineas: TarjetaLinea[] = [
       "Casamientos, cumpleaños, celebraciones y eventos de empresa, con ambientación, barra, DJ y catering en un solo lugar.",
     boton: "Armá tu evento",
     href: "/eventos",
-  },
-  {
-    id: "disco",
-    antetitulo: "Disco",
-    titulo: "La noche más grande de Carlos Paz.",
-    texto: "Cinco espacios, sectores al aire libre y VIP.",
-    boton: "Ver próximas aperturas",
-    href: "/disco",
   },
   {
     id: "academia",

@@ -4,6 +4,7 @@ import "./globals.css";
 import { CustomCursor } from "@/components/CustomCursor";
 import { siteConfig } from "@/config/site";
 import { aniversario } from "@/config/aniversario";
+import { ES_DEMO } from "@/lib/ejemplo";
 
 // Pasado el aniversario, muestra la home normal antes de pintar (ver SegunFecha).
 // Corre antes que todo y no toca nada que maneje React: solo agrega una regla de estilo.
@@ -55,6 +56,8 @@ export const metadata: Metadata = {
     locale: "es_AR",
     type: "website",
   },
+  // La demo trae contenido de ejemplo: que los buscadores no la listen. El sitio real no lleva esta marca.
+  ...(ES_DEMO && { robots: { index: false, follow: false } }),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
