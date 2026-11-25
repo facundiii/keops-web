@@ -11,6 +11,8 @@ export interface Noche {
   /** Único por noche. Ej: "2026-12-05" */
   id: string;
   nombre: string;
+  /** Qué tipo de noche es, en pocas palabras. Ej: "Reggaetón viejo", "Electrónica". Opcional: vacío = no se muestra. */
+  estilo?: string;
   /** Fecha de la noche, en formato AAAA-MM-DD. Ej: "2026-12-05" */
   fecha: string;
   /** Hora de apertura. Ej: "00:00" */
@@ -35,6 +37,7 @@ export const cartelera: Noche[] = [
   // {
   //   id: "2026-12-05",
   //   nombre: "Nombre de la noche",
+  //   estilo: "Reggaetón viejo",
   //   fecha: "2026-12-05",
   //   hora: "00:00",
   //   djs: ["DJ Residente Diego Fernandez", "DJ Invitado ..."],

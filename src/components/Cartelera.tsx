@@ -59,6 +59,8 @@ function Ficha({ noche }: { noche: Noche }) {
 
       <div className="flex flex-1 flex-col px-1 pt-4">
         <h3 className="titulo-3 text-marfil">{noche.nombre}</h3>
+        {/* Qué tipo de noche es: va pegado al nombre */}
+        {noche.estilo && <p className="texto-chico text-marfil mt-1">{noche.estilo}</p>}
         <p className="texto-chico text-arena mt-2 flex items-center gap-2">
           <Clock size={20} strokeWidth={1.5} aria-hidden="true" className="shrink-0" />
           {fechaLarga(noche.fecha)} · {noche.hora} h

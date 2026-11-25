@@ -44,7 +44,8 @@ export function ProximasNoches({ noches, cantidad, boton, esEjemplo = false }: P
           <li key={noche.id}>
             <article className="h-full flex gap-4 rounded-2xl border border-piedra bg-carbon p-4">
               {noche.flyer && (
-                <div className="relative w-24 shrink-0 aspect-[9/16] rounded-lg overflow-hidden border border-piedra">
+                // `self-start`: la miniatura conserva su 9:16 aunque la tarjeta sea más alta; si se estira, recorta el flyer por los costados
+                <div className="relative w-24 shrink-0 self-start aspect-[9/16] rounded-lg overflow-hidden border border-piedra">
                   <Image
                     src={noche.flyer}
                     alt={`Arte de ${noche.nombre}`}
@@ -57,6 +58,8 @@ export function ProximasNoches({ noches, cantidad, boton, esEjemplo = false }: P
               <div className="flex min-w-0 flex-1 flex-col pt-1">
                 <p className="antetitulo mb-2">{fechaLarga(noche.fecha)}</p>
                 <h3 className="titulo-3 text-marfil">{noche.nombre}</h3>
+                {/* Qué tipo de noche es: va pegado al nombre */}
+                {noche.estilo && <p className="texto-chico text-marfil mt-1">{noche.estilo}</p>}
                 {noche.djs.length > 0 && <p className="texto-chico text-arena mt-2">{noche.djs.join(" · ")}</p>}
                 <p className="texto-chico text-arena mt-2 flex items-center gap-2">
                   <Clock size={20} strokeWidth={1.5} aria-hidden="true" className="shrink-0" />

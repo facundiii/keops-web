@@ -30,8 +30,9 @@ function proximosSabados(cantidad: number): string[] {
 }
 
 /**
- * Cartelera de ejemplo, para ver cómo se ven los flyers: noches, DJs y artes inventados
- * (los flyers de /disco/flyers/ejemplo-*.jpg están armados con las fotos del sitio).
+ * Cartelera de ejemplo, para ver cómo se ven las fichas y los flyers. Las noches (Gasolina, Silenzzio
+ * y DOT) tienen nombre y estilo como las de verdad; los DJs y los artes son inventados (los flyers de
+ * /disco/flyers/ejemplo-*.jpg están armados con las fotos del sitio).
  * Incluye una agotada y una sin arte.
  */
 export function nochesDeEjemplo(): Noche[] {
@@ -39,28 +40,33 @@ export function nochesDeEjemplo(): Noche[] {
   return [
     {
       id: "ejemplo-1",
-      nombre: "Neon Night",
+      nombre: "Gasolina",
+      estilo: "Reggaetón viejo",
       fecha: s1,
       hora: "00:00",
       djs: ["Martín Ríos", "Sofi Lazo b2b Nico Ferrán"],
-      flyer: "/disco/flyers/ejemplo-neon.jpg",
+      flyer: "/disco/flyers/ejemplo-gasolina.jpg",
     },
     {
+      // Una fiesta con auriculares: cada DJ va por un canal, con un estilo de música distinto.
+      // Va como agotada: los auriculares son limitados.
       id: "ejemplo-2",
-      nombre: "Sunset Sessions",
+      nombre: "Silenzzio",
+      estilo: "Fiesta con auriculares, tres canales",
       fecha: s2,
       hora: "00:30",
-      djs: ["Juli Benítez", "DJ Residente"],
-      flyer: "/disco/flyers/ejemplo-sunset.jpg",
+      djs: ["Juli Benítez (reggaetón)", "Tomi Acosta (electrónica)", "Luca Mora (cuarteto y rock)"],
+      flyer: "/disco/flyers/ejemplo-silenzzio.jpg",
       agotado: true,
     },
     {
       id: "ejemplo-3",
-      nombre: "Bajo la pirámide",
+      nombre: "DOT",
+      estilo: "Electrónica",
       fecha: s3,
       hora: "00:00",
-      djs: ["Tomi Acosta", "Luca Mora", "DJ Invitado"],
-      flyer: "/disco/flyers/ejemplo-piramide.jpg",
+      djs: ["Agus Peralta", "Mica Funes b2b Santi Vera", "Bruno Cáceres"],
+      flyer: "/disco/flyers/ejemplo-dot.jpg",
     },
     { id: "ejemplo-4", nombre: "Noche sin arte", fecha: s4, hora: "00:00", djs: ["DJ Residente"], flyer: "" },
   ];

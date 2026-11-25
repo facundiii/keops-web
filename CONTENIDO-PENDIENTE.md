@@ -49,9 +49,9 @@ de ejemplo en `fotos.ts`; no hace falta borrarlos: cuando cargás el dato real, 
 
 ## `cartelera.ts`
 
-- [ ] Cargar las próximas noches. Cada una lleva: `id`, `nombre`, `fecha` (formato `2026-12-05`), `hora`, `djs`, `flyer` y, si corresponde, `agotado: true`. Hay un ejemplo comentado en el archivo.
+- [ ] Cargar las próximas noches. Cada una lleva: `id`, `nombre`, `fecha` (formato `2026-12-05`), `hora`, `djs`, `flyer` y, si corresponde, `estilo` (qué tipo de noche es, por ejemplo "Reggaetón viejo") y `agotado: true`. Hay un ejemplo comentado en el archivo.
 - [ ] Subir el arte de cada noche (vertical 9:16) a `public/disco/flyers/`.
-- Para ver cómo quedan los flyers, en tu PC la cartelera muestra noches de ejemplo con artes armados con las fotos del sitio (`public/disco/flyers/ejemplo-*.jpg`, datos inventados). Lo mismo en Fusion (`public/fusion/flyers/`). No se publican; cuando cargues noches reales, se pueden borrar esos archivos.
+- Para ver cómo quedan las fichas y los flyers, en tu PC la cartelera muestra tres noches de ejemplo: **Gasolina** (reggaetón viejo), **Silenzzio** (fiesta con auriculares, tres canales; va como agotada) y **DOT** (electrónica), con artes armados con las fotos del sitio (`public/disco/flyers/ejemplo-*.jpg`). Los DJs, las horas y las fechas son inventados. Lo mismo en Fusion (`public/fusion/flyers/`). No se publican; cuando cargues noches reales, se pueden borrar esos archivos.
 - [ ] (Opcional) `urlEntradas` de cada noche: el link para comprar esa noche en la app o la web de entradas. Con él, "Comprar entrada" abre directo la compra; sin él, lleva a la sección "Comprá tu entrada" de Disco.
 - No hace falta borrar las noches viejas: se ocultan solas al mediodía del día siguiente.
 
